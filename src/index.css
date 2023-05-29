@@ -1,11 +1,19 @@
 @import url(../src/styles/style.css);
+@font-face {
+  font-family: 'KakaoBig';
+  src: url('../assets/fonts/KakaoBig-normal-400-100_1.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html {
   font-size: 10px;
 }
 
 body {
+  display: block;
   margin: 0;
-  font-family: 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: KakaoBig, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
