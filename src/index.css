@@ -1,69 +1,81 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+@import url(../src/styles/style.css);
+html {
+  font-size: 10px;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background--green);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+/* 1rem 10px 단위 설정   */
+html {
+  font-size: 62.5%;
+  letter-spacing: -0.05px;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* 반응형 */
+@media all and (max-width: 1400px) {
+  html {
+    font-size: 44%;
   }
-  a:hover {
-    color: #747bff;
+}
+@media all and (min-width: 1400px) and (max-width: 1550px) {
+  html {
+    font-size: 46.5%;
   }
-  button {
-    background-color: #f9f9f9;
+}
+@media all and (min-width: 1550px) and (max-width: 1700px) {
+  html {
+    font-size: 51.5%;
+  }
+}
+@media all and (min-width: 1700px) and (max-width: 1900px) {
+  html {
+    font-size: 56.5%;
+  }
+}
+
+@media all and (min-width: 2070px) and (max-width: 2350px) {
+  html {
+    font-size: 68.5%;
+  }
+}
+@media all and (min-width: 2350px) and (max-width: 2600px) {
+  html {
+    font-size: 78%;
+  }
+}
+@media all and (min-width: 2600px) and (max-width: 2900px) {
+  html {
+    font-size: 86%;
+  }
+}
+@media all and (min-width: 2900px) and (max-width: 3200px) {
+  html {
+    font-size: 96.5%;
+  }
+}
+@media all and (min-width: 3200px) and (max-width: 3500px) {
+  html {
+    font-size: 106%;
+  }
+}
+@media all and (min-width: 3500px) and (max-width: 3850px) {
+  html {
+    font-size: 117%;
+  }
+}
+@media all and (min-width: 3850px) {
+  html {
+    font-size: 128.5%;
   }
 }
