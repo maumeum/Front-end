@@ -77,17 +77,6 @@ export const CheckEmail = styled.div`
   font-size: 1.3rem;
 `
 
-export const LoginButton = styled.button`
-  margin-top: 7rem;
-  width: 45rem;
-  height: 5.5rem;
-  background-color: var(--button--color);
-  color: #FFFFFF;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-`
-
 export const SignUpButton = styled(NavLink)`
   align-self: flex-start;
   margin: 13rem 0 3rem 5rem;

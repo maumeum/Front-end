@@ -3,19 +3,17 @@ import styled from "styled-components";
 export const HeaderSection = styled.div`
   position: sticky;
   box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  width: '100vw';
+  display: block;
   height: 8rem;
   background-color: #FFFFFF;
-  border-bottom: 1px solid rgb(238, 238, 238)
-`;
+  border-bottom: 1px solid rgb(238, 238, 238);
+`
 
 export const HeaderContainer = styled.div`
   display: flex;
+  min-width: 140rem;
   margin: auto 40rem;
-  
-`;
+`
 
 export const LogoContainer = styled.div`
   width: 8rem;
@@ -29,7 +27,7 @@ export const MainLogo = styled.img`
 `
 export const NavContainer = styled.div`
   display: flex;
-  margin: 0.5rem 22rem 0.5rem 24rem;
+  margin: 0.5rem 33rem 0.5rem 24rem;
 `
 
 export const NavCategory = styled.p`
