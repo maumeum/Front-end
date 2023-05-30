@@ -20,6 +20,7 @@ export const HeaderContainer = styled.div`
 export const LogoContainer = styled.div`
   width: 8rem;
   height: 8rem;
+  cursor: pointer;
 `
 
 export const MainLogo = styled.img`
@@ -46,8 +47,9 @@ export const LoginButton = styled.button`
   background-color: transparent;
   border-radius: 1.7rem;
   border: 1px solid #CCCCCC;
-  font-size: 1.1rem;
-  font-weight: 500;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 400;
   cursor: pointer;
 `
 
