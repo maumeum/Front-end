@@ -4,6 +4,7 @@ export const HeaderSection = styled.div`
   position: sticky;
   box-sizing: border-box;
   display: flex;
+  justify-content: center;
   width: '100vw';
   height: 8rem;
   background-color: #FFFFFF;
@@ -13,7 +14,7 @@ export const HeaderSection = styled.div`
 export const HeaderContainer = styled.div`
   display: flex;
   margin: auto 40rem;
-  justify-content: center;
+  
 `;
 
 export const LogoContainer = styled.div`

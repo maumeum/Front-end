@@ -13,9 +13,9 @@ const Header = () => {
           <MainLogo src={mainLogo} alt="mainLogo" />
         </LogoContainer>
         <NavContainer>
-          <NavCategory>봉사정보조회</NavCategory>
-          <NavCategory>봉사 동행구하기</NavCategory>
-          <NavCategory>봉사단체홍보</NavCategory>
+          <NavCategory>봉사모집하기</NavCategory>
+          <NavCategory>커뮤니티</NavCategory>
+          <NavCategory>봉사후기</NavCategory>
         </NavContainer>
         <LoginButton>로그인</LoginButton>
         <SearchButton>
