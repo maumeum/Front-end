@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const LargeButton = styled.button`
-  margin-top: 7rem;
+  margin-top: 6rem;
   width: 45rem;
   height: 5.5rem;
   background-color: var(--button--color);
