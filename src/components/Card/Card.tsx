@@ -1,19 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CardContainer, ImgBox, ContentBox, UserInfo } from './card.ts';
+import { CardContainer, ImgBox, ContentBox, UserInfo, Badge } from './card.ts';
 type Props = {
   title: string;
   thumbnail: string;
   nickname: string;
   profile: string;
+  recruitStatus: string;
 };
 
-function Card({ title, thumbnail, nickname, profile }: Props) {
+function Card({ title, thumbnail, nickname, profile, recruitStatus }: Props) {
   return (
     <>
       <CardContainer>
         <ImgBox>
           <img src={thumbnail} alt="" />
+          <Badge>
+            <p>{recruitStatus}</p>
+          </Badge>
         </ImgBox>
         <ContentBox>
           <p>{title}</p>
