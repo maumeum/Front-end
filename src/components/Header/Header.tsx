@@ -11,12 +11,19 @@ const Header = () => {
   // 로그인 버튼을 클릭하여 로그인 화면으로 이동
   const loginHandler = () => {
     navigate("/login");
+    window.location.reload();
+  }
+
+  // 로고를 클릭하여 메인 페이지로 이동
+  const mainHandler = () => {
+    navigate("/");
+    window.location.reload();
   }
 
   return (
     <HeaderSection>
       <HeaderContainer>
-        <LogoContainer to="/">
+        <LogoContainer onClick={mainHandler}>
           <MainLogo src={mainLogo} alt="mainLogo" />
         </LogoContainer>
         <NavContainer>

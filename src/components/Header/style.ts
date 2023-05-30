@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import {NavLink} from "react-router-dom";
 
 export const HeaderSection = styled.div`
   position: sticky;
@@ -18,9 +17,10 @@ export const HeaderContainer = styled.div`
   
 `;
 
-export const LogoContainer = styled(NavLink)`
+export const LogoContainer = styled.div`
   width: 8rem;
   height: 8rem;
+  cursor: pointer;
 `
 
 export const MainLogo = styled.img`

@@ -53,6 +53,18 @@ export const PasswordInput = styled.input`
   font-size: 2rem;
   font-weight: bold;
 `
+export const CheckData = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+  width: 45rem;
+  height: 6rem;
+  background-color: #fafafa;
+  color: #EB5757;
+  font-size: 1.3rem;
+`
+
 export const CheckEmail = styled.div`
   display: flex;
   justify-content: center;
