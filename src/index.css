@@ -6,6 +6,12 @@
   font-style: normal;
 }
 
+* {
+  font-family: KakaoBig, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
 html {
   font-size: 10px;
 }
@@ -13,9 +19,6 @@ html {
 body {
   display: block;
   margin: 0;
-  font-family: KakaoBig, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
