@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
 import Header from './components/Header/Header';
-import Main from './pages/mainPage/main';
-import Login from './pages/userPage/login';
+import Main from "./pages/mainPage/main";
+import Login from "./pages/userPage/login";
+import SignUp from './pages/userPage/signUp';
 import MyVolunHistory from './pages/myPage-hr/volunHistory';
 import MyVolunSuggest from './pages/myPage-hr/volunSuggest';
 import MyComment from './pages/myPage-hr/myComment';
@@ -21,7 +22,8 @@ function App() {
         <Route path="/mypage/comment" element={<MyComment />} />
         <Route path="/mypage/post" element={<MyPost />} />
         <Route path="/login" element={<Login />} />
-      </Routes>
+        <Route path="/sign_up" element={<SignUp />} />
+      </Routes>    
     </Router>
   );
 }
