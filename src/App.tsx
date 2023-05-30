@@ -4,6 +4,7 @@ import './App.css';
 
 import Header from './components/Header/Header';
 import Main from "./pages/mainPage/main";
+import Login from "./pages/userPage/login";
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/login" element={<Login />} />
       </Routes>    
     </Router>
   )
