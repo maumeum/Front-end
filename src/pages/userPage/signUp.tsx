@@ -59,8 +59,14 @@ const SignUp = () => {
     // 회원가입 완료
     if (validEmail(email) && validPassword(password, checkPassword) && validPhoneNum(phoneNum)) {
       Swal.fire({
-        title: `${nickname}님 안녕하세요!`,
+        title: `마음이음에 오신 것을 환영합니다!`,
         confirmButtonColor: "var(--button--color)"
+      })
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: '정보를 모두 입력해주세요.',
+        confirmButtonColor: "#d33"
       })
     }
   };
