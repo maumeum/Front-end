@@ -6,6 +6,7 @@ export const Container = styled.div`
   top: 12.5rem;
   left: 15.5rem;
   font-size: 1.9rem;
+  height: 1000px;
 `;
 
 export const MenuBar = styled.div`

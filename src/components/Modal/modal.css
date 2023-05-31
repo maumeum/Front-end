@@ -1,4 +1,9 @@
 .ReactModal__Content--after-open {
   margin: auto;
   width: 50%;
+  position: relative;
+}
+
+.ql-editor {
+  height: 50rem;
 }

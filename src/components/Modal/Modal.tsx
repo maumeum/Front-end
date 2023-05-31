@@ -3,6 +3,10 @@ import ReactModal from 'react-modal';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './modal.css';
+import exit from '../../assets/icons/exit.svg';
+
+import LargeButton from '../Buttons/LargeButton';
+import { BtnConatiner } from './style';
 
 type ModalProps = {
   isOpen: boolean;
@@ -78,11 +82,12 @@ const Modal = ({ isOpen, setOpen }: ModalProps) => {
   };
   return (
     <ReactModal isOpen={isOpen}>
-      <div>모달 입니다.</div>
+      <img src={exit} alt="" />
       <ReactQuill onChange={handleChange} modules={modules} />
-      <div>
-        <button onClick={handleClickClose}>닫기</button>
-      </div>
+
+      <BtnConatiner>
+        <LargeButton onClick={handleClickClose}>후기 작성하기</LargeButton>
+      </BtnConatiner>
     </ReactModal>
   );
 };
