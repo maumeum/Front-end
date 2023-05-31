@@ -6,7 +6,6 @@ import {NavLink} from "react-router-dom";
 export const LoginSection = styled.div`
   position: relative;
   left: 68.5rem;
-  right: 68.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -93,7 +92,6 @@ export const SignUpButton = styled(NavLink)`
 export const SignUpSection = styled.div`
   position: relative;
   left: 68.5rem;
-  right: 68.5rem;
   margin: 17rem 0 26.5rem;
   width: 55rem;
   height: 77rem;
