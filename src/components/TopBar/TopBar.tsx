@@ -4,11 +4,12 @@ import { TopBarBox, Title, SubText, TextContainer } from './style';
 type TopBarProps = {
   text: string;
   title: string;
+  modal?: string;
 };
-const TopBar = ({ title, text }: TopBarProps) => {
+const TopBar = ({ title, text, modal }: TopBarProps) => {
   return (
     <>
-      <TopBarBox>
+      <TopBarBox modal={modal}>
         <TextContainer>
           <Title>{title}</Title>
           <SubText>{text}</SubText>

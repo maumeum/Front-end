@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './modal.css';
 import exit from '../../assets/icons/exit.svg';
+import { BtnConatiner } from './style';
 
 import LargeButton from '../Buttons/LargeButton';
-import { BtnConatiner } from './style';
+import TopBar from '../../components/TopBar/TopBar';
 
 type ModalProps = {
   isOpen: boolean;
@@ -14,6 +15,13 @@ type ModalProps = {
 };
 
 const Modal = ({ isOpen, setOpen }: ModalProps) => {
+  // useEffect(() => {
+  //   window.addEventListener('click', handleClickClose);
+  //   return () => {
+  //     window.removeEventListener('click', handleClickClose);
+  //   };
+  // }, []);
+
   const [input, setInput] = useState('');
 
   const handleClickClose = () => {
@@ -81,8 +89,12 @@ const Modal = ({ isOpen, setOpen }: ModalProps) => {
     },
   };
   return (
-    <ReactModal isOpen={isOpen}>
-      <img src={exit} alt="" />
+    <ReactModal isOpen={isOpen} onRequestClose={handleClickClose}>
+      <TopBar
+        modal="modal"
+        title={'봉사활동 리뷰작성'}
+        text={'다른 사람들과 함께 봉사의 즐거움을 나눠보아요!'}
+      />
       <ReactQuill onChange={handleChange} modules={modules} />
 
       <BtnConatiner>
