@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const HeaderSection = styled.div`
   top: 0;
-  z-index: 999;
+  z-index: 200;
   position: sticky;
   box-sizing: border-box;
   height: 8rem;
@@ -12,8 +12,9 @@ export const HeaderSection = styled.div`
 
 export const HeaderContainer = styled.div`
   display: flex;
-  min-width: 140rem;
-  margin: auto 40rem;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 40rem;
 `
 
 export const LogoContainer = styled.div`
@@ -28,20 +29,27 @@ export const MainLogo = styled.img`
 `
 export const NavContainer = styled.div`
   display: flex;
-  margin: 0.5rem 28rem 0.5rem 30rem;
+  min-width: 40rem;
 `
 
 export const NavCategory = styled.p`
-  margin: 0.5rem 2.5rem;
+  margin: 0rem 2.5rem;
   align-self: center;
   color: #444444;
   font-weight: normal;
   font-size: 1.5rem;
 `
 
+export const UtilContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+`
+
 export const LoginButton = styled.button`
-  margin: 2.5rem 1rem 1rem;
+  margin: 0 1rem;
   width: 7rem;
+  min-width: 7rem;
   height: 3.5rem;
   background-color: transparent;
   border-radius: 1.7rem;
@@ -53,13 +61,12 @@ export const LoginButton = styled.button`
 `
 
 export const SearchButton = styled.div`
-  margin: 2.8rem 1rem 1rem;
-  width: 2rem;
-  height: 2rem;
+  width: auto;
+  height: auto;
   cursor: pointer;
 `
 
 export const SearchIcon = styled.img`
-  width: 2.5rem;
-  height: 2.5rem;
+  width: auto;
+  height: auto;
 `

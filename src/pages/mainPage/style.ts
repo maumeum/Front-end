@@ -16,6 +16,7 @@ export const TopSlogan = styled.h2`
 `
 export const TopContainer = styled.div`
   display: flex;
+  flex: 1;
   justify-content: space-between;
   margin: 0 40rem;
 `
@@ -35,8 +36,8 @@ export const ReviewCard = styled.div`
 `
 
 export const IntroducePage = styled.div`
-  margin: 4rem 0 4rem 6rem;
-  width: 45rem;
+  margin: 4rem 0 4rem 4.5rem;
+  width: 36rem;
   height: 54rem;
   background-color: #FFFFFF;
   border: none;
@@ -48,6 +49,7 @@ export const IntroducePage = styled.div`
 export const IntroduceTitle = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 36rem;
   height: 25rem;
   background-color: var(--color--footer);
   border: none;
@@ -57,15 +59,14 @@ export const IntroduceTitle = styled.div`
 
 export const MainTitle = styled.h2`
   margin: 3rem 3rem auto 2.5rem;
-  width: 30rem;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: bold;
 `
 
 export const IntroImg = styled.img`
   margin: 1.5rem 2.5rem auto 0;
-  width: 6.2rem;
-  height: 8rem;
+  width: 5.5rem;
+  height: 7.5rem;
 `
 
 export const IntroduceDesc = styled.div`
@@ -93,14 +94,14 @@ export const MidSlogan = styled.h2`
 `
 
 export const VolunteerContainer = styled.div`
-  margin: 4rem 40rem 0;
+  margin: 4rem 40rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 `
 
 export const Volunteer = styled.div`
   margin-bottom: 6rem;
-  width: 26.5rem;
+  width: calc(100% - 0.5rem);
   height: 37rem;
   background-color: #FFFFFF;
   border: none;
