@@ -4,13 +4,13 @@ import {NavLink} from "react-router-dom";
 // 로그인 css
 
 export const LoginSection = styled.div`
-  position: absolute;
+  position: relative;
   left: 68.5rem;
   right: 68.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 8rem;
+  margin: 8rem 0 34rem;
   width: 55rem;
   height: 75rem;
 `
@@ -91,7 +91,7 @@ export const SignUpButton = styled(NavLink)`
 // 회원가입 css
 
 export const SignUpSection = styled.div`
-  position: absolute;
+  position: relative;
   left: 68.5rem;
   right: 68.5rem;
   margin: 17rem 0 26.5rem;
@@ -106,7 +106,7 @@ export const SignUpForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 4.3rem;
+  padding-top: 4.3rem;
 `
 
 export const InputContainer = styled.div`

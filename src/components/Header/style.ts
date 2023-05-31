@@ -27,7 +27,7 @@ export const MainLogo = styled.img`
 `
 export const NavContainer = styled.div`
   display: flex;
-  margin: 0.5rem 33rem 0.5rem 24rem;
+  margin: 0.5rem 28rem 0.5rem 30rem;
 `
 
 export const NavCategory = styled.p`
