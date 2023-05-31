@@ -6,13 +6,12 @@ import { Container } from './tab.ts';
 Tab.defaultProps = {
   currTab: '신청한 봉사',
   onClick: () => {},
+  tabs: ['신청한 봉사', '완료한 봉사'],
 };
 
 interface EachTabProps {
   active?: boolean;
 }
-
-const tabs = ['신청한 봉사', '완료한 봉사'];
 
 const EachTab = styled.p<EachTabProps>`
   font-size: 1.8rem;
@@ -35,9 +34,11 @@ const EachTab = styled.p<EachTabProps>`
 export default function Tab({
   currTab,
   onClick,
+  tabs,
 }: {
   currTab: string;
   onClick: () => void;
+  tabs: string[];
 }) {
   return (
     <Container>

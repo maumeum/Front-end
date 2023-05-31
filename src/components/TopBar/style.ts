@@ -1,12 +1,22 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const TopBarBox = styled.div`
+interface BarProps {
+  modal: string;
+}
+
+export const TopBarBox = styled.div<BarProps>`
   width: 112rem;
   height: 13.2rem;
   background-color: #ffffe8;
   margin: 0 auto;
   margin-top: 13.5rem;
   display: flex;
+  ${(props) =>
+    props.modal === 'modal' &&
+    css`
+      margin-top: 1rem;
+      width: 100%;
+    `}
 `;
 export const TextContainer = styled.div`
   box-sizing: border-box;
