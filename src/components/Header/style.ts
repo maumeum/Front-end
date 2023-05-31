@@ -3,23 +3,22 @@ import styled from "styled-components";
 export const HeaderSection = styled.div`
   position: sticky;
   box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  width: '100vw';
+  display: block;
   height: 8rem;
   background-color: #FFFFFF;
-  border-bottom: 1px solid rgb(238, 238, 238)
-`;
+  border-bottom: 1px solid rgb(238, 238, 238);
+`
 
 export const HeaderContainer = styled.div`
   display: flex;
+  min-width: 140rem;
   margin: auto 40rem;
-  
-`;
+`
 
 export const LogoContainer = styled.div`
   width: 8rem;
   height: 8rem;
+  cursor: pointer;
 `
 
 export const MainLogo = styled.img`
@@ -28,7 +27,7 @@ export const MainLogo = styled.img`
 `
 export const NavContainer = styled.div`
   display: flex;
-  margin: 0.5rem 22rem 0.5rem 24rem;
+  margin: 0.5rem 33rem 0.5rem 24rem;
 `
 
 export const NavCategory = styled.p`
@@ -46,8 +45,9 @@ export const LoginButton = styled.button`
   background-color: transparent;
   border-radius: 1.7rem;
   border: 1px solid #CCCCCC;
-  font-size: 1.1rem;
-  font-weight: 500;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 400;
   cursor: pointer;
 `
 
