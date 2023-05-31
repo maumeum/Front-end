@@ -10,7 +10,7 @@ function myComment() {
     setCurrTab(tab);
   };
 
-  const tabs = ['내가 쓴 게시글', '내가 댓글 단 게시글'];
+  const tabs = ['내가 쓴 게시글', '내가 댓글 단 게시글', '내가 쓴 후기'];
   return (
     <>
       <Container>

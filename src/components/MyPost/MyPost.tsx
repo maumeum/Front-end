@@ -1,5 +1,11 @@
-import React from 'react';
-import { PostListContainer } from './style';
+import React, { useState } from 'react';
+import {
+  PostListContainer,
+  PostBox,
+  Title,
+  Description,
+  PostInfo,
+} from './style';
 
 function MyPost() {
   const data = [
@@ -20,17 +26,29 @@ function MyPost() {
       date: '2022-01-01',
     },
   ];
+
+  const truncateTitle = (title: string) => {
+    const maxLength = 55;
+    if (title.length <= maxLength) {
+      return title;
+    } else {
+      return title.slice(0, maxLength) + '...';
+    }
+  };
   return (
     <>
       <PostListContainer>
         {data.map((item, index) => {
+          const truncatedTitle = truncateTitle(item.title);
           return (
-            <div>
-              <p>{item.title}</p>
-              <p>{item.content}</p>
-              <p>{item.date}</p>
-              <p>{item.category}</p>
-            </div>
+            <PostBox key={`postList-${index}`}>
+              <Title>{truncatedTitle}</Title>
+              <Description>{item.content}</Description>
+              <PostInfo>
+                <p>{item.date}</p>
+                <p>{item.category}</p>
+              </PostInfo>
+            </PostBox>
           );
         })}
       </PostListContainer>
