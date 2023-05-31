@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
+import ReactModal from 'react-modal';
 
+ReactModal.setAppElement('#root');
 import Header from './components/Header/Header';
-import Main from "./pages/mainPage/main";
-import Login from "./pages/userPage/login";
+import Main from './pages/mainPage/main';
+import Login from './pages/userPage/login';
 import SignUp from './pages/userPage/signUp';
 import MyVolunHistory from './pages/myPage-hr/volunHistory';
 import MyVolunSuggest from './pages/myPage-hr/volunSuggest';
@@ -23,7 +25,7 @@ function App() {
         <Route path="/mypage/post" element={<MyPost />} />
         <Route path="/login" element={<Login />} />
         <Route path="/sign_up" element={<SignUp />} />
-      </Routes>    
+      </Routes>
     </Router>
   );
 }
