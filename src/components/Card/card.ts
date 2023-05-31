@@ -38,15 +38,24 @@ export const ContentBox = styled.div`
     line-height: 2.4rem;
     letter-spacing: -0.1px;
     text-align: left;
-    height: 70%;
+    /* height: 60%; */
   }
+  p + p {
+    margin-top: 0;
+    font-weight: 500;
+    font-size: 1.5rem;
+  }
+`;
+
+export const VolunInfo = styled.div`
+  height: 60%;
 `;
 
 export const UserInfo = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  height: 30%;
+  height: 40%;
 
   img {
     width: 3.5rem;
@@ -58,7 +67,6 @@ export const UserInfo = styled.div`
   p {
     font-weight: 500;
     font-size: 1.5rem;
-    height: 100%;
     display: flex;
     align-items: center;
   }
@@ -95,4 +103,5 @@ export const Button = styled.button`
   background-color: var(--color--footer);
   height: 4.4rem;
   border-radius: 5%;
+  cursor: pointer;
 `;
