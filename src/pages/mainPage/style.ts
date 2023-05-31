@@ -3,23 +3,24 @@ import styled from "styled-components";
 export const MainSection = styled.div`
   position: relative;
   margin: 0;
-  padding: 6rem 40rem 12rem;
+  padding: 0;
   background-color: #F7F7F7;
 `
 
 export const TopSlogan = styled.h2`
-  margin-bottom: 0;
+  margin: 0 40rem;
+  padding-top: 6rem;
   width: 26rem;
   font-size: 2.6rem;
   font-weight: 700;
 `
 export const TopContainer = styled.div`
   display: flex;
-  width: 112rem;
+  justify-content: space-between;
+  margin: 0 40rem;
 `
 
 export const ReviewContainer = styled.div`
-  width: 112rem;
 `
 
 export const ReviewCard = styled.div`
@@ -46,6 +47,7 @@ export const IntroducePage = styled.div`
 
 export const IntroduceTitle = styled.div`
   display: flex;
+  justify-content: space-between;
   height: 25rem;
   background-color: var(--color--footer);
   border: none;
@@ -55,7 +57,7 @@ export const IntroduceTitle = styled.div`
 
 export const MainTitle = styled.h2`
   margin: 3rem 3rem auto 2.5rem;
-  width: 23rem;
+  width: 30rem;
   font-size: 2rem;
   font-weight: bold;
 `
@@ -85,16 +87,15 @@ export const Desc = styled.p`
 `
 
 export const MidSlogan = styled.h2`
+  margin: 12rem 40rem 0;
   font-size: 3rem;
   font-weight: 900;
 `
 
 export const VolunteerContainer = styled.div`
-  width: 112rem;
+  margin: 4rem 40rem 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  column-gap: 2rem;
-  grid-template-rows: repeat(2, 1fr);
 `
 
 export const Volunteer = styled.div`
@@ -109,19 +110,20 @@ export const Volunteer = styled.div`
 `
 
 export const CommunityTitle = styled.h2`
+  margin: 6rem 40rem 4rem;
   font-size: 3rem;
   font-weight: 900;
 `
 
 export const CommunityContainer = styled.div`
-  width: 112rem;
+  margin: 0 40rem;
+  padding-bottom: 12rem;
   height: 89rem;
   display: grid;
   grid-template-rows: repeat(6, 1fr);
 `
 
 export const CommunityCard = styled.div`
-  width: 112rem;
   height: 11rem;
   background-color: #FFFFFF;
   border: none;
