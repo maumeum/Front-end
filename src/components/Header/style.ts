@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 export const HeaderSection = styled.div`
+  top: 0;
+  z-index: 999;
   position: sticky;
   box-sizing: border-box;
-  display: block;
   height: 8rem;
   background-color: #FFFFFF;
   border-bottom: 1px solid rgb(238, 238, 238);
