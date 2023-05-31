@@ -31,7 +31,7 @@ export default Footer;
 const members = [
   {
     name: "김마리나",
-    link: ""
+    link: "https://github.com/KIMANIRAM"
   },
   {
     name: "류이서",
@@ -43,7 +43,7 @@ const members = [
   },
   {
     name: "이해인",
-    link: ""
+    link: "https://github.com/LHI0915"
   },
   {
     name: "정혜린",
@@ -55,6 +55,6 @@ const members = [
   },
   {
     name: "탁경진",
-    link: ""
+    link: "https://github.com/Takkyou"
   },
 ];
