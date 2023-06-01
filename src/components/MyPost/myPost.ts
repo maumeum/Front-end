@@ -32,6 +32,7 @@ export const Description = styled.div`
 export const PostInfo = styled.div`
 	display: flex;
 	align-items: center;
+	position: relative;
 	p {
 		color: #666666;
 		font-family: kakaoReg;
@@ -42,6 +43,15 @@ export const PostInfo = styled.div`
 		text-align: left;
 	}
 	p + p {
+		margin-left: 2rem;
+	}
+`;
+
+export const ButtonContainer = styled.div`
+	position: absolute;
+	right: 0;
+	margin-right: 4rem;
+	button + button {
 		margin-left: 2rem;
 	}
 `;

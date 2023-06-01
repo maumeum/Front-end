@@ -28,7 +28,7 @@ function myComment() {
 					<TabMenu>
 						<Tab currTab={currTab} onClick={handleClickTab} tabs={tabs} />
 					</TabMenu>
-					<MyPost></MyPost>
+					<MyPost currTab={currTab}></MyPost>
 				</Main>
 			</Container>
 		</>

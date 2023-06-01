@@ -5,9 +5,15 @@ import {
 	Title,
 	Description,
 	PostInfo,
+	ButtonContainer,
 } from './myPost';
 
-function MyPost() {
+import { SmallButton } from '../Buttons/SmallButton';
+
+type Props = {
+	currTab: string;
+};
+function MyPost({ currTab }: Props) {
 	const data = [
 		{
 			title:
@@ -38,6 +44,7 @@ function MyPost() {
 
 	const [isShowMore, setIsShowMore] = useState<boolean>(false); //더보기 열고(긴글) 닫기(짧은글)
 	const textLimit = 160; //글자수 제한 선언
+
 	return (
 		<>
 			<PostListContainer>
@@ -65,7 +72,12 @@ function MyPost() {
 							<PostInfo>
 								<p>{item.date}</p>
 								<p>{item.category}</p>
-								<button>수정하기</button>
+								{currTab === '내가 쓴 게시글' && (
+									<ButtonContainer>
+										<SmallButton>수정하기</SmallButton>
+										<SmallButton>삭제하기</SmallButton>
+									</ButtonContainer>
+								)}
 							</PostInfo>
 						</PostBox>
 					);
