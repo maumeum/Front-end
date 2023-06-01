@@ -96,7 +96,7 @@ const Modal = ({ isOpen, setOpen }: ModalProps) => {
 				onChange={handleChange}
 				modules={modules}
 				placeholder={placeholder}
-				style={{ height: '50rem', marginTop: '2rem' }}
+				style={{ height: '35rem', marginTop: '2rem' }}
 			/>
 
 			<BtnConatiner>

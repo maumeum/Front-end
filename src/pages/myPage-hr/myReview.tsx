@@ -45,16 +45,9 @@ function myReview() {
 					<TabMenu>
 						<Tab currTab={currTab} tabs={tabs} />
 					</TabMenu>
-					{data.map((item, idx) => {
+					{data.map((data, idx) => {
 						return (
-							<MyPost
-								key={`reviewList-${idx}`}
-								title={item.title}
-								date={item.date}
-								content={item.content}
-								category={item.category}
-								currTab={currTab}
-							/>
+							<MyPost key={`reviewList-${idx}`} data={data} currTab={currTab} />
 						);
 					})}
 				</Main>
