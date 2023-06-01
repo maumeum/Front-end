@@ -13,7 +13,7 @@ function MyPost() {
 			title:
 				'한강 플로깅 같이 하실분 구합니다~ 카카오톡 오픈채팅방으로 들어오세요',
 			content:
-				'7월 8일 8시쯤 저녁먹고 산책할겸 한강나루역 부근에서 플로깅하실 분.생각잇으시면댓 주세요',
+				'7월 8일 8시쯤 저녁먹고 산책할겸 한강나루역 부근에서 플로깅하실 분.생각잇으시면댓 주세요 7월 8일 8시쯤 저녁먹고 산책할겸 한강나루역 부근에서 플로깅하실 분.생각잇으시면댓 주세요 7월 8일 8시쯤 저녁먹고 산책할겸 한강나루역 부근에서 플로깅하실 분.생각잇으시면댓 주세요7월 8일 8시쯤 저녁먹고 산책할겸 한강나루역 부근에서 플로깅하실 분.생각잇으시면댓 주세요7월 8일 8시쯤 저녁먹고 산책할겸 한강나루역 부근에서 플로깅하실 분.생각잇으시면댓 주세요7월 8일 8시쯤 저녁먹고 산책할겸 한강나루역 부근에서 플로깅하실 분.생각잇으시면댓 주세요7월 8일 8시쯤 저녁먹고 산책할겸 한강나루역 부근에서 플로깅하실 분.생각잇으시면댓 주세요',
 			category: '동행구해요',
 			date: '2022-01-01',
 		},
@@ -35,15 +35,33 @@ function MyPost() {
 			return title.slice(0, maxLength) + '...';
 		}
 	};
+
+	const [isShowMore, setIsShowMore] = useState<boolean>(false); //더보기 열고(긴글) 닫기(짧은글)
+	const textLimit = 160; //글자수 제한 선언
 	return (
 		<>
 			<PostListContainer>
 				{data.map((item, index) => {
 					const truncatedTitle = truncateTitle(item.title);
+					const shortComment = item.content.slice(0, textLimit) + ' ...'; //보여줄 짧은 글
+					const isLongComment = item.content.length > textLimit; //긴글인지 확인
 					return (
 						<PostBox key={`postList-${index}`}>
 							<Title>{truncatedTitle}</Title>
-							<Description>{item.content}</Description>
+							<Description>
+								{isLongComment && !isShowMore ? shortComment : item.content}
+								<div
+									onClick={() => setIsShowMore(!isShowMore)}
+									style={{
+										fontSize: '1.7rem',
+										marginLeft: '2.1rem',
+										cursor: 'pointer',
+									}}>
+									{item.content.length > textLimit &&
+										(isShowMore ? '[닫기]' : '[더보기]')}
+								</div>
+							</Description>
+
 							<PostInfo>
 								<p>{item.date}</p>
 								<p>{item.category}</p>

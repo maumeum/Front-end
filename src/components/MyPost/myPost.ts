@@ -20,7 +20,7 @@ export const Title = styled.p`
 	text-align: left;
 `;
 
-export const Description = styled.p`
+export const Description = styled.div`
 	margin: 0;
 	font-family: kakaoReg;
 	font-size: 18px;
