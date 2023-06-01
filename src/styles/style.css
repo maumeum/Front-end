@@ -27,8 +27,10 @@
 }
 
 :root {
-	--color--footer: #f5d4d4;
-	--button--color: #aacb73;
+  --color--footer: #F5D4D4;
+  --button--color: #AACB73;
+  --little-color: #CDE990;
+  --card--color: #FFFFE8;
 }
 
 @font-face {
