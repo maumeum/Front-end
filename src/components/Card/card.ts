@@ -98,12 +98,15 @@ export const Badge = styled.div<CardProps>`
 `;
 
 export const Button = styled.button`
-	position: absolute;
-	right: 0;
 	border: none;
 	background-color: var(--button--color);
 	color: #ffffff;
 	height: 4.4rem;
 	border-radius: 5%;
 	cursor: pointer;
+`;
+
+export const ButtonContainer = styled.div`
+	position: absolute;
+	right: 0;
 `;

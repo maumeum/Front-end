@@ -7,9 +7,11 @@ import {
 	ContentBox,
 	UserInfo,
 	Badge,
-	Button,
 	VolunInfo,
+	ButtonContainer,
 } from './card.ts';
+
+import { SmallButton } from '../Buttons/SmallButton.ts';
 
 type Props = {
 	title: string;
@@ -54,7 +56,9 @@ function Card({
 						<img src={profile} alt='작성자 프로필사진' />
 						<p>{nickname}</p>
 						{currTab === '완료한 봉사' && (
-							<Button onClick={openModal}>리뷰작성</Button>
+							<ButtonContainer>
+								<SmallButton onClick={openModal}>리뷰작성</SmallButton>
+							</ButtonContainer>
 						)}
 						<Modal isOpen={isOpen} setOpen={setOpen} />
 					</UserInfo>
