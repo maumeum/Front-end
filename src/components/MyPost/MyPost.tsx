@@ -13,14 +13,18 @@ import Modal from '../Modal/Modal.tsx';
 import { SmallButton } from '../Buttons/SmallButton';
 
 type PostProps = {
-	title: string;
-	content: string;
-	category: string;
-	date: string;
+	data: {
+		title: string;
+		content: string;
+		category: string;
+		date: string;
+	};
 	currTab?: string;
 };
 
-function MyPost({ currTab, title, content, category, date }: PostProps) {
+function MyPost({ currTab, data }: PostProps) {
+	const { title, content, category, date } = data;
+
 	const truncateTitle = (title: string) => {
 		const maxLength = 55;
 		if (title.length <= maxLength) {
@@ -55,12 +59,12 @@ function MyPost({ currTab, title, content, category, date }: PostProps) {
 						<div
 							onClick={() => setIsShowMore(!isShowMore)}
 							style={{
-								fontSize: '1.7rem',
+								fontSize: '1.1rem',
 								marginLeft: '2.1rem',
 								cursor: 'pointer',
 							}}>
 							{content.length > textLimit &&
-								(isShowMore ? '[닫기]' : '[더보기]')}
+								(isShowMore ? '[닫기]' : '...[더보기]')}
 						</div>
 					</Description>
 

@@ -14,26 +14,28 @@ import {
 import { SmallButton } from '../Buttons/SmallButton.ts';
 
 type Props = {
-	title: string;
-	thumbnail: string;
-	nickname: string;
-	profile: string;
-	recruitStatus: string;
+	data: {
+		title: string;
+		thumbnail: string;
+		nickname: string;
+		profile: string;
+		recruitStatus: string;
+		startDate: string;
+		endDate: string;
+	};
 	currTab: string;
-	startDate: string;
-	endDate: string;
 };
 
-function Card({
-	currTab,
-	title,
-	thumbnail,
-	nickname,
-	profile,
-	recruitStatus,
-	startDate,
-	endDate,
-}: Props) {
+function Card({ currTab, data }: Props) {
+	const {
+		title,
+		thumbnail,
+		nickname,
+		recruitStatus,
+		profile,
+		startDate,
+		endDate,
+	} = data;
 	const [isOpen, setOpen] = useState(false);
 	const openModal = () => {
 		setOpen(true);

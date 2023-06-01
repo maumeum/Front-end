@@ -28,6 +28,7 @@ export const ContentBox = styled.div`
 	font-weight: bold;
 	display: flex;
 	flex-direction: column;
+	padding: 1rem;
 `;
 
 export const VolunInfo = styled.div`
@@ -36,7 +37,7 @@ export const VolunInfo = styled.div`
 	p {
 		word-break: keep-all;
 		font-family: 'KakaoBig Regular', 'Apple SD Gothic Neo';
-		font-size: 2.2rem;
+		font-size: 1.8rem;
 		line-height: 2.4rem;
 		letter-spacing: -0.1px;
 		text-align: left;
@@ -45,7 +46,7 @@ export const VolunInfo = styled.div`
 	p + p {
 		position: absolute;
 		font-weight: 500;
-		font-size: 1.5rem;
+		font-size: 1.3rem;
 		color: #999b9c;
 	}
 `;

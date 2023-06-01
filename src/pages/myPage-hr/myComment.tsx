@@ -47,15 +47,9 @@ function myComment() {
 					<TabMenu>
 						<Tab currTab={currTab} onClick={handleClickTab} tabs={tabs} />
 					</TabMenu>
-					{data.map((item, index) => {
+					{data.map((data, index) => {
 						return (
-							<MyPost
-								key={`postList-${index}`}
-								currTab={currTab}
-								title={item.title}
-								content={item.content}
-								category={item.category}
-								date={item.date}></MyPost>
+							<MyPost key={`postList-${index}`} currTab={currTab} data={data} />
 						);
 					})}
 				</Main>

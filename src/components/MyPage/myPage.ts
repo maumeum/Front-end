@@ -4,7 +4,7 @@ export const Container = styled.div`
 	display: flex;
 	position: relative;
 	top: 10rem;
-	left: 10rem;
+	left: 15rem;
 	font-size: 1.9rem;
 	min-height: 1000px;
 `;
@@ -24,4 +24,11 @@ export const Main = styled.div`
 
 export const TabMenu = styled.div`
 	display: flex;
+`;
+
+export const CardBox = styled.div`
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-column-gap: 3rem;
+	grid-row-gap: 2rem;
 `;

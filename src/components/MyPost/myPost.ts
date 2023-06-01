@@ -5,7 +5,8 @@ export const PostListContainer = styled.div`
 `;
 
 export const PostBox = styled.div`
-	padding: 1rem;
+	width: 85%;
+	padding: 3rem;
 	border: 1px solid #e6e6e6;
 	border-radius: 10px;
 	margin-bottom: 3rem;
@@ -13,7 +14,7 @@ export const PostBox = styled.div`
 
 export const Title = styled.p`
 	font-family: kakaoBig;
-	font-size: 24px;
+	font-size: 2rem;
 	font-weight: 700;
 	line-height: 29px;
 	letter-spacing: 0em;
@@ -23,7 +24,8 @@ export const Title = styled.p`
 export const Description = styled.div`
 	margin: 0;
 	font-family: kakaoReg;
-	font-size: 18px;
+	word-break: keep-all;
+	font-size: 1.6rem;
 	line-height: 24px;
 	letter-spacing: 0em;
 	text-align: left;
@@ -36,7 +38,7 @@ export const PostInfo = styled.div`
 	p {
 		color: #666666;
 		font-family: kakaoReg;
-		font-size: 15px;
+		font-size: 1.5rem;
 		font-weight: 400;
 		line-height: 18px;
 		letter-spacing: 0em;

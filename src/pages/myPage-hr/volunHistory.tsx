@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { CardBox } from './voluntHistory.ts';
 import {
 	Container,
 	Main,
 	MenuBar,
 	TabMenu,
+	CardBox,
 } from '../../components/MyPage/myPage.ts';
 import car from '../../assets/images/car.png';
 
@@ -111,17 +111,7 @@ function myVolunHistory() {
 					</TabMenu>
 					<CardBox>
 						{props.map((data, index) => (
-							<Card
-								key={index}
-								currTab={currTab}
-								title={data.title}
-								thumbnail={data.thumbnail}
-								nickname={data.nickname}
-								recruitStatus={data.recruitStatus}
-								profile={data.profile}
-								startDate={data.startDate}
-								endDate={data.endDate}
-							/>
+							<Card key={index} currTab={currTab} data={data} />
 						))}
 					</CardBox>
 				</Main>
