@@ -118,7 +118,12 @@ export const EmailContainer = styled.div`
   width: 45rem;
   height: 5.6rem;
   background-color: #FFFFFF;
-  border: 1px solid #CCCCCC;
+  border: ${props => {
+    if (props.className === "submit") {
+      return "1px solid #EB5757"
+    }
+    return "1px solid #CCCCCC;"
+  }};
   border-radius: 8px;
   box-sizing: border-box;
 `
@@ -156,7 +161,12 @@ export const DataInput = styled.input`
   width: 45rem;
   height: 5.6rem;
   padding-left: 1rem;
-  border: 1px solid #CCCCCC;
+  border: ${props => {
+    if (props.value === "" && props.className !== "") {
+      return "1px solid #EB5757"
+    }
+    return "1px solid #CCCCCC;"
+  }};
   outline: none;
   border-radius: 8px;
   box-sizing: border-box;
