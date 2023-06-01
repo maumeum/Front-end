@@ -37,6 +37,7 @@ const props = [
 function volunSuggest() {
 	const tabs = ['내가 등록한 봉사활동'];
 	const [currTab, setCurrTab] = useState('내가 등록한 봉사활동');
+
 	return (
 		<>
 			<Container>

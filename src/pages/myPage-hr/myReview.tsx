@@ -8,7 +8,6 @@ import {
 
 import Tab from '../../components/Tab/Tab.tsx';
 import MyPost from '../../components/MyPost/MyPost.tsx';
-import { SmallButton } from '../../components/Buttons/SmallButton';
 
 function myReview() {
 	const tabs = ['내가 쓴 리뷰'];

@@ -111,3 +111,8 @@ export const ButtonContainer = styled.div`
 	position: absolute;
 	right: 0;
 `;
+
+export const SelectContainer = styled.div`
+	position: absolute;
+	right: 0;
+`;
