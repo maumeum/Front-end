@@ -10,7 +10,7 @@ export const MainSection = styled.div`
 export const TopSlogan = styled.h2`
   margin: 0 40rem;
   padding-top: 6rem;
-  width: 26rem;
+  width: 30rem;
   font-size: 2.6rem;
   font-weight: 700;
 `
@@ -22,17 +22,7 @@ export const TopContainer = styled.div`
 `
 
 export const ReviewContainer = styled.div`
-`
 
-export const ReviewCard = styled.div`
-  margin: 4rem 0;
-  width: 70rem;
-  height: 25rem;
-  background-color: #FFFFFF;
-  border: none;
-  border-radius: 12px;
-  box-sizing: border-box;
-  filter: drop-shadow(0 2px 10px rgb(0, 0, 0, 10%));
 `
 
 export const IntroducePage = styled.div`
@@ -94,20 +84,10 @@ export const MidSlogan = styled.h2`
 `
 
 export const VolunteerContainer = styled.div`
+  min-width: 112rem;
   margin: 4rem 40rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-`
-
-export const Volunteer = styled.div`
-  margin-bottom: 6rem;
-  width: calc(100% - 0.5rem);
-  height: 37rem;
-  background-color: #FFFFFF;
-  border: none;
-  border-radius: 12px;
-  box-sizing: border-box;
-  filter: drop-shadow(0 2px 10px rgb(0, 0, 0, 10%));
 `
 
 export const CommunityTitle = styled.h2`
@@ -119,16 +99,8 @@ export const CommunityTitle = styled.h2`
 export const CommunityContainer = styled.div`
   margin: 0 40rem;
   padding-bottom: 12rem;
+  min-width: 112rem;
   height: 89rem;
   display: grid;
   grid-template-rows: repeat(6, 1fr);
-`
-
-export const CommunityCard = styled.div`
-  height: 11rem;
-  background-color: #FFFFFF;
-  border: none;
-  border-radius: 12px;
-  position: sticky;
-  filter: drop-shadow(0 2px 10px rgb(0, 0, 0, 10%));
 `
