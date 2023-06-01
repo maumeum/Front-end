@@ -15,25 +15,30 @@ import MyComment from './pages/myPage-hr/myComment';
 import MyPost from './pages/myPage-hr/myPost';
 import FindFriend from './pages/community/findFriend';
 import Question from './pages/community/question';
+import FindFriendWrite from './pages/community/findFriendWrite';
 
 function App() {
-  return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/mypage/history" element={<MyVolunHistory />} />
-        <Route path="/mypage/suggest" element={<MyVolunSuggest />} />
-        <Route path="/mypage/comment" element={<MyComment />} />
-        <Route path="/mypage/post" element={<MyPost />} />
-        <Route path="/community/findfriend" element={<FindFriend />} />
-        <Route path="/community/question" element={<Question />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/sign_up" element={<SignUp />} />
-      </Routes>
-      <Footer />
-    </Router>
-  );
+	return (
+		<Router>
+			<Header />
+			<Routes>
+				<Route path='/' element={<Main />} />
+				<Route path='/mypage/history' element={<MyVolunHistory />} />
+				<Route path='/mypage/suggest' element={<MyVolunSuggest />} />
+				<Route path='/mypage/comment' element={<MyComment />} />
+				<Route path='/mypage/post' element={<MyPost />} />
+				<Route path='/community/findfriend' element={<FindFriend />} />
+				<Route path='/community/question' element={<Question />} />
+				<Route
+					path='/community/findfriend/write'
+					element={<FindFriendWrite />}
+				/>
+				<Route path='/login' element={<Login />} />
+				<Route path='/sign_up' element={<SignUp />} />
+			</Routes>
+			<Footer />
+		</Router>
+	);
 }
 
 export default App;
