@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import LargeButton from "../../components/Buttons/LargeButton";
 import {SignUpSection, SignUpForm, InputContainer, DataName, EmailContainer, EmailData, EmailButton, DataInput, CheckValue} from "./style"
-import Swal from "sweetalert2"; 
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const [email, setEmail] = useState<string>("");
@@ -15,7 +15,7 @@ const SignUp = () => {
   const emailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSubmit(false);
     setEmail(e.target.value);
-  };
+  }; 
 
   // nickname value
   const nicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +76,7 @@ const SignUp = () => {
       <SignUpForm>
         <InputContainer>
           <DataName>이메일</DataName>
-          <EmailContainer>
+          <EmailContainer className={checkEmail(email) && submit? "submit" : ""}>
             <EmailData type="text" placeholder="이메일을 입력해주세요." value={email} onChange={emailChange}/>
             <EmailButton>중복 확인</EmailButton>
           </EmailContainer>
@@ -92,9 +92,10 @@ const SignUp = () => {
           <DataName>닉네임</DataName>
           <DataInput 
           type="text" 
-          placeholder="닉네임을 입력해주세요." 
-          value={nickname} 
+          placeholder="닉네임을 입력해주세요."
+          className={submit? "submit" : ""}
           onChange={nicknameChange}
+          value={nickname}
           />
           {!nickname && submit && <CheckValue>닉네임을 입력해주세요.</CheckValue>}
         </InputContainer>
@@ -104,6 +105,7 @@ const SignUp = () => {
           type="password" 
           placeholder="비밀번호 4~20자 입력" 
           value={password} 
+          className={submit? "submit" : ""}
           onChange={passwordChange}
           />
           {!password && submit ? (
@@ -118,6 +120,7 @@ const SignUp = () => {
           type="password" 
           placeholder="비밀번호 다시 입력" 
           value={checkPassword} 
+          className={submit? "submit" : ""}
           onChange={checkPasswordChange}
           />
           {!checkPassword && submit && <CheckValue>비밀번호 확인을 입력해주세요.</CheckValue>}
@@ -128,10 +131,11 @@ const SignUp = () => {
           type="text" 
           placeholder="핸드폰 번호('-'없이 입력)" 
           value={phoneNum} 
+          className={submit? "submit" : ""}
           onChange={phoneNumChange}
           />
           {!phoneNum && submit ? (
-          <CheckValue>휴대폰 번호를 입력해주세요.</CheckValue>
+          <CheckValue>핸드폰 번호를 입력해주세요.</CheckValue>
           ) : (
             !phoneNum.match(/^\d+$/) && phoneNum
           ) ? <CheckValue>핸드폰번호는 숫자만 입력할 수 있습니다.</CheckValue> : ""}
@@ -161,3 +165,11 @@ const validPassword = (password: string, checkPassword: string) => {
 const validPhoneNum = (phoneNum: string) => {
   return (phoneNum.match(/^\d+$/) && phoneNum !== "");
 };
+
+// 이메일 공란일 때
+const checkEmail = (email: string) => {
+  if (email === "") {
+    return true;
+  }
+  return false;
+}
