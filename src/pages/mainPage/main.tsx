@@ -4,8 +4,7 @@ import {
   MainSection, 
   TopSlogan, 
   TopContainer,
-  ReviewContainer, 
-  ReviewCard, 
+  ReviewContainer,  
   IntroducePage, 
   IntroduceTitle, 
   MainTitle, 
@@ -15,21 +14,26 @@ import {
   Desc, 
   MidSlogan, 
   VolunteerContainer, 
-  Volunteer,
   CommunityTitle,
   CommunityContainer,
-  CommunityCard
 } from "./style";
+import VolunteerCard from "../../components/Card/VolunteerCard";
+import ReviewCard from "../../components/Card/ReviewCard";
+import CommunityCard from "../../components/Card/CommunityCard";
+import {volunteerList} from "../../assets/datas/volunteerData";
+import { ReviewList } from "../../assets/datas/volunteerData";
+import { communityList } from "../../assets/datas/volunteerData";
 import cardLogo from "../../assets/icons/cardlogo.svg";
 
 const Main = () => {
   return (
     <MainSection>
-      <TopSlogan>당신의 아름다운 걸음을 마음이음이 함께합니다.</TopSlogan>
+      <TopSlogan>당신의 아름다운 걸음을<br />마음이음이 함께합니다.</TopSlogan>
       <TopContainer>
         <ReviewContainer>
-          <ReviewCard></ReviewCard>
-          <ReviewCard></ReviewCard>
+          {ReviewList.sort(() => Math.random() - 0.5).slice(0,2).map((item, index) => (
+            <ReviewCard data={{...item, index}} key={index} />
+          ))}
         </ReviewContainer>
         <IntroducePage>
           <IntroduceTitle>
@@ -48,14 +52,14 @@ const Main = () => {
       </TopContainer>
       <MidSlogan>시간을 나눠 마음 채우기</MidSlogan>
       <VolunteerContainer>
-        {Array.from({ length: 8 }).map((_, index) => (
-          <Volunteer key={index} />
+      {volunteerList.sort(() => Math.random() - 0.5).slice(0,8).map((item , index) => (
+          <VolunteerCard key={index} data={item}/>
         ))}
       </VolunteerContainer>
       <CommunityTitle>커뮤니티</CommunityTitle>
       <CommunityContainer>
-        {Array.from({ length: 6}).map((_, index) => (
-          <CommunityCard key={index} />
+        {communityList.sort(() => Math.random() - 0.5).slice(0, 6).map((item, index) => (
+          <CommunityCard key={index} data={item}/>
         ))}
       </CommunityContainer>
     </MainSection>
