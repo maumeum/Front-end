@@ -17,6 +17,7 @@ import FindFriend from './pages/community/findFriend';
 import Question from './pages/community/question';
 import FindFriendWrite from './pages/community/findFriendWrite';
 import QuestionWrite from './pages/community/questionWrite';
+import Review from './pages/reviewPage/reviewPage';
 
 function App() {
 	return (
@@ -37,6 +38,7 @@ function App() {
 				<Route path='/community/question/write' element={<QuestionWrite />} />
 				<Route path='/login' element={<Login />} />
 				<Route path='/sign_up' element={<SignUp />} />
+				<Route path='/review' element={<Review />} />
 			</Routes>
 			<Footer />
 		</Router>
