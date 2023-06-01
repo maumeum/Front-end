@@ -65,6 +65,7 @@ function MyPost() {
 							<PostInfo>
 								<p>{item.date}</p>
 								<p>{item.category}</p>
+								<button>수정하기</button>
 							</PostInfo>
 						</PostBox>
 					);

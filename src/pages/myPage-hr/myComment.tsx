@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import { Container, Main, MenuBar, TabMenu } from './voluntHistory.ts';
-
+import {
+	Container,
+	Main,
+	MenuBar,
+	TabMenu,
+} from '../../components/MyPage/myPage.ts';
 import Tab from '../../components/Tab/Tab.tsx';
 import MyPost from '../../components/MyPost/MyPost.tsx';
 

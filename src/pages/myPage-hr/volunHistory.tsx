@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { Container, Main, MenuBar, TabMenu, CardBox } from './voluntHistory.ts';
+import { CardBox } from './voluntHistory.ts';
+import {
+	Container,
+	Main,
+	MenuBar,
+	TabMenu,
+} from '../../components/MyPage/myPage.ts';
 import car from '../../assets/images/car.png';
 
 import Tab from '../../components/Tab/Tab.tsx';

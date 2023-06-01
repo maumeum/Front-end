@@ -26,7 +26,6 @@ export const ImgBox = styled.div`
 
 export const ContentBox = styled.div`
 	font-weight: bold;
-	padding: 1rem;
 	display: flex;
 	flex-direction: column;
 `;
@@ -55,7 +54,8 @@ export const UserInfo = styled.div`
 	display: flex;
 	align-items: center;
 	height: 0%;
-	margin-top: 2.8rem;
+	margin-top: 3.5rem;
+	position: relative;
 
 	img {
 		width: 3.5rem;
@@ -101,7 +101,8 @@ export const Button = styled.button`
 	position: absolute;
 	right: 0;
 	border: none;
-	background-color: var(--color--footer);
+	background-color: var(--button--color);
+	color: #ffffff;
 	height: 4.4rem;
 	border-radius: 5%;
 	cursor: pointer;
