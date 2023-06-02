@@ -10,8 +10,6 @@ export const Container = styled.div`
 export const MenuBar = styled.div`
 	width: 10%;
 	border-radius: 5px;
-	border: 1px solid black;
-	/* margin-left: 40rem; */
 `;
 
 export const Main = styled.div`
