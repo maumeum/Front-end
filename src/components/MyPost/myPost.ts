@@ -5,7 +5,7 @@ export const PostListContainer = styled.div`
 `;
 
 export const PostBox = styled.div`
-	/* width: 90%; */
+	width: 88%;
 	padding: 3rem;
 	border: 1px solid #e6e6e6;
 	border-radius: 10px;

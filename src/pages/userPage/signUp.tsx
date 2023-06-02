@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import LargeButton from '../../components/Buttons/LargeButton';
 import {
 	SignUpSection,
@@ -12,6 +13,7 @@ import {
 	CheckValue,
 } from './style';
 import Swal from 'sweetalert2';
+import Modal from '../../components/Modal/Modal.tsx';
 
 type Props = {
 	mypage?: string;
@@ -31,6 +33,7 @@ const SignUp = ({ mypage, myInfo }: Props) => {
 	const [checkPassword, setCheckPassword] = useState<string>('');
 	const [phoneNum, setPhoneNum] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
+	const navigate = useNavigate();
 
 	// 이메일 value
 	const emailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,9 +65,17 @@ const SignUp = ({ mypage, myInfo }: Props) => {
 		setPhoneNum(e.target.value);
 	};
 
+	//회원정보 수정 클릭시 모달
+	const [isOpen, setOpen] = useState(false);
+
 	const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
 		// 상태 초기화
-
+		{
+			if (mypage) {
+				setOpen(true);
+				return;
+			}
+		}
 		setSubmit(false);
 		e.preventDefault();
 		setSubmit(true);
@@ -105,12 +116,13 @@ const SignUp = ({ mypage, myInfo }: Props) => {
 					<EmailContainer
 						className={checkEmail(email) && submit ? 'submit' : ''}>
 						<EmailData
+							readOnly={mypage ? true : false}
 							type='text'
 							placeholder='이메일을 입력해주세요.'
 							value={mypage ? myInfo?.email : email}
 							onChange={emailChange}
 						/>
-						<EmailButton>중복 확인</EmailButton>
+						<EmailButton mypage={mypage}>중복 확인</EmailButton>
 					</EmailContainer>
 					{!email && submit ? (
 						<CheckValue>이메일을 입력해주세요.</CheckValue>
@@ -125,6 +137,7 @@ const SignUp = ({ mypage, myInfo }: Props) => {
 				<InputContainer>
 					<DataName>닉네임</DataName>
 					<DataInput
+						readOnly={mypage ? true : false}
 						type='text'
 						placeholder='닉네임을 입력해주세요.'
 						className={submit ? 'submit' : ''}
@@ -138,6 +151,7 @@ const SignUp = ({ mypage, myInfo }: Props) => {
 				<InputContainer>
 					<DataName>비밀번호</DataName>
 					<DataInput
+						readOnly={mypage ? true : false}
 						type='password'
 						placeholder='비밀번호 4~20자 입력'
 						value={mypage ? myInfo?.password : password}
@@ -156,6 +170,7 @@ const SignUp = ({ mypage, myInfo }: Props) => {
 				<InputContainer>
 					<DataName>비밀번호 확인</DataName>
 					<DataInput
+						readOnly={mypage ? true : false}
 						type='password'
 						placeholder='비밀번호 다시 입력'
 						value={mypage ? myInfo?.pwdcheck : checkPassword}
@@ -169,6 +184,7 @@ const SignUp = ({ mypage, myInfo }: Props) => {
 				<InputContainer>
 					<DataName>핸드폰 번호</DataName>
 					<DataInput
+						readOnly={mypage ? true : false}
 						type='text'
 						placeholder="핸드폰 번호('-'없이 입력)"
 						value={mypage ? myInfo?.password : phoneNum}
@@ -188,6 +204,7 @@ const SignUp = ({ mypage, myInfo }: Props) => {
 				) : (
 					<LargeButton onClick={clickHandler}>회원가입</LargeButton>
 				)}
+				<Modal isOpen={isOpen} setOpen={setOpen} user={'user'} />
 			</SignUpForm>
 		</SignUpSection>
 	);

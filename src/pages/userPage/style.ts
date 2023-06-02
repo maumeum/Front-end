@@ -107,9 +107,8 @@ export const SignUpSection = styled.div<SignUpProps>`
 		props.mypage === 'mypage' &&
 		css`
 			width: 60rem;
-			margin: 5rem 0 20rem;
-			left: 45.5rem;
-			cursor: not-allowed;
+			margin: 5rem 0 10rem;
+			left: 30.5rem;
 		`}
 `;
 
@@ -157,7 +156,7 @@ export const EmailData = styled.input`
 	color: #666666;
 `;
 
-export const EmailButton = styled.button`
+export const EmailButton = styled.button<SignUpProps>`
 	width: 7.5rem;
 	height: 3.5rem;
 	margin-right: 1.5rem;
@@ -168,9 +167,14 @@ export const EmailButton = styled.button`
 	font-weight: 100;
 	font-size: 1.2rem;
 	cursor: pointer;
+	${props =>
+		props.mypage === 'mypage' &&
+		css`
+			cursor: not-allowed;
+		`}
 `;
 
-export const DataInput = styled.input`
+export const DataInput = styled.input<SignUpProps>`
 	width: 45rem;
 	height: 5.6rem;
 	padding-left: 1rem;
