@@ -7,6 +7,7 @@ ReactModal.setAppElement('#root');
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Main from './pages/mainPage/main';
+import Search from './pages/searchPage/search';
 import Login from './pages/userPage/login';
 import SignUp from './pages/userPage/signUp';
 import MyVolunHistory from './pages/myPage-hr/volunHistory';
@@ -28,7 +29,6 @@ function App() {
 				<Route path='/mypage/history' element={<MyVolunHistory />} />
 				<Route path='/mypage/suggest' element={<MyVolunSuggest />} />
 				<Route path='/mypage/comment' element={<MyComment />} />
-				<Route path='/mypage/post' element={<MyPost />} />
 				<Route path='/community/findfriend' element={<FindFriend />} />
 				<Route path='/community/question' element={<Question />} />
 				<Route
@@ -38,6 +38,7 @@ function App() {
 				<Route path='/community/question/write' element={<QuestionWrite />} />
 				<Route path='/login' element={<Login />} />
 				<Route path='/sign_up' element={<SignUp />} />
+        <Route path="/search" element={<Search />} />
 				<Route path='/review' element={<Review />} />
 				<Route path='/mypage/review' element={<MyReview />} />
 			</Routes>
