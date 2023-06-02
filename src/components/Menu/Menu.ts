@@ -6,13 +6,14 @@ export const MenuContainer = styled.div`
 
 export const MenuTitle = styled.p`
 	color: var(--button--color);
-	border-bottom: 1px solid var(--button--color);
-	font-size: 1.5rem;
+	border-bottom: 1px solid #eeeeee;
+	font-size: 1.8rem;
+	font-weight: bold;
+	padding: 1rem;
 `;
 
 export const Menus = styled.div`
 	color: #000000;
-
 	a {
 		text-decoration: none;
 		&:visited {

@@ -10,14 +10,16 @@ export const Container = styled.div`
 export const MenuBar = styled.div`
 	width: 10%;
 	border-radius: 5px;
+	margin: 17.5rem 0 0 10rem;
+	/* top: 7.8rem; */
 `;
 
 export const Main = styled.div`
 	width: 70%;
-	top: 12.5rem;
+	margin-top: 7.5rem;
 	padding: 3.5rem;
-	margin-left: 2rem;
-	/* margin-right: 40rem; */
+	margin-left: 5rem;
+	margin-right: 27rem;
 `;
 
 export const TabMenu = styled.div`
