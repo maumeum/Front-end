@@ -18,6 +18,7 @@ import Question from './pages/community/question';
 import FindFriendWrite from './pages/community/findFriendWrite';
 import QuestionWrite from './pages/community/questionWrite';
 import Review from './pages/reviewPage/reviewPage';
+import MyPage from './pages/myPage-hr/myPage';
 
 function App() {
 	return (
@@ -39,6 +40,7 @@ function App() {
 				<Route path='/sign_up' element={<SignUp />} />
 				<Route path='/review' element={<Review />} />
 				<Route path='/mypage/review' element={<MyReview />} />
+				<Route path='/mypage' element={<MyPage />} />
 			</Routes>
 			<Footer />
 		</Router>
