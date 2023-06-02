@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MenuTitle, Menus } from './menu';
+import { MenuTitle, Menus } from './Menu.ts';
 
 type MenuProps = {
 	title: string;

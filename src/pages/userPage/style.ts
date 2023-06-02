@@ -5,12 +5,10 @@ import { NavLink } from 'react-router-dom';
 
 export const LoginSection = styled.div`
 	position: relative;
-	left: 68.5rem;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin: 8rem 0 34rem;
-	width: 55rem;
+	margin: 8rem 68.5rem 34rem;
 	height: 75rem;
 `;
 
@@ -95,9 +93,7 @@ type SignUpProps = {
 
 export const SignUpSection = styled.div<SignUpProps>`
 	position: relative;
-	left: 68.5rem;
-	margin: 17rem 0 26.5rem;
-	width: 55rem;
+	margin: 17rem 68.5rem 26.5rem;
 	height: 77rem;
 	background-color: #f7f8f9;
 	border-radius: 20px;
@@ -149,6 +145,7 @@ export const DataName = styled.p`
 
 export const EmailData = styled.input`
 	padding-left: 1rem;
+  width: 70%;
 	border: none;
 	outline: none;
 	text-align: start;
