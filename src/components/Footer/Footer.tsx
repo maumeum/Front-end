@@ -4,10 +4,14 @@ import {FooterSection, IntroContainer, LogoContainer, MainLogo, SloganContainer,
 import mainLogo from "../../assets/icons/mainlogo.svg";
 
 const Footer = () => {
+  const clickHandler = () => {
+    window.scrollTo({top: 0, behavior: "smooth"});
+  };
+
   return (
     <FooterSection>
         <IntroContainer>
-          <LogoContainer>
+          <LogoContainer onClick={clickHandler}>
             <MainLogo src={mainLogo} alt="mainLogo" />
           </LogoContainer>
           <SloganContainer>

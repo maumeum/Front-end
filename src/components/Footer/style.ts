@@ -17,7 +17,8 @@ export const IntroContainer = styled.div`
 export const LogoContainer = styled.div`
   margin-top: 4.6rem;
   width: 10rem;
-  height: rem;
+  height: 10rem;
+  cursor: pointer;
 `
 
 export const MainLogo = styled.img`
