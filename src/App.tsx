@@ -12,7 +12,7 @@ import SignUp from './pages/userPage/signUp';
 import MyVolunHistory from './pages/myPage-hr/volunHistory';
 import MyVolunSuggest from './pages/myPage-hr/volunSuggest';
 import MyComment from './pages/myPage-hr/myComment';
-import MyPost from './pages/myPage-hr/myPost';
+import MyReview from './pages/myPage-hr/myReview';
 import FindFriend from './pages/community/findFriend';
 import Question from './pages/community/question';
 import FindFriendWrite from './pages/community/findFriendWrite';
@@ -39,6 +39,7 @@ function App() {
 				<Route path='/login' element={<Login />} />
 				<Route path='/sign_up' element={<SignUp />} />
 				<Route path='/review' element={<Review />} />
+				<Route path='/mypage/review' element={<MyReview />} />
 			</Routes>
 			<Footer />
 		</Router>

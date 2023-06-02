@@ -6,7 +6,6 @@ import {NavLink} from "react-router-dom";
 export const LoginSection = styled.div`
   position: relative;
   left: 68.5rem;
-  right: 68.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -93,7 +92,6 @@ export const SignUpButton = styled(NavLink)`
 export const SignUpSection = styled.div`
   position: relative;
   left: 68.5rem;
-  right: 68.5rem;
   margin: 17rem 0 26.5rem;
   width: 55rem;
   height: 77rem;
@@ -120,7 +118,12 @@ export const EmailContainer = styled.div`
   width: 45rem;
   height: 5.6rem;
   background-color: #FFFFFF;
-  border: 1px solid #CCCCCC;
+  border: ${props => {
+    if (props.className === "submit") {
+      return "1px solid #EB5757"
+    }
+    return "1px solid #CCCCCC;"
+  }};
   border-radius: 8px;
   box-sizing: border-box;
 `
@@ -158,7 +161,12 @@ export const DataInput = styled.input`
   width: 45rem;
   height: 5.6rem;
   padding-left: 1rem;
-  border: 1px solid #CCCCCC;
+  border: ${props => {
+    if (props.value === "" && props.className !== "") {
+      return "1px solid #EB5757"
+    }
+    return "1px solid #CCCCCC;"
+  }};
   outline: none;
   border-radius: 8px;
   box-sizing: border-box;

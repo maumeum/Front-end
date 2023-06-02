@@ -1,45 +1,62 @@
 .dn {
-  display: none;
+	display: none;
 }
 
 .w500 {
-  position: relative;
-  width: 400px;
-  margin: 0 auto;
+	position: relative;
+	width: 400px;
+	margin: 0 auto;
 }
 
 .w800 {
-  position: relative;
-  width: 800px;
-  margin: 0 auto;
+	position: relative;
+	width: 800px;
+	margin: 0 auto;
 }
 
 .w1000 {
-  position: relative;
-  width: 1000px;
-  margin: 0 auto;
+	position: relative;
+	width: 1000px;
+	margin: 0 auto;
 }
 
 .w1140 {
-  position: relative;
-  width: 1140px;
-  margin: 0 auto;
+	position: relative;
+	width: 1140px;
+	margin: 0 auto;
 }
 
 :root {
   --color--footer: #F5D4D4;
   --button--color: #AACB73;
+  --little-color: #CDE990;
+  --card--color: #FFFFE8;
+}
+
+@font-face {
+	font-family: 'kakaoBig';
+	src: url('../assets/KakaoBig-normal-400-100_1.ttf');
+}
+
+@font-face {
+	font-family: 'kakaoOTFReg';
+	src: url('../assets/KakaoOTFRegular.otf');
+}
+
+@font-face {
+	font-family: 'kakaoReg';
+	src: url('../assets/KakaoRegular.ttf');
 }
 
 /* button_layout */
 
 .border {
-  border-radius: 5px;
+	border-radius: 5px;
 }
 
 .btn_box {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 10px;
 }
