@@ -8,6 +8,7 @@ import { NumberWriteContainer, PageContainer } from './style.ts';
 import PostList from '../../components/PostList/PostList.tsx';
 
 const findFriend = () => {
+	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const navigate = useNavigate();
 	const handleSearch = (query: string) => {
 		//검색기능 구현 로직 작성예정
