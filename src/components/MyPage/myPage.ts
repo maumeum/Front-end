@@ -3,16 +3,15 @@ import styled from 'styled-components';
 export const Container = styled.div`
 	display: flex;
 	position: relative;
-	top: 10rem;
-	left: 15rem;
-	font-size: 1.9rem;
-	min-height: 1000px;
+	margin: 0;
+	padding: 0;
 `;
 
 export const MenuBar = styled.div`
 	width: 10%;
 	border-radius: 5px;
 	border: 1px solid black;
+	/* margin-left: 40rem; */
 `;
 
 export const Main = styled.div`
@@ -20,6 +19,7 @@ export const Main = styled.div`
 	top: 12.5rem;
 	padding: 3.5rem;
 	margin-left: 2rem;
+	/* margin-right: 40rem; */
 `;
 
 export const TabMenu = styled.div`

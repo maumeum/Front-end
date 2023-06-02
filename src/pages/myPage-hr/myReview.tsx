@@ -8,7 +8,7 @@ import {
 
 import Tab from '../../components/Tab/Tab.tsx';
 import MyPost from '../../components/MyPost/MyPost.tsx';
-
+import Menu from '../../components/Menu/Menu.tsx';
 function myReview() {
 	const tabs = ['내가 쓴 리뷰'];
 	const [currTab, setCurrTab] = useState('내가 쓴 리뷰');
@@ -35,9 +35,7 @@ function myReview() {
 		<>
 			<Container>
 				<MenuBar>
-					<p>내가쓴글</p>
-					<p>내가 댓글 쓴글</p>
-					<p>봉사내역조회</p>
+					<Menu title={'마이페이지'} />
 				</MenuBar>
 
 				<Main>

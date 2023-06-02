@@ -28,7 +28,6 @@ function App() {
 				<Route path='/mypage/history' element={<MyVolunHistory />} />
 				<Route path='/mypage/suggest' element={<MyVolunSuggest />} />
 				<Route path='/mypage/comment' element={<MyComment />} />
-				<Route path='/mypage/post' element={<MyPost />} />
 				<Route path='/community/findfriend' element={<FindFriend />} />
 				<Route path='/community/question' element={<Question />} />
 				<Route
