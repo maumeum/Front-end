@@ -11,13 +11,17 @@ const Header = () => {
   // 로그인 버튼을 클릭하여 로그인 화면으로 이동
   const loginHandler = () => {
     navigate("/login");
-    window.location.reload();
   }
 
   // 로고를 클릭하여 메인 페이지로 이동
   const mainHandler = () => {
     navigate("/");
     window.location.reload();
+  }
+
+  // search 로고를 클릭하여 검색 화면으로 이동
+  const searchHandler = () => {
+    navigate("/search");
   }
 
   return (
@@ -27,13 +31,13 @@ const Header = () => {
           <MainLogo src={mainLogo} alt="mainLogo" />
         </LogoContainer>
         <NavContainer>
-          <NavCategory>봉사모집하기</NavCategory>
-          <NavCategory>커뮤니티</NavCategory>
-          <NavCategory>봉사후기</NavCategory>
+          <NavCategory to="/">봉사모집하기</NavCategory>
+          <NavCategory to="/community/findfriend">커뮤니티</NavCategory>
+          <NavCategory to="/review">봉사후기</NavCategory>
         </NavContainer>
         <UtilContainer>
           <LoginButton onClick={loginHandler}>로그인</LoginButton>
-          <SearchButton>
+          <SearchButton onClick={searchHandler}>
             <SearchIcon src={searchLogo} alt="searchLogo" />
           </SearchButton>
         </UtilContainer>

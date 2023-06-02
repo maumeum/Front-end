@@ -7,15 +7,10 @@ export const FooterSection = styled.div`
   border: none;
 `
 
-export const FooterContainer = styled.div`
-  min-width: 140rem;
-  display: flex;
-  flex-direction: column;
-`
-
 export const IntroContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  min-width: 112rem;
   margin: 0 40rem;
 `
 
@@ -35,18 +30,17 @@ export const SloganContainer = styled.div`
 `
 export const Slogan = styled.p`
   text-align: end;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
 `
 
 export const MemberList = styled.ul`
-  align-self: center;
   display: flex;
   list-style-type: none;
   font-size: 1.2rem;
 `
 
 export const Member = styled.li`
-  margin: 0 1rem;
+  margin: 0 0 0 2rem;
 `
 
 export const GitLink = styled.a`
