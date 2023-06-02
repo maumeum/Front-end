@@ -15,6 +15,9 @@ import MyComment from './pages/myPage-hr/myComment';
 import MyReview from './pages/myPage-hr/myReview';
 import FindFriend from './pages/community/findFriend';
 import Question from './pages/community/question';
+import FindFriendWrite from './pages/community/findFriendWrite';
+import QuestionWrite from './pages/community/questionWrite';
+import Review from './pages/reviewPage/reviewPage';
 
 function App() {
 	return (
@@ -25,11 +28,18 @@ function App() {
 				<Route path='/mypage/history' element={<MyVolunHistory />} />
 				<Route path='/mypage/suggest' element={<MyVolunSuggest />} />
 				<Route path='/mypage/comment' element={<MyComment />} />
-				<Route path='/mypage/review' element={<MyReview />} />
+				<Route path='/mypage/post' element={<MyPost />} />
 				<Route path='/community/findfriend' element={<FindFriend />} />
 				<Route path='/community/question' element={<Question />} />
+				<Route
+					path='/community/findfriend/write'
+					element={<FindFriendWrite />}
+				/>
+				<Route path='/community/question/write' element={<QuestionWrite />} />
 				<Route path='/login' element={<Login />} />
 				<Route path='/sign_up' element={<SignUp />} />
+				<Route path='/review' element={<Review />} />
+				<Route path='/mypage/review' element={<MyReview />} />
 			</Routes>
 			<Footer />
 		</Router>
