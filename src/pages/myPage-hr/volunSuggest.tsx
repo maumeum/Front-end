@@ -10,7 +10,7 @@ import car from '../../assets/images/car.png';
 
 import Tab from '../../components/Tab/Tab.tsx';
 import Card from '../../components/Card/Card.tsx';
-
+import Menu from '../../components/Menu/Menu.tsx';
 const props = [
 	{
 		title:
@@ -37,13 +37,12 @@ const props = [
 function volunSuggest() {
 	const tabs = ['내가 등록한 봉사활동'];
 	const [currTab, setCurrTab] = useState('내가 등록한 봉사활동');
+
 	return (
 		<>
 			<Container>
 				<MenuBar>
-					<p>내가쓴글</p>
-					<p>내가 댓글 쓴글</p>
-					<p>봉사내역조회</p>
+					<Menu title={'마이페이지'} />
 				</MenuBar>
 
 				<Main>

@@ -5,7 +5,7 @@ export const PostListContainer = styled.div`
 `;
 
 export const PostBox = styled.div`
-	width: 85%;
+	width: 88%;
 	padding: 3rem;
 	border: 1px solid #e6e6e6;
 	border-radius: 10px;
@@ -16,7 +16,6 @@ export const Title = styled.p`
 	font-family: kakaoBig;
 	font-size: 2rem;
 	font-weight: 700;
-	line-height: 29px;
 	letter-spacing: 0em;
 	text-align: left;
 `;

@@ -10,6 +10,7 @@ import car from '../../assets/images/car.png';
 
 import Tab from '../../components/Tab/Tab.tsx';
 import Card from '../../components/Card/Card.tsx';
+import Menu from '../../components/Menu/Menu.tsx';
 
 function myVolunHistory() {
 	const [currTab, setCurrTab] = useState('신청한 봉사');
@@ -18,7 +19,7 @@ function myVolunHistory() {
 		setCurrTab(tab);
 	};
 
-	const props = [
+	const appliedData = [
 		{
 			title:
 				'세상에서 제일 재밌는 봉사활동, 런닝과 환경 보호를 한번에! 참여해보세요',
@@ -96,13 +97,25 @@ function myVolunHistory() {
 			endDate: '2021-01-02',
 		},
 	];
+
+	const completedData = [
+		{
+			title: '이건 완료된 봉사에서만 보이는 글 제목입니다. 제발 성공해라',
+			thumbnail: car,
+			nickname: '배가고파요배가고파',
+			profile: car,
+			recruitStatus: '모집중',
+			startDate: '2021-01-01',
+			endDate: '2021-01-02',
+		},
+	];
+
+	const data = currTab === '신청한 봉사' ? appliedData : completedData;
 	return (
 		<>
 			<Container>
 				<MenuBar>
-					<p>내가쓴글</p>
-					<p>내가 댓글 쓴글</p>
-					<p>봉사내역조회</p>
+					<Menu title={'마이페이지'} />
 				</MenuBar>
 
 				<Main>
@@ -110,7 +123,7 @@ function myVolunHistory() {
 						<Tab currTab={currTab} onClick={handleClickTab} />
 					</TabMenu>
 					<CardBox>
-						{props.map((data, index) => (
+						{data.map((data, index) => (
 							<Card key={index} currTab={currTab} data={data} />
 						))}
 					</CardBox>

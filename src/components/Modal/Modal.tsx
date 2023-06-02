@@ -6,13 +6,15 @@ import { BtnConatiner, customStyles, TitleInput } from './modal';
 
 import LargeButton from '../Buttons/LargeButton';
 import TopBar from '../../components/TopBar/TopBar';
+import UserForm from '../../components/UserForm/UserForm.tsx';
 
 type ModalProps = {
 	isOpen: boolean;
 	setOpen: (isOpen: boolean) => void;
+	user?: string;
 };
 
-const Modal = ({ isOpen, setOpen }: ModalProps) => {
+const Modal = ({ isOpen, setOpen, user }: ModalProps) => {
 	// const [input, setInput] = useState('');
 
 	const handleClickClose = () => {
@@ -86,22 +88,30 @@ const Modal = ({ isOpen, setOpen }: ModalProps) => {
 			isOpen={isOpen}
 			onRequestClose={handleClickClose}
 			style={customStyles}>
-			<TopBar
-				modal='modal'
-				title={'봉사활동 리뷰작성'}
-				text={'다른 사람들과 함께 봉사의 즐거움을 나눠보아요!'}
-			/>
-			<TitleInput placeholder='제목을 입력해주세요.' />
-			<ReactQuill
-				onChange={handleChange}
-				modules={modules}
-				placeholder={placeholder}
-				style={{ height: '50rem', marginTop: '2rem' }}
-			/>
+			{user !== 'user' ? (
+				<>
+					<TopBar
+						modal='modal'
+						title={'봉사활동 리뷰작성'}
+						text={'다른 사람들과 함께 봉사의 즐거움을 나눠보아요!'}
+					/>
+					<TitleInput placeholder='제목을 입력해주세요.' />
+					<ReactQuill
+						onChange={handleChange}
+						modules={modules}
+						placeholder={placeholder}
+						style={{ height: '35rem', marginTop: '2rem' }}
+					/>
 
-			<BtnConatiner>
-				<LargeButton onClick={handleClickClose}>후기 작성하기</LargeButton>
-			</BtnConatiner>
+					<BtnConatiner>
+						<LargeButton onClick={handleClickClose}>후기 작성하기</LargeButton>
+					</BtnConatiner>
+				</>
+			) : (
+				<>
+					<UserForm />
+				</>
+			)}
 		</ReactModal>
 	);
 };

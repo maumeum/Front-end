@@ -7,7 +7,7 @@ import {
 } from '../../components/MyPage/myPage.ts';
 import Tab from '../../components/Tab/Tab.tsx';
 import MyPost from '../../components/MyPost/MyPost.tsx';
-
+import Menu from '../../components/Menu/Menu.tsx';
 const data = [
 	{
 		title:
@@ -38,9 +38,7 @@ function myComment() {
 		<>
 			<Container>
 				<MenuBar>
-					<p>내가쓴글</p>
-					<p>내가 댓글 쓴글</p>
-					<p>봉사내역조회</p>
+					<Menu title={'마이페이지'} />
 				</MenuBar>
 
 				<Main>

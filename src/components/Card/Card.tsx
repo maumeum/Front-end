@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Modal from '../../components/Modal/Modal.tsx';
-
+import Selector from '../../components/Selector/Selector.tsx';
+import { SmallButton } from '../Buttons/SmallButton.ts';
 import {
 	CardContainer,
 	ImgBox,
@@ -9,9 +10,8 @@ import {
 	Badge,
 	VolunInfo,
 	ButtonContainer,
+	SelectContainer,
 } from './card.ts';
-
-import { SmallButton } from '../Buttons/SmallButton.ts';
 
 type Props = {
 	data: {
@@ -40,6 +40,11 @@ function Card({ currTab, data }: Props) {
 	const openModal = () => {
 		setOpen(true);
 	};
+
+	const handleRecruitmentStatusChange = selectedValue => {
+		console.log('Selected Value:', selectedValue);
+	};
+
 	return (
 		<>
 			<CardContainer currTab={currTab}>
@@ -61,6 +66,11 @@ function Card({ currTab, data }: Props) {
 							<ButtonContainer>
 								<SmallButton onClick={openModal}>리뷰작성</SmallButton>
 							</ButtonContainer>
+						)}
+						{currTab === '내가 등록한 봉사활동' && (
+							<SelectContainer>
+								<Selector onChange={handleRecruitmentStatusChange} />
+							</SelectContainer>
 						)}
 						<Modal isOpen={isOpen} setOpen={setOpen} />
 					</UserInfo>

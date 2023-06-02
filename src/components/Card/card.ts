@@ -7,7 +7,7 @@ interface CardProps {
 export const CardContainer = styled.div<CardProps>`
 	display: flex;
 	flex-direction: column;
-	width: 34.5rem;
+	width: calc(100% - 0.5rem);
 	min-height: 42.9rem;
 	border-radius: 8px;
 	cursor: pointer;
@@ -37,7 +37,7 @@ export const VolunInfo = styled.div`
 	p {
 		word-break: keep-all;
 		font-family: 'KakaoBig Regular', 'Apple SD Gothic Neo';
-		font-size: 1.8rem;
+		font-size: 1.7rem;
 		line-height: 2.4rem;
 		letter-spacing: -0.1px;
 		text-align: left;
@@ -55,7 +55,7 @@ export const UserInfo = styled.div`
 	display: flex;
 	align-items: center;
 	height: 0%;
-	margin-top: 3.5rem;
+	margin-top: 1.5rem;
 	position: relative;
 
 	img {
@@ -108,6 +108,11 @@ export const Button = styled.button`
 `;
 
 export const ButtonContainer = styled.div`
+	position: absolute;
+	right: 0;
+`;
+
+export const SelectContainer = styled.div`
 	position: absolute;
 	right: 0;
 `;
