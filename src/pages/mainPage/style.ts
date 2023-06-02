@@ -79,6 +79,7 @@ export const Desc = styled.p`
 
 export const MidSlogan = styled.h2`
   margin: 12rem 40rem 0;
+  width: 50rem;
   font-size: 3rem;
   font-weight: 900;
 `
@@ -92,6 +93,7 @@ export const VolunteerContainer = styled.div`
 
 export const CommunityTitle = styled.h2`
   margin: 6rem 40rem 4rem;
+  width: 30rem;
   font-size: 3rem;
   font-weight: 900;
 `
