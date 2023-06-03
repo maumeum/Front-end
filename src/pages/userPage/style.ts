@@ -1,13 +1,16 @@
 import styled, { css } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
+const flexcenter = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 // 로그인 css
 
-export const LoginSection = styled.div`
+export const LoginSection = styled(flexcenter)`
 	position: relative;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
 	margin: 8rem 68.5rem 34rem;
 	height: 75rem;
 `;
@@ -52,10 +55,7 @@ export const PasswordInput = styled.input`
 	font-size: 2rem;
 	font-weight: bold;
 `;
-export const CheckData = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
+export const CheckData = styled(flexcenter)`
 	margin-top: 3rem;
 	width: 45rem;
 	height: 6rem;
@@ -64,10 +64,7 @@ export const CheckData = styled.div`
 	font-size: 1.3rem;
 `;
 
-export const CheckEmail = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
+export const CheckEmail = styled(flexcenter)`
 	margin-top: 3rem;
 	width: 45rem;
 	height: 6rem;
