@@ -11,6 +11,7 @@ import car from '@src/assets/images/car.png';
 import Tab from '@components/Tab/Tab.tsx';
 import Card from '@components/Card/Card.tsx';
 import Menu from '@components/Menu/Menu.tsx';
+import { TabTypes } from '@components/Tab/TabTypes.ts';
 const props = [
 	{
 		title:
@@ -35,8 +36,8 @@ const props = [
 ];
 
 function volunSuggest() {
-	const tabs = ['내가 등록한 봉사활동'];
-	const [currTab] = useState('내가 등록한 봉사활동');
+	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
+	const [currTab] = useState<TabTypes>(TabTypes.VOLUNTEER_SUGGEST);
 
 	return (
 		<>

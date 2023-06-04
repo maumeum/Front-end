@@ -9,9 +9,11 @@ import {
 import Tab from '@components/Tab/Tab.tsx';
 import MyPost from '@components/MyPost/MyPost.tsx';
 import Menu from '@components/Menu/Menu.tsx';
+import { TabTypes } from '@components/Tab/TabTypes.ts';
+
 function myReview() {
-	const tabs = ['내가 쓴 리뷰'];
-	const [currTab] = useState('내가 쓴 리뷰');
+	const tabs = [TabTypes.WRITTEN_REVIEW];
+	const [currTab] = useState<TabTypes>(TabTypes.WRITTEN_REVIEW);
 
 	const data = [
 		{

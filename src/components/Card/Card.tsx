@@ -36,6 +36,7 @@ function Card({ currTab, data }: Props) {
 		startDate,
 		endDate,
 	} = data;
+
 	const [isOpen, setIsOpen] = useState(false);
 
 	const openModal = () => {

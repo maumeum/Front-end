@@ -2,15 +2,31 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { Container } from '@components/Tab/tab.ts';
-
-Tab.defaultProps = {
-	currTab: '신청한 봉사',
-	onClick: () => {},
-	tabs: ['신청한 봉사', '완료한 봉사'],
-};
-
+import { TabTypes } from '@components/Tab/TabTypes.ts';
+interface TabProps {
+	currTab: TabTypes;
+	onClick?: (tab: TabTypes) => void;
+	tabs: TabTypes[];
+}
 interface EachTabProps {
 	active?: boolean;
+}
+
+export default function Tab({ currTab, onClick, tabs }: TabProps) {
+	return (
+		<Container>
+			{tabs?.map((tab, i) => {
+				return (
+					<EachTab
+						key={`${tab}-${i}`}
+						active={currTab === tab}
+						onClick={() => onClick?.(tab)}>
+						{tab}
+					</EachTab>
+				);
+			})}
+		</Container>
+	);
 }
 
 const EachTab = styled.p<EachTabProps>`
@@ -30,28 +46,3 @@ const EachTab = styled.p<EachTabProps>`
 			box-shadow: inset 0px -4px 0px var(--button--color);
 		`}
 `;
-
-export default function Tab({
-	currTab,
-	onClick,
-	tabs,
-}: {
-	currTab: string;
-	onClick: () => void;
-	tabs: string[];
-}) {
-	return (
-		<Container>
-			{tabs.map((tab, i) => {
-				return (
-					<EachTab
-						key={`${tab}-${i}`}
-						active={currTab === tab}
-						onClick={() => onClick(tab)}>
-						{tab}
-					</EachTab>
-				);
-			})}
-		</Container>
-	);
-}

@@ -8,6 +8,7 @@ import {
 import Tab from '@components/Tab/Tab.tsx';
 import MyPost from '@components/MyPost/MyPost.tsx';
 import Menu from '@components/Menu/Menu.tsx';
+import { TabTypes } from '@components/Tab/TabTypes.ts';
 const data = [
 	{
 		title:
@@ -28,12 +29,14 @@ const data = [
 ];
 
 function myComment() {
-	const [currTab, setCurrTab] = useState('내가 쓴 게시글');
-	const handleClickTab = (tab: string) => {
+	const [currTab, setCurrTab] = useState<TabTypes>(TabTypes.WRITTEN_POSTS);
+
+	const handleClickTab = (tab: TabTypes) => {
 		setCurrTab(tab);
 	};
 
-	const tabs = ['내가 쓴 게시글', '내가 댓글 단 게시글'];
+	const tabs = [TabTypes.WRITTEN_POSTS, TabTypes.COMMENTED_POSTS];
+
 	return (
 		<>
 			<Container>
