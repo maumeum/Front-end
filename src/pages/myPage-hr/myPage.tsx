@@ -10,7 +10,7 @@ import Menu from '@components/Menu/Menu.tsx';
 
 import SingUp from '../../pages/userPage/signUp.tsx';
 function myPage() {
-	const [currTab, setCurrTab] = useState('내 정보 수정');
+	const [currTab] = useState('내 정보 수정');
 	const tabs = ['내 정보 수정'];
 
 	const myInfo = {

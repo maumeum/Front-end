@@ -4,9 +4,9 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { BtnConatiner, customStyles, TitleInput } from './modal';
 
-import LargeButton from '../Buttons/LargeButton';
-import TopBar from '../../components/TopBar/TopBar';
-import UserForm from '../../components/UserForm/UserForm.tsx';
+import LargeButton from '@components/Buttons/LargeButton';
+import TopBar from '@components/TopBar/TopBar';
+import UserForm from '@components/UserForm/UserForm.tsx';
 
 type ModalProps = {
 	isOpen: boolean;

@@ -11,7 +11,7 @@ import MyPost from '@components/MyPost/MyPost.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 function myReview() {
 	const tabs = ['내가 쓴 리뷰'];
-	const [currTab, setCurrTab] = useState('내가 쓴 리뷰');
+	const [currTab] = useState('내가 쓴 리뷰');
 
 	const data = [
 		{
