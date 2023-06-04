@@ -6,7 +6,8 @@ import TotalPostNumber from '../../components/TotalPostNumber/TotalPostNumber.ts
 import WriteButton from '../../components/Buttons/WriteButton/WriteButton.tsx';
 import { NumberWriteContainer, PageContainer } from './style.ts';
 import PostList from '../../components/PostList/PostList.tsx';
-
+import Menu from '../../components/Menu/Menu.tsx';
+import { MenuBar } from '../../components/MyPage/myPage.ts';
 const question = () => {
 	const navigate = useNavigate();
 	const handleSearch = (query: string) => {
@@ -17,11 +18,13 @@ const question = () => {
 	};
 	const postListData = [
 		{
+			id: '01',
 			postTitle: '봉사활동 한번 신청하면 달마다 주기적으로 가야하는 건가요?',
 			postContents:
 				'저는 한번만 참여하고 싶은데 혹시 봉사활동 신청하면 주기적으로 가야하는건지 궁금해요',
 		},
 		{
+			id: '02',
 			postTitle: '한강 쓰레기줍기 행사 어떤 준비물 제공되는지 아시는분?',
 			postContents:
 				'쓰레기줍기 행사 참여하려고 하는데 어떤 준비물 제공되는지 궁금합니다. 아니면 집에서 미리 준비해가야하는 건가요?',
@@ -30,6 +33,9 @@ const question = () => {
 
 	return (
 		<>
+			<MenuBar>
+				<Menu title={'커뮤니티'} />
+			</MenuBar>
 			<PageContainer>
 				<TopBar title='궁금해요' text='봉사와 관련된 궁금한 사항을 질문해요' />
 				<SearchBar onSearch={handleSearch} />
@@ -37,9 +43,9 @@ const question = () => {
 					<TotalPostNumber totalPosts={postListData.length} />
 					<WriteButton toNavigate={navigateWrite} />
 				</NumberWriteContainer>
-				{postListData.map((postData, index) => (
+				{postListData.map(postData => (
 					<PostList
-						key={index}
+						key={postData.id}
 						postTitle={
 							postData.postTitle.slice(0, 50) +
 							(postData.postTitle.length > 50 ? '...' : '')

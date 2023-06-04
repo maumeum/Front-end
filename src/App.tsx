@@ -20,6 +20,7 @@ import FindFriendWrite from './pages/community/findFriendWrite';
 import QuestionWrite from './pages/community/questionWrite';
 import Review from './pages/reviewPage/reviewPage';
 import MyPage from './pages/myPage-hr/myPage';
+import FindFriendDetail from './pages/community/findFriendDetail';
 
 function App() {
 	return (
@@ -39,10 +40,14 @@ function App() {
 				<Route path='/community/question/write' element={<QuestionWrite />} />
 				<Route path='/login' element={<Login />} />
 				<Route path='/sign_up' element={<SignUp />} />
-        <Route path="/search" element={<Search />} />
+				<Route path='/search' element={<Search />} />
 				<Route path='/review' element={<Review />} />
 				<Route path='/mypage/review' element={<MyReview />} />
 				<Route path='/mypage' element={<MyPage />} />
+				<Route
+					path='/community/findfriend/:postId'
+					element={<FindFriendDetail />}
+				/>
 			</Routes>
 			<Footer />
 		</Router>

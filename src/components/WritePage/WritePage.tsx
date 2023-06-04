@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import ReactQuill from 'react-quill';
 import {
 	TextContainer,
@@ -21,21 +21,19 @@ const WritePage = ({ title, subtitle }: WritePageProps) => {
 	const onClickHandler = () => {
 		console.log(content);
 	};
-	const placeholder = { subtitle };
-	const modules = useMemo(() => {
-		return {
-			toolbar: {
-				container: [
-					[{ header: [1, 2, 3, false] }],
-					['bold', 'italic', 'underline', 'strike'],
-					['blockquote'],
-					[{ list: 'ordered' }, { list: 'bullet' }],
-					[{ color: [] }, { background: [] }],
-					[{ align: [] }, 'link', 'image'],
-				],
-			},
-		};
-	}, []);
+
+	const modules = {
+		toolbar: {
+			container: [
+				[{ header: [1, 2, 3, false] }],
+				['bold', 'italic', 'underline', 'strike'],
+				['blockquote'],
+				[{ list: 'ordered' }, { list: 'bullet' }],
+				[{ color: [] }, { background: [] }],
+				[{ align: [] }, 'link', 'image'],
+			],
+		},
+	};
 	return (
 		<>
 			<Container>
