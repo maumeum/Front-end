@@ -10,16 +10,16 @@ import Main from './pages/mainPage/main';
 import Search from './pages/searchPage/search';
 import Login from './pages/userPage/login';
 import SignUp from './pages/userPage/signUp';
-import MyVolunHistory from './pages/myPage-hr/volunHistory';
-import MyVolunSuggest from './pages/myPage-hr/volunSuggest';
-import MyComment from './pages/myPage-hr/myComment';
-import MyReview from './pages/myPage-hr/myReview';
+import MyVolunHistory from './pages/myPage/volunHistory';
+import MyVolunSuggest from './pages/myPage/volunSuggest';
+import MyComment from './pages/myPage/myComment';
+import MyReview from './pages/myPage/myReview';
 import FindFriend from './pages/community/findFriend';
 import Question from './pages/community/question';
 import FindFriendWrite from './pages/community/findFriendWrite';
 import QuestionWrite from './pages/community/questionWrite';
 import Review from './pages/reviewPage/reviewPage';
-import MyPage from './pages/myPage-hr/myPage';
+import MyPage from './pages/myPage/myPage';
 
 function App() {
 	return (
@@ -39,7 +39,7 @@ function App() {
 				<Route path='/community/question/write' element={<QuestionWrite />} />
 				<Route path='/login' element={<Login />} />
 				<Route path='/sign_up' element={<SignUp />} />
-        <Route path="/search" element={<Search />} />
+				<Route path='/search' element={<Search />} />
 				<Route path='/review' element={<Review />} />
 				<Route path='/mypage/review' element={<MyReview />} />
 				<Route path='/mypage' element={<MyPage />} />

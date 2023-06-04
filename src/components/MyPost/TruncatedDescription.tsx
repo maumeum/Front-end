@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
 type TruncatedDescriptionProps = {
 	content: string;
 	isShowMore: boolean;
-	setIsShowMore: React.Dispatch<React.SetStateAction<boolean>>;
+	setIsShowMore: Dispatch<SetStateAction<boolean>>;
 };
 
 function TruncatedDescription({
@@ -27,7 +27,7 @@ function TruncatedDescription({
 						marginLeft: '2.1rem',
 						cursor: 'pointer',
 					}}>
-					{isShowMore ? '[닫기]' : '...[더보기]'}
+					{isShowMore ? '[닫기]' : '[더보기]'}
 				</span>
 			)}
 		</>

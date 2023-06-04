@@ -12,6 +12,7 @@ import {
 	ButtonContainer,
 	SelectContainer,
 } from './card.ts';
+import { TabTypes } from '../Tab/TabTypes.ts';
 
 type Props = {
 	data: {
@@ -68,12 +69,12 @@ function Card({ currTab, data }: Props) {
 					<UserInfo>
 						<img src={profile} alt='작성자 프로필사진' />
 						<p>{nickname}</p>
-						{currTab === '완료한 봉사' && (
+						{currTab === TabTypes.VOLUNTEER_COMPLETED && (
 							<ButtonContainer>
 								<SmallButton onClick={openModal}>리뷰작성</SmallButton>
 							</ButtonContainer>
 						)}
-						{currTab === '내가 등록한 봉사활동' && (
+						{currTab === TabTypes.VOLUNTEER_SUGGEST && (
 							<SelectContainer>
 								<Selector onChange={handleRecruitmentStatusChange} />
 							</SelectContainer>
