@@ -1,16 +1,17 @@
 import styled, { css } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
+const flexcenter = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 // 로그인 css
 
-export const LoginSection = styled.div`
+export const LoginSection = styled(flexcenter)`
 	position: relative;
-	left: 68.5rem;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	margin: 8rem 0 34rem;
-	width: 55rem;
+	margin: 8rem 68.5rem 34rem;
 	height: 75rem;
 `;
 
@@ -54,10 +55,7 @@ export const PasswordInput = styled.input`
 	font-size: 2rem;
 	font-weight: bold;
 `;
-export const CheckData = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
+export const CheckData = styled(flexcenter)`
 	margin-top: 3rem;
 	width: 45rem;
 	height: 6rem;
@@ -66,10 +64,7 @@ export const CheckData = styled.div`
 	font-size: 1.3rem;
 `;
 
-export const CheckEmail = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
+export const CheckEmail = styled(flexcenter)`
 	margin-top: 3rem;
 	width: 45rem;
 	height: 6rem;
@@ -95,9 +90,7 @@ type SignUpProps = {
 
 export const SignUpSection = styled.div<SignUpProps>`
 	position: relative;
-	left: 68.5rem;
-	margin: 17rem 0 26.5rem;
-	width: 55rem;
+	margin: 17rem 68.5rem 26.5rem;
 	height: 77rem;
 	background-color: #f7f8f9;
 	border-radius: 20px;
@@ -149,6 +142,7 @@ export const DataName = styled.p`
 
 export const EmailData = styled.input`
 	padding-left: 1rem;
+  width: 70%;
 	border: none;
 	outline: none;
 	text-align: start;

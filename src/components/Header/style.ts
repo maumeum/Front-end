@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {NavLink} from "react-router-dom";
 
 export const HeaderSection = styled.div`
   top: 0;
@@ -15,6 +16,7 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 0 40rem;
+  min-width: 112rem;
 `
 
 export const LogoContainer = styled.div`
@@ -32,12 +34,13 @@ export const NavContainer = styled.div`
   min-width: 40rem;
 `
 
-export const NavCategory = styled.p`
+export const NavCategory = styled(NavLink)`
   margin: 0rem 2.5rem;
   align-self: center;
   color: #444444;
   font-weight: normal;
   font-size: 1.5rem;
+  text-decoration: none;
 `
 
 export const UtilContainer = styled.div`
@@ -61,6 +64,7 @@ export const LoginButton = styled.button`
 `
 
 export const SearchButton = styled.div`
+  margin-right: 1rem;
   width: auto;
   height: auto;
   cursor: pointer;
