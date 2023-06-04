@@ -7,30 +7,29 @@ import { BtnConatiner, customStyles, TitleInput } from './modal';
 import LargeButton from '@components/Buttons/LargeButton';
 import TopBar from '@components/TopBar/TopBar';
 import UserForm from '@components/UserForm/UserForm.tsx';
-import {quillModule} from `@components/Modal/quillModule`
+import { quillModule } from '@components/Modal/quillModule.ts';
 
 type ModalProps = {
 	isOpen: boolean;
-	setOpen: (isOpen: boolean) => void;
+	closeModal: () => void;
 	user?: string;
 };
 
-const Modal = ({ isOpen, setOpen, user }: ModalProps) => {
-	// const [input, setInput] = useState('');
-	const handleClickClose = () => {
-		setOpen(false);
+const Modal = ({ isOpen, closeModal, user }: ModalProps) => {
+	const handleSubmit = () => {
+		//요청보내는 코드 들어가야하는 부분
+		closeModal();
 	};
-	
+
 	const handleChange = (value: string) => {
 		console.log(value);
 	};
 
-	
 	const placeholder = '본문을 입력해주세요';
 	return (
 		<ReactModal
 			isOpen={isOpen}
-			onRequestClose={handleClickClose}
+			onRequestClose={handleSubmit}
 			style={customStyles}>
 			{user !== 'user' ? (
 				<>
@@ -48,7 +47,7 @@ const Modal = ({ isOpen, setOpen, user }: ModalProps) => {
 					/>
 
 					<BtnConatiner>
-						<LargeButton onClick={handleClickClose}>후기 작성하기</LargeButton>
+						<LargeButton onClick={handleSubmit}>후기 작성하기</LargeButton>
 					</BtnConatiner>
 				</>
 			) : (

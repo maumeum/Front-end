@@ -36,10 +36,15 @@ function Card({ currTab, data }: Props) {
 		startDate,
 		endDate,
 	} = data;
-	const [isOpen, setOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
+
 	const openModal = () => {
-		setOpen(true);
+		setIsOpen(true);
 	};
+
+	function closeModal() {
+		setIsOpen(false);
+	}
 
 	const handleRecruitmentStatusChange = (selectedValue: string) => {
 		console.log('Selected Value:', selectedValue);
@@ -72,7 +77,7 @@ function Card({ currTab, data }: Props) {
 								<Selector onChange={handleRecruitmentStatusChange} />
 							</SelectContainer>
 						)}
-						<Modal isOpen={isOpen} setOpen={setOpen} />
+						<Modal isOpen={isOpen} closeModal={closeModal} />
 					</UserInfo>
 				</ContentBox>
 			</CardContainer>
