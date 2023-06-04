@@ -27,11 +27,9 @@ function MyPost({ currTab, data }: PostProps) {
 
 	const truncateTitle = (title: string) => {
 		const maxLength = 55;
-		if (title.length <= maxLength) {
-			return title;
-		} else {
-			return title.slice(0, maxLength) + '...';
-		}
+		return title.length <= maxLength
+			? title
+			: `${title.slice(0, maxLength)}...`;
 	};
 	const [isOpen, setOpen] = useState(false);
 
