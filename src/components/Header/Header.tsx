@@ -16,7 +16,6 @@ const Header = () => {
   // 로고를 클릭하여 메인 페이지로 이동
   const mainHandler = () => {
     navigate("/");
-    window.location.reload();
   }
 
   // search 로고를 클릭하여 검색 화면으로 이동

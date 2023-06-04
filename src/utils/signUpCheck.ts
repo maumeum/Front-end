@@ -6,23 +6,13 @@ export const validEmail = (email: string): boolean | null => {
 	);
 };
 
-export const validPassword = (password: string, checkPassword: string): boolean | undefined => {
-	if (password !== checkPassword) {
+export const validPassword = (password: string): boolean | undefined => {
+	if (password.length < 4 || password.length > 20) {
 		return false;
 	}
-	if (password.length >= 4 && password.length <= 20) {
-		return true;
-	}
+  return true;
 };
 
 export const validPhoneNum = (phoneNum: string): boolean | null => {
 	return phoneNum.match(/^\d+$/) && phoneNum !== '';
-};
-
-// 이메일 공란일 때
-export const checkEmail = (email: string): boolean => {
-	if (email === '') {
-		return true;
-	}
-	return false;
 };
