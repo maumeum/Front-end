@@ -9,7 +9,7 @@ import Tab from '@components/Tab/Tab.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@components/Tab/TabTypes.ts';
 
-import SingUp from '../userPage/signUp.tsx';
+import SingUp from '@pages/userPage/signUp.tsx';
 function myPage() {
 	const [currTab] = useState<TabTypes>(TabTypes.EDIT_MYINFO);
 	const tabs = [TabTypes.EDIT_MYINFO];
