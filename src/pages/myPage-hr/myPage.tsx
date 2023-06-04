@@ -4,9 +4,9 @@ import {
 	Main,
 	MenuBar,
 	TabMenu,
-} from '../../components/MyPage/myPage.ts';
-import Tab from '../../components/Tab/Tab.tsx';
-import Menu from '../../components/Menu/Menu.tsx';
+} from '@components/MyPage/myPage.ts';
+import Tab from '@components/Tab/Tab.tsx';
+import Menu from '@components/Menu/Menu.tsx';
 
 import SingUp from '../../pages/userPage/signUp.tsx';
 function myPage() {

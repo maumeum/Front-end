@@ -4,10 +4,10 @@ import {
 	Main,
 	MenuBar,
 	TabMenu,
-} from '../../components/MyPage/myPage.ts';
-import Tab from '../../components/Tab/Tab.tsx';
-import MyPost from '../../components/MyPost/MyPost.tsx';
-import Menu from '../../components/Menu/Menu.tsx';
+} from '@components/MyPage/myPage.ts';
+import Tab from '@components/Tab/Tab.tsx';
+import MyPost from '@components/MyPost/MyPost.tsx';
+import Menu from '@components/Menu/Menu.tsx';
 const data = [
 	{
 		title:

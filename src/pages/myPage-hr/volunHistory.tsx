@@ -5,12 +5,12 @@ import {
 	MenuBar,
 	TabMenu,
 	CardBox,
-} from '../../components/MyPage/myPage.ts';
-import car from '../../assets/images/car.png';
+} from '@components/MyPage/myPage.ts';
+import car from '@src/assets/images/car.png';
 
-import Tab from '../../components/Tab/Tab.tsx';
-import Card from '../../components/Card/Card.tsx';
-import Menu from '../../components/Menu/Menu.tsx';
+import Tab from '@components/Tab/Tab.tsx';
+import Card from '@components/Card/Card.tsx';
+import Menu from '@components/Menu/Menu.tsx';
 
 function myVolunHistory() {
 	const [currTab, setCurrTab] = useState('신청한 봉사');
