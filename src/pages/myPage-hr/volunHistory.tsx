@@ -123,8 +123,12 @@ function myVolunHistory() {
 						<Tab currTab={currTab} onClick={handleClickTab} />
 					</TabMenu>
 					<CardBox>
-						{data.map((data, index) => (
-							<Card key={index} currTab={currTab} data={data} />
+						{data.map((data, idx) => (
+							<Card
+								key={`historycard-${data.id}-${idx}`}
+								currTab={currTab}
+								data={data}
+							/>
 						))}
 					</CardBox>
 				</Main>

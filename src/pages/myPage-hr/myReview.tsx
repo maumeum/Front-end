@@ -44,7 +44,11 @@ function myReview() {
 					</TabMenu>
 					{data.map((data, idx) => {
 						return (
-							<MyPost key={`reviewList-${idx}`} data={data} currTab={currTab} />
+							<MyPost
+								key={`reviewList-${idx}-${data.id}`}
+								data={data}
+								currTab={currTab}
+							/>
 						);
 					})}
 				</Main>

@@ -47,7 +47,11 @@ function myComment() {
 					</TabMenu>
 					{data.map((data, index) => {
 						return (
-							<MyPost key={`postList-${index}`} currTab={currTab} data={data} />
+							<MyPost
+								key={`mypostList-${index}-${data.id}`}
+								currTab={currTab}
+								data={data}
+							/>
 						);
 					})}
 				</Main>

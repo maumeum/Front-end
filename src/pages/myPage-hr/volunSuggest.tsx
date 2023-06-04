@@ -50,8 +50,12 @@ function volunSuggest() {
 						<Tab currTab={currTab} tabs={tabs} />
 					</TabMenu>
 					<CardBox>
-						{props.map((data, index) => (
-							<Card key={index} data={data} currTab={currTab} />
+						{props.map((data, idx) => (
+							<Card
+								key={`suggestcard-${data.id}-${idx}`}
+								data={data}
+								currTab={currTab}
+							/>
 						))}
 					</CardBox>
 				</Main>
