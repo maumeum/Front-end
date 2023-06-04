@@ -41,7 +41,7 @@ function Card({ currTab, data }: Props) {
 		setOpen(true);
 	};
 
-	const handleRecruitmentStatusChange = selectedValue => {
+	const handleRecruitmentStatusChange = (selectedValue: string) => {
 		console.log('Selected Value:', selectedValue);
 	};
 
