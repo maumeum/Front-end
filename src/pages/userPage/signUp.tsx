@@ -1,21 +1,14 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import LargeButton from '../../components/Buttons/LargeButton';
 import {
 	SignUpSection,
 	SignUpForm,
-	InputContainer,
-	DataName,
-	EmailContainer,
-	EmailData,
-	EmailButton,
-	CheckValue,
-	DataInput,
 } from './style';
 import Swal from 'sweetalert2';
 import Modal from '../../components/Modal/Modal.tsx';
-import { checkEmail, validEmail, validPassword, validPhoneNum } from '@src/utils/signUpCheck.ts';
+import { validEmail, validPassword, validPhoneNum } from '@src/utils/signUpCheck.ts';
 import { emailError, nicknameError, passwordError, passwordCheckError, phoneNumError } from '@src/utils/errorMessage.ts';
+import InputForm from '@src/components/UserForm/InputForm.tsx';
 
 type Props = {
 	mypage?: string;
@@ -28,17 +21,6 @@ type Props = {
 	};
 };
 
-interface ErrorType {
-	data: string, 
-	submit: boolean,
-	errorMessage: {
-		existMessage: string,
-		validMessage?: string,
-	},
-	passwordData?: string,
-	validFn?: (data: string) => boolean | null,
-	validPassword?: (password: string, checkPassword: string) => boolean | undefined,
-}
 
 const SignUp = ({ mypage, myInfo }: Props) => {
 	const [email, setEmail] = useState<string>('');
@@ -48,29 +30,6 @@ const SignUp = ({ mypage, myInfo }: Props) => {
 	const [phoneNum, setPhoneNum] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
 	
-	//Error Message 전달
-	const getError = ({data, submit, errorMessage, passwordData, validFn, validPassword}: ErrorType) => {
-		if (validFn && !validFn(data) && data !== "") {
-			return <CheckValue>{errorMessage.validMessage}</CheckValue>;
-		} 
-		if (validPassword && passwordData) {
-			if (!validPassword(data, passwordData) && password !== "") {
-				return <CheckValue>{errorMessage.validMessage}</CheckValue>;
-			}
-		} 
-		if (passwordData) {
-			if (data !== passwordData && data !== "") {
-				return <CheckValue>{errorMessage.validMessage}</CheckValue>;
-			}
-		}
-		if (!submit){
-			return "";
-		}
-		if (!data || submit){
-			return <CheckValue>{errorMessage.existMessage}</CheckValue>;
-		}
-	}
-
 	// inputValue 함수
 	const getFormChanger = (setter: React.Dispatch<React.SetStateAction<string>>) =>
 	(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -105,7 +64,7 @@ const SignUp = ({ mypage, myInfo }: Props) => {
 		// 회원가입 완료
 		if (
 			validEmail(email) &&
-			validPassword(password, checkPassword) &&
+			validPassword(password) &&
 			validPhoneNum(phoneNum)
 		) {
 			Swal.fire({
@@ -124,74 +83,70 @@ const SignUp = ({ mypage, myInfo }: Props) => {
 	return (
 		<SignUpSection mypage={mypage}>
 			<SignUpForm>
-				<InputContainer>
-					<DataName>이메일</DataName>
-					<EmailContainer
-						className={checkEmail(email) && submit ? 'submit' : ''}>
-						<EmailData
-							readOnly={mypage ? true : false}
-							type='text'
-							name="email"
-							placeholder='이메일을 입력해주세요.'
-							value={mypage ? myInfo?.email : email}
-							onChange={getFormChanger(setEmail)}
-						/>
-						<EmailButton mypage={mypage}>중복 확인</EmailButton>
-					</EmailContainer>
-					{getError({data: email, submit, errorMessage: emailError, validFn: validEmail})}
-				</InputContainer>
-				<InputContainer>
-					<DataName>닉네임</DataName>
-					<DataInput
-						readOnly={mypage ? true : false}
-						type='text'
-						name="nickname"
-						placeholder='닉네임을 입력해주세요.'
-						className={submit ? 'submit' : ''}
-						onChange={getFormChanger(setNickname)}
-						value={mypage ? myInfo?.nickname : nickname}
-					/>
-					{getError({data: nickname, submit, errorMessage: nicknameError})}
-				</InputContainer>
-				<InputContainer>
-					<DataName>비밀번호</DataName>
-					<DataInput
-						readOnly={mypage ? true : false}
-						type='password'
-						name="password"
-						placeholder='비밀번호 4~20자 입력'
-						value={mypage ? myInfo?.password : password}
-						className={submit ? 'submit' : ''}
-						onChange={getFormChanger(setPassword)}
-					/>
-					{getError({data: password, submit, errorMessage: passwordError, validPassword: validPassword})}
-				</InputContainer>
-				<InputContainer>
-					<DataName>비밀번호 확인</DataName>
-					<DataInput
-						readOnly={mypage ? true : false}
-						type='password'
-						name="checkPassword"
-						placeholder='비밀번호 다시 입력'
-						value={mypage ? myInfo?.pwdcheck : checkPassword}
-						className={submit ? 'submit' : ''}
-						onChange={getFormChanger(setCheckPassword)}
-					/>
-					{getError({data: checkPassword, submit, passwordData: password, errorMessage: passwordCheckError,})}
-				</InputContainer>
-				<InputContainer>
-					<DataName>핸드폰 번호</DataName>
-					<DataInput
-						readOnly={mypage ? true : false}
-						type='text'
-						name="phoneNum"
-						placeholder="핸드폰 번호('-'없이 입력)"
-						value={mypage ? myInfo?.password : phoneNum}
-						className={submit ? 'submit' : ''}
-						onChange={getFormChanger(setPhoneNum)}
-					/>
-					{getError({data: phoneNum, submit, errorMessage: phoneNumError, validFn: validPhoneNum})}
-				</InputContainer>
+        <InputForm
+            mypage={mypage}
+            myInfo={myInfo}
+            submit={submit}
+            dataName="이메일"
+            inputType="text"
+            name="email"
+            placeholder="이메일을 입력해주세요."
+            value={email}
+            onChangeFn={getFormChanger(setEmail)}
+            errorMessage={emailError}
+            validFn={validEmail}
+          />
+				<InputForm
+          mypage={mypage}
+          myInfo={myInfo}
+          submit={submit}
+          dataName="닉네임"
+          inputType="text"
+          name="nickname"
+          placeholder="닉네임을 입력해주세요."
+          value={nickname}
+          onChangeFn={getFormChanger(setNickname)}
+          errorMessage={nicknameError}
+        />
+        <InputForm
+          mypage={mypage}
+          myInfo={myInfo}
+          submit={submit}
+          dataName="비밀번호"
+          inputType="password"
+          name="password"
+          placeholder="비밀번호 4~20자 입력"
+          value={password}
+          onChangeFn={getFormChanger(setPassword)}
+          errorMessage={passwordError}
+          validPassword={validPassword}
+        />
+        <InputForm
+          mypage={mypage}
+          myInfo={myInfo}
+          submit={submit}
+          dataName="비밀번호 확인"
+          inputType="password"
+          name="checkPassword"
+          placeholder="비밀번호 다시 입력"
+          value={checkPassword}
+          onChangeFn={getFormChanger(setCheckPassword)}
+          errorMessage={passwordCheckError}
+          passwordData={password}
+        />
+        <InputForm
+          mypage={mypage}
+          myInfo={myInfo}
+          submit={submit}
+          dataName="핸드폰 번호"
+          inputType="text"
+          name="phoneNum"
+          placeholder="핸드폰 번호('-'없이 입력)"
+          value={phoneNum}
+          onChangeFn={getFormChanger(setPhoneNum)}
+          errorMessage={phoneNumError}
+          validFn={validPhoneNum}
+        />
 				{mypage ? (
 					<LargeButton onClick={clickHandler}>회원정보 수정</LargeButton>
 				) : (
