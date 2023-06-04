@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import LargeButton from '../../components/Buttons/LargeButton';
+import LargeButton from '@components/Buttons/LargeButton';
 import {
 	SignUpSection,
 	SignUpForm,
 } from './style';
 import Swal from 'sweetalert2';
-import Modal from '../../components/Modal/Modal.tsx';
+import Modal from '@components/Modal/Modal.tsx';
 import { validEmail, validPassword, validPhoneNum } from '@src/utils/signUpCheck.ts';
 import { emailError, nicknameError, passwordError, passwordCheckError, phoneNumError } from '@src/utils/errorMessage.ts';
 import InputForm from '@src/components/UserForm/InputForm.tsx';
