@@ -8,9 +8,9 @@ import {
 	ButtonContainer,
 } from './myPost';
 
-import Modal from '../Modal/Modal.tsx';
+import Modal from '@components/Modal/Modal.tsx';
 
-import { SmallButton } from '../Buttons/SmallButton';
+import { SmallButton } from '@components/Buttons/SmallButton';
 
 type PostProps = {
 	data: {

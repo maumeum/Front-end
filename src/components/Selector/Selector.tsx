@@ -1,5 +1,5 @@
 import React from 'react';
-import { OptionColor, SelectColor } from './selector';
+import { OptionColor, SelectColor } from '@components/Selector/selector';
 import Swal from 'sweetalert2';
 
 function Selector({ onChange }) {
@@ -22,6 +22,7 @@ function Selector({ onChange }) {
 			<OptionColor value='모집중'>모집중</OptionColor>
 			<OptionColor value='모집마감'>모집마감</OptionColor>
 			<OptionColor value='모집중단'>모집중단</OptionColor>
+			<OptionColor value='활동완료'>활동완료</OptionColor>
 		</SelectColor>
 	);
 }
