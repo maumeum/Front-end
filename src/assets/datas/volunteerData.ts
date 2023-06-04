@@ -1,5 +1,6 @@
 export const volunteerList = [
   {
+    _id: 1,
     title: "아동기초학습지도",
     content: "지구촌지역아동센터에서 초등학생 1~6학년 아이들 교육지도를 도와주실 봉사자를 모집합니다. 궁금한 사항 있으시면 언제든 연락주세요",
     centName: "지구촌지역아동센터",
@@ -14,7 +15,8 @@ export const volunteerList = [
     user_id : "1",
     updateAt : "2023-05-31 15:00:00"
   },
-  {
+  { 
+    _id: 2,
     title: "다문화가정 요가교육",
     content: "갈월종합사회복지관 다문화가정 요가교육을 도와주실 봉사자를 모집합니다. 궁금한 사항 있으시면 언제든 연락주세요",
     centName: "갈월종합사회복지관",
@@ -30,6 +32,7 @@ export const volunteerList = [
     updateAt : "2023-05-31 15:00:00"
   },
   {
+    _id: 3,
     title: "뜨개질 수업",
     content: "영등포치매예방센터에서 뜨개질 수업을 도와주실 봉사자를 모집합니다. 궁금한 사항 있으시면 언제든 연락주세요",
     centName: "영등포치매예방센터",
@@ -45,6 +48,7 @@ export const volunteerList = [
     updateAt : "2023-05-31 15:00:00"
   },
   {
+    _id: 4,
     title: "도시락배달 봉사",
     content: "우면종합사회복지관에서 도시락 봉사를 도와주실 봉사자를 모집합니다. 궁금한 사항 있으시면 언제든 연락주세요",
     centName: "우면종합사회복지관",
@@ -60,6 +64,7 @@ export const volunteerList = [
     updateAt : "2023-05-31 15:00:00"
   },
   {
+    _id: 5,
     title: "어르신 요가 교실",
     content: "영등포치매예방센터에서 어르신 요가 교육지도를 도와주실 봉사자를 모집합니다. 궁금한 사항 있으시면 언제든 연락주세요",
     centName: "영등포치매예방센터",
@@ -75,6 +80,7 @@ export const volunteerList = [
     updateAt : "2023-05-31 15:00:00"
   },
   {
+    _id: 6,
     title: "어린이학습지 지도",
     content: "남양주아동센터에서 초등학생 1~6학년 아이들 교육지도를 도와주실 봉사자를 모집합니다. 궁금한 사항 있으시면 언제든 연락주세요",
     centName: "남양주아동센터",
@@ -90,6 +96,7 @@ export const volunteerList = [
     updateAt : "2023-05-31 15:00:00"
   },
   {
+    _id: 7,
     title: "연탄배달봉사",
     content: "지구촌복지관에서 연탄배달봉사를 도와주실 봉사자를 모집합니다. 궁금한 사항 있으시면 언제든 연락주세요",
     centName: "지구촌복지관",
@@ -105,6 +112,7 @@ export const volunteerList = [
     updateAt : "2023-05-31 15:00:00"
   }
   ,{
+    _id: 8,
     title: "어린이 글쓰기 교실",
     content: "지구촌지역아동센터에서 어린이 글쓰기 교실을 도와주실 봉사자를 모집합니다. 궁금한 사항 있으시면 언제든 연락주세요",
     centName: "지구촌지역아동센터",
@@ -123,6 +131,7 @@ export const volunteerList = [
 
 export const ReviewList = [
   {
+    _id: 1,
     title : "직장인 유기견 봉사활동 후기 6개월차",
     content : "저는 일주일에 1번씩 6개월 동안 유기견 봉사활동을 다녔던 직장인입니다. 봉사가 취미이기도 하고, 봉사활동 하고나면 남한테 도움을 준듯한 느낌이 들어 기분이 좋아지더라구요 이번 유기견 봉사활동도 잘 마칠 수 있었습니다.",
     images : ["사진1", "사진2"],
@@ -132,6 +141,7 @@ export const ReviewList = [
     },
   },
   {
+    _id: 2,
     title : "경기도 반려동물 유기견 관리 후기",
     content : "처음 해봤던 유기견 관리 봉사였는데 좋은 경험했습니다!",
     images : ["사진1"],
@@ -141,6 +151,7 @@ export const ReviewList = [
     },
   }, 
   {
+    _id: 3,
     title : "뜻깊은 경험을 해본 것 같아요~~",
     content : "견사 청소, 강아지 배변 훈련을 진행했어요. 매번 마음속으로만 생각했는데, 직접해보니까 너무 마음 따뜻해지더라구요.",
     images : [],
@@ -150,6 +161,7 @@ export const ReviewList = [
    },
   }, 
   {
+    _id: 4,
     title : "할머니 요가 교실 후기",
     content : "처음 해봤던 유기견 관리 봉사였는데 좋은 경험했습니다!",
     images : ["사진1"],
@@ -159,6 +171,7 @@ export const ReviewList = [
     },
   }, 
   {
+    _id: 5,
     title : "아이들과의 행복한 시간",
     content : "견사 청소, 강아지 배변 훈련을 진행했어요. 매번 마음속으로만 생각했는데, 직접해보니까 너무 마음 따뜻해지더라구요.",
     images : [],
@@ -168,6 +181,7 @@ export const ReviewList = [
    },
   }, 
   {
+    _id: 6,
     title : "저는 내일도 봉사갑니다.",
     content : "저는 일주일에 1번씩 6개월 동안 유기견 봉사활동을 다녔던 직장인입니다. 봉사가 취미이기도 하고, 봉사활동 하고나면 남한테 도움을 준듯한 느낌이 들어 기분이 좋아지더라구요 이번 유기견 봉사활동도 잘 마칠 수 있었습니다.",
     images : ["사진1", "사진2"],
@@ -180,6 +194,7 @@ export const ReviewList = [
 
 export const communityList = [
   {
+    _id: 1,
     user_id: {
       nickname: "커뮤장인1"
     },
@@ -192,6 +207,7 @@ export const communityList = [
     updatedAt: "2023-05-30 13:25:10"
   },
   {
+    _id: 2,
     user_id: {
       nickname: "커뮤장인2"
     },
@@ -204,6 +220,7 @@ export const communityList = [
     updatedAt: "2023-05-30 13:25:10"
   },
   {
+    _id: 3,
     user_id: {
       nickname: "커뮤장인3"
     },
@@ -216,6 +233,7 @@ export const communityList = [
     updatedAt: "2023-05-30 13:25:10"
   },
   {
+    _id: 4,
     user_id: {
       nickname: "커뮤장인4"
     },
@@ -228,6 +246,7 @@ export const communityList = [
     updatedAt: "2023-05-30 13:25:10"
   },
   {
+    _id: 5,
     user_id: {
       nickname: "커뮤장인5"
     },
@@ -240,6 +259,7 @@ export const communityList = [
     updatedAt: "2023-05-30 13:25:10"
   },
   {
+    _id: 6,
     user_id: {
       nickname: "커뮤장인6"
     },

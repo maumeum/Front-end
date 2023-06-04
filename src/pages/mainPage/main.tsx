@@ -32,7 +32,7 @@ const Main = () => {
       <TopContainer>
         <ReviewContainer>
           {ReviewList.sort(() => Math.random() - 0.5).slice(0,2).map((item, index) => (
-            <ReviewCard data={{...item, index}} key={index} />
+            <ReviewCard data={{...item, index}} key={item._id} />
           ))}
         </ReviewContainer>
         <IntroducePage>
@@ -52,14 +52,14 @@ const Main = () => {
       </TopContainer>
       <MidSlogan>시간을 나눠 마음 채우기</MidSlogan>
       <VolunteerContainer>
-      {volunteerList.sort(() => Math.random() - 0.5).slice(0,8).map((item , index) => (
-          <VolunteerCard key={index} data={item}/>
+      {volunteerList.sort(() => Math.random() - 0.5).slice(0,8).map((item) => (
+          <VolunteerCard key={item._id} data={item}/>
         ))}
       </VolunteerContainer>
       <CommunityTitle>커뮤니티</CommunityTitle>
       <CommunityContainer>
-        {communityList.sort(() => Math.random() - 0.5).slice(0, 6).map((item, index) => (
-          <CommunityCard key={index} data={item}/>
+        {communityList.sort(() => Math.random() - 0.5).slice(0, 6).map((item) => (
+          <CommunityCard key={item._id} data={item}/>
         ))}
       </CommunityContainer>
     </MainSection>
