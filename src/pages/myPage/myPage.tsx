@@ -27,7 +27,6 @@ function myPage() {
 			<MenuBar>
 				<Menu title={'마이페이지'} />
 			</MenuBar>
-
 			<Main>
 				<TabMenu>
 					<Tab currTab={currTab} tabs={tabs} />

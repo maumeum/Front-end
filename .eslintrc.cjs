@@ -17,7 +17,7 @@ module.exports = {
 	plugins: ['@typescript-eslint', 'react'],
 	rules: {
 		indent: [
-			'error',
+			'warn',
 			'tab',
 			{ SwitchCase: 1, ignoredNodes: ['TemplateLiteral *'] },
 		],

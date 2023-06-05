@@ -5,11 +5,11 @@ type TotalPostNumberProps = {
 };
 
 const TotalPostNumber = ({ totalPosts }: TotalPostNumberProps) => {
-  return (
-    <Text>
+	return (
+		<Text>
       전체 <TotalNumber>{totalPosts}</TotalNumber>건
-    </Text>
-  );
+		</Text>
+	);
 };
 
 export default TotalPostNumber;

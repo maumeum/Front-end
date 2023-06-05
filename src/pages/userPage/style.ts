@@ -125,7 +125,7 @@ export const EmailContainer = styled.div`
 	width: 45rem;
 	height: 5.6rem;
 	background-color: #ffffff;
-	border: ${props => {
+	border: ${(props) => {
 		if (props.className === 'submit') {
 			return '1px solid #EB5757';
 		}
@@ -169,7 +169,7 @@ export const DataInput = styled.input<SignUpProps>`
 	width: 45rem;
 	height: 5.6rem;
 	padding-left: 1rem;
-	border: ${props => {
+	border: ${(props) => {
 		if (props.value === '' && props.className !== '') {
 			return '1px solid #EB5757';
 		}

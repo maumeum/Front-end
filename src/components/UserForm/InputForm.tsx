@@ -1,4 +1,5 @@
-import React, { RefObject } from 'react';
+import React, { useState, useEffect, RefObject } from 'react';
+import Swal from 'sweetalert2';
 
 import {
 	DataName,
@@ -9,6 +10,7 @@ import {
 	EmailData,
 	EmailButton,
 } from '@src/pages/userPage/style';
+import { post } from '@src/api/Api';
 
 interface ErrorType {
 	data: string;
@@ -77,6 +79,31 @@ const InputForm = ({
 				return '';
 		}
 	};
+
+	const clickHandler = async () => {
+		const userData = await post<boolean>('/api/email', { email: value });
+		if (value === '') {
+			return Swal.fire({
+				icon: 'error',
+				title: '이메일을 입력해주세요.',
+				confirmButtonColor: '#d33',
+			});
+		}
+
+		if (userData) {
+			Swal.fire({
+				title: '사용 가능한 이메일 입니다!',
+				confirmButtonColor: 'var(--button--color)',
+			});
+		} else {
+			Swal.fire({
+				icon: 'error',
+				title: '이미 사용 중인 이메일입니다.',
+				confirmButtonColor: '#d33',
+			});
+		}
+	};
+
 	return (
 		<InputContainer>
 			{name !== 'email' ? (
@@ -112,7 +139,9 @@ const InputForm = ({
 							onChange={onChangeFn}
 							value={value}
 						/>
-						{!isMyPage && <EmailButton>중복 확인</EmailButton>}
+						{!isMyPage && (
+							<EmailButton onClick={clickHandler}>중복 확인</EmailButton>
+						)}
 					</EmailContainer>
 					{getError({
 						data: value,

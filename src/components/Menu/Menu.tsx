@@ -36,11 +36,17 @@ function Menu({ title }: MenuProps) {
 				</>
 			)}
 
-			{title === '게시판' && (
+			{title === '커뮤니티' && (
 				<>
-					<p>{title}</p>
-					<p>동행하기</p>
-					<p>질문하기</p>
+					<MenuTitle>{title}</MenuTitle>
+					<Menus>
+						<Link to='/community/findfriend'>
+							<p>동행 구해요</p>
+						</Link>
+						<Link to='/community/question'>
+							<p>궁금해요</p>
+						</Link>
+					</Menus>
 				</>
 			)}
 		</>

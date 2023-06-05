@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
+import { post } from '@src/api/Api';
 import LargeButton from '@components/Buttons/LargeButton';
 import { SignUpSection, SignUpForm } from './style';
-import Swal from 'sweetalert2';
+
 import {
 	validEmail,
 	validPassword,
@@ -24,6 +28,8 @@ const SignUp = () => {
 	const [phoneNum, setPhoneNum] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
 
+	const navigate = useNavigate();
+
 	// inputValue 함수
 	const getFormChanger =
 		(setter: React.Dispatch<React.SetStateAction<string>>) =>
@@ -32,7 +38,13 @@ const SignUp = () => {
 			setter(e.target.value);
 		};
 
-	const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+	//회원정보 수정 클릭시 모달
+	const [isOpen, setIsOpen] = useState(false);
+
+	function closeModal() {
+		setIsOpen(false);
+	}
+	const clickHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		// 상태 초기화
 		setSubmit(false);
 		e.preventDefault();
@@ -53,8 +65,17 @@ const SignUp = () => {
 			validPassword(password) &&
 			validPhoneNum(phoneNum)
 		) {
+			// 유저 정보 저장
+			await post('/api/signup', {
+				email,
+				password,
+				nickname,
+				phone: phoneNum,
+			});
+			navigate('/');
 			Swal.fire({
 				title: '마음이음에 오신 것을 환영합니다!',
+				text: '로그인을 해주세요.',
 				confirmButtonColor: 'var(--button--color)',
 			});
 		} else {

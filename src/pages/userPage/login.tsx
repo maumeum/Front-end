@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { post } from '@src/api/Api';
+import { setToken } from '@src/api/Token';
 import {
 	LoginSection,
 	LogoContainer,
@@ -11,8 +15,7 @@ import {
 	SignUpButton,
 } from './style';
 import LargeButton from '@components/Buttons/LargeButton';
-import { validEmail } from '@src/utils/signUpCheck';
-
+import { validEmail } from '@utils/signUpCheck';
 import mainLogo from '@src/assets/icons/mainlogo.svg';
 
 const Login = () => {
@@ -21,6 +24,8 @@ const Login = () => {
 	const [checkEmail, setCheckEmail] = useState<boolean>(true);
 	const [checkData, setCheckData] = useState<boolean>(true);
 
+	const navigate = useNavigate();
+
 	//이메일, 비밀번호 value
 	const getFormChanger =
 		(setter: React.Dispatch<React.SetStateAction<string>>) =>
@@ -28,7 +33,7 @@ const Login = () => {
 			setter(e.target.value);
 		};
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setCheckEmail(true);
 
@@ -39,6 +44,20 @@ const Login = () => {
 			return setCheckEmail(false);
 		}
 		setCheckData(true);
+
+		const response: { token: string } = await post('/api/login', {
+			email,
+			password,
+		});
+
+		// 토큰이 있다면 localStorage에 토큰 저장
+		if (response.token) {
+			setToken(response.token);
+		}
+
+		setCheckData(true);
+		navigate('/');
+		window.location.reload();
 	};
 
 	return (
