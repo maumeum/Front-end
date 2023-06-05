@@ -1,7 +1,8 @@
 export enum TabTypes {
 	// 열거형 정의
 	MYPAGE = '마이페이지',
-	EDIT_PROFILE = '프로필수정',
+	EDIT_PROFILE = '프로필 사진 수정',
+	EDIT_INTRO = '내 소개 수정',
 	EDIT_MYINFO = '내 정보 수정',
 	VOLUNTEER_APPLIED = '신청한 봉사',
 	VOLUNTEER_COMPLETED = '완료한 봉사',
