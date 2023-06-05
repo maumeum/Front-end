@@ -17,7 +17,7 @@ import {
 	Date,
 	Contents,
 } from './CommentStyle';
-import car from '../../assets/images/car.png';
+import car from '@assets/images/car.png';
 
 type Comment = {
 	id: string;
@@ -51,8 +51,8 @@ const CommentSection: React.FC = () => {
 		setComment('');
 	};
 	const deleteComment = (commentId: string) => {
-		setComments(prevComments =>
-			prevComments.filter(comment => comment.id !== commentId),
+		setComments((prevComments) =>
+			prevComments.filter((comment) => comment.id !== commentId),
 		);
 	};
 
@@ -76,7 +76,7 @@ const CommentSection: React.FC = () => {
 			{comments.length === 0 ? (
 				<p>등록된 댓글이 없습니다.</p>
 			) : (
-				comments.map(comment => (
+				comments.map((comment) => (
 					<CommentContainer key={comment.id}>
 						<ProfileContainer>
 							<Profile src={userData.userProfile} alt='user-profile' />
