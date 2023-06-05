@@ -17,7 +17,7 @@ module.exports = {
 	plugins: ['@typescript-eslint', 'react'],
 	rules: {
 		indent: [
-			'error',
+			'warn',
 			'tab',
 			{ SwitchCase: 1, ignoredNodes: ['TemplateLiteral *'] },
 		],
@@ -27,6 +27,8 @@ module.exports = {
 		'comma-dangle': ['error', 'always-multiline'],
 		'object-curly-spacing': ['error', 'always'],
 		'arrow-parens': ['error', 'always'],
+		'react/jsx-uses-react': 'off',
+		'react/react-in-jsx-scope': 'off',
 	},
 };
 /*
