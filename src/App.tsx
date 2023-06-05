@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ReactModal from 'react-modal';
 
@@ -19,6 +19,7 @@ import FindFriendWrite from '@pages/community/findFriendWrite';
 import QuestionWrite from '@pages/community/questionWrite';
 import Review from '@pages/reviewPage/reviewPage';
 import MyPage from '@pages/myPage/myPage';
+import FindFriendDetail from '@pages/community/findFriendDetail';
 
 function App() {
 	return (
@@ -42,6 +43,10 @@ function App() {
 				<Route path='/review' element={<Review />} />
 				<Route path='/mypage/review' element={<MyReview />} />
 				<Route path='/mypage' element={<MyPage />} />
+				<Route
+					path='/community/findfriend/:postId'
+					element={<FindFriendDetail />}
+				/>
 			</Routes>
 			<Footer />
 		</Router>
