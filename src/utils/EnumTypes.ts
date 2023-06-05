@@ -11,8 +11,3 @@ export enum TabTypes {
 	WRITTEN_REVIEW = '내가 쓴 리뷰',
 	WITHDRAWAL = '회원탈퇴',
 }
-
-export enum MyPageTypes {
-	EDITPAGE = '내 정보 수정',
-	QUERYPAGE = '내 정보 조회',
-}

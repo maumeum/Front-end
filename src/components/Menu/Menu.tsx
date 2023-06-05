@@ -13,8 +13,9 @@ function Menu({ title }: MenuProps) {
 				<>
 					<MenuTitle>{title}</MenuTitle>
 					<Menus>
-						<p>프로필 수정</p>
-						<p>내 정보 수정</p>
+						<Link to='/mypage'>
+							<p>내 정보 수정</p>
+						</Link>
 						<Link to='/mypage/review'>
 							<p>내가 쓴 리뷰</p>
 						</Link>

@@ -20,6 +20,7 @@ import FindFriendWrite from '@pages/community/findFriendWrite';
 import QuestionWrite from '@pages/community/questionWrite';
 import Review from '@pages/reviewPage/reviewPage';
 import MyPage from '@pages/myPage/myPage';
+import UserInfoEdit from '@pages/myPage/userInfoEdit';
 
 function App() {
 	return (
@@ -44,6 +45,7 @@ function App() {
 					<Route path='/review' element={<Review />} />
 					<Route path='/mypage/review' element={<MyReview />} />
 					<Route path='/mypage' element={<MyPage />} />
+					<Route path='/mypage/edit' element={<UserInfoEdit />} />
 				</Routes>
 				<Footer />
 			</AppContainer>

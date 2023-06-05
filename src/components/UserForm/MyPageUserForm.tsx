@@ -34,8 +34,8 @@ function MyPageUserForm({ myInfo, pageType }: MyPageUserFormProps) {
 	const [checkPassword, setCheckPassword] = useState<string>('');
 	const [phoneNum, setPhoneNum] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
-	const isQueryPage = pageType === '내 정보 조회' ? true : false;
-
+	const isQueryPage = pageType === '마이페이지' ? true : false;
+	console.log(isQueryPage);
 	//모달설정
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -108,7 +108,7 @@ function MyPageUserForm({ myInfo, pageType }: MyPageUserFormProps) {
 						inputType='password'
 						name='password'
 						placeholder='비밀번호 4~20자 입력'
-						value={myInfo.password}
+						value={myInfo?.password}
 						onChangeFn={getFormChanger(setPassword)}
 						errorMessage={passwordError}
 						validPassword={validPassword}

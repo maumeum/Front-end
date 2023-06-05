@@ -10,9 +10,9 @@ import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/utils/EnumTypes';
 import MyPageUserForm from '@components/UserForm/MyPageUserForm';
 
-function myPage() {
-	const [currTab] = useState<TabTypes>(TabTypes.MYPAGE);
-	const tabs = [TabTypes.MYPAGE];
+function userInfoEdit() {
+	const [currTab] = useState<TabTypes>(TabTypes.EDIT_MYINFO);
+	const tabs = [TabTypes.EDIT_MYINFO];
 
 	const myInfo = {
 		email: 'abc@naver.com',
@@ -32,10 +32,10 @@ function myPage() {
 				<TabMenu>
 					<Tab currTab={currTab} tabs={tabs} />
 				</TabMenu>
-				<MyPageUserForm myInfo={myInfo} pageType={TabTypes.MYPAGE} />
+				<MyPageUserForm myInfo={myInfo} pageType={TabTypes.EDIT_MYINFO} />
 			</Main>
 		</Container>
 	);
 }
 
-export default myPage;
+export default userInfoEdit;

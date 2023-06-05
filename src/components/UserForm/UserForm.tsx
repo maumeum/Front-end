@@ -9,7 +9,11 @@ import { DataInput, DataName } from '@src/pages/userPage/style';
 import LargeButton from '@components/Buttons/LargeButton';
 import Swal from 'sweetalert2';
 
-function UserForm() {
+type UserFormProps = {
+	closeModal: () => void;
+};
+
+function UserForm({ closeModal }: UserFormProps) {
 	const [password, setPassword] = useState('');
 	const DbPassword = '1234';
 	const navigate = useNavigate();
@@ -23,7 +27,9 @@ function UserForm() {
 				confirmButtonColor: '#afcd81',
 				confirmButtonText: '확인',
 			});
-			navigate('/');
+			closeModal();
+			//회원정보 수정하는 컴포넌트
+			navigate('/mypage/edit');
 		} else {
 			Swal.fire({
 				title: '비밀번호가 일치하지 않습니다',
@@ -34,25 +40,27 @@ function UserForm() {
 		}
 	};
 	return (
-		<UserFormContainer>
-			<form action=''>
-				<TopBar
-					title={'유저 정보 확인'}
-					text={'회원정보 수정을 위해 비밀번호를 입력해주세요:)'}
-					modal='modal'
-				/>
-				<InputContainer>
-					<DataName>비밀번호</DataName>
-					<DataInput
-						type='password'
-						name='name'
-						placeholder='비밀번호를 입력해주세요.'
-						onChange={e => setPassword(e.target.value)}
+		<>
+			<UserFormContainer>
+				<form action=''>
+					<TopBar
+						title={'유저 정보 확인'}
+						text={'회원정보 수정을 위해 비밀번호를 입력해주세요:)'}
+						modal='modal'
 					/>
-					<LargeButton onClick={handleClick}>확인하기</LargeButton>
-				</InputContainer>
-			</form>
-		</UserFormContainer>
+					<InputContainer>
+						<DataName>비밀번호</DataName>
+						<DataInput
+							type='password'
+							name='name'
+							placeholder='비밀번호를 입력해주세요.'
+							onChange={e => setPassword(e.target.value)}
+						/>
+						<LargeButton onClick={handleClick}>확인하기</LargeButton>
+					</InputContainer>
+				</form>
+			</UserFormContainer>
+		</>
 	);
 }
 
