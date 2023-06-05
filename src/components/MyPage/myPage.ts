@@ -31,3 +31,7 @@ export const CardBox = styled.div`
 	grid-column-gap: 3rem;
 	grid-row-gap: 2rem;
 `;
+
+export const FormContainer = styled.form`
+	min-height: 50rem;
+`;

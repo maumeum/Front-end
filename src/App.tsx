@@ -21,6 +21,7 @@ import QuestionWrite from '@pages/community/questionWrite';
 import Review from '@pages/reviewPage/reviewPage';
 import MyPage from '@pages/myPage/myPage';
 import UserInfoEdit from '@pages/myPage/userInfoEdit';
+import MyProfile from './pages/myPage/myProfile';
 
 function App() {
 	return (
@@ -46,6 +47,7 @@ function App() {
 					<Route path='/mypage/review' element={<MyReview />} />
 					<Route path='/mypage' element={<MyPage />} />
 					<Route path='/mypage/edit' element={<UserInfoEdit />} />
+					<Route path='/mypage/profile' element={<MyProfile />} />
 				</Routes>
 				<Footer />
 			</AppContainer>
