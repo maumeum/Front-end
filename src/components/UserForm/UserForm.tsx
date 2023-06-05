@@ -47,7 +47,7 @@ function UserForm() {
 						type='password'
 						name='name'
 						placeholder='비밀번호를 입력해주세요.'
-						onChange={e => setPassword(e.target.value)}
+						onChange={(e) => setPassword(e.target.value)}
 					/>
 					<LargeButton onClick={handleClick}>확인하기</LargeButton>
 				</InputContainer>

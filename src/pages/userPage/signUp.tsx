@@ -32,10 +32,10 @@ const SignUp = ({ mypage }: Props) => {
 	// inputValue 함수
 	const getFormChanger =
 		(setter: React.Dispatch<React.SetStateAction<string>>) =>
-		(e: React.ChangeEvent<HTMLInputElement>) => {
-			setSubmit(false);
-			setter(e.target.value);
-		};
+			(e: React.ChangeEvent<HTMLInputElement>) => {
+				setSubmit(false);
+				setter(e.target.value);
+			};
 
 	//회원정보 수정 클릭시 모달
 	const [isOpen, setIsOpen] = useState(false);
@@ -71,7 +71,7 @@ const SignUp = ({ mypage }: Props) => {
 			validPhoneNum(phoneNum)
 		) {
 			Swal.fire({
-				title: `마음이음에 오신 것을 환영합니다!`,
+				title: '마음이음에 오신 것을 환영합니다!',
 				confirmButtonColor: 'var(--button--color)',
 			});
 		} else {

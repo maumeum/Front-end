@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import AppContainer from '@src/styles/AppStyle';
 import ReactModal from 'react-modal';
 
 ReactModal.setAppElement('#root');
@@ -24,29 +23,27 @@ import MyPage from '@pages/myPage/myPage';
 function App() {
 	return (
 		<Router>
-			<AppContainer>
-				<Header />
-				<Routes>
-					<Route path='/' element={<Main />} />
-					<Route path='/mypage/history' element={<MyVolunHistory />} />
-					<Route path='/mypage/suggest' element={<MyVolunSuggest />} />
-					<Route path='/mypage/comment' element={<MyComment />} />
-					<Route path='/community/findfriend' element={<FindFriend />} />
-					<Route path='/community/question' element={<Question />} />
-					<Route
-						path='/community/findfriend/write'
-						element={<FindFriendWrite />}
-					/>
-					<Route path='/community/question/write' element={<QuestionWrite />} />
-					<Route path='/login' element={<Login />} />
-					<Route path='/sign_up' element={<SignUp />} />
-					<Route path='/search' element={<Search />} />
-					<Route path='/review' element={<Review />} />
-					<Route path='/mypage/review' element={<MyReview />} />
-					<Route path='/mypage' element={<MyPage />} />
-				</Routes>
-				<Footer />
-			</AppContainer>
+			<Header />
+			<Routes>
+				<Route path='/' element={<Main />} />
+				<Route path='/mypage/history' element={<MyVolunHistory />} />
+				<Route path='/mypage/suggest' element={<MyVolunSuggest />} />
+				<Route path='/mypage/comment' element={<MyComment />} />
+				<Route path='/community/findfriend' element={<FindFriend />} />
+				<Route path='/community/question' element={<Question />} />
+				<Route
+					path='/community/findfriend/write'
+					element={<FindFriendWrite />}
+				/>
+				<Route path='/community/question/write' element={<QuestionWrite />} />
+				<Route path='/login' element={<Login />} />
+				<Route path='/sign_up' element={<SignUp />} />
+				<Route path='/search' element={<Search />} />
+				<Route path='/review' element={<Review />} />
+				<Route path='/mypage/review' element={<MyReview />} />
+				<Route path='/mypage' element={<MyPage />} />
+			</Routes>
+			<Footer />
 		</Router>
 	);
 }

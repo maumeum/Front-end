@@ -15,5 +15,5 @@
 
 	"bracketSpacing": true,
 
-	"arrowParens": "avoid"
+	"arrowParens": "always"
 }
