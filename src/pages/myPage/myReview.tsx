@@ -4,14 +4,16 @@ import {
 	Main,
 	MenuBar,
 	TabMenu,
-} from '../../components/MyPage/myPage.ts';
+} from '@components/MyPage/myPage.ts';
 
-import Tab from '../../components/Tab/Tab.tsx';
-import MyPost from '../../components/MyPost/MyPost.tsx';
-import Menu from '../../components/Menu/Menu.tsx';
+import Tab from '@components/Tab/Tab.tsx';
+import MyPost from '@components/MyPost/MyPost.tsx';
+import Menu from '@components/Menu/Menu.tsx';
+import { TabTypes } from '@components/Tab/TabTypes.ts';
+
 function myReview() {
-	const tabs = ['내가 쓴 리뷰'];
-	const [currTab, setCurrTab] = useState('내가 쓴 리뷰');
+	const tabs = [TabTypes.WRITTEN_REVIEW];
+	const [currTab] = useState<TabTypes>(TabTypes.WRITTEN_REVIEW);
 
 	const data = [
 		{
@@ -44,7 +46,11 @@ function myReview() {
 					</TabMenu>
 					{data.map((data, idx) => {
 						return (
-							<MyPost key={`reviewList-${idx}`} data={data} currTab={currTab} />
+							<MyPost
+								key={`reviewList-${idx}-${data.id}`}
+								data={data}
+								currTab={currTab}
+							/>
 						);
 					})}
 				</Main>

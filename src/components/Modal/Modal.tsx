@@ -4,89 +4,32 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { BtnConatiner, customStyles, TitleInput } from './modal';
 
-import LargeButton from '../Buttons/LargeButton';
-import TopBar from '../../components/TopBar/TopBar';
-import UserForm from '../../components/UserForm/UserForm.tsx';
+import LargeButton from '@components/Buttons/LargeButton';
+import TopBar from '@components/TopBar/TopBar';
+import UserForm from '@components/UserForm/UserForm.tsx';
+import { quillModule } from '@components/Modal/quillModule.ts';
 
 type ModalProps = {
 	isOpen: boolean;
-	setOpen: (isOpen: boolean) => void;
+	closeModal: () => void;
 	user?: string;
 };
 
-const Modal = ({ isOpen, setOpen, user }: ModalProps) => {
-	// const [input, setInput] = useState('');
-
-	const handleClickClose = () => {
-		setOpen(false);
+const Modal = ({ isOpen, closeModal, user }: ModalProps) => {
+	const handleSubmit = () => {
+		//요청보내는 코드 들어가야하는 부분
+		closeModal();
 	};
 
 	const handleChange = (value: string) => {
 		console.log(value);
 	};
 
-	const modules = {
-		toolbar: {
-			container: [
-				[{ header: [1, 2, 3, 4, 5, 6, false] }],
-				[{ font: [] }],
-				[{ align: [] }],
-				['bold', 'italic', 'underline', 'strike', 'blockquote'],
-				[{ list: 'ordered' }, { list: 'bullet' }],
-				[
-					{
-						color: [
-							'#000000',
-							'#e60000',
-							'#ff9900',
-							'#ffff00',
-							'#008a00',
-							'#0066cc',
-							'#9933ff',
-							'#ffffff',
-							'#facccc',
-							'#ffebcc',
-							'#ffffcc',
-							'#cce8cc',
-							'#cce0f5',
-							'#ebd6ff',
-							'#bbbbbb',
-							'#f06666',
-							'#ffc266',
-							'#ffff66',
-							'#66b966',
-							'#66a3e0',
-							'#c285ff',
-							'#888888',
-							'#a10000',
-							'#b26b00',
-							'#b2b200',
-							'#006100',
-							'#0047b2',
-							'#6b24b2',
-							'#444444',
-							'#5c0000',
-							'#663d00',
-							'#666600',
-							'#003700',
-							'#002966',
-							'#3d1466',
-							'custom-color',
-						],
-					},
-					{ background: [] },
-				],
-				['image'],
-				['clean'],
-			],
-		},
-	};
-
 	const placeholder = '본문을 입력해주세요';
 	return (
 		<ReactModal
 			isOpen={isOpen}
-			onRequestClose={handleClickClose}
+			onRequestClose={handleSubmit}
 			style={customStyles}>
 			{user !== 'user' ? (
 				<>
@@ -98,13 +41,13 @@ const Modal = ({ isOpen, setOpen, user }: ModalProps) => {
 					<TitleInput placeholder='제목을 입력해주세요.' />
 					<ReactQuill
 						onChange={handleChange}
-						modules={modules}
+						modules={quillModule}
 						placeholder={placeholder}
 						style={{ height: '35rem', marginTop: '2rem' }}
 					/>
 
 					<BtnConatiner>
-						<LargeButton onClick={handleClickClose}>후기 작성하기</LargeButton>
+						<LargeButton onClick={handleSubmit}>후기 작성하기</LargeButton>
 					</BtnConatiner>
 				</>
 			) : (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import Modal from '../../components/Modal/Modal.tsx';
-import Selector from '../../components/Selector/Selector.tsx';
-import { SmallButton } from '../Buttons/SmallButton.ts';
+import Modal from '@components/Modal/Modal.tsx';
+import Selector from '@components/Selector/Selector.tsx';
+import { SmallButton } from '@components/Buttons/SmallButton.ts';
 import {
 	CardContainer,
 	ImgBox,
@@ -12,6 +12,7 @@ import {
 	ButtonContainer,
 	SelectContainer,
 } from './card.ts';
+import { TabTypes } from '../Tab/TabTypes.ts';
 
 type Props = {
 	data: {
@@ -36,12 +37,18 @@ function Card({ currTab, data }: Props) {
 		startDate,
 		endDate,
 	} = data;
-	const [isOpen, setOpen] = useState(false);
+
+	const [isOpen, setIsOpen] = useState(false);
+
 	const openModal = () => {
-		setOpen(true);
+		setIsOpen(true);
 	};
 
-	const handleRecruitmentStatusChange = selectedValue => {
+	function closeModal() {
+		setIsOpen(false);
+	}
+
+	const handleRecruitmentStatusChange = (selectedValue: string) => {
 		console.log('Selected Value:', selectedValue);
 	};
 
@@ -62,17 +69,17 @@ function Card({ currTab, data }: Props) {
 					<UserInfo>
 						<img src={profile} alt='작성자 프로필사진' />
 						<p>{nickname}</p>
-						{currTab === '완료한 봉사' && (
+						{currTab === TabTypes.VOLUNTEER_COMPLETED && (
 							<ButtonContainer>
 								<SmallButton onClick={openModal}>리뷰작성</SmallButton>
 							</ButtonContainer>
 						)}
-						{currTab === '내가 등록한 봉사활동' && (
+						{currTab === TabTypes.VOLUNTEER_SUGGEST && (
 							<SelectContainer>
 								<Selector onChange={handleRecruitmentStatusChange} />
 							</SelectContainer>
 						)}
-						<Modal isOpen={isOpen} setOpen={setOpen} />
+						<Modal isOpen={isOpen} closeModal={closeModal} />
 					</UserInfo>
 				</ContentBox>
 			</CardContainer>

@@ -4,14 +4,15 @@ import {
 	Main,
 	MenuBar,
 	TabMenu,
-} from '../../components/MyPage/myPage.ts';
-import Tab from '../../components/Tab/Tab.tsx';
-import Menu from '../../components/Menu/Menu.tsx';
+} from '@components/MyPage/myPage.ts';
+import Tab from '@components/Tab/Tab.tsx';
+import Menu from '@components/Menu/Menu.tsx';
+import { TabTypes } from '@components/Tab/TabTypes.ts';
 
-import SingUp from '../../pages/userPage/signUp.tsx';
+import SingUp from '@pages/userPage/signUp.tsx';
 function myPage() {
-	const [currTab, setCurrTab] = useState('내 정보 수정');
-	const tabs = ['내 정보 수정'];
+	const [currTab] = useState<TabTypes>(TabTypes.EDIT_MYINFO);
+	const tabs = [TabTypes.EDIT_MYINFO];
 
 	const myInfo = {
 		email: 'abc@naver.com',
@@ -31,7 +32,7 @@ function myPage() {
 				<TabMenu>
 					<Tab currTab={currTab} tabs={tabs} />
 				</TabMenu>
-				<SingUp mypage='mypage' myInfo={myInfo} />
+				<SingUp mypage='mypage' />
 			</Main>
 		</Container>
 	);

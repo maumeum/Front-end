@@ -1,15 +1,15 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import TopBar from '../../components/TopBar/TopBar.tsx';
-import SearchBar from '../../components/SearchBar/SearchBar.tsx';
-import TotalPostNumber from '../../components/TotalPostNumber/TotalPostNumber.tsx';
-import WriteButton from '../../components/Buttons/WriteButton/WriteButton.tsx';
-import { NumberWriteContainer, PageContainer, Container } from './style.ts';
-import PostList from '../../components/PostList/PostList.tsx';
-import Menu from '../../components/Menu/Menu.tsx';
-import { MenuBar } from '../../components/MyPage/myPage.ts';
+import TopBar from '@components/TopBar/TopBar.tsx';
+import SearchBar from '@components/SearchBar/SearchBar.tsx';
+import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
+import WriteButton from '@components/Buttons/WriteButton/WriteButton.tsx';
+import { NumberWriteContainer, PageContainer } from './style.ts';
+import PostList from '@components/PostList/PostList.tsx';
+import Menu from '@components/Menu/Menu.tsx';
+import { MenuBar } from '@components/MyPage/myPage.ts';
 
 const findFriend = () => {
-	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const navigate = useNavigate();
 	const handleSearch = (query: string) => {
 		//검색기능 구현 로직 작성예정
@@ -59,16 +59,16 @@ const findFriend = () => {
 					<TotalPostNumber totalPosts={postListData.length} />
 					<WriteButton toNavigate={navigateWrite} />
 				</NumberWriteContainer>
-				{postListData.map(postData => (
+				{postListData.map(postListData => (
 					<PostList
-						key={postData.id}
+						key={postListData.id}
 						postTitle={
-							postData.postTitle.slice(0, 50) +
-							(postData.postTitle.length > 50 ? '...' : '')
+							postListData.postTitle.slice(0, 50) +
+							(postListData.postTitle.length > 50 ? '...' : '')
 						}
 						postContents={
-							postData.postContents.slice(0, 50) +
-							(postData.postContents.length > 50 ? '...' : '')
+							postListData.postContents.slice(0, 50) +
+							(postListData.postContents.length > 50 ? '...' : '')
 						}
 					/>
 				))}
