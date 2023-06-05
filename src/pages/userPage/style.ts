@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 const flexcenter = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 `;
 
 // 로그인 css
@@ -100,6 +100,7 @@ export const SignUpSection = styled.div<SignUpProps>`
 		props.mypage === 'mypage' &&
 		css`
 			width: 60rem;
+			height: 60rem;
 			margin: 5rem 0 10rem;
 			left: 30.5rem;
 		`}
@@ -142,7 +143,7 @@ export const DataName = styled.p`
 
 export const EmailData = styled.input`
 	padding-left: 1rem;
-  width: 70%;
+	width: 70%;
 	border: none;
 	outline: none;
 	text-align: start;

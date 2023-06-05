@@ -23,6 +23,7 @@ interface ErrorType {
 }
 
 interface InputContainerProps {
+	readOnly?: boolean;
 	submit: boolean;
 	dataName: string;
 	inputType: string;
@@ -40,6 +41,7 @@ interface InputContainerProps {
 }
 
 const InputForm = ({
+	readOnly,
 	submit,
 	dataName,
 	inputType,
@@ -82,6 +84,7 @@ const InputForm = ({
 				<>
 					<DataName>{dataName}</DataName>
 					<DataInput
+						readOnly={readOnly}
 						type={inputType}
 						name={name}
 						placeholder={placeholder}

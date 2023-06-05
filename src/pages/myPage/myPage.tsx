@@ -7,12 +7,12 @@ import {
 } from '@components/MyPage/myPage.ts';
 import Tab from '@components/Tab/Tab.tsx';
 import Menu from '@components/Menu/Menu.tsx';
-import { TabTypes } from '@components/Tab/TabTypes.ts';
+import { TabTypes, MyPageTypes } from '@src/utils/EnumTypes';
+import MyPageUserForm from '@components/UserForm/MyPageUserForm';
 
-import SingUp from '@pages/userPage/signUp.tsx';
 function myPage() {
-	const [currTab] = useState<TabTypes>(TabTypes.EDIT_MYINFO);
-	const tabs = [TabTypes.EDIT_MYINFO];
+	const [currTab] = useState<TabTypes>(TabTypes.MYPAGE);
+	const tabs = [TabTypes.MYPAGE];
 
 	const myInfo = {
 		email: 'abc@naver.com',
@@ -32,7 +32,7 @@ function myPage() {
 				<TabMenu>
 					<Tab currTab={currTab} tabs={tabs} />
 				</TabMenu>
-				<SingUp mypage='mypage' />
+				<MyPageUserForm myInfo={myInfo} pageType={MyPageTypes.QUERYPAGE} />
 			</Main>
 		</Container>
 	);

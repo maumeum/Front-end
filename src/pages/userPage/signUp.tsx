@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import LargeButton from '@components/Buttons/LargeButton';
 import { SignUpSection, SignUpForm } from './style';
 import Swal from 'sweetalert2';
-import Modal from '@components/Modal/Modal.tsx';
 import {
 	validEmail,
 	validPassword,
@@ -17,11 +16,7 @@ import {
 } from '@src/utils/errorMessage.ts';
 import InputForm from '@src/components/UserForm/InputForm.tsx';
 
-type Props = {
-	mypage?: string;
-};
-
-const SignUp = ({ mypage }: Props) => {
+const SignUp = () => {
 	const [email, setEmail] = useState<string>('');
 	const [nickname, setNickname] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
@@ -37,20 +32,8 @@ const SignUp = ({ mypage }: Props) => {
 			setter(e.target.value);
 		};
 
-	//회원정보 수정 클릭시 모달
-	const [isOpen, setIsOpen] = useState(false);
-
-	function closeModal() {
-		setIsOpen(false);
-	}
 	const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
 		// 상태 초기화
-		{
-			if (mypage) {
-				setIsOpen(true);
-				return;
-			}
-		}
 		setSubmit(false);
 		e.preventDefault();
 		setSubmit(true);
@@ -71,7 +54,7 @@ const SignUp = ({ mypage }: Props) => {
 			validPhoneNum(phoneNum)
 		) {
 			Swal.fire({
-				title: `마음이음에 오신 것을 환영합니다!`,
+				title: '마음이음에 오신 것을 환영합니다!',
 				confirmButtonColor: 'var(--button--color)',
 			});
 		} else {
@@ -141,7 +124,6 @@ const SignUp = ({ mypage }: Props) => {
 					validFn={validPhoneNum}
 				/>
 				<LargeButton onClick={clickHandler}>회원가입</LargeButton>
-				<Modal isOpen={isOpen} closeModal={closeModal} user={'user'} />
 			</SignUpForm>
 		</SignUpSection>
 	);
