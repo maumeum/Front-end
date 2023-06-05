@@ -75,3 +75,6 @@ export const Contents = styled.p`
 	color: #475569;
 	margin: 3rem 0 6rem 3rem;
 `;
+export const CommentHolder = styled.p`
+	font-size: 2rem;
+`;

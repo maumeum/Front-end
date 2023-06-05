@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const PageContainer = styled.div`
 	margin-bottom: 40rem;
-	margin-top: -25rem;
+	margin-top: -30rem;
 	margin-left: 15rem;
 `;
 
@@ -69,4 +69,5 @@ export const Contentdiv = styled.div`
 `;
 export const Content = styled.p`
 	font-size: 2.4rem;
+	line-height: 5rem;
 `;

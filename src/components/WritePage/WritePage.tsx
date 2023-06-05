@@ -9,6 +9,7 @@ import {
 	ButtonContainer,
 } from '../WritePage/WritePageStyle';
 import 'react-quill/dist/quill.snow.css';
+import { quillModule } from '../Modal/quillModule';
 
 type WritePageProps = {
 	title: string;
@@ -22,18 +23,10 @@ const WritePage = ({ title, subtitle }: WritePageProps) => {
 		console.log(content);
 	};
 
-	const modules = {
-		toolbar: {
-			container: [
-				[{ header: [1, 2, 3, false] }],
-				['bold', 'italic', 'underline', 'strike'],
-				['blockquote'],
-				[{ list: 'ordered' }, { list: 'bullet' }],
-				[{ color: [] }, { background: [] }],
-				[{ align: [] }, 'link', 'image'],
-			],
-		},
+	const deletecontent = () => {
+		setContent('');
 	};
+
 	return (
 		<>
 			<Container>
@@ -46,11 +39,11 @@ const WritePage = ({ title, subtitle }: WritePageProps) => {
 						ref={quillRef}
 						value={content}
 						onChange={setContent}
-						modules={modules}
+						modules={quillModule}
 					/>
 				</TextContainer>
 				<ButtonContainer>
-					<CancelButton>취소</CancelButton>
+					<CancelButton onClick={deletecontent}>취소</CancelButton>
 					<SubmitButton onClick={onClickHandler}>등록</SubmitButton>
 				</ButtonContainer>
 			</Container>

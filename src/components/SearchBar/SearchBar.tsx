@@ -6,7 +6,7 @@ import {
 	SearchBarContainer,
 	SearchLogo,
 } from './SearchBarstyle';
-import searchLogo from '../../assets/icons/search.svg';
+import searchLogo from '@assets/icons/search.svg';
 
 type SearchBarProps = {
 	onSearch: (query: string) => void;
