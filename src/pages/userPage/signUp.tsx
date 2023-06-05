@@ -32,10 +32,10 @@ const SignUp = ({ mypage, myInfo }: Props) => {
 	
 	// inputValue 함수
 	const getFormChanger = (setter: React.Dispatch<React.SetStateAction<string>>) =>
-	(e: React.ChangeEvent<HTMLInputElement>) => {
-		setSubmit(false);
-		setter(e.target.value);
-	};
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			setSubmit(false);
+			setter(e.target.value);
+		};
 
 	//회원정보 수정 클릭시 모달
 	const [isOpen, setOpen] = useState(false);
@@ -68,7 +68,7 @@ const SignUp = ({ mypage, myInfo }: Props) => {
 			validPhoneNum(phoneNum)
 		) {
 			Swal.fire({
-				title: `마음이음에 오신 것을 환영합니다!`,
+				title: '마음이음에 오신 것을 환영합니다!',
 				confirmButtonColor: 'var(--button--color)',
 			});
 		} else {
@@ -83,70 +83,70 @@ const SignUp = ({ mypage, myInfo }: Props) => {
 	return (
 		<SignUpSection mypage={mypage}>
 			<SignUpForm>
-        <InputForm
-            mypage={mypage}
-            myInfo={myInfo}
-            submit={submit}
-            dataName="이메일"
-            inputType="text"
-            name="email"
-            placeholder="이메일을 입력해주세요."
-            value={email}
-            onChangeFn={getFormChanger(setEmail)}
-            errorMessage={emailError}
-            validFn={validEmail}
-          />
 				<InputForm
-          mypage={mypage}
-          myInfo={myInfo}
-          submit={submit}
-          dataName="닉네임"
-          inputType="text"
-          name="nickname"
-          placeholder="닉네임을 입력해주세요."
-          value={nickname}
-          onChangeFn={getFormChanger(setNickname)}
-          errorMessage={nicknameError}
-        />
-        <InputForm
-          mypage={mypage}
-          myInfo={myInfo}
-          submit={submit}
-          dataName="비밀번호"
-          inputType="password"
-          name="password"
-          placeholder="비밀번호 4~20자 입력"
-          value={password}
-          onChangeFn={getFormChanger(setPassword)}
-          errorMessage={passwordError}
-          validPassword={validPassword}
-        />
-        <InputForm
-          mypage={mypage}
-          myInfo={myInfo}
-          submit={submit}
-          dataName="비밀번호 확인"
-          inputType="password"
-          name="checkPassword"
-          placeholder="비밀번호 다시 입력"
-          value={checkPassword}
-          onChangeFn={getFormChanger(setCheckPassword)}
-          errorMessage={passwordCheckError}
-          passwordData={password}
-        />
-        <InputForm
-          mypage={mypage}
-          myInfo={myInfo}
-          submit={submit}
-          dataName="핸드폰 번호"
-          inputType="text"
-          name="phoneNum"
-          placeholder="핸드폰 번호('-'없이 입력)"
-          value={phoneNum}
-          onChangeFn={getFormChanger(setPhoneNum)}
-          errorMessage={phoneNumError}
-          validFn={validPhoneNum}
-        />
+					mypage={mypage}
+					myInfo={myInfo}
+					submit={submit}
+					dataName='이메일'
+					inputType='text'
+					name='email'
+					placeholder='이메일을 입력해주세요.'
+					value={email}
+					onChangeFn={getFormChanger(setEmail)}
+					errorMessage={emailError}
+					validFn={validEmail}
+				/>
+				<InputForm
+					mypage={mypage}
+					myInfo={myInfo}
+					submit={submit}
+					dataName='닉네임'
+					inputType='text'
+					name='nickname'
+					placeholder='닉네임을 입력해주세요.'
+					value={nickname}
+					onChangeFn={getFormChanger(setNickname)}
+					errorMessage={nicknameError}
+				/>
+				<InputForm
+					mypage={mypage}
+					myInfo={myInfo}
+					submit={submit}
+					dataName='비밀번호'
+					inputType='password'
+					name='password'
+					placeholder='비밀번호 4~20자 입력'
+					value={password}
+					onChangeFn={getFormChanger(setPassword)}
+					errorMessage={passwordError}
+					validPassword={validPassword}
+				/>
+				<InputForm
+					mypage={mypage}
+					myInfo={myInfo}
+					submit={submit}
+					dataName='비밀번호 확인'
+					inputType='password'
+					name='checkPassword'
+					placeholder='비밀번호 다시 입력'
+					value={checkPassword}
+					onChangeFn={getFormChanger(setCheckPassword)}
+					errorMessage={passwordCheckError}
+					passwordData={password}
+				/>
+				<InputForm
+					mypage={mypage}
+					myInfo={myInfo}
+					submit={submit}
+					dataName='핸드폰 번호'
+					inputType='text'
+					name='phoneNum'
+					placeholder='핸드폰 번호("-"없이 입력)'
+					value={phoneNum}
+					onChangeFn={getFormChanger(setPhoneNum)}
+					errorMessage={phoneNumError}
+					validFn={validPhoneNum}
+				/>
 				{mypage ? (
 					<LargeButton onClick={clickHandler}>회원정보 수정</LargeButton>
 				) : (

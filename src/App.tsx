@@ -23,27 +23,27 @@ import MyPage from './pages/myPage-hr/myPage';
 function App() {
 	return (
 		<Router>
-        <Header />
-        <Routes>
-          <Route path='/' element={<Main />} />
-          <Route path='/mypage/history' element={<MyVolunHistory />} />
-          <Route path='/mypage/suggest' element={<MyVolunSuggest />} />
-          <Route path='/mypage/comment' element={<MyComment />} />
-          <Route path='/community/findfriend' element={<FindFriend />} />
-          <Route path='/community/question' element={<Question />} />
-          <Route
-            path='/community/findfriend/write'
-            element={<FindFriendWrite />}
-          />
-          <Route path='/community/question/write' element={<QuestionWrite />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/sign_up' element={<SignUp />} />
-          <Route path="/search" element={<Search />} />
-          <Route path='/review' element={<Review />} />
-          <Route path='/mypage/review' element={<MyReview />} />
-          <Route path='/mypage' element={<MyPage />} />
-        </Routes>
-        <Footer />
+			<Header />
+			<Routes>
+				<Route path='/' element={<Main />} />
+				<Route path='/mypage/history' element={<MyVolunHistory />} />
+				<Route path='/mypage/suggest' element={<MyVolunSuggest />} />
+				<Route path='/mypage/comment' element={<MyComment />} />
+				<Route path='/community/findfriend' element={<FindFriend />} />
+				<Route path='/community/question' element={<Question />} />
+				<Route
+					path='/community/findfriend/write'
+					element={<FindFriendWrite />}
+				/>
+				<Route path='/community/question/write' element={<QuestionWrite />} />
+				<Route path='/login' element={<Login />} />
+				<Route path='/sign_up' element={<SignUp />} />
+				<Route path='/search' element={<Search />} />
+				<Route path='/review' element={<Review />} />
+				<Route path='/mypage/review' element={<MyReview />} />
+				<Route path='/mypage' element={<MyPage />} />
+			</Routes>
+			<Footer />
 		</Router>
 	);
 }

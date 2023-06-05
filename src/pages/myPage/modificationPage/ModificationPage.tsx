@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 function ModificationPage() {
-  return <div>ModificationPage</div>;
+	return <div>ModificationPage</div>;
 }
 
 export default ModificationPage;
