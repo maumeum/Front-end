@@ -91,7 +91,7 @@ type SignUpProps = {
 export const SignUpSection = styled.div<SignUpProps>`
 	position: relative;
 	margin: 17rem 68.5rem 26.5rem;
-	/* height: 77rem; */
+	height: 77rem;
 	width: 60rem;
 	background-color: #f7f8f9;
 	border-radius: 20px;
