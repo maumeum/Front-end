@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import {LoginSection, LogoContainer, LogoImage, LoginForm, EmailInput, PasswordInput, CheckEmail, CheckData, SignUpButton} from "./style"
-import LargeButton from "../../components/Buttons/LargeButton";
+import LargeButton from "@components/Buttons/LargeButton";
 import { validEmail } from "@src/utils/signUpCheck";
 
-import mainLogo from "../../assets/icons/mainlogo.svg";
+import mainLogo from "@src/assets/icons/mainlogo.svg";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");

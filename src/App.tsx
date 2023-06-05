@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
+import AppContainer from "@src/styles/AppStyle";
 import ReactModal from 'react-modal';
 
 ReactModal.setAppElement('#root');

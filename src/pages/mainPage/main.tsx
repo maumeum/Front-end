@@ -17,13 +17,13 @@ import {
   CommunityTitle,
   CommunityContainer,
 } from "./style";
-import VolunteerCard from "../../components/Card/VolunteerCard";
-import ReviewCard from "../../components/Card/ReviewCard";
-import CommunityCard from "../../components/Card/CommunityCard";
-import {volunteerList} from "../../assets/datas/volunteerData";
-import { ReviewList } from "../../assets/datas/volunteerData";
-import { communityList } from "../../assets/datas/volunteerData";
-import cardLogo from "../../assets/icons/cardlogo.svg";
+import VolunteerCard from "@components/Card/VolunteerCard";
+import ReviewCard from "@components/Card/ReviewCard";
+import CommunityCard from "@components/Card/CommunityCard";
+import {volunteerList} from "@src/assets/datas/volunteerData";
+import { ReviewList } from "@src/assets/datas/volunteerData";
+import { communityList } from "@src/assets/datas/volunteerData";
+import cardLogo from "@src/assets/icons/cardlogo.svg";
 
 const Main = () => {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import {FooterSection, IntroContainer, LogoContainer, MainLogo, SloganContainer, Slogan, MemberList, Member, GitLink} from "./style"
 
-import mainLogo from "../../assets/icons/mainlogo.svg";
+import mainLogo from "@src/assets/icons/mainlogo.svg";
 
 const Footer = () => {
   const clickHandler = () => {

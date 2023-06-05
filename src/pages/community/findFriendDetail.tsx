@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import car from '../../assets/images/car.png';
+import car from '@src/assets/images/car.png';
 import {
 	DetailContainer,
 	Header,
@@ -16,7 +16,7 @@ import {
 	Contentdiv,
 	Content,
 } from './style';
-import CommentSection from '@src/components/Comment/Comment';
+import CommentSection from '@components/Comment/Comment.tsx';
 const FindFriendDetail = () => {
 	const [loggedInUser, setLoggedInUser] = useState('로그인한 사용자');
 	const { postId } = useParams();
