@@ -83,7 +83,7 @@ export const SignUpButton = styled(NavLink)`
 `;
 
 type SignUpProps = {
-	mypage?: string;
+	pageType?: string;
 };
 
 // 회원가입 css
@@ -91,13 +91,14 @@ type SignUpProps = {
 export const SignUpSection = styled.div<SignUpProps>`
 	position: relative;
 	margin: 17rem 68.5rem 26.5rem;
-	height: 77rem;
+	/* height: 77rem; */
+	width: 60rem;
 	background-color: #f7f8f9;
 	border-radius: 20px;
 	filter: drop-shadow(0 4px 4px rgb(0, 0, 0, 25%));
 
-	${props =>
-		props.mypage === 'mypage' &&
+	${({ pageType }) =>
+		pageType &&
 		css`
 			width: 60rem;
 			height: 60rem;
@@ -141,7 +142,7 @@ export const DataName = styled.p`
 	color: #666666;
 `;
 
-export const EmailData = styled.input`
+export const EmailData = styled.input<SignUpProps>`
 	padding-left: 1rem;
 	width: 70%;
 	border: none;
@@ -162,11 +163,6 @@ export const EmailButton = styled.button<SignUpProps>`
 	font-weight: 100;
 	font-size: 1.2rem;
 	cursor: pointer;
-	${props =>
-		props.mypage === 'mypage' &&
-		css`
-			cursor: not-allowed;
-		`}
 `;
 
 export const DataInput = styled.input<SignUpProps>`

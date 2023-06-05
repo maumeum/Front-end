@@ -18,7 +18,7 @@ function userInfoEdit() {
 		email: 'abc@naver.com',
 		nickname: '안녕하세요',
 		password: '12345',
-		pwdcheck: '1234',
+		pwdcheck: '12345',
 		phoneNum: '1234',
 	};
 

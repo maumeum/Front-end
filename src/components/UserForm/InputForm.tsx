@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { RefObject } from 'react';
 
 import {
 	DataName,
@@ -23,7 +23,7 @@ interface ErrorType {
 }
 
 interface InputContainerProps {
-	readOnly?: boolean;
+	isMyPage?: boolean;
 	submit: boolean;
 	dataName: string;
 	inputType: string;
@@ -41,7 +41,7 @@ interface InputContainerProps {
 }
 
 const InputForm = ({
-	readOnly,
+	isMyPage,
 	submit,
 	dataName,
 	inputType,
@@ -77,14 +77,13 @@ const InputForm = ({
 				return '';
 		}
 	};
-
 	return (
 		<InputContainer>
 			{name !== 'email' ? (
 				<>
 					<DataName>{dataName}</DataName>
 					<DataInput
-						readOnly={readOnly}
+						readOnly={isMyPage}
 						type={inputType}
 						name={name}
 						placeholder={placeholder}
@@ -106,13 +105,14 @@ const InputForm = ({
 					<DataName>{dataName}</DataName>
 					<EmailContainer className={submit && value === '' ? 'submit' : ''}>
 						<EmailData
+							readOnly={isMyPage}
 							type={inputType}
 							name={name}
 							placeholder={placeholder}
 							onChange={onChangeFn}
 							value={value}
 						/>
-						<EmailButton>중복 확인</EmailButton>
+						{!isMyPage && <EmailButton>중복 확인</EmailButton>}
 					</EmailContainer>
 					{getError({
 						data: value,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SignUpSection, SignUpForm } from '@pages/userPage/style';
 import {
 	validEmail,
@@ -16,6 +16,8 @@ import Swal from 'sweetalert2';
 import InputForm from '@src/components/UserForm/InputForm.tsx';
 import LargeButton from '@components/Buttons/LargeButton';
 import Modal from '@components/Modal/Modal.tsx';
+import { TabTypes } from '@src/utils/EnumTypes';
+
 type MyPageUserFormProps = {
 	pageType: string;
 	myInfo: {
@@ -28,25 +30,30 @@ type MyPageUserFormProps = {
 };
 
 function MyPageUserForm({ myInfo, pageType }: MyPageUserFormProps) {
+	useEffect(() => {
+		const { nickname, password, pwdcheck, phoneNum } = myInfo;
+		setNickname(nickname);
+		setCheckPassword(pwdcheck);
+		setPhoneNum(phoneNum);
+		setPassword(password);
+	}, []);
+
 	const [email, setEmail] = useState<string>('');
 	const [nickname, setNickname] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const [checkPassword, setCheckPassword] = useState<string>('');
 	const [phoneNum, setPhoneNum] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
-	const isQueryPage = pageType === '마이페이지' ? true : false;
-	console.log(isQueryPage);
+	const isMyPage = pageType === TabTypes.MYPAGE;
+
 	//모달설정
 	const [isOpen, setIsOpen] = useState(false);
-
 	const openModal = () => {
 		setIsOpen(true);
 	};
-
 	function closeModal() {
 		setIsOpen(false);
 	}
-
 	// inputValue 함수
 	const getFormChanger =
 		(setter: React.Dispatch<React.SetStateAction<string>>) =>
@@ -57,7 +64,7 @@ function MyPageUserForm({ myInfo, pageType }: MyPageUserFormProps) {
 
 	const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
 		{
-			isQueryPage ? openModal() : null;
+			isMyPage ? openModal() : null;
 		}
 		// 상태 초기화
 		setSubmit(false);
@@ -72,55 +79,71 @@ function MyPageUserForm({ myInfo, pageType }: MyPageUserFormProps) {
 				confirmButtonColor: '#d33',
 			});
 		}
+		console.log(nickname);
 	};
 
 	return (
 		<>
-			<SignUpSection mypage={'mypage'}>
+			<SignUpSection pageType={pageType}>
 				<SignUpForm>
+					{isMyPage && (
+						<InputForm
+							isMyPage={isMyPage}
+							submit={submit}
+							dataName='이메일'
+							inputType='text'
+							name='email'
+							placeholder={myInfo.email}
+							value={email}
+							onChangeFn={getFormChanger(setEmail)}
+							errorMessage={emailError}
+							validFn={validEmail}
+						/>
+					)}
 					<InputForm
-						readOnly={isQueryPage}
-						submit={submit}
-						dataName='이메일'
-						inputType='text'
-						name='email'
-						placeholder='이메일을 입력해주세요.'
-						value={myInfo.email}
-						onChangeFn={getFormChanger(setEmail)}
-						errorMessage={emailError}
-						validFn={validEmail}
-					/>
-					<InputForm
-						readOnly={isQueryPage}
+						isMyPage={isMyPage}
 						submit={submit}
 						dataName='닉네임'
 						inputType='text'
 						name='nickname'
-						placeholder='닉네임을 입력해주세요.'
-						value={myInfo.nickname}
+						placeholder={myInfo.nickname}
+						value={nickname}
 						onChangeFn={getFormChanger(setNickname)}
 						errorMessage={nicknameError}
 					/>
 					<InputForm
-						readOnly={isQueryPage}
+						isMyPage={isMyPage}
 						submit={submit}
 						dataName='비밀번호'
 						inputType='password'
 						name='password'
 						placeholder='비밀번호 4~20자 입력'
-						value={myInfo?.password}
+						value={password}
 						onChangeFn={getFormChanger(setPassword)}
 						errorMessage={passwordError}
 						validPassword={validPassword}
 					/>
+					{isMyPage ? null : (
+						<InputForm
+							submit={submit}
+							dataName='비밀번호 확인'
+							inputType='password'
+							name='checkPassword'
+							placeholder='비밀번호 다시 입력'
+							value={checkPassword}
+							onChangeFn={getFormChanger(setCheckPassword)}
+							errorMessage={passwordCheckError}
+							passwordData={password}
+						/>
+					)}
 					<InputForm
-						readOnly={isQueryPage}
+						isMyPage={isMyPage}
 						submit={submit}
 						dataName='핸드폰 번호'
 						inputType='text'
 						name='phoneNum'
 						placeholder="핸드폰 번호('-'없이 입력)"
-						value={myInfo.phoneNum}
+						value={phoneNum}
 						onChangeFn={getFormChanger(setPhoneNum)}
 						errorMessage={phoneNumError}
 						validFn={validPhoneNum}
