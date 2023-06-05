@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import AppContainer from "@src/styles/AppStyle";
 import ReactModal from 'react-modal';
 
 ReactModal.setAppElement('#root');
@@ -24,7 +23,6 @@ import MyPage from './pages/myPage-hr/myPage';
 function App() {
 	return (
 		<Router>
-			<AppContainer>
         <Header />
         <Routes>
           <Route path='/' element={<Main />} />
@@ -46,7 +44,6 @@ function App() {
           <Route path='/mypage' element={<MyPage />} />
         </Routes>
         <Footer />
-      </AppContainer>
 		</Router>
 	);
 }
