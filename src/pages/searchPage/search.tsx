@@ -1,7 +1,7 @@
 import React from "react";
 
 import {SearchSection, SearchContainer, SearchLogo, SearchInput, VolunteerContainer, CommunityContainer} from "./style";
-import searchLogo from "../../assets/icons/search.svg";
+import searchLogo from "@src/assets/icons/search.svg";
 
 const Search = () => {
   return (
