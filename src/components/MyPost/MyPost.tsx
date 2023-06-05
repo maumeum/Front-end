@@ -8,9 +8,9 @@ import {
 	ButtonContainer,
 } from './myPost';
 
-import Modal from '../Modal/Modal.tsx';
-
-import { SmallButton } from '../Buttons/SmallButton';
+import Modal from '@components/Modal/Modal.tsx';
+import TruncatedDescription from '@components/MyPost/TruncatedDescription';
+import { SmallButton } from '@components/Buttons/SmallButton';
 
 type PostProps = {
 	data: {
@@ -22,18 +22,16 @@ type PostProps = {
 	currTab?: string;
 };
 
+function truncateTitle(title: string) {
+	const maxLength = 55;
+	return title.length <= maxLength ? title : `${title.slice(0, maxLength)}...`;
+}
+
 function MyPost({ currTab, data }: PostProps) {
 	const { title, content, category, date } = data;
-
-	const truncateTitle = (title: string) => {
-		const maxLength = 55;
-		if (title.length <= maxLength) {
-			return title;
-		} else {
-			return title.slice(0, maxLength) + '...';
-		}
-	};
 	const [isOpen, setOpen] = useState(false);
+	const [isShowMore, setIsShowMore] = useState<boolean>(false);
+	const truncatedTitle = truncateTitle(title);
 
 	const handleButtonClick = () => {
 		if (currTab === '내가 쓴 리뷰') {
@@ -44,28 +42,17 @@ function MyPost({ currTab, data }: PostProps) {
 		}
 	};
 
-	const [isShowMore, setIsShowMore] = useState<boolean>(false); //더보기 열고(긴글) 닫기(짧은글)
-	const textLimit = 160; //글자수 제한 선언
-	const truncatedTitle = truncateTitle(title);
-	const shortComment = content.slice(0, textLimit) + ' ...'; //보여줄 짧은 글
-	const isLongComment = content.length > textLimit; //긴글인지 확인
 	return (
 		<>
 			<PostListContainer>
 				<PostBox>
 					<Title>{truncatedTitle}</Title>
 					<Description>
-						{isLongComment && !isShowMore ? shortComment : content}
-						<div
-							onClick={() => setIsShowMore(!isShowMore)}
-							style={{
-								fontSize: '1.1rem',
-								marginLeft: '2.1rem',
-								cursor: 'pointer',
-							}}>
-							{content.length > textLimit &&
-								(isShowMore ? '[닫기]' : '...[더보기]')}
-						</div>
+						<TruncatedDescription
+							content={content}
+							isShowMore={isShowMore}
+							setIsShowMore={setIsShowMore}
+						/>
 					</Description>
 
 					<PostInfo>
