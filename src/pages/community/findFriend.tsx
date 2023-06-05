@@ -59,7 +59,7 @@ const findFriend = () => {
 					<TotalPostNumber totalPosts={postListData.length} />
 					<WriteButton toNavigate={navigateWrite} />
 				</NumberWriteContainer>
-				{postListData.map(postListData => (
+				{postListData.map((postListData) => (
 					<PostList
 						key={postListData.id}
 						postTitle={

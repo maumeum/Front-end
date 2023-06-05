@@ -38,7 +38,7 @@ const EachTab = styled.p<EachTabProps>`
 		margin-left: 1.6rem;
 	}
 
-	${props =>
+	${(props) =>
 		props.active &&
 		css`
 			font-weight: bold;

@@ -10,7 +10,7 @@ export const validPassword = (password: string): boolean | undefined => {
 	if (password.length < 4 || password.length > 20) {
 		return false;
 	}
-  return true;
+	return true;
 };
 
 export const validPhoneNum = (phoneNum: string): boolean | null => {

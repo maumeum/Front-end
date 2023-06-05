@@ -16,26 +16,26 @@ export const Button = styled.button<ButtonProps>`
 	display: inline-block;
 	line-height: 1;
 
-	${props =>
+	${(props) =>
 		props.isFull &&
 		css`
 			width: '100%';
 		`}
 
-	${props =>
+	${(props) =>
 		!props.isFull &&
 		css`
 			width: 'auto';
 		`}
 
-  ${props =>
+  ${(props) =>
 		props.primary &&
 		css`
 			color: #ffffff;
 			background-color: #aacb73;
 		`}
 
-  ${props =>
+  ${(props) =>
 		!props.primary &&
 		css`
 			color: #202020;
@@ -44,21 +44,21 @@ export const Button = styled.button<ButtonProps>`
 			box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
 		`}
 
-  ${props =>
+  ${(props) =>
 		props.size === 'small' &&
 		css`
 			font-size: 12px;
 			padding: 10px 16px;
 		`}
 
-  ${props =>
+  ${(props) =>
 		props.size === 'medium' &&
 		css`
 			font-size: 14px;
 			padding: 11px 20px;
 		`}
 
-  ${props =>
+  ${(props) =>
 		props.size === 'large' &&
 		css`
 			font-size: 16px;

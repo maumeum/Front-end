@@ -1,13 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import TopBar from '../../components/TopBar/TopBar.tsx';
-import SearchBar from '../../components/SearchBar/SearchBar.tsx';
-import TotalPostNumber from '../../components/TotalPostNumber/TotalPostNumber.tsx';
-import WriteButton from '../../components/Buttons/WriteButton/WriteButton.tsx';
+import TopBar from '@components/TopBar/TopBar.tsx';
+import SearchBar from '@components/SearchBar/SearchBar.tsx';
+import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
+import WriteButton from '@components/Buttons/WriteButton/WriteButton.tsx';
 import { NumberWriteContainer, PageContainer } from './style.ts';
-import PostList from '../../components/PostList/PostList.tsx';
-import Menu from '../../components/Menu/Menu.tsx';
-import { MenuBar } from '../../components/MyPage/myPage.ts';
+import PostList from '@components/PostList/PostList.tsx';
+import Menu from '@components/Menu/Menu.tsx';
+import { MenuBar } from '@components/MyPage/myPage.ts';
 const question = () => {
 	const navigate = useNavigate();
 	const handleSearch = (query: string) => {
@@ -43,7 +43,7 @@ const question = () => {
 					<TotalPostNumber totalPosts={postListData.length} />
 					<WriteButton toNavigate={navigateWrite} />
 				</NumberWriteContainer>
-				{postListData.map(postData => (
+				{postListData.map((postData) => (
 					<PostList
 						key={postData.id}
 						postTitle={

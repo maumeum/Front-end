@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import {NavLink} from "react-router-dom";
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const HeaderSection = styled.div`
   top: 0;
@@ -9,7 +9,7 @@ export const HeaderSection = styled.div`
   height: 8rem;
   background-color: #FFFFFF;
   border-bottom: 1px solid rgb(238, 238, 238);
-`
+`;
 
 export const HeaderContainer = styled.div`
   display: flex;
@@ -17,22 +17,23 @@ export const HeaderContainer = styled.div`
   align-items: center;
   margin: 0 40rem;
   min-width: 112rem;
-`
+`;
 
 export const LogoContainer = styled.div`
   width: 8rem;
   height: 8rem;
   cursor: pointer;
-`
+`;
 
 export const MainLogo = styled.img`
   width: 8rem;
   height: 8rem;
-`
+`;
+
 export const NavContainer = styled.div`
   display: flex;
   min-width: 40rem;
-`
+`;
 
 export const NavCategory = styled(NavLink)`
   margin: 0rem 2.5rem;
@@ -41,13 +42,13 @@ export const NavCategory = styled(NavLink)`
   font-weight: normal;
   font-size: 1.5rem;
   text-decoration: none;
-`
+`;
 
 export const UtilContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-`
+`;
 
 export const LoginButton = styled.button`
   margin: 0 1rem;
@@ -61,16 +62,16 @@ export const LoginButton = styled.button`
   font-size: 1.2rem;
   font-weight: 400;
   cursor: pointer;
-`
+`;
 
 export const SearchButton = styled.div`
   margin-right: 1rem;
   width: auto;
   height: auto;
   cursor: pointer;
-`
+`;
 
 export const SearchIcon = styled.img`
   width: auto;
   height: auto;
-`
+`;
