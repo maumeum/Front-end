@@ -1,28 +1,36 @@
 import React from 'react';
 
-import { ReviewSection, ImageContainer, ReviewImage, ReviewContainer, Nickname, ReviewTitle, ReviewContent } from './card.ts';
+import {
+	ReviewSection,
+	ImageContainer,
+	ReviewImage,
+	ReviewContainer,
+	Nickname,
+	ReviewTitle,
+	ReviewContent,
+} from './card.ts';
 import imgData from '@src/assets/images/volunteer2.jpg';
 
 interface listType {
-  title: string,
-  content: string,
-  images: string[],
-  volunteer_id: string,
-  user_id: {
-    nickname: string
-  }
-  index: number;
+	title: string;
+	content: string;
+	images: string[];
+	volunteer_id: string;
+	user_id: {
+		nickname: string;
+	};
+	index: number;
 }
 
 interface ReviewCardProps {
-  data: listType
+	data: listType;
 }
 
 const ReviewCard = ({ data }: ReviewCardProps) => {
 	const key = data.index;
 
 	//Content 미리보기 함수
-	const previewContent = (data:listType) => {
+	const previewContent = (data: listType) => {
 		const content = data.content;
 
 		// content의 길이가 35자 이상이라면 ... 처리
@@ -48,7 +56,9 @@ const ReviewCard = ({ data }: ReviewCardProps) => {
 			<ReviewContainer>
 				<Nickname className={colorClass(key)}>{data.user_id.nickname}</Nickname>
 				<ReviewTitle className={colorClass(key)}>{data.title}</ReviewTitle>
-				<ReviewContent className={colorClass(key)}>{previewContent(data)}</ReviewContent>
+				<ReviewContent className={colorClass(key)}>
+					{previewContent(data)}
+				</ReviewContent>
 			</ReviewContainer>
 		</ReviewSection>
 	);

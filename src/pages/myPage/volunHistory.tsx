@@ -5,17 +5,18 @@ import {
 	MenuBar,
 	TabMenu,
 	CardBox,
-} from '../../components/MyPage/myPage.ts';
-import car from '../../assets/images/car.png';
+} from '@components/MyPage/myPage.ts';
+import car from '@src/assets/images/car.png';
 
-import Tab from '../../components/Tab/Tab.tsx';
-import Card from '../../components/Card/Card.tsx';
-import Menu from '../../components/Menu/Menu.tsx';
+import Tab from '@components/Tab/Tab.tsx';
+import Card from '@components/Card/Card.tsx';
+import Menu from '@components/Menu/Menu.tsx';
+import { TabTypes } from '@components/Tab/TabTypes.ts';
 
 function myVolunHistory() {
-	const [currTab, setCurrTab] = useState('신청한 봉사');
-
-	const handleClickTab = (tab: string) => {
+	const [currTab, setCurrTab] = useState<TabTypes>(TabTypes.VOLUNTEER_APPLIED);
+	const tabs = [TabTypes.VOLUNTEER_APPLIED, TabTypes.VOLUNTEER_COMPLETED];
+	const handleClickTab = (tab: TabTypes) => {
 		setCurrTab(tab);
 	};
 
@@ -120,11 +121,15 @@ function myVolunHistory() {
 
 				<Main>
 					<TabMenu>
-						<Tab currTab={currTab} onClick={handleClickTab} />
+						<Tab currTab={currTab} onClick={handleClickTab} tabs={tabs} />
 					</TabMenu>
 					<CardBox>
-						{data.map((data, index) => (
-							<Card key={index} currTab={currTab} data={data} />
+						{data.map((data, idx) => (
+							<Card
+								key={`historycard-${data.id}-${idx}`}
+								currTab={currTab}
+								data={data}
+							/>
 						))}
 					</CardBox>
 				</Main>

@@ -27,25 +27,25 @@
 }
 
 :root {
-  --color--footer: #F5D4D4;
-  --button--color: #AACB73;
-  --little-color: #CDE990;
-  --card--color: #FFFFE8;
+	--color--footer: #f5d4d4;
+	--button--color: #aacb73;
+	--little-color: #cde990;
+	--card--color: #ffffe8;
 }
 
 @font-face {
 	font-family: 'kakaoBig';
-	src: url('../assets/KakaoBig-normal-400-100_1.ttf');
+	src: url('/assets/fonts/KakaoBig-normal-400-100_1.ttf') format('truetype');
 }
 
 @font-face {
 	font-family: 'kakaoOTFReg';
-	src: url('../assets/KakaoOTFRegular.otf');
+	src: url('/assets/fonts/KakaoOTFRegular.otf') format('opentype');
 }
 
 @font-face {
 	font-family: 'kakaoReg';
-	src: url('../assets/KakaoRegular.ttf');
+	src: url('/assets/fonts/KakaoRegular.ttf') format('truetype');
 }
 
 /* button_layout */

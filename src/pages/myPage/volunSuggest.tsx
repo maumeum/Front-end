@@ -5,12 +5,13 @@ import {
 	MenuBar,
 	TabMenu,
 	CardBox,
-} from '../../components/MyPage/myPage.ts';
-import car from '../../assets/images/car.png';
+} from '@components/MyPage/myPage.ts';
+import car from '@src/assets/images/car.png';
 
-import Tab from '../../components/Tab/Tab.tsx';
-import Card from '../../components/Card/Card.tsx';
-import Menu from '../../components/Menu/Menu.tsx';
+import Tab from '@components/Tab/Tab.tsx';
+import Card from '@components/Card/Card.tsx';
+import Menu from '@components/Menu/Menu.tsx';
+import { TabTypes } from '@components/Tab/TabTypes.ts';
 const props = [
 	{
 		title:
@@ -35,8 +36,8 @@ const props = [
 ];
 
 function volunSuggest() {
-	const tabs = ['내가 등록한 봉사활동'];
-	const [currTab, setCurrTab] = useState('내가 등록한 봉사활동');
+	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
+	const [currTab] = useState<TabTypes>(TabTypes.VOLUNTEER_SUGGEST);
 
 	return (
 		<>
@@ -50,8 +51,12 @@ function volunSuggest() {
 						<Tab currTab={currTab} tabs={tabs} />
 					</TabMenu>
 					<CardBox>
-						{props.map((data, index) => (
-							<Card key={index} data={data} currTab={currTab} />
+						{props.map((data, idx) => (
+							<Card
+								key={`suggestcard-${data.id}-${idx}`}
+								data={data}
+								currTab={currTab}
+							/>
 						))}
 					</CardBox>
 				</Main>

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TopBar from '../TopBar/TopBar';
-import { UserFormContainer, InputContainer } from './userForm';
-import { DataInput, DataName } from '../../pages/userPage/style';
-import LargeButton from '../../components/Buttons/LargeButton';
+import {
+	UserFormContainer,
+	InputContainer,
+} from '@components/UserForm/userForm';
+import { DataInput, DataName } from '@src/pages/userPage/style';
+import LargeButton from '@components/Buttons/LargeButton';
 import Swal from 'sweetalert2';
 
 function UserForm() {
