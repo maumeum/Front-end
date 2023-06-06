@@ -27,12 +27,21 @@ import VolunteerCard from '@components/Card/VolunteerCard';
 import ReviewCard from '@components/Card/ReviewCard';
 import CommunityCard from '@components/Card/CommunityCard';
 import { volunteerList } from '@assets/datas/volunteerData';
-import { ReviewList } from '@assets/datas/volunteerData';
 import { communityList } from '@assets/datas/volunteerData';
 import cardLogo from '@assets/icons/cardlogo.svg';
 
 const Main = () => {
-	console.log(communityList);
+	const [ReviewList, setReviewList] = useState<communityListType[]>([]);
+
+	// 리뷰 데이터 불러오기
+	useEffect(() => {
+		const fetchData = async () => {
+			const responseData = await get<communityListType[]>('/api/review');
+
+			setReviewList(responseData);
+		};
+		fetchData();
+	}, []);
 
 	return (
 		<MainSection>
