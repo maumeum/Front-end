@@ -1,4 +1,5 @@
 import React from 'react';
+import { volunteerListType } from '@src/types/cardType';
 
 import {
 	VolunteerSection,
@@ -10,24 +11,8 @@ import {
 	VolunteerContent,
 } from '@components/Card/card';
 
-interface listType {
-	title: string;
-	content: string;
-	centName: string;
-	createdAt: string;
-	statusName: string;
-	deadline: string;
-	applyCount: number;
-	registerCount: number;
-	actTypeName: string;
-	teenager: boolean;
-	images: string[];
-	user_id: string;
-	updateAt: string;
-}
-
 interface VolunteerCardProps {
-	data: listType;
+	data: volunteerListType;
 }
 
 import imgData from '../../assets/images/volunteer1.jpg';

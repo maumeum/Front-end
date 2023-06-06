@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { post } from '@src/api/Api';
-import { setToken } from '@src/api/Token';
+import { post } from '@api/Api';
+import { setToken } from '@api/Token';
 import {
 	LoginSection,
 	LogoContainer,
@@ -16,7 +16,7 @@ import {
 } from './style';
 import LargeButton from '@components/Buttons/LargeButton';
 import { validEmail } from '@utils/signUpCheck';
-import mainLogo from '@src/assets/icons/mainlogo.svg';
+import mainLogo from '@assets/icons/mainlogo.svg';
 
 const Login = () => {
 	const [email, setEmail] = useState<string>('');
