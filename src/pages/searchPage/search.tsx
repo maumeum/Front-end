@@ -11,19 +11,20 @@ import {
 	CommunityTitle,
 	NoSearchContainer,
 	NoKeyword,
-	KeywordContainer,
-	KeywordBox,
 } from './style';
+import KeywordComponent from '@components/Keyword/Keyword';
 import VolunteerCard from '@components/Card/VolunteerCard';
 import CommunityCard from '@components/Card/CommunityCard';
 
 const Search = () => {
 	const [query, setQuery] = useState<string>('');
+	const [submit, setSubmit] = useState<boolean>(false);
 	const [volunteerList, setVolunteerList] = useState<volunteerListType[]>([]);
 	const [communityList, setCommunityList] = useState<communityListType[]>([]);
 
 	const handleSearch = (query: string) => {
 		setQuery(query);
+		setSubmit(true);
 	};
 
 	// 봉사활동 조회
@@ -71,13 +72,9 @@ const Search = () => {
 				</>
 			) : (
 				<NoSearchContainer>
-					<NoKeyword>검색결과가 없습니다.</NoKeyword>
+					{submit ? <NoKeyword>검색결과가 없습니다.</NoKeyword> : ''}
 					<VolunteerTitle>아래와 같은 키워드는 어떠신가요?</VolunteerTitle>
-					<KeywordContainer>
-						{keywordData.map((item, index) => (
-							<KeywordBox key={index}>{item}</KeywordBox>
-						))}
-					</KeywordContainer>
+					<KeywordComponent />
 				</NoSearchContainer>
 			)}
 		</SearchSection>
@@ -85,13 +82,3 @@ const Search = () => {
 };
 
 export default Search;
-
-const keywordData = [
-	'어린이',
-	'어른',
-	'유기견',
-	'보육원',
-	'장애인',
-	'교육',
-	'다문화',
-];
