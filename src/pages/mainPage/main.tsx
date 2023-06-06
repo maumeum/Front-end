@@ -26,19 +26,36 @@ import {
 import VolunteerCard from '@components/Card/VolunteerCard';
 import ReviewCard from '@components/Card/ReviewCard';
 import CommunityCard from '@components/Card/CommunityCard';
-import { volunteerList } from '@assets/datas/volunteerData';
-import { communityList } from '@assets/datas/volunteerData';
 import cardLogo from '@assets/icons/cardlogo.svg';
 
 const Main = () => {
-	const [ReviewList, setReviewList] = useState<communityListType[]>([]);
+	const [reviewList, setReviewList] = useState<reviewListType[]>([]);
+	const [communityList, setCommunityList] = useState<communityListType[]>([]);
+	const [volunteerList, setVolunteerList] = useState<volunteerListType[]>([]);
 
 	// 리뷰 데이터 불러오기
 	useEffect(() => {
 		const fetchData = async () => {
-			const responseData = await get<communityListType[]>('/api/review');
-
+			const responseData = await get<reviewListType[]>('/api/review');
 			setReviewList(responseData);
+		};
+		fetchData();
+	}, []);
+
+	// 봉사활동 데이터 불러오기
+	useEffect(() => {
+		const fetchData = async () => {
+			const responseData = await get<volunteerListType[]>('/api/volunteers');
+			setVolunteerList(responseData);
+		};
+		fetchData();
+	}, []);
+
+	// 커뮤니티 데이터 불러오기
+	useEffect(() => {
+		const fetchData = async () => {
+			const responseData = await get<communityListType[]>('/commuities');
+			setCommunityList(responseData);
 		};
 		fetchData();
 	}, []);
@@ -52,7 +69,8 @@ const Main = () => {
 			</TopSlogan>
 			<TopContainer>
 				<ReviewContainer>
-					{ReviewList.sort(() => Math.random() - 0.5)
+					{reviewList
+						.sort(() => Math.random() - 0.5)
 						.slice(0, 2)
 						.map((item, index) => (
 							<ReviewCard data={{ ...item, index }} key={item._id} />
