@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { getToken, deleteToken } from '@src/api/Token';
+import MyPageButton from '../MyPage/MyPageButton';
 import {
 	HeaderSection,
 	HeaderContainer,
@@ -14,8 +15,8 @@ import {
 	SearchButton,
 	SearchIcon,
 } from './style';
-import mainLogo from '../../assets/icons/mainlogo.svg';
-import searchLogo from '../../assets/icons/search.svg';
+import mainLogo from '@assets/icons/mainlogo.svg';
+import searchLogo from '@assets/icons/search.svg';
 
 const Header = () => {
 	const [checkToken, setCheckToken] = useState<boolean>(false);
@@ -81,6 +82,7 @@ const Header = () => {
 					</NavCategory>
 				</NavContainer>
 				<UtilContainer>
+					<MyPageButton />
 					{!checkToken ? (
 						<LoginButton onClick={loginHandler}>로그인</LoginButton>
 					) : (

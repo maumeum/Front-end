@@ -18,6 +18,7 @@ export const VolunteerContainer = styled.div`
 	margin: 4rem 40rem;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
+	column-gap: 2rem;
 `;
 
 export const CommunityTitle = styled.h2`
@@ -46,22 +47,4 @@ export const NoKeyword = styled.h2`
 	font-size: 3rem;
 	font-weight: 900;
 	color: #888888;
-`;
-
-export const KeywordContainer = styled.div`
-	margin: 12rem 40rem;
-	min-width: 112rem;
-	display: grid;
-	grid-template-columns: repeat(6, 1fr);
-	column-gap: 3rem;
-	row-gap: 5rem;
-`;
-
-export const KeywordBox = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	aspect-ratio: 1;
-	border-radius: 50%;
-	border: 2px solid black;
 `;
