@@ -1,6 +1,7 @@
 // Datalist Type
 
 export interface communityListType {
+	_id: string;
 	user_id: {
 		nickname: string;
 	};
@@ -9,6 +10,7 @@ export interface communityListType {
 }
 
 export interface reviewListType {
+	_id: string;
 	title: string;
 	content: string;
 	images: string[];
@@ -20,6 +22,7 @@ export interface reviewListType {
 }
 
 export interface volunteerListType {
+	_id: string;
 	title: string;
 	content: string;
 	centName: string;
