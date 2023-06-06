@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-import { post } from '@src/api/Api';
+import { post } from '@api/Api';
 import LargeButton from '@components/Buttons/LargeButton';
 import { SignUpSection, SignUpForm } from './style';
 
@@ -10,15 +10,15 @@ import {
 	validEmail,
 	validPassword,
 	validPhoneNum,
-} from '@src/utils/signUpCheck.ts';
+} from '@utils/signUpCheck.ts';
 import {
 	emailError,
 	nicknameError,
 	passwordError,
 	passwordCheckError,
 	phoneNumError,
-} from '@src/utils/errorMessage.ts';
-import InputForm from '@src/components/UserForm/InputForm.tsx';
+} from '@utils/errorMessage.ts';
+import InputForm from '@components/UserForm/InputForm.tsx';
 
 const SignUp = () => {
 	const [email, setEmail] = useState<string>('');

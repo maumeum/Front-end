@@ -1,4 +1,5 @@
 import React from 'react';
+import { communityListType } from '@src/types/cardType';
 
 import {
 	CommunityContainer,
@@ -6,16 +7,8 @@ import {
 	CommunityTitle,
 } from '@components/Card/card';
 
-interface listType {
-	user_id: {
-		nickname: string;
-	};
-	title: string;
-	postType: string;
-}
-
 interface CommunityCardProps {
-	data: listType;
+	data: communityListType;
 }
 
 const CommunityCard = ({ data }: CommunityCardProps) => {
