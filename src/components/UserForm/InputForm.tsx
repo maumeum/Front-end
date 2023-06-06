@@ -25,7 +25,7 @@ interface ErrorType {
 }
 
 interface InputContainerProps {
-	isMyPage?: boolean;
+	isMyPage?: boolean | string;
 	submit: boolean;
 	dataName: string;
 	inputType: string;

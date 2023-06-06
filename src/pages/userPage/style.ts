@@ -187,3 +187,9 @@ export const CheckValue = styled.p`
 	color: #eb5757;
 	font-size: 1.2rem;
 `;
+
+export const WithdrawalSection = styled.div`
+	margin-left: 2rem;
+	margin-bottom: 3rem;
+	width: 70%;
+`;

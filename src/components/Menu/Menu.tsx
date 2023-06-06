@@ -31,7 +31,9 @@ function Menu({ title }: MenuProps) {
 						<Link to='/mypage/suggest'>
 							<p>내가 등록한 봉사</p>
 						</Link>
-						<p>회원탈퇴</p>
+						<Link to='/mypage/withdrawal'>
+							<p>회원탈퇴</p>
+						</Link>
 					</Menus>
 				</>
 			)}
