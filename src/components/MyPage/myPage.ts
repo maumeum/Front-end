@@ -15,11 +15,10 @@ export const MenuBar = styled.div`
 `;
 
 export const Main = styled.div`
-	width: 70%;
+	width: 65%;
 	margin-top: 5rem;
 	padding: 3.5rem;
 	margin-left: 5rem;
-	margin-right: 27rem;
 `;
 
 export const TabMenu = styled.div`

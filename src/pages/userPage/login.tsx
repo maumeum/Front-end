@@ -43,6 +43,7 @@ const Login = () => {
 			setCheckData(true);
 			return setCheckEmail(false);
 		}
+		setCheckData(true);
 
 		const response: { token: string } = await post('/api/login', {
 			email,

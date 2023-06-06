@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, RefObject } from 'react';
 import Swal from 'sweetalert2';
 
 import {
@@ -25,6 +25,7 @@ interface ErrorType {
 }
 
 interface InputContainerProps {
+	isMyPage?: boolean | string;
 	submit: boolean;
 	dataName: string;
 	inputType: string;
@@ -42,6 +43,7 @@ interface InputContainerProps {
 }
 
 const InputForm = ({
+	isMyPage,
 	submit,
 	dataName,
 	inputType,
@@ -108,6 +110,7 @@ const InputForm = ({
 				<>
 					<DataName>{dataName}</DataName>
 					<DataInput
+						readOnly={isMyPage}
 						type={inputType}
 						name={name}
 						placeholder={placeholder}
@@ -129,13 +132,16 @@ const InputForm = ({
 					<DataName>{dataName}</DataName>
 					<EmailContainer className={submit && value === '' ? 'submit' : ''}>
 						<EmailData
+							readOnly={isMyPage}
 							type={inputType}
 							name={name}
 							placeholder={placeholder}
 							onChange={onChangeFn}
 							value={value}
 						/>
-						<EmailButton onClick={clickHandler}>중복 확인</EmailButton>
+						{!isMyPage && (
+							<EmailButton onClick={clickHandler}>중복 확인</EmailButton>
+						)}
 					</EmailContainer>
 					{getError({
 						data: value,

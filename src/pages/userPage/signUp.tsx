@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { post } from '@src/api/Api';
 import LargeButton from '@components/Buttons/LargeButton';
 import { SignUpSection, SignUpForm } from './style';
-import Modal from '@components/Modal/Modal.tsx';
+
 import {
 	validEmail,
 	validPassword,
@@ -20,11 +20,7 @@ import {
 } from '@src/utils/errorMessage.ts';
 import InputForm from '@src/components/UserForm/InputForm.tsx';
 
-type Props = {
-	mypage?: string;
-};
-
-const SignUp = ({ mypage }: Props) => {
+const SignUp = () => {
 	const [email, setEmail] = useState<string>('');
 	const [nickname, setNickname] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
@@ -50,12 +46,6 @@ const SignUp = ({ mypage }: Props) => {
 	}
 	const clickHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		// 상태 초기화
-		{
-			if (mypage) {
-				setIsOpen(true);
-				return;
-			}
-		}
 		setSubmit(false);
 		e.preventDefault();
 		setSubmit(true);
@@ -155,7 +145,6 @@ const SignUp = ({ mypage }: Props) => {
 					validFn={validPhoneNum}
 				/>
 				<LargeButton onClick={clickHandler}>회원가입</LargeButton>
-				<Modal isOpen={isOpen} closeModal={closeModal} user={'user'} />
 			</SignUpForm>
 		</SignUpSection>
 	);

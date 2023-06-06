@@ -8,7 +8,7 @@ import {
 import Tab from '@components/Tab/Tab.tsx';
 import MyPost from '@components/MyPost/MyPost.tsx';
 import Menu from '@components/Menu/Menu.tsx';
-import { TabTypes } from '@components/Tab/TabTypes.ts';
+import { TabTypes } from '@src/utils/EnumTypes';
 const data = [
 	{
 		title:

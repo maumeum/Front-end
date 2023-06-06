@@ -12,7 +12,7 @@ import {
 	ButtonContainer,
 	SelectContainer,
 } from './card.ts';
-import { TabTypes } from '../Tab/TabTypes.ts';
+import { TabTypes } from '../../utils/EnumTypes.ts';
 
 type Props = {
 	data: {

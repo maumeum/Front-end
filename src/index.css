@@ -1,7 +1,7 @@
 @import url(../src/styles/style.css);
 @font-face {
 	font-family: 'KakaoBig';
-	src: url('/assets/fonts/KakaoBig-normal-400-100_1.ttf') format('truetype');
+	src: url('/fonts/KakaoBig-normal-400-100_1.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
