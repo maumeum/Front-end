@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 
 import {
 	DataName,
@@ -9,6 +10,7 @@ import {
 	EmailData,
 	EmailButton,
 } from '@src/pages/userPage/style';
+import { post } from '@src/api/Api';
 
 interface ErrorType {
 	data: string;
@@ -52,7 +54,6 @@ const InputForm = ({
 	passwordData,
 	validPassword,
 }: InputContainerProps) => {
-
 	const getError = ({
 		data,
 		submit,
@@ -77,9 +78,33 @@ const InputForm = ({
 		}
 	};
 
+	const clickHandler = async () => {
+		const userData = await post<boolean>('/api/email', { email: value });
+		if (value === '') {
+			return Swal.fire({
+				icon: 'error',
+				title: '이메일을 입력해주세요.',
+				confirmButtonColor: '#d33',
+			});
+		}
+
+		if (userData) {
+			Swal.fire({
+				title: '사용 가능한 이메일 입니다!',
+				confirmButtonColor: 'var(--button--color)',
+			});
+		} else {
+			Swal.fire({
+				icon: 'error',
+				title: '이미 사용 중인 이메일입니다.',
+				confirmButtonColor: '#d33',
+			});
+		}
+	};
+
 	return (
 		<InputContainer>
-			{name !== 'email' ? 
+			{name !== 'email' ? (
 				<>
 					<DataName>{dataName}</DataName>
 					<DataInput
@@ -90,12 +115,19 @@ const InputForm = ({
 						onChange={onChangeFn}
 						value={value}
 					/>
-					{getError({ data: value, submit, errorMessage, validFn: validFn, validPassword: validPassword, passwordData: passwordData })}
+					{getError({
+						data: value,
+						submit,
+						errorMessage,
+						validFn: validFn,
+						validPassword: validPassword,
+						passwordData: passwordData,
+					})}
 				</>
-				: <>
+			) : (
+				<>
 					<DataName>{dataName}</DataName>
-					<EmailContainer
-						className={submit && value === '' ? 'submit' : '' }>
+					<EmailContainer className={submit && value === '' ? 'submit' : ''}>
 						<EmailData
 							type={inputType}
 							name={name}
@@ -103,10 +135,18 @@ const InputForm = ({
 							onChange={onChangeFn}
 							value={value}
 						/>
-						<EmailButton>중복 확인</EmailButton>
+						<EmailButton onClick={clickHandler}>중복 확인</EmailButton>
 					</EmailContainer>
-					{getError({ data: value, submit, errorMessage, validFn: validFn, validPassword: validPassword, passwordData: passwordData })}
-				</>}
+					{getError({
+						data: value,
+						submit,
+						errorMessage,
+						validFn: validFn,
+						validPassword: validPassword,
+						passwordData: passwordData,
+					})}
+				</>
+			)}
 		</InputContainer>
 	);
 };
