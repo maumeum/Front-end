@@ -152,6 +152,7 @@ export const ReviewSection = styled.div`
 		props.className === 'one' ? '#daebb7' : '#FFFFFF'};
 	border: none;
 	border-radius: 12px;
+	word-break: keep-all;
 	filter: drop-shadow(0 2px 10px rgb(0, 0, 0, 10%));
 	cursor: pointer;
 `;
@@ -191,17 +192,18 @@ export const ReviewContent = styled.p`
 // volunteer card
 export const VolunteerSection = styled.div`
 	margin-bottom: 6rem;
-	width: calc(100% - 0.5rem);
+	width: 100%;
 	height: 37rem;
 	background-color: #ffffff;
 	border: none;
 	border-radius: 12px;
 	filter: drop-shadow(0 2px 10px rgb(0, 0, 0, 10%));
+	word-break: keep-all;
 	cursor: pointer;
 `;
 
 export const VolunteerImgContainer = styled.div`
-	margin-bottom: 3rem;
+	margin-bottom: 0;
 `;
 
 export const VolunteerImage = styled.img`
