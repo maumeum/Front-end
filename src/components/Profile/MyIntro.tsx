@@ -4,9 +4,9 @@ import {
 	IntroBox,
 	FormBtn,
 	CheckLength,
+	FormContainer,
 } from '@components/Profile/myIntro.ts';
 import Swal from 'sweetalert2';
-import { FormContainer } from '@components/MyPage/myPage.ts';
 
 function MyIntro() {
 	const [intro, setIntro] = useState<string>('');
@@ -35,14 +35,16 @@ function MyIntro() {
 	return (
 		<>
 			<FormContainer>
-				<IntroContainer>
-					<IntroBox
-						placeholder='최대 200자 까지 가능합니다'
-						onChange={handleChange}
-					/>
-					<CheckLength>{`${introLength} / 200`}</CheckLength>
-					<FormBtn onClick={handleClick}>저장하기</FormBtn>
-				</IntroContainer>
+				<form action='#'>
+					<IntroContainer>
+						<IntroBox
+							placeholder='최대 200자 까지 가능합니다'
+							onChange={handleChange}
+						/>
+						<CheckLength>{`${introLength} / 200`}</CheckLength>
+						<FormBtn onClick={handleClick}>저장하기</FormBtn>
+					</IntroContainer>
+				</form>
 			</FormContainer>
 		</>
 	);
