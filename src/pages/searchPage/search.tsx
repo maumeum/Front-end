@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import SearchBar from '@components/SearchBar/SearchBar';
 import { get } from '@api/Api';
@@ -21,10 +22,15 @@ const Search = () => {
 	const [submit, setSubmit] = useState<boolean>(false);
 	const [volunteerList, setVolunteerList] = useState<volunteerListType[]>([]);
 	const [communityList, setCommunityList] = useState<communityListType[]>([]);
+	const navigate = useNavigate();
 
 	const handleSearch = (query: string) => {
 		setQuery(query);
 		setSubmit(true);
+		if (query === '') {
+			return navigate('/search');
+		}
+		navigate(`/search?keyword=${query}`);
 	};
 
 	// 봉사활동 조회
