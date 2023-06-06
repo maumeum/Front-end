@@ -193,3 +193,9 @@ export const WithdrawalSection = styled.div`
 	margin-bottom: 3rem;
 	width: 70%;
 `;
+
+export const WithdrawalContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
