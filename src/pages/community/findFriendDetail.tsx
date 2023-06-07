@@ -27,7 +27,7 @@ const FindFriendDetail = () => {
 		writeDate: '23.05.25',
 		postImage: car,
 		postContents:
-			'안녕하세요. 수원 지역 유기견 봉사활동 같이 하실 분 모집합니다.제목 그대로 유기견 봉사활동하고 장소는 수원시 장안구입니다.\n 강아지를 좋아하시고 사랑하는 분이면 누구든 환영합니다.',
+			'안녕하세요. 수원 지역 유기견 봉사활동 같이 하실 분 모집합니다.\n제목 그대로 유기견 봉사활동하고 장소는 수원시 장안구입니다.\n 강아지를 좋아하시고 사랑하는 분이면 누구든 환영합니다.',
 	};
 	const isAuthor = loggedInUser === data.userInfo;
 	const hasPostImage = !!data.postImage;

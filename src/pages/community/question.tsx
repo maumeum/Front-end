@@ -8,7 +8,8 @@ import { NumberWriteContainer, PageContainer } from './style.ts';
 import PostList from '@components/PostList/PostList.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { MenuBar } from '@components/MyPage/myPage.ts';
-const question = () => {
+
+const Question = () => {
 	const navigate = useNavigate();
 	const handleSearch = (query: string) => {
 		console.log('검색어:', query);
@@ -22,6 +23,54 @@ const question = () => {
 			postTitle: '봉사활동 한번 신청하면 달마다 주기적으로 가야하는 건가요?',
 			postContents:
 				'저는 한번만 참여하고 싶은데 혹시 봉사활동 신청하면 주기적으로 가야하는건지 궁금해요',
+		},
+		{
+			id: '02',
+			postTitle: '한강 쓰레기줍기 행사 어떤 준비물 제공되는지 아시는분?',
+			postContents:
+				'쓰레기줍기 행사 참여하려고 하는데 어떤 준비물 제공되는지 궁금합니다. 아니면 집에서 미리 준비해가야하는 건가요?',
+		},
+		{
+			id: '02',
+			postTitle: '한강 쓰레기줍기 행사 어떤 준비물 제공되는지 아시는분?',
+			postContents:
+				'쓰레기줍기 행사 참여하려고 하는데 어떤 준비물 제공되는지 궁금합니다. 아니면 집에서 미리 준비해가야하는 건가요?',
+		},
+		{
+			id: '02',
+			postTitle: '한강 쓰레기줍기 행사 어떤 준비물 제공되는지 아시는분?',
+			postContents:
+				'쓰레기줍기 행사 참여하려고 하는데 어떤 준비물 제공되는지 궁금합니다. 아니면 집에서 미리 준비해가야하는 건가요?',
+		},
+		{
+			id: '02',
+			postTitle: '한강 쓰레기줍기 행사 어떤 준비물 제공되는지 아시는분?',
+			postContents:
+				'쓰레기줍기 행사 참여하려고 하는데 어떤 준비물 제공되는지 궁금합니다. 아니면 집에서 미리 준비해가야하는 건가요?',
+		},
+		{
+			id: '02',
+			postTitle: '한강 쓰레기줍기 행사 어떤 준비물 제공되는지 아시는분?',
+			postContents:
+				'쓰레기줍기 행사 참여하려고 하는데 어떤 준비물 제공되는지 궁금합니다. 아니면 집에서 미리 준비해가야하는 건가요?',
+		},
+		{
+			id: '02',
+			postTitle: '한강 쓰레기줍기 행사 어떤 준비물 제공되는지 아시는분?',
+			postContents:
+				'쓰레기줍기 행사 참여하려고 하는데 어떤 준비물 제공되는지 궁금합니다. 아니면 집에서 미리 준비해가야하는 건가요?',
+		},
+		{
+			id: '02',
+			postTitle: '한강 쓰레기줍기 행사 어떤 준비물 제공되는지 아시는분?',
+			postContents:
+				'쓰레기줍기 행사 참여하려고 하는데 어떤 준비물 제공되는지 궁금합니다. 아니면 집에서 미리 준비해가야하는 건가요?',
+		},
+		{
+			id: '02',
+			postTitle: '한강 쓰레기줍기 행사 어떤 준비물 제공되는지 아시는분?',
+			postContents:
+				'쓰레기줍기 행사 참여하려고 하는데 어떤 준비물 제공되는지 궁금합니다. 아니면 집에서 미리 준비해가야하는 건가요?',
 		},
 		{
 			id: '02',
@@ -61,4 +110,4 @@ const question = () => {
 	);
 };
 
-export default question;
+export default Question;
