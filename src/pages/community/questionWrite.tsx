@@ -1,17 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import WritePage from '../../components/WritePage/WritePage';
+import { post } from '@src/api/Api';
+import { getToken } from '@src/api/Token';
+import parse from 'html-react-parser';
 
-const questionWrite = () => {
-	const content =
-		'궁금한 사항에 대한 질문을 자유롭게 남겨주세요.\n서로 예의를 지키며 존중하는 문화를 만들어가요.';
+const QuestionWrite = () => {
+	const [postData, setPostData] = useState({
+		title: '',
+		content: '',
+	});
+
+	const onSavePost = (inputTitle: string, content: string) => {
+		setPostData({
+			title: inputTitle,
+			content: content,
+		});
+		console.log('Saved question Post:', inputTitle, content);
+
+		const token = getToken();
+		console.log(token);
+		// API 호출을 수행하는 부분
+		post(
+			'/api/community/create',
+			{
+				title: inputTitle,
+				content: parse(content as string),
+			},
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			},
+		);
+	};
+
+	const onCancelPost = () => {
+		setPostData({
+			title: '',
+			content: '',
+		});
+		console.log('Cancelled Post');
+	};
 
 	return (
 		<>
-			<WritePage
-				title='봉사활동에 대해 궁금한 사항이 잘 나타나는 제목을 지어보세요'
-				subtitle={content}
-			/>
+			<WritePage onSave={onSavePost} onCancel={onCancelPost} />
 		</>
 	);
 };
-export default questionWrite;
+
+export default QuestionWrite;
