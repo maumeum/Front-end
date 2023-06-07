@@ -1,4 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+	useState,
+	useEffect,
+	MouseEvent,
+	SetStateAction,
+	Dispatch,
+	ChangeEvent,
+} from 'react';
 import {
 	SignUpSection,
 	SignUpForm,
@@ -16,7 +23,8 @@ import LargeButton from '@components/Buttons/LargeButton';
 import Modal from '@components/Modal/Modal.tsx';
 import { useNavigate } from 'react-router-dom';
 import { TabTypes } from '@src/utils/EnumTypes';
-import { get } from '@src/api/Api';
+import { get, patch } from '@src/api/Api';
+import { getToken } from '@src/api/Token';
 
 type MyPageUserFormProps = {
 	pageType: string; //readOnly설정을 위한 props 값
@@ -29,10 +37,10 @@ type UserInfo = {
 	phone: string;
 	image: string;
 };
+const token = getToken();
 
 function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 	useEffect(() => {
-		const token = localStorage.getItem('userToken');
 		const fetchData = async () => {
 			try {
 				const response = await get('/api/users/info', {
@@ -57,7 +65,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 	const [initialPhone, setInitialPhone] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
 	const [nickname, setNickname] = useState<string>('');
-	const [phoneState, setPhone] = useState<string>('');
+	const [phone, setPhone] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
 
 	const isMyPage = pageType === TabTypes.MYPAGE;
@@ -72,30 +80,32 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 	const openModal = () => {
 		setIsOpen(true);
 	};
-	function closeModal() {
+	const closeModal = () => {
 		setIsOpen(false);
-	}
+	};
+	const changePwClickHandler = (e: MouseEvent<HTMLButtonElement>) => {
+		setEditMode(true);
+		setAuthMode(false);
+		setIsOpen(true);
+	};
 	// inputValue 함수
 	const getFormChanger =
-		(setter: React.Dispatch<React.SetStateAction<string>>) =>
-		(e: React.ChangeEvent<HTMLInputElement>) => {
+		(setter: Dispatch<SetStateAction<string>>) =>
+		(e: ChangeEvent<HTMLInputElement>) => {
 			setSubmit(false);
 			setter(e.target.value);
 		};
 
 	//유저값 변경 확인
 	const isInfoChanged = () => {
-		return initialNickname !== nickname || initialPhone !== phoneState;
+		return initialNickname !== nickname || initialPhone !== phone;
 	};
 	const isNicknameValid = nickname.length > 0;
-	const isPhoneValid = validPhoneNum(phoneState);
-	const isButtonDisabled = !(
-		isNicknameValid &&
-		isPhoneValid &&
-		isInfoChanged()
-	);
+	const isPhoneValid = validPhoneNum(phone);
+	const isButtonDisabled =
+		!isMyPage && !(isNicknameValid && isPhoneValid && isInfoChanged());
 
-	const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+	const clickHandler = async (e: MouseEvent<HTMLButtonElement>) => {
 		{
 			if (isMyPage) {
 				setEditMode(false);
@@ -109,8 +119,23 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 		e.preventDefault();
 		setSubmit(true);
 
-		//비밀번호 일치여부
-		if (validPhoneNum(phoneState) && nickname.length > 0) {
+		//회원정보 수정 요청
+		{
+			try {
+				await patch(
+					'/api/users/info',
+					{ nickname, phone },
+					{
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+					},
+				);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		if (validPhoneNum(phone) && nickname.length > 0) {
 			Swal.fire({
 				title: '회원정보가 수정되었습니다!',
 				confirmButtonColor: 'var(--button--color)',
@@ -153,19 +178,14 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 						dataName='핸드폰 번호'
 						inputType='text'
 						name='phoneNum'
-						value={phoneState}
+						value={phone}
 						onChangeFn={getFormChanger(setPhone)}
 						errorMessage={phoneNumError}
 						validFn={validPhoneNum}
 					/>
 					<ButtonContainer>
 						{!isMyPage && (
-							<LargeButton
-								onClick={() => {
-									setEditMode(true);
-									setAuthMode(false);
-									setIsOpen(true);
-								}}>
+							<LargeButton onClick={changePwClickHandler}>
 								비밀번호변경
 							</LargeButton>
 						)}
