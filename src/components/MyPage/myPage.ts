@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const Container = styled.div`
 	display: flex;
@@ -15,11 +16,10 @@ export const MenuBar = styled.div`
 `;
 
 export const Main = styled.div`
-	width: 70%;
+	width: 65%;
 	margin-top: 5rem;
 	padding: 3.5rem;
 	margin-left: 5rem;
-	margin-right: 27rem;
 `;
 
 export const TabMenu = styled.div`
@@ -31,4 +31,15 @@ export const CardBox = styled.div`
 	grid-template-columns: repeat(4, 1fr);
 	grid-column-gap: 3rem;
 	grid-row-gap: 2rem;
+`;
+
+export const ButtonContainer = styled(NavLink)`
+	width: 3rem;
+	aspect-ratio: 1;
+`;
+
+export const Image = styled.img`
+	width: 100%;
+	aspect-ratio: 1;
+	border-radius: 50%;
 `;

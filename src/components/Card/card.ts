@@ -55,7 +55,7 @@ export const UserInfo = styled.div`
 	display: flex;
 	align-items: center;
 	height: 0%;
-	margin-top: 1.5rem;
+	margin-top: 3rem;
 	position: relative;
 
 	img {
@@ -119,118 +119,121 @@ export const SelectContainer = styled.div`
 
 // Community Card
 export const CommunityContainer = styled.div`
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  height: 11rem;
-  background-color: #FFFFFF;
-  border: none;
-  border-radius: 12px;
-  filter: drop-shadow(0 2px 10px rgb(0, 0, 0, 10%));
-  cursor: pointer;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	height: 11rem;
+	background-color: #ffffff;
+	border: none;
+	border-radius: 12px;
+	filter: drop-shadow(0 2px 10px rgb(0, 0, 0, 10%));
+	cursor: pointer;
 `;
 
 export const PostType = styled.div`
-  width: 25%;
-  text-align: center;
-  color: #888888;
-  font-size: 2.5rem;
+	width: 25%;
+	text-align: center;
+	color: #888888;
+	font-size: 2.5rem;
 `;
 
 export const CommunityTitle = styled.p`
-  margin: 0 6rem 0 3rem;
-  font-size: 2rem;
+	margin: 0 6rem 0 3rem;
+	font-size: 2rem;
 `;
 
 // Review Card
 export const ReviewSection = styled.div`
-  display: flex;
-  margin: 4rem 0;
-  width: 70rem;
-  height: 25rem;
-  background-color: ${(props) => props.className === 'one' ? '#daebb7' : '#FFFFFF'};
-  border: none;
-  border-radius: 12px;
-  filter: drop-shadow(0 2px 10px rgb(0, 0, 0, 10%));
-  cursor: pointer;
+	display: flex;
+	margin: 4rem 0;
+	width: 70rem;
+	height: 25rem;
+	background-color: ${(props) =>
+		props.className === 'one' ? '#daebb7' : '#FFFFFF'};
+	border: none;
+	border-radius: 12px;
+	word-break: keep-all;
+	filter: drop-shadow(0 2px 10px rgb(0, 0, 0, 10%));
+	cursor: pointer;
 `;
 
 export const ImageContainer = styled.div`
-  height: 100%;
+	height: 100%;
 `;
 
 export const ReviewImage = styled.img`
-  height: 100%;
-  border: none;
-  border-radius: 12px 0 0 12px;
+	height: 100%;
+	border: none;
+	border-radius: 12px 0 0 12px;
 `;
 
 export const ReviewContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 3rem 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 3rem 2rem;
 `;
 
 export const ReviewTitle = styled.h2`
-  font-size: 2rem;
+	font-size: 2rem;
 `;
 
 export const Nickname = styled.p`
-  margin-top: 0;
-  font-size: 1.4rem;
-  color: #4A4A4A;
+	margin-top: 0;
+	font-size: 1.4rem;
+	color: #4a4a4a;
 `;
 
 export const ReviewContent = styled.p`
-  font-size: 1.4rem;
-  color: #4A4A4A;
+	font-size: 1.4rem;
+	color: #4a4a4a;
 `;
 
 // volunteer card
 export const VolunteerSection = styled.div`
-  margin-bottom: 6rem;
-  width: calc(100% - 0.5rem);
-  height: 37rem;
-  background-color: #FFFFFF;
-  border: none;
-  border-radius: 12px;
-  filter: drop-shadow(0 2px 10px rgb(0, 0, 0, 10%));
-  cursor: pointer;
+	margin-bottom: 6rem;
+	width: 100%;
+	height: 37rem;
+	background-color: #ffffff;
+	border: none;
+	border-radius: 12px;
+	filter: drop-shadow(0 2px 10px rgb(0, 0, 0, 10%));
+	word-break: keep-all;
+	cursor: pointer;
 `;
 
 export const VolunteerImgContainer = styled.div`
-  margin-bottom: 3rem;
+	margin-bottom: 0;
 `;
 
 export const VolunteerImage = styled.img`
-  width: 100%;
-  aspect-ratio: 4/3;
-  border: none;
-  border-radius: 12px;
+	width: 100%;
+	aspect-ratio: 4/3;
+	border: none;
+	border-radius: 12px;
 `;
 
 export const RecruitStatus = styled.div`
-  width: 25%;
-  text-align: center;
-  background-color: #202020;
-  color: #FFFFFF;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 0 4px 4px 4px;
+	width: 25%;
+	text-align: center;
+	background-color: #202020;
+	color: #ffffff;
+	font-size: 1.2rem;
+	border: none;
+	border-radius: 0 4px 4px 4px;
 `;
 
 export const VolunteerIntroContainer = styled.div`
-  margin: 1.5rem;
+	margin: 1.5rem;
 `;
 
 export const VolunteerTitle = styled.h2`
-  margin-bottom: 1.5rem;
-  font-size: 1.7rem;
-  font-weight: 800;
+	margin-bottom: 1.5rem;
+	font-size: 1.7rem;
+	font-weight: 800;
 `;
 
 export const VolunteerContent = styled.p`
-  margin-top: 0;
-  font-size: 1.3rem;
+	margin-top: 0;
+	font-size: 1.3rem;
 `;
