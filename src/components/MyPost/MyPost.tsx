@@ -8,16 +8,20 @@ import {
 	ButtonContainer,
 } from './myPost';
 
-import Modal from '@components/Modal/Modal.tsx';
+// import Modal from '@components/Modal/Modal.tsx';
 import TruncatedDescription from '@components/MyPost/TruncatedDescription';
 import { SmallButton } from '@components/Buttons/SmallButton';
+import { del } from '@src/api/Api';
+import { getToken } from '@src/api/Token';
+import Swal from 'sweetalert2';
 
 type PostProps = {
 	data: {
 		title: string;
 		content: string;
-		category: string;
-		date: string;
+		createdAt: string;
+		_id: string;
+		postType?: string;
 	};
 	currTab?: string;
 };
@@ -27,18 +31,42 @@ function truncateTitle(title: string) {
 	return title.length <= maxLength ? title : `${title.slice(0, maxLength)}...`;
 }
 
+function truncateDate(createdAt: string) {
+	return createdAt.split('T')[0];
+}
+
 function MyPost({ currTab, data }: PostProps) {
-	const { title, content, category, date } = data;
-	const [isOpen, setOpen] = useState(false);
+	const { title, content, createdAt, postType, _id } = data;
 	const [isShowMore, setIsShowMore] = useState<boolean>(false);
 	const truncatedTitle = truncateTitle(title);
 
 	const handleButtonClick = () => {
 		if (currTab === '내가 쓴 리뷰') {
-			console.log('리뷰임');
-			setOpen(true);
+			console.log('내가 쓴 리뷰임');
 		} else if (currTab === '내가 쓴 게시글') {
 			console.log('내가 쓴글임');
+		}
+	};
+
+	const handleDeleteClick = async () => {
+		console.log(_id);
+		try {
+			await del(`/api/review/users/${_id}`, {
+				headers: {
+					Authorization: `Bearer ${getToken()}`,
+				},
+			});
+			Swal.fire({
+				title: '리뷰가 삭제되었습니다',
+				icon: 'success',
+				confirmButtonColor: 'var(--button--color)',
+			});
+		} catch (error) {
+			Swal.fire({
+				title: '리뷰가 삭제에 실패했습니다.',
+				icon: 'success',
+				confirmButtonColor: 'var(--button--color)',
+			});
 		}
 	};
 
@@ -46,6 +74,7 @@ function MyPost({ currTab, data }: PostProps) {
 		<>
 			<PostListContainer>
 				<PostBox>
+					{/* //데이터 없으면 없다고 표시 */}
 					<Title>{truncatedTitle}</Title>
 					<Description>
 						<TruncatedDescription
@@ -56,15 +85,14 @@ function MyPost({ currTab, data }: PostProps) {
 					</Description>
 
 					<PostInfo>
-						<p>{date}</p>
-						<p>{category}</p>
+						<p>{truncateDate(createdAt)}</p>
+						<p>{postType ? postType : '봉사후기'}</p>
 						{currTab === '내가 쓴 게시글' || currTab === '내가 쓴 리뷰' ? (
 							<ButtonContainer>
 								<SmallButton onClick={handleButtonClick}>수정하기</SmallButton>
-								<SmallButton>삭제하기</SmallButton>
+								<SmallButton onClick={handleDeleteClick}>삭제하기</SmallButton>
 							</ButtonContainer>
 						) : null}
-						<Modal isOpen={isOpen} setOpen={setOpen} />
 					</PostInfo>
 				</PostBox>
 			</PostListContainer>

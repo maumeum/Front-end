@@ -82,7 +82,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 	const closeModal = () => {
 		setIsOpen(false);
 	};
-	const changePwClickHandler = (e: MouseEvent<HTMLButtonElement>) => {
+	const changePwClickHandler = () => {
 		setEditMode(true);
 		setAuthMode(false);
 		setIsOpen(true);

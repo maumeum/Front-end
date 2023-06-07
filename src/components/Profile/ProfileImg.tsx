@@ -11,7 +11,7 @@ import useAuthStore from '@src/store/useAuthStore.ts';
 import { patch } from '@api/Api';
 import { getToken } from '@api/Token';
 
-// const url = process.env.VITE_API_URL;
+const url = import.meta.env.VITE_API_URL;
 function ProfileImg() {
 	const { userData, initialize } = useAuthStore();
 
@@ -19,15 +19,17 @@ function ProfileImg() {
 		initialize();
 	}, []);
 
-	const [beforeImg, setBeforeImg] = useState<string>(
-		userData ? userData.image : '',
-	);
+	useEffect(() => {
+		setBeforeImg(userData?.image);
+	}, [userData]);
+
+	const [beforeImg, setBeforeImg] = useState<string | undefined>('');
 	const [afterImg, setAfterImg] = useState<string>('');
 	const [isUpload, setIsUpload] = useState<boolean>(false);
 
 	const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
-		console.log(file);
+
 		if (file) {
 			const reader = new FileReader();
 			reader.onload = () => {
@@ -40,7 +42,9 @@ function ProfileImg() {
 	};
 
 	const handleResetImage = () => {
-		setAfterImg(beforeImg);
+		if (beforeImg) {
+			setAfterImg(beforeImg);
+		}
 		setIsUpload(false);
 	};
 
@@ -78,7 +82,7 @@ function ProfileImg() {
 						{isUpload ? (
 							<img src={afterImg} alt='Uploaded' />
 						) : (
-							<img src={beforeImg} alt='Original' />
+							<img src={`${url}/${beforeImg}`} alt='Original' />
 						)}
 					</ImgPreview>
 					<InputConatiner>

@@ -13,6 +13,9 @@ import {
 	SelectContainer,
 } from './card.ts';
 import { TabTypes } from '../../utils/EnumTypes.ts';
+import { post } from '@src/api/Api';
+import { getToken } from '@src/api/Token';
+import Swal from 'sweetalert2';
 
 type Props = {
 	data: {
@@ -52,6 +55,32 @@ function Card({ currTab, data }: Props) {
 		console.log('Selected Value:', selectedValue);
 	};
 
+	const handleParticipated = async () => {
+		try {
+			await post('/api/review/users/participation', {
+				headers: {
+					Authorization: `Bearer ${getToken()}`,
+				},
+			});
+			Swal.fire({
+				title: '참여하신 활동이 맞으십니까?',
+				text: '커뮤니티 경험 향상을 위해 거짓 정보는 지양해주세요!',
+				icon: 'info',
+				showCancelButton: true,
+				confirmButtonColor: '#ffd4d4',
+				cancelButtonColor: '#afcd81',
+				confirmButtonText: '네',
+				cancelButtonText: '아니요',
+			}).then((result) => {
+				if (result.isConfirmed) {
+					Swal.fire('완료된 봉사로 변경되었습니다!', 'success');
+				}
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<>
 			<CardContainer currTab={currTab}>
@@ -78,6 +107,11 @@ function Card({ currTab, data }: Props) {
 							<SelectContainer>
 								<Selector onChange={handleRecruitmentStatusChange} />
 							</SelectContainer>
+						)}
+						{currTab === TabTypes.VOLUNTEER_APPLIED && (
+							<ButtonContainer>
+								<SmallButton onClick={handleParticipated}>참여완료</SmallButton>
+							</ButtonContainer>
 						)}
 						<Modal isOpen={isOpen} closeModal={closeModal} />
 					</UserInfo>

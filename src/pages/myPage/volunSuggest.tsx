@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	Container,
 	Main,
@@ -12,6 +12,9 @@ import Tab from '@components/Tab/Tab.tsx';
 import Card from '@components/Card/Card.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/utils/EnumTypes';
+import { get } from '@src/api/Api';
+import { getToken } from '@src/api/Token';
+
 const props = [
 	{
 		title:
@@ -36,6 +39,26 @@ const props = [
 ];
 
 function volunSuggest() {
+	// useEffect(() => {
+
+	// 	console.log(getToken());
+	// 	const fetchData = async () => {
+	// 		try {
+
+	// 			const response = await get('/api/reviews/users', {
+	// 				headers: {
+	// 					Authorization: `Bearer ${getToken()}`,
+	// 				},
+	// 			});
+	// 			console.log(response);
+
+	// 		} catch (error) {
+	// 			console.log(error);
+	// 		}
+	// 	};
+
+	// 	fetchData();
+	// }, []);
 	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
 	const [currTab] = useState<TabTypes>(TabTypes.VOLUNTEER_SUGGEST);
 

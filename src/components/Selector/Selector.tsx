@@ -22,7 +22,6 @@ function Selector({ onChange }: { onChange: (selectedValue: string) => void }) {
 			<OptionColor value='모집중'>모집중</OptionColor>
 			<OptionColor value='모집마감'>모집마감</OptionColor>
 			<OptionColor value='모집중단'>모집중단</OptionColor>
-			<OptionColor value='활동완료'>활동완료</OptionColor>
 		</SelectColor>
 	);
 }

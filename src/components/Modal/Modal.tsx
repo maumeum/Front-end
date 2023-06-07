@@ -6,7 +6,7 @@ import { customStyles } from '@components/Modal/modal';
 import MyReview from '../MyPost/MyReview';
 type ModalProps = {
 	isOpen: boolean;
-	closeModal: () => void;
+	closeModal?: () => void;
 	user?: string;
 	editMode?: boolean;
 	authMode?: boolean;

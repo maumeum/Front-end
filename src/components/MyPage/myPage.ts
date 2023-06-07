@@ -16,7 +16,7 @@ export const MenuBar = styled.div`
 `;
 
 export const Main = styled.div`
-	width: 65%;
+	width: 70%;
 	margin-top: 5rem;
 	padding: 3.5rem;
 	margin-left: 5rem;
