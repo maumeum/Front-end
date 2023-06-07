@@ -57,7 +57,7 @@ const Question = () => {
 				<Menu title={'커뮤니티'} />
 			</MenuBar>
 			<PageContainer>
-				<TopBar title='동행 구해요' text='같이 봉사할 친구를 모집해요' />
+				<TopBar title='궁금해요' text='봉사와 관련된 궁금한 사항을 질문해요' />
 				<SearchBar onSearch={handleSearch} />
 				<NumberWriteContainer>
 					<TotalPostNumber totalPosts={postListData.length} />

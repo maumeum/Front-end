@@ -17,6 +17,7 @@ import {
 	Contentdiv,
 	Content,
 } from './style.ts';
+import CommentSection from '@src/components/Comment/Comment.tsx';
 
 const FindFriendDetail = () => {
 	const navigate = useNavigate();
@@ -65,7 +66,7 @@ const FindFriendDetail = () => {
 					<Title>{title}</Title>
 					<SubContainer>
 						<InfoBox>
-							<UserName>{datauser.user}</UserName>
+							<UserName>{user}</UserName>
 							<Date>작성일 : {createdAt}</Date>
 						</InfoBox>
 						{isAuthor && <Btn onClick={handleEdit}>수정하기</Btn>}
@@ -79,6 +80,7 @@ const FindFriendDetail = () => {
 					</Contentdiv>
 				</ContentContainer>
 			</DetailContainer>
+			<CommentSection />
 		</>
 	);
 };
