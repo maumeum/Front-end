@@ -48,7 +48,7 @@ const Search = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const responseData = await get<CommunityListType[]>(
-				`/commuities/search/?keyword=${query}`,
+				`/api/community/search?keyword=${query}`,
 			);
 			setCommunityList(responseData);
 		};
