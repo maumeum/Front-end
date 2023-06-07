@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-import { post } from '@src/api/Api';
+import { post } from '@api/Api';
 import LargeButton from '@components/Buttons/LargeButton';
 import { SignUpSection, SignUpForm } from './style';
 
@@ -10,15 +10,15 @@ import {
 	validEmail,
 	validPassword,
 	validPhoneNum,
-} from '@src/utils/signUpCheck.ts';
+} from '@utils/signUpCheck.ts';
 import {
 	emailError,
 	nicknameError,
 	passwordError,
 	passwordCheckError,
 	phoneNumError,
-} from '@src/utils/errorMessage.ts';
-import InputForm from '@src/components/UserForm/InputForm.tsx';
+} from '@utils/errorMessage.ts';
+import InputForm from '@components/UserForm/InputForm.tsx';
 
 const SignUp = () => {
 	const [email, setEmail] = useState<string>('');
@@ -51,10 +51,7 @@ const SignUp = () => {
 				title: '비밀번호가 일치하지 않습니다.',
 				confirmButtonColor: '#d33',
 			});
-		}
-
-		// 회원가입 완료
-		if (
+		} else if (
 			validEmail(email) &&
 			validPassword(password) &&
 			validPhoneNum(phoneNum)
@@ -71,12 +68,6 @@ const SignUp = () => {
 				title: '마음이음에 오신 것을 환영합니다!',
 				text: '로그인을 해주세요.',
 				confirmButtonColor: 'var(--button--color)',
-			});
-		} else {
-			Swal.fire({
-				icon: 'error',
-				title: '정보를 모두 입력해주세요.',
-				confirmButtonColor: '#d33',
 			});
 		}
 	};
