@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import SearchBar from '@components/SearchBar/SearchBar';
 import { get } from '@api/Api';
-import { communityListType, volunteerListType } from '@src/types/cardType';
+import { CommunityListType, VolunteerListType } from '@src/types/CardType';
 import {
 	SearchSection,
 	VolunteerContainer,
@@ -19,18 +20,23 @@ import CommunityCard from '@components/Card/CommunityCard';
 const Search = () => {
 	const [query, setQuery] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
-	const [volunteerList, setVolunteerList] = useState<volunteerListType[]>([]);
-	const [communityList, setCommunityList] = useState<communityListType[]>([]);
+	const [volunteerList, setVolunteerList] = useState<VolunteerListType[]>([]);
+	const [communityList, setCommunityList] = useState<CommunityListType[]>([]);
+	const navigate = useNavigate();
 
 	const handleSearch = (query: string) => {
 		setQuery(query);
 		setSubmit(true);
+		if (query === '') {
+			return navigate('/search');
+		}
+		navigate(`/search?keyword=${query}`);
 	};
 
 	// 봉사활동 조회
 	useEffect(() => {
 		const fetchData = async () => {
-			const responseData = await get<volunteerListType[]>(
+			const responseData = await get<VolunteerListType[]>(
 				`/api/volunteers/search/?keyword=${query}`,
 			);
 			setVolunteerList(responseData);
@@ -41,7 +47,7 @@ const Search = () => {
 	// 커뮤니티 조회
 	useEffect(() => {
 		const fetchData = async () => {
-			const responseData = await get<communityListType[]>(
+			const responseData = await get<CommunityListType[]>(
 				`/commuities/search/?keyword=${query}`,
 			);
 			setCommunityList(responseData);

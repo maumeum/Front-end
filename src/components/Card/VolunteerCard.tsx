@@ -1,5 +1,5 @@
 import React from 'react';
-import { volunteerListType } from '@src/types/cardType';
+import { VolunteerListType } from '@src/types/CardType';
 
 import {
 	VolunteerSection,
@@ -12,7 +12,7 @@ import {
 } from '@components/Card/card';
 
 interface VolunteerCardProps {
-	data: volunteerListType;
+	data: VolunteerListType;
 }
 
 import imgData from '../../assets/images/volunteer1.jpg';
