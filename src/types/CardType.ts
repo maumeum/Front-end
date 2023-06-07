@@ -1,5 +1,4 @@
 // Datalist Type
-
 export interface CommunityListType {
 	_id: string;
 	user_id: {
