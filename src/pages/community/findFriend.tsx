@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TopBar from '@components/TopBar/TopBar.tsx';
 import SearchBar from '@components/SearchBar/SearchBar.tsx';
@@ -23,8 +23,6 @@ const FindFriend = () => {
 	useEffect(() => {
 		fetchPostList();
 	}, []);
-
-	const token = getToken();
 
 	const fetchPostList = async () => {
 		try {

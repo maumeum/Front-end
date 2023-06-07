@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { getToken } from '@api/Token';
 import { ButtonContainer, ButtonWord } from './myPage.ts';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { ReviewListType } from '@src/types/CardType.ts';
 
 import {

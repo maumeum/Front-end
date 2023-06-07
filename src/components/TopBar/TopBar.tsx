@@ -1,4 +1,3 @@
-import React from 'react';
 import { TopBarBox, Title, SubText, TextContainer } from './TopBarstyle';
 
 type TopBarProps = {

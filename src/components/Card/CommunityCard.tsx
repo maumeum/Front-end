@@ -1,4 +1,3 @@
-import React from 'react';
 import { CommunityListType } from '@src/types/CardType';
 
 import {
