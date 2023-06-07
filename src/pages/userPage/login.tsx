@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 import { post } from '@api/Api';
 import { setToken } from '@api/Token';
@@ -45,19 +46,28 @@ const Login = () => {
 		}
 		setCheckData(true);
 
-		const response: { token: string } = await post('/api/login', {
-			email,
-			password,
-		});
+		try {
+			const response: { token: string } = await post('/api/login', {
+				email,
+				password,
+			});
 
-		// 토큰이 있다면 localStorage에 토큰 저장
-		if (response.token) {
-			setToken(response.token);
+			// 토큰이 있다면 localStorage에 토큰 저장
+			if (response.token) {
+				setToken(response.token);
+			}
+
+			setCheckData(true);
+			navigate('/');
+			window.location.reload();
+		} catch (err) {
+			Swal.fire({
+				icon: 'error',
+				title: '이메일 또는 비밀번호가 일치하지 않습니다.',
+				confirmButtonColor: '#d33',
+			});
+			window.location.reload();
 		}
-
-		setCheckData(true);
-		navigate('/');
-		window.location.reload();
 	};
 
 	return (
