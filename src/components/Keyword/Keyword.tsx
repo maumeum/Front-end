@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { KeywordContainer, KeywordBox } from './style';
 import keywordData from '@assets/datas/keywordData';
 

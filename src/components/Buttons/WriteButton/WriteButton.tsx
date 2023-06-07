@@ -1,4 +1,3 @@
-import React from 'react';
 import { WriteBtn } from './WriteButtonstyle';
 
 type WriteButtonProps = {

@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, MouseEvent } from 'react';
+import { useState, ChangeEvent, MouseEvent } from 'react';
 import {
 	IntroContainer,
 	IntroBox,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
 	Container,
 	Main,
@@ -14,6 +14,7 @@ import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/utils/EnumTypes';
 const props = [
 	{
+		id: 1,
 		title:
 			'지금 당장 이메일 내의 스팸메시지를 삭제해보세요! 탄소가 줄어듭니다.',
 		thumbnail: car,
@@ -24,6 +25,7 @@ const props = [
 		endDate: '2021-01-02',
 	},
 	{
+		id: 2,
 		title:
 			'페트병의 라벨을 잘 제거합시다! 1초의 행동으로 환경을 보호할 수 있습니다',
 		thumbnail: car,

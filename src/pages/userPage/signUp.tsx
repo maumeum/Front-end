@@ -38,12 +38,13 @@ const SignUp = () => {
 			setter(e.target.value);
 		};
 
-	//회원정보 수정 클릭시 모달
-	const [isOpen, setIsOpen] = useState(false);
+	// //회원정보 수정 클릭시 모달
+	// const [isOpen, setIsOpen] = useState(false);
 
-	function closeModal() {
-		setIsOpen(false);
-	}
+	// function closeModal() {
+	// 	setIsOpen(false);
+	// }
+
 	const clickHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		// 상태 초기화
 		setSubmit(false);

@@ -1,4 +1,3 @@
-import React, { useState, useEffect, RefObject } from 'react';
 import Swal from 'sweetalert2';
 
 import {
@@ -81,21 +80,22 @@ const InputForm = ({
 	};
 
 	const clickHandler = async () => {
-		const userData = await post<boolean>('/api/email', { email: value });
-		if (value === '') {
-			return Swal.fire({
-				icon: 'error',
-				title: '이메일을 입력해주세요.',
-				confirmButtonColor: '#d33',
-			});
-		}
-
-		if (userData) {
-			Swal.fire({
-				title: '사용 가능한 이메일 입니다!',
-				confirmButtonColor: 'var(--button--color)',
-			});
-		} else {
+		try {
+			const userData = await post<boolean>('/api/email', { email: value });
+			if (value === '') {
+				return Swal.fire({
+					icon: 'error',
+					title: '이메일을 입력해주세요.',
+					confirmButtonColor: '#d33',
+				});
+			}
+			if (userData) {
+				Swal.fire({
+					title: '사용 가능한 이메일 입니다!',
+					confirmButtonColor: 'var(--button--color)',
+				});
+			}
+		} catch (err) {
 			Swal.fire({
 				icon: 'error',
 				title: '이미 사용 중인 이메일입니다.',
@@ -110,7 +110,7 @@ const InputForm = ({
 				<>
 					<DataName>{dataName}</DataName>
 					<DataInput
-						readOnly={isMyPage}
+						readOnly={isMyPage ? true : false}
 						type={inputType}
 						name={name}
 						placeholder={placeholder}
@@ -132,7 +132,7 @@ const InputForm = ({
 					<DataName>{dataName}</DataName>
 					<EmailContainer className={submit && value === '' ? 'submit' : ''}>
 						<EmailData
-							readOnly={isMyPage}
+							readOnly={isMyPage ? true : false}
 							type={inputType}
 							name={name}
 							placeholder={placeholder}

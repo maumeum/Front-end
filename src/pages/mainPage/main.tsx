@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import { get } from '@api/Api';
 import {
@@ -54,7 +54,7 @@ const Main = () => {
 	// 커뮤니티 데이터 불러오기
 	useEffect(() => {
 		const fetchData = async () => {
-			const responseData = await get<CommunityListType[]>('/commuities');
+			const responseData = await get<CommunityListType[]>('/api/community');
 			setCommunityList(responseData);
 		};
 		fetchData();

@@ -11,7 +11,7 @@ export const TopBarBox = styled.div<BarProps>`
 	margin: 0 auto;
 	margin-top: 13.5rem;
 	display: flex;
-	${props =>
+	${(props) =>
 		props.modal === 'modal' &&
 		css`
 			margin-top: 1rem;
