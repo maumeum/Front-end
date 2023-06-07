@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 import { get } from '@api/Api';
 import {
-	communityListType,
-	volunteerListType,
-	reviewListType,
-} from '@src/types/cardType';
+	CommunityListType,
+	VolunteerListType,
+	ReviewListType,
+} from '@src/types/CardType';
 import {
 	MainSection,
 	TopSlogan,
@@ -29,14 +29,14 @@ import CommunityCard from '@components/Card/CommunityCard';
 import cardLogo from '@assets/icons/cardlogo.svg';
 
 const Main = () => {
-	const [reviewList, setReviewList] = useState<reviewListType[]>([]);
-	const [communityList, setCommunityList] = useState<communityListType[]>([]);
-	const [volunteerList, setVolunteerList] = useState<volunteerListType[]>([]);
+	const [reviewList, setReviewList] = useState<ReviewListType[]>([]);
+	const [communityList, setCommunityList] = useState<CommunityListType[]>([]);
+	const [volunteerList, setVolunteerList] = useState<VolunteerListType[]>([]);
 
 	// 리뷰 데이터 불러오기
 	useEffect(() => {
 		const fetchData = async () => {
-			const responseData = await get<reviewListType[]>('/api/review');
+			const responseData = await get<ReviewListType[]>('/api/review');
 			setReviewList(responseData);
 		};
 		fetchData();
@@ -45,7 +45,7 @@ const Main = () => {
 	// 봉사활동 데이터 불러오기
 	useEffect(() => {
 		const fetchData = async () => {
-			const responseData = await get<volunteerListType[]>('/api/volunteers');
+			const responseData = await get<VolunteerListType[]>('/api/volunteers');
 			setVolunteerList(responseData);
 		};
 		fetchData();
@@ -54,7 +54,7 @@ const Main = () => {
 	// 커뮤니티 데이터 불러오기
 	useEffect(() => {
 		const fetchData = async () => {
-			const responseData = await get<communityListType[]>('/commuities');
+			const responseData = await get<CommunityListType[]>('/commuities');
 			setCommunityList(responseData);
 		};
 		fetchData();
