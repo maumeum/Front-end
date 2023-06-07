@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';

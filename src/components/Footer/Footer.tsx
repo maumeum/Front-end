@@ -1,5 +1,14 @@
-import React from 'react';
-import { FooterSection, IntroContainer, LogoContainer, MainLogo, SloganContainer, Slogan, MemberList, Member, GitLink } from './style';
+import {
+	FooterSection,
+	IntroContainer,
+	LogoContainer,
+	MainLogo,
+	SloganContainer,
+	Slogan,
+	MemberList,
+	Member,
+	GitLink,
+} from './style';
 
 import mainLogo from '@src/assets/icons/mainlogo.svg';
 
@@ -15,11 +24,20 @@ const Footer = () => {
 					<MainLogo src={mainLogo} alt='mainLogo' />
 				</LogoContainer>
 				<SloganContainer>
-					<Slogan>마음을 잇는 봉사 <br/ >마음이음에서 흔적을 남겨보세요</Slogan>
+					<Slogan>
+						마음을 잇는 봉사 <br />
+						마음이음에서 흔적을 남겨보세요
+					</Slogan>
 					<MemberList>
-						{members.map((member: {name: string, link: string}, index: number) => {
-							return <Member key={index}><GitLink href={member.link}>{member.name}</GitLink></Member>;
-						})}
+						{members.map(
+							(member: { name: string; link: string }, index: number) => {
+								return (
+									<Member key={index}>
+										<GitLink href={member.link}>{member.name}</GitLink>
+									</Member>
+								);
+							},
+						)}
 					</MemberList>
 				</SloganContainer>
 			</IntroContainer>

@@ -1,4 +1,3 @@
-import React, { useState, useEffect, RefObject } from 'react';
 import Swal from 'sweetalert2';
 
 import {
@@ -111,7 +110,7 @@ const InputForm = ({
 				<>
 					<DataName>{dataName}</DataName>
 					<DataInput
-						readOnly={isMyPage}
+						readOnly={isMyPage ? true : false}
 						type={inputType}
 						name={name}
 						placeholder={placeholder}
@@ -133,7 +132,7 @@ const InputForm = ({
 					<DataName>{dataName}</DataName>
 					<EmailContainer className={submit && value === '' ? 'submit' : ''}>
 						<EmailData
-							readOnly={isMyPage}
+							readOnly={isMyPage ? true : false}
 							type={inputType}
 							name={name}
 							placeholder={placeholder}

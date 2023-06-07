@@ -1,4 +1,3 @@
-import React from 'react';
 import TopBar from '../../components/TopBar/TopBar.tsx';
 import SearchBar from '../../components/SearchBar/SearchBar.tsx';
 import TotalPostNumber from '../../components/TotalPostNumber/TotalPostNumber.tsx';

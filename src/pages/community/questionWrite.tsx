@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import WritePage from '../../components/WritePage/WritePage';
 import { post } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
