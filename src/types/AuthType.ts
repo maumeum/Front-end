@@ -1,4 +1,4 @@
-import UserType from './userType';
+import UserType from './UserType';
 
 interface AuthType {
 	userData: UserType | null;

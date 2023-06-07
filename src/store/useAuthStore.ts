@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { getToken } from '@api/Token';
 import { get } from '@api/Api';
 
-import UserType from '@src/types/userType';
+import UserType from '@src/types/UserType';
 import AuthType from '@src/types/AuthType';
 
 const useAuthStore = create<AuthType>((set) => ({
