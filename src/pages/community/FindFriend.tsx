@@ -12,7 +12,7 @@ import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 
 type PostData = {
-	id: string;
+	_id: string;
 	title: string;
 	content: string;
 };
@@ -33,6 +33,7 @@ const FindFriend = () => {
 				},
 			});
 			setPostListData(response);
+			console.log(response);
 		} catch (error) {
 			console.error('Error fetching post list:', error);
 		}
@@ -45,6 +46,9 @@ const FindFriend = () => {
 
 	const navigateWrite = () => {
 		navigate('/community/findfriend/write');
+	};
+	const navigateDetail = (postId: string) => {
+		navigate(`/community/findfriend/${postId}`);
 	};
 
 	return (
@@ -61,7 +65,7 @@ const FindFriend = () => {
 				</NumberWriteContainer>
 				{postListData.map((postData) => (
 					<PostList
-						key={postData.id}
+						key={postData._id}
 						postTitle={
 							postData.title.slice(0, 50) +
 							(postData.title.length > 50 ? '...' : '')
@@ -70,6 +74,7 @@ const FindFriend = () => {
 							postData.content.slice(0, 50) +
 							(postData.content.length > 50 ? '...' : '')
 						}
+						onClick={() => navigateDetail(postData._id)}
 					/>
 				))}
 			</PageContainer>

@@ -12,6 +12,7 @@ export const PostListContainer = styled.div`
 	height: 7.6rem;
 	margin-bottom: 3.6rem;
 	margin-top: 4.6rem;
+	cursor: pointer;
 `;
 
 export const PostTitle = styled.p`

@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import car from '@src/assets/images/car.png';
+import { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { get } from '@src/api/Api';
+import { getToken } from '@src/api/Token';
 import {
 	DetailContainer,
 	Header,
@@ -15,45 +16,69 @@ import {
 	Image,
 	Contentdiv,
 	Content,
-} from './style';
-import CommentSection from '@components/Comment/Comment.tsx';
-const FindFriendDetail = () => {
-	const [loggedInUser, setLoggedInUser] = useState('로그인한 사용자');
-	const { postId } = useParams();
+} from './style.ts';
 
-	const data = {
-		title: '수원 유기견 봉사활동 같이하실 분 구해요!',
-		userInfo: '로그인한 사용자',
-		writeDate: '23.05.25',
-		postImage: car,
-		postContents:
-			'안녕하세요. 수원 지역 유기견 봉사활동 같이 하실 분 모집합니다.\n제목 그대로 유기견 봉사활동하고 장소는 수원시 장안구입니다.\n 강아지를 좋아하시고 사랑하는 분이면 누구든 환영합니다.',
+const FindFriendDetail = () => {
+	const navigate = useNavigate();
+	const { postId } = useParams();
+	const [post, setPost] = useState<any>([]);
+	const [datauser, setDataUser] = useState<any>('');
+
+	useEffect(() => {
+		fetchPost();
+	}, []);
+
+	const fetchPost = async () => {
+		try {
+			const token = getToken();
+			const response = await get(`/api/community/${postId}`, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
+			setPost(response!.post.post);
+			setDataUser(response!.post);
+			console.log(response);
+		} catch (error) {
+			console.error('Error fetching post:', error);
+		}
 	};
-	const isAuthor = loggedInUser === data.userInfo;
-	const hasPostImage = !!data.postImage;
+
+	const handleEdit = () => {
+		navigate(`/community/findfriend/edit/${postId}`);
+	};
+
+	if (!post) {
+		return <div>Loading...</div>;
+	}
+
+	const { title, user_id, createdAt, images, content } = post;
+	const { user } = datauser;
+	const loggedInUser = '로그인한 사용자';
+	const isAuthor = loggedInUser === user_id;
+	const hasPostImage = !!images;
 
 	return (
 		<>
 			<DetailContainer>
 				<Header>
-					<Title>{data.title}</Title>
+					<Title>{title}</Title>
 					<SubContainer>
 						<InfoBox>
-							<UserName>{data.userInfo}</UserName>
-							<Date>작성일 : {data.writeDate}</Date>
+							<UserName>{datauser.user}</UserName>
+							<Date>작성일 : {createdAt}</Date>
 						</InfoBox>
-						{isAuthor && <Btn>수정하기</Btn>}
+						{isAuthor && <Btn onClick={handleEdit}>수정하기</Btn>}
 					</SubContainer>
 				</Header>
 				<Line></Line>
 				<ContentContainer>
-					{hasPostImage && <Image src={data.postImage} alt='content-image' />}
+					{hasPostImage && <Image src={images} alt='content-image' />}
 					<Contentdiv>
-						<Content>{data.postContents}</Content>
+						<Content>{content}</Content>
 					</Contentdiv>
 				</ContentContainer>
 			</DetailContainer>
-			<CommentSection></CommentSection>
 		</>
 	);
 };
