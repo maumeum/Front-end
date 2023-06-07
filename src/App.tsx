@@ -22,6 +22,7 @@ import UserInfoEdit from '@pages/myPage/userInfoEdit';
 import MyProfile from './pages/myPage/myProfile';
 import FindFriendDetail from '@src/pages/community/FindFriendDetail';
 import Withdrawal from '@pages/myPage/withdrawal';
+import ReviewDetail from '@src/pages/reviewPage/ReviewDetail';
 
 function App() {
 	return (
@@ -51,6 +52,7 @@ function App() {
 					path='/community/findfriend/:postId'
 					element={<FindFriendDetail />}
 				/>
+				<Route path='/review/:postId' element={<ReviewDetail />} />
 				<Route path='/mypage/withdrawal' element={<Withdrawal />} />
 			</Routes>
 			<Footer />
