@@ -1,5 +1,5 @@
 import React from 'react';
-import { communityListType } from '@src/types/cardType';
+import { CommunityListType } from '@src/types/CardType';
 
 import {
 	CommunityContainer,
@@ -8,7 +8,7 @@ import {
 } from '@components/Card/card';
 
 interface CommunityCardProps {
-	data: communityListType;
+	data: CommunityListType;
 }
 
 const CommunityCard = ({ data }: CommunityCardProps) => {

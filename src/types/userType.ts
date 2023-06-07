@@ -1,4 +1,4 @@
-interface userType {
+interface UserType {
 	_id: string;
 	email: string;
 	nickname: string;
@@ -6,4 +6,4 @@ interface userType {
 	image: string;
 }
 
-export default userType;
+export default UserType;

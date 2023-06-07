@@ -1,5 +1,5 @@
 import React from 'react';
-import { reviewListType } from '@src/types/cardType.ts';
+import { ReviewListType } from '@src/types/CardType.ts';
 
 import {
 	ReviewSection,
@@ -13,14 +13,14 @@ import {
 import imgData from '@src/assets/images/volunteer2.jpg';
 
 interface ReviewCardProps {
-	data: reviewListType;
+	data: ReviewListType;
 }
 
 const ReviewCard = ({ data }: ReviewCardProps) => {
 	const key = data.index;
 
 	//Content 미리보기 함수
-	const previewContent = (data: reviewListType) => {
+	const previewContent = (data: ReviewListType) => {
 		const content = data.content;
 
 		// content의 길이가 35자 이상이라면 ... 처리
