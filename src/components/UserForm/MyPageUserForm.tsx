@@ -44,6 +44,8 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 				setEmail(email);
 				setNickname(nickname);
 				setPhone(phone);
+				setInitialNickname(nickname);
+				setInitialPhone(phone);
 			} catch (error) {
 				console.log(error);
 			}
@@ -51,7 +53,8 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 
 		fetchData();
 	}, []);
-
+	const [initialNickname, setInitialNickname] = useState<string>('');
+	const [initialPhone, setInitialPhone] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
 	const [nickname, setNickname] = useState<string>('');
 	const [phoneState, setPhone] = useState<string>('');
@@ -80,6 +83,18 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 			setter(e.target.value);
 		};
 
+	//유저값 변경 확인
+	const isInfoChanged = () => {
+		return initialNickname !== nickname || initialPhone !== phoneState;
+	};
+	const isNicknameValid = nickname.length > 0;
+	const isPhoneValid = validPhoneNum(phoneState);
+	const isButtonDisabled = !(
+		isNicknameValid &&
+		isPhoneValid &&
+		isInfoChanged()
+	);
+
 	const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
 		{
 			if (isMyPage) {
@@ -95,7 +110,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 		setSubmit(true);
 
 		//비밀번호 일치여부
-		if (validPhoneNum(phoneState)) {
+		if (validPhoneNum(phoneState) && nickname.length > 0) {
 			Swal.fire({
 				title: '회원정보가 수정되었습니다!',
 				confirmButtonColor: 'var(--button--color)',
@@ -154,7 +169,9 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 								비밀번호변경
 							</LargeButton>
 						)}
-						<LargeButton onClick={clickHandler}>회원정보수정</LargeButton>
+						<LargeButton onClick={clickHandler} disabled={isButtonDisabled}>
+							회원정보수정
+						</LargeButton>
 					</ButtonContainer>
 					<Modal
 						isOpen={isOpen}
