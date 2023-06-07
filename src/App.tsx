@@ -13,15 +13,15 @@ import MyVolunHistory from '@pages/myPage/volunHistory';
 import MyVolunSuggest from '@pages/myPage/volunSuggest';
 import MyComment from '@pages/myPage/myComment';
 import MyReview from '@pages/myPage/myReview';
-import FindFriend from '@src/pages/community/FindFriend';
-import Question from '@src/pages/community/Question';
-import FindFriendWrite from '@src/pages/community/FindFriendWrite';
-import QuestionWrite from '@src/pages/community/QuestionWrite';
+import FindFriend from '@src/pages/community/findFriend';
+import Question from '@src/pages/community/question';
+import FindFriendWrite from '@src/pages/community/findFriendWrite';
+import QuestionWrite from '@src/pages/community/questionWrite';
 import Review from '@pages/reviewPage/reviewPage';
 import MyPage from '@pages/myPage/myPage';
 import UserInfoEdit from '@pages/myPage/userInfoEdit';
 import MyProfile from './pages/myPage/myProfile';
-import FindFriendDetail from '@pages/community/FindFriendDetail';
+import FindFriendDetail from '@pages/community/findFriendDetail';
 import Withdrawal from '@pages/myPage/withdrawal';
 
 function App() {

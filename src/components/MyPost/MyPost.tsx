@@ -8,7 +8,7 @@ import {
 	ButtonContainer,
 } from './myPost';
 
-import Modal from '@components/Modal/Modal.tsx';
+// import Modal from '@components/Modal/Modal.tsx';
 import TruncatedDescription from '@components/MyPost/TruncatedDescription';
 import { SmallButton } from '@components/Buttons/SmallButton';
 
@@ -29,14 +29,13 @@ function truncateTitle(title: string) {
 
 function MyPost({ currTab, data }: PostProps) {
 	const { title, content, category, date } = data;
-	const [isOpen, setOpen] = useState(false);
+	// const [isOpen, setOpen] = useState(false);
 	const [isShowMore, setIsShowMore] = useState<boolean>(false);
 	const truncatedTitle = truncateTitle(title);
 
 	const handleButtonClick = () => {
 		if (currTab === '내가 쓴 리뷰') {
 			console.log('리뷰임');
-			setOpen(true);
 		} else if (currTab === '내가 쓴 게시글') {
 			console.log('내가 쓴글임');
 		}
@@ -64,7 +63,7 @@ function MyPost({ currTab, data }: PostProps) {
 								<SmallButton>삭제하기</SmallButton>
 							</ButtonContainer>
 						) : null}
-						<Modal isOpen={isOpen} setOpen={setOpen} />
+						{/* <Modal isOpen={isOpen} setOpen={setOpen} /> */}
 					</PostInfo>
 				</PostBox>
 			</PostListContainer>
