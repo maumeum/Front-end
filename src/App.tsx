@@ -21,7 +21,7 @@ import Review from '@pages/reviewPage/reviewPage';
 import MyPage from '@pages/myPage/myPage';
 import UserInfoEdit from '@pages/myPage/userInfoEdit';
 import MyProfile from './pages/myPage/myProfile';
-import FindFriendDetail from '@pages/community/FindFriendDetail';
+import FindFriendDetail from '@src/pages/community/FindFriendDetail';
 import Withdrawal from '@pages/myPage/withdrawal';
 
 function App() {
