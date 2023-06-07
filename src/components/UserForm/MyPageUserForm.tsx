@@ -37,7 +37,6 @@ type UserInfo = {
 	phone: string;
 	image: string;
 };
-const token = getToken();
 
 function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 	useEffect(() => {
@@ -45,7 +44,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 			try {
 				const response = await get('/api/users/info', {
 					headers: {
-						Authorization: `Bearer ${token}`,
+						Authorization: `Bearer ${getToken()}`,
 					},
 				});
 				const { email, nickname, phone } = response as UserInfo;
@@ -127,7 +126,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 					{ nickname, phone },
 					{
 						headers: {
-							Authorization: `Bearer ${token}`,
+							Authorization: `Bearer ${getToken()}`,
 						},
 					},
 				);

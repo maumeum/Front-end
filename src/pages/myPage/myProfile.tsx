@@ -16,6 +16,7 @@ function myProfile() {
 	const tabs_img = [TabTypes.EDIT_PROFILE];
 	const [currIntroTab] = useState<TabTypes>(TabTypes.EDIT_INTRO);
 	const tabs_intro = [TabTypes.EDIT_INTRO];
+
 	return (
 		<>
 			<Container>

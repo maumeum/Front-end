@@ -110,7 +110,7 @@ const InputForm = ({
 				<>
 					<DataName>{dataName}</DataName>
 					<DataInput
-						readOnly={isMyPage}
+						readOnly={isMyPage ? true : false}
 						type={inputType}
 						name={name}
 						placeholder={placeholder}
@@ -132,7 +132,7 @@ const InputForm = ({
 					<DataName>{dataName}</DataName>
 					<EmailContainer className={submit && value === '' ? 'submit' : ''}>
 						<EmailData
-							readOnly={isMyPage}
+							readOnly={isMyPage ? true : false}
 							type={inputType}
 							name={name}
 							placeholder={placeholder}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import {
 	ImgContainer,
 	ImgPreview,
@@ -7,17 +7,25 @@ import {
 } from '@components/Profile/profileImg';
 import img from '@assets/images/car.png';
 import Swal from 'sweetalert2';
+import useAuthStore from '@src/store/useAuthStore.ts';
+import { patch } from '@api/Api';
+import { getToken } from '@api/Token';
 
+// const url = process.env.VITE_API_URL;
 function ProfileImg() {
+	const { userData, initialize } = useAuthStore();
+
 	useEffect(() => {
-		setBeforeImg(img);
+		initialize();
 	}, []);
 
-	const [beforeImg, setBeforeImg] = useState<string>('');
+	const [beforeImg, setBeforeImg] = useState<string>(
+		userData ? userData.image : '',
+	);
 	const [afterImg, setAfterImg] = useState<string>('');
 	const [isUpload, setIsUpload] = useState<boolean>(false);
 
-	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
 		console.log(file);
 		if (file) {
@@ -40,8 +48,22 @@ function ProfileImg() {
 		console.log('이미지 취소 요청');
 	};
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
+		try {
+			await patch(
+				'/api/users/image',
+				{ image: afterImg },
+				{
+					headers: {
+						Authorization: `Bearer ${getToken()}`,
+					},
+				},
+			);
+		} catch (error) {
+			console.log(error);
+			return;
+		}
 		Swal.fire({
 			title: '프로필 사진이 변경되었습니다',
 			icon: 'success',
@@ -51,7 +73,7 @@ function ProfileImg() {
 	return (
 		<>
 			<ImgContainer>
-				<form action='#' onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit} encType='multipart/form-data'>
 					<ImgPreview>
 						{isUpload ? (
 							<img src={afterImg} alt='Uploaded' />

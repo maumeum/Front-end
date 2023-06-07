@@ -25,20 +25,6 @@ export const get = async <T>(
 	});
 };
 
-// axios.post
-// export const post = async <T>(
-// 	url: string,
-// 	data?: any,
-// 	config?: AxiosRequestConfig,
-// ): Promise<T> => {
-// 	const fullURL = apiURL + url;
-// 	return request<T>({
-// 		url: fullURL,
-// 		method: 'POST',
-// 		data,
-// 		...config,
-// 	});
-// };
 export const post = async <T>(
 	url: string,
 	data?: any,

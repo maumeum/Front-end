@@ -4,6 +4,7 @@ interface UserType {
 	nickname: string;
 	phone: string;
 	image: string;
+	introduction: string;
 }
 
 export default UserType;
