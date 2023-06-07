@@ -12,6 +12,5 @@ export const InputContainer = styled.div`
 	align-items: center;
 	p {
 		align-self: flex-start;
-		margin-left: 13rem;
 	}
 `;

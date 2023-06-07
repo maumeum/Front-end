@@ -14,14 +14,6 @@ function userInfoEdit() {
 	const [currTab] = useState<TabTypes>(TabTypes.EDIT_MYINFO);
 	const tabs = [TabTypes.EDIT_MYINFO];
 
-	const myInfo = {
-		email: 'abc@naver.com',
-		nickname: '안녕하세요',
-		password: '12345',
-		pwdcheck: '12345',
-		phoneNum: '1234',
-	};
-
 	return (
 		<Container>
 			<MenuBar>
@@ -32,7 +24,7 @@ function userInfoEdit() {
 				<TabMenu>
 					<Tab currTab={currTab} tabs={tabs} />
 				</TabMenu>
-				<MyPageUserForm myInfo={myInfo} pageType={TabTypes.EDIT_MYINFO} />
+				<MyPageUserForm pageType={TabTypes.EDIT_MYINFO} />
 			</Main>
 		</Container>
 	);

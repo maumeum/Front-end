@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	Container,
 	Main,
@@ -14,14 +14,6 @@ function myPage() {
 	const [currTab] = useState<TabTypes>(TabTypes.MYPAGE);
 	const tabs = [TabTypes.MYPAGE];
 
-	const myInfo = {
-		email: 'abc@naver.com',
-		nickname: '안녕하세요',
-		password: '12345',
-		pwdcheck: '12345',
-		phoneNum: '1234',
-	};
-
 	return (
 		<Container>
 			<MenuBar>
@@ -31,7 +23,7 @@ function myPage() {
 				<TabMenu>
 					<Tab currTab={currTab} tabs={tabs} />
 				</TabMenu>
-				<MyPageUserForm myInfo={myInfo} pageType={TabTypes.MYPAGE} />
+				<MyPageUserForm pageType={TabTypes.MYPAGE} />
 			</Main>
 		</Container>
 	);
