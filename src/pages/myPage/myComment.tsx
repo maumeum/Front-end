@@ -13,7 +13,7 @@ import { TabTypes } from '@src/utils/EnumTypes';
 import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 
-const comment = [
+const comment1 = [
 	{
 		title: '이건 완료된 봉사에서만 보이는 글 제목입니다. 제발 성공해라',
 		content:
@@ -53,11 +53,29 @@ function myComment() {
 		fetchData();
 	}, []);
 
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await get('/api/volunteerComments/users', {
+					headers: {
+						Authorization: `Bearer ${getToken()}`,
+					},
+				});
+				console.log(response);
+				setComment(response as CommunityProps[]);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		fetchData();
+	}, []);
+
 	const tabs = [TabTypes.WRITTEN_POSTS, TabTypes.COMMENTED_POSTS];
 	const [currTab, setCurrTab] = useState<TabTypes>(TabTypes.WRITTEN_POSTS);
 	const [post, setPost] = useState<CommunityProps[]>([]);
 	const [data, setData] = useState<CommunityProps[]>([]);
-	// const [comment, setComment] = useState<CommunityProps[]>([]);
+	const [comment, setComment] = useState<CommunityProps[]>([]);
 
 	useEffect(() => {
 		currTab === TabTypes.WRITTEN_POSTS ? setData(post) : setData(comment);
