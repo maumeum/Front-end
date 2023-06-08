@@ -6,13 +6,7 @@ import { CommunityListType, ReviewListType } from '@src/types/CardType';
 import DataType from '@src/types/DataType';
 import Menu from '@components/Menu/Menu.tsx';
 import PostList from '@components/PostList/PostList';
-import {
-	MenuBar,
-	TopBarContainer,
-	ClickTopBar,
-	TopBar,
-	PostContainer,
-} from './style';
+import { MenuBar, TopBarContainer, ClickTopBar, PostContainer } from './style';
 
 const Report = () => {
 	const [communityList, setCommunityList] = useState<CommunityListType[]>([]);
