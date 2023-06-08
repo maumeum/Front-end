@@ -7,23 +7,21 @@ interface StyledButtonProps extends ButtonProps {
 }
 
 export const StyledButton: React.FC<StyledButtonProps> = ({
-	primary = false,
-	size = 'medium',
+	label = '버튼',
+	primary = true,
+	size = 'small',
+	round = false,
 	backgroundColor,
-	label,
-	isFull,
-	...props
 }) => {
-	const mode = primary ? 'button--primary' : 'button--secondary';
+	const mode = primary ? 'button--primary' : 'button--outline';
 	return (
 		<Button
 			type='button'
 			className={['button', `button--${size}`, mode].join(' ')}
-			primary={primary}
 			style={{ backgroundColor }}
+			primary={primary}
 			size={size}
-			isFull={isFull}
-			{...props}>
+			round={round}>
 			{label}
 		</Button>
 	);

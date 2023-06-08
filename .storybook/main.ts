@@ -16,3 +16,7 @@ const config: StorybookConfig = {
 	},
 };
 export default config;
+
+module.exports = {
+	addons: ['storybook-addon-react-router-v6'],
+};
