@@ -12,6 +12,7 @@ import Tab from '@components/Tab/Tab.tsx';
 import Card from '@components/Card/Card.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/utils/EnumTypes';
+import DataType from '@src/types/DataType';
 
 function myVolunHistory() {
 	const [currTab, setCurrTab] = useState<TabTypes>(TabTypes.VOLUNTEER_APPLIED);
