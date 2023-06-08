@@ -8,12 +8,14 @@ const QuestionWrite = () => {
 	const [postData, setPostData] = useState({
 		title: '',
 		content: '',
+		postType: 'qna',
 	});
 
 	const onSavePost = (inputTitle: string, content: string) => {
 		setPostData({
 			title: inputTitle,
 			content: content,
+			postType: 'qna',
 		});
 		console.log('Saved question Post:', inputTitle, content);
 
@@ -25,6 +27,7 @@ const QuestionWrite = () => {
 			{
 				title: inputTitle,
 				content: parse(content as string),
+				postType: 'qna',
 			},
 			{
 				headers: {
@@ -38,6 +41,7 @@ const QuestionWrite = () => {
 		setPostData({
 			title: '',
 			content: '',
+			postType: 'qna',
 		});
 		console.log('Cancelled Post');
 	};
