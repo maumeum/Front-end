@@ -4,10 +4,10 @@ import ReactModal from 'react-modal';
 ReactModal.setAppElement('#root');
 import Header from '@components/Header/Header';
 import Footer from '@components/Footer/Footer';
-import Main from '@pages/mainPage/main';
-import Search from '@pages/searchPage/search';
-import Login from '@pages/userPage/login';
-import SignUp from '@pages/userPage/signUp';
+import Main from '@pages/mainPage/Main';
+import Search from '@pages/searchPage/Search';
+import Login from '@pages/userPage/Login';
+import SignUp from '@pages/userPage/SignUp';
 import MyVolunHistory from '@pages/myPage/volunHistory';
 import MyVolunSuggest from '@pages/myPage/volunSuggest';
 import MyComment from '@pages/myPage/myComment';
@@ -24,6 +24,7 @@ import FindFriendDetail from '@src/pages/community/FindFriendDetail';
 import Withdrawal from '@pages/myPage/withdrawal';
 import ReviewDetail from '@src/pages/reviewPage/ReviewDetail';
 import TeamAuth from '@pages/admin/TeamAuth';
+import Report from '@pages/admin/Report';
 
 function App() {
 	return (
@@ -53,6 +54,7 @@ function App() {
 				<Route path='/review/:postId' element={<ReviewDetail />} />
 				<Route path='/mypage/withdrawal' element={<Withdrawal />} />
 				<Route path='/admin/team_auth' element={<TeamAuth />} />
+				<Route path='/admin/report' element={<Report />} />
 			</Routes>
 			<Footer />
 		</Router>
