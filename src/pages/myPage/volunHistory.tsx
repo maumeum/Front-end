@@ -12,7 +12,43 @@ import Tab from '@components/Tab/Tab.tsx';
 import Card from '@components/Card/Card.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/utils/EnumTypes';
+import { get } from '@src/api/Api';
+import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType';
+
+type VolunProps = {
+	createdAt: string;
+	_id: string;
+	isParticipate: boolean;
+	volunteer_id: {
+		startDate: string;
+		endDate: string;
+		_id: string;
+		title: string;
+		centName: string;
+		statusName: string;
+		deadline: string;
+		images: string[];
+	};
+};
+
+const completedData = [
+	{
+		createdAt: '2021-01-01',
+		_id: '1',
+		isParticipate: false,
+		volunteer_id: {
+			startDate: '2021-01-01',
+			endDate: '2021-01-02',
+			_id: '6478ac1fb4594284808acbea',
+			title: '이건 완료된 봉사에서만 보이는 글 제목입니다. 제발 성공해라',
+			centName: '배가고파요배가고파',
+			statusName: '모집중',
+			deadline: '내일까지모집',
+			images: [car],
+		},
+	},
+];
 
 function myVolunHistory() {
 	const [currTab, setCurrTab] = useState<TabTypes>(TabTypes.VOLUNTEER_APPLIED);
@@ -20,8 +56,35 @@ function myVolunHistory() {
 	const handleClickTab = (tab: TabTypes) => {
 		setCurrTab(tab);
 	};
+	const [appliedData, setAppliedData] = useState<VolunProps[]>([]);
+	// const [completedData, setCompletedData] = useState<VolunProps[]>([]);
+	const [data, setData] = useState<VolunProps[]>([]);
 
-	const appliedData = [
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await get('/api/applications', {
+					headers: {
+						Authorization: `Bearer ${getToken()}`,
+					},
+				});
+				console.log(response);
+				setAppliedData(response as VolunProps[]);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		fetchData();
+	}, []);
+
+	useEffect(() => {
+		currTab === TabTypes.VOLUNTEER_APPLIED
+			? setData(appliedData)
+			: setData(completedData);
+	}, [currTab, appliedData, completedData]);
+
+	const appliedData1 = [
 		{
 			id: 1,
 			title:
@@ -108,20 +171,6 @@ function myVolunHistory() {
 		},
 	];
 
-	const completedData = [
-		{
-			id: 1,
-			title: '이건 완료된 봉사에서만 보이는 글 제목입니다. 제발 성공해라',
-			thumbnail: car,
-			nickname: '배가고파요배가고파',
-			profile: car,
-			recruitStatus: '모집중',
-			startDate: '2021-01-01',
-			endDate: '2021-01-02',
-		},
-	];
-
-	const data = currTab === '신청한 봉사' ? appliedData : completedData;
 	return (
 		<>
 			<Container>
@@ -134,12 +183,8 @@ function myVolunHistory() {
 						<Tab currTab={currTab} onClick={handleClickTab} tabs={tabs} />
 					</TabMenu>
 					<CardBox>
-						{data.map((data, idx) => (
-							<Card
-								key={`historycard-${data.id}-${idx}`}
-								currTab={currTab}
-								data={data}
-							/>
+						{data.map((data) => (
+							<Card key={data.volunteer_id._id} currTab={currTab} data={data} />
 						))}
 					</CardBox>
 				</Main>

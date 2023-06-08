@@ -39,30 +39,60 @@ const props = [
 		endDate: '2021-01-02',
 	},
 ];
+interface ResponseData {
+	_id: string;
+	title: string;
+	centName: string;
+	createdAt: string;
+	statusName: string;
+	deadline: string;
+	startDate: string;
+	endDate: string;
+	image: string;
+	register_user_id: {
+		nickname: string;
+		image: string;
+		introduction: string;
+	};
+	updatedAt: string;
+}
 
 function volunSuggest() {
-	// useEffect(() => {
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await get('/api/volunteers/registeration', {
+					headers: {
+						Authorization: `Bearer ${getToken()}`,
+					},
+				});
+				setDataList(response as ResponseData[]);
+			} catch (error) {
+				console.log(error);
+			}
+		};
 
-	// 	console.log(getToken());
-	// 	const fetchData = async () => {
-	// 		try {
-
-	// 			const response = await get('/api/reviews/users', {
-	// 				headers: {
-	// 					Authorization: `Bearer ${getToken()}`,
-	// 				},
-	// 			});
-	// 			console.log(response);
-
-	// 		} catch (error) {
-	// 			console.log(error);
-	// 		}
-	// 	};
-
-	// 	fetchData();
-	// }, []);
+		fetchData();
+	}, []);
+	const [dataList, setDataList] = useState<ResponseData[]>([]);
 	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
 	const [currTab] = useState<TabTypes>(TabTypes.VOLUNTEER_SUGGEST);
+	console.log(dataList);
+	const transformData = dataList.map((data) => {
+		return {
+			createdAt: data.createdAt,
+			volunteer_id: {
+				startDate: data.startDate,
+				endDate: data.endDate,
+				_id: data._id,
+				title: data.title,
+				centName: data.centName,
+				statusName: data.statusName,
+				deadline: data.deadline,
+				images: [car],
+			},
+		};
+	});
 
 	return (
 		<>
@@ -76,12 +106,8 @@ function volunSuggest() {
 						<Tab currTab={currTab} tabs={tabs} />
 					</TabMenu>
 					<CardBox>
-						{props.map((data, idx) => (
-							<Card
-								key={`suggestcard-${data.id}-${idx}`}
-								data={data}
-								currTab={currTab}
-							/>
+						{transformData.map((data, idx) => (
+							<Card key={data.volunteer_id._id} data={data} currTab={currTab} />
 						))}
 					</CardBox>
 				</Main>
