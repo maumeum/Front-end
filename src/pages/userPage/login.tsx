@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 
 import { post } from '@api/Api';
 import { setToken } from '@api/Token';
+import DataType from '@src/types/DataType';
 import {
 	LoginSection,
 	LogoContainer,
@@ -47,14 +48,14 @@ const Login = () => {
 		setCheckData(true);
 
 		try {
-			const response: { token: string } = await post('/api/login', {
+			const response = await post<DataType>('/api/login', {
 				email,
 				password,
 			});
 
 			// 토큰이 있다면 localStorage에 토큰 저장
-			if (response.token) {
-				setToken(response.token);
+			if (response.data.token) {
+				setToken(response.data.token);
 			}
 
 			setCheckData(true);

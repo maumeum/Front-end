@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 import { post } from '@api/Api';
+import DataType from '@src/types/DataType';
 import LargeButton from '@components/Buttons/LargeButton';
 import { SignUpSection, SignUpForm } from './style';
 
@@ -64,7 +65,7 @@ const SignUp = () => {
 			validPhoneNum(phoneNum)
 		) {
 			// 유저 정보 저장
-			await post('/api/signup', {
+			await post<DataType>('/api/signup', {
 				email,
 				password,
 				nickname,
