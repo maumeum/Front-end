@@ -1,12 +1,7 @@
 import TeamCard from '@components/Card/TeamCard';
 import SearchBar from '@components/SearchBar/SearchBar';
 import Menu from '@components/Menu/Menu.tsx';
-import {
-	MenuBar,
-	TopBarContainer,
-	ClickTopBar,
-	TeamCardContainer,
-} from './style';
+import { MenuBar, TopBarContainer, TopBar, TeamCardContainer } from './style';
 import teamData from '@assets/datas/teamData';
 
 const TeamAuth = () => {
@@ -19,7 +14,7 @@ const TeamAuth = () => {
 				<Menu title='관리자' />
 			</MenuBar>
 			<TopBarContainer>
-				<ClickTopBar>단체 인증 요청</ClickTopBar>
+				<TopBar>단체 인증 요청</TopBar>
 			</TopBarContainer>
 			<SearchBar onSearch={handleClick} />
 			<TeamCardContainer>
