@@ -3,8 +3,10 @@ import WritePage from '@components/WritePage/WritePage';
 import { post } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import parse from 'html-react-parser';
+import { useNavigate } from 'react-router-dom';
 
 const FindFriendWrite = () => {
+	const navigate = useNavigate();
 	const [postData, setPostData] = useState({
 		title: '',
 		content: '',
@@ -35,6 +37,7 @@ const FindFriendWrite = () => {
 				},
 			},
 		);
+		navigate('/community/findfriend');
 	};
 
 	const onCancelPost = () => {
