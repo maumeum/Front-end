@@ -8,6 +8,7 @@ import {
 import Tab from '@components/Tab/Tab.tsx';
 import MyPost from '@components/MyPost/MyPost.tsx';
 import Menu from '@components/Menu/Menu.tsx';
+import DataType from '@src/types/DataType';
 import { TabTypes } from '@src/utils/EnumTypes';
 import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
@@ -37,12 +38,13 @@ function myComment() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get('/api/community/user', {
+				const response = await get<DataType>('/api/community/user', {
 					headers: {
 						Authorization: `Bearer ${getToken()}`,
 					},
 				});
-				setPost(response as CommunityProps[]);
+				console.log(response);
+				setPost(response.data as CommunityProps[]);
 			} catch (error) {
 				console.log(error);
 			}
@@ -55,7 +57,8 @@ function myComment() {
 	const [currTab, setCurrTab] = useState<TabTypes>(TabTypes.WRITTEN_POSTS);
 	const [post, setPost] = useState<CommunityProps[]>([]);
 	const [data, setData] = useState<CommunityProps[]>([]);
-	// const [comment,setComment] = useState<CommunityProps[]>([]);
+	// const [comment, setComment] = useState<CommunityProps[]>([]);
+
 	useEffect(() => {
 		currTab === TabTypes.WRITTEN_POSTS ? setData(post) : setData(comment);
 	}, [currTab, post, comment]);
@@ -64,6 +67,9 @@ function myComment() {
 		setCurrTab(tab);
 	};
 
+	const removePost = (postId: string) => {
+		setData(data.filter((post) => post._id !== postId));
+	};
 	return (
 		<>
 			<Container>
@@ -75,8 +81,15 @@ function myComment() {
 					<TabMenu>
 						<Tab currTab={currTab} onClick={handleClickTab} tabs={tabs} />
 					</TabMenu>
-					{data.map((data, index) => {
-						return <MyPost key={data._id} currTab={currTab} data={data} />;
+					{data.map((data) => {
+						return (
+							<MyPost
+								key={data._id}
+								currTab={currTab}
+								data={data}
+								onRemovePost={removePost}
+							/>
+						);
 					})}
 				</Main>
 			</Container>

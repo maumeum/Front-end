@@ -91,6 +91,7 @@ function ProfileImg() {
 							id='fileInput'
 							type='file'
 							accept='image/*'
+							name='image'
 							onChange={handleImageChange}
 						/>
 					</InputConatiner>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
 	PostListContainer,
 	PostBox,
@@ -8,11 +9,11 @@ import {
 	ButtonContainer,
 } from './myPost';
 
-// import Modal from '@components/Modal/Modal.tsx';
 import TruncatedDescription from '@components/MyPost/TruncatedDescription';
 import { SmallButton } from '@components/Buttons/SmallButton';
 import { del } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
+import { TabTypes } from '@src/utils/EnumTypes';
 import Swal from 'sweetalert2';
 
 type PostProps = {
@@ -23,6 +24,7 @@ type PostProps = {
 		_id: string;
 		postType?: string;
 	};
+	onRemovePost: (id: string) => void;
 	currTab?: string;
 };
 
@@ -35,38 +37,67 @@ function truncateDate(createdAt: string) {
 	return createdAt.split('T')[0];
 }
 
-function MyPost({ currTab, data }: PostProps) {
+function MyPost({ currTab, data, onRemovePost }: PostProps) {
 	const { title, content, createdAt, postType, _id } = data;
 	const [isShowMore, setIsShowMore] = useState<boolean>(false);
 	const truncatedTitle = truncateTitle(title);
+	const navigate = useNavigate();
 
 	const handleButtonClick = () => {
-		if (currTab === '내가 쓴 리뷰') {
-			console.log('내가 쓴 리뷰임');
-		} else if (currTab === '내가 쓴 게시글') {
-			console.log('내가 쓴글임');
+		if (currTab === TabTypes.WRITTEN_REVIEW) {
+			navigate(`/review/${_id}`);
+		} else if (currTab === TabTypes.WRITTEN_POSTS) {
+			navigate(`/community/${_id}`);
 		}
 	};
 
 	const handleDeleteClick = async () => {
 		console.log(_id);
-		try {
-			await del(`/api/review/users/${_id}`, {
-				headers: {
-					Authorization: `Bearer ${getToken()}`,
-				},
-			});
-			Swal.fire({
-				title: '리뷰가 삭제되었습니다',
-				icon: 'success',
-				confirmButtonColor: 'var(--button--color)',
-			});
-		} catch (error) {
-			Swal.fire({
-				title: '리뷰가 삭제에 실패했습니다.',
-				icon: 'success',
-				confirmButtonColor: 'var(--button--color)',
-			});
+
+		if (currTab === TabTypes.WRITTEN_REVIEW) {
+			console.log(currTab);
+			try {
+				await del(`/api/review/users/${_id}`, {
+					headers: {
+						Authorization: `Bearer ${getToken()}`,
+					},
+				});
+				Swal.fire({
+					title: '리뷰가 삭제되었습니다',
+					icon: 'success',
+					confirmButtonColor: 'var(--button--color)',
+				});
+				onRemovePost(data._id);
+			} catch (error) {
+				Swal.fire({
+					title: '리뷰가 삭제에 실패했습니다.',
+					icon: 'success',
+					confirmButtonColor: 'var(--button--color)',
+				});
+			}
+		} else if (currTab === TabTypes.WRITTEN_POSTS) {
+			console.log(currTab);
+			try {
+				const response = await del(`/api/community/${_id}`, {
+					headers: {
+						Authorization: `Bearer ${getToken()}`,
+					},
+				});
+				console.log(response);
+				onRemovePost(data._id);
+				Swal.fire({
+					title: '게시글 삭제되었습니다',
+					icon: 'success',
+					confirmButtonColor: 'var(--button--color)',
+				});
+			} catch (error) {
+				console.log(error);
+				Swal.fire({
+					title: '게시글 삭제에 실패했습니다.',
+					icon: 'error',
+					confirmButtonColor: 'var(--button--color)',
+				});
+			}
 		}
 	};
 
@@ -87,7 +118,8 @@ function MyPost({ currTab, data }: PostProps) {
 					<PostInfo>
 						<p>{truncateDate(createdAt)}</p>
 						<p>{postType ? postType : '봉사후기'}</p>
-						{currTab === '내가 쓴 게시글' || currTab === '내가 쓴 리뷰' ? (
+						{currTab === TabTypes.WRITTEN_POSTS ||
+						currTab === TabTypes.WRITTEN_REVIEW ? (
 							<ButtonContainer>
 								<SmallButton onClick={handleButtonClick}>수정하기</SmallButton>
 								<SmallButton onClick={handleDeleteClick}>삭제하기</SmallButton>

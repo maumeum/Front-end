@@ -12,6 +12,7 @@ import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/utils/EnumTypes';
 import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
+import DataType from '@src/types/DataType';
 
 type ReviewProps = {
 	title: string;
@@ -24,12 +25,12 @@ function myReview() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get('/api/reviews/users', {
+				const response = await get<DataType>('/api/reviews/users', {
 					headers: {
 						Authorization: `Bearer ${getToken()}`,
 					},
 				});
-				setData(response as ReviewProps[]);
+				setData(response.data as ReviewProps[]);
 			} catch (error) {
 				console.log(error);
 			}
@@ -41,6 +42,10 @@ function myReview() {
 	const tabs = [TabTypes.WRITTEN_REVIEW];
 	const [currTab] = useState<TabTypes>(TabTypes.WRITTEN_REVIEW);
 	const [data, setData] = useState<ReviewProps[]>([]);
+
+	const removePost = (postId: string) => {
+		setData(data.filter((post) => post._id !== postId));
+	};
 
 	return (
 		<>
@@ -54,7 +59,14 @@ function myReview() {
 						<Tab currTab={currTab} tabs={tabs} />
 					</TabMenu>
 					{data.map((data) => {
-						return <MyPost key={data._id} data={data} currTab={currTab} />;
+						return (
+							<MyPost
+								key={data._id}
+								data={data}
+								currTab={currTab}
+								onRemovePost={removePost}
+							/>
+						);
 					})}
 				</Main>
 			</Container>

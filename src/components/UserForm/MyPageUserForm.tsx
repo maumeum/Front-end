@@ -25,6 +25,7 @@ import { useNavigate } from 'react-router-dom';
 import { TabTypes } from '@src/utils/EnumTypes';
 import { get, patch } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
+import DataType from '@src/types/DataType';
 
 type MyPageUserFormProps = {
 	pageType: string; //readOnly설정을 위한 props 값
@@ -42,12 +43,12 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get('/api/users/info', {
+				const response = await get<DataType>('/api/users/info', {
 					headers: {
 						Authorization: `Bearer ${getToken()}`,
 					},
 				});
-				const { email, nickname, phone } = response as UserInfo;
+				const { email, nickname, phone } = response.data as UserInfo;
 				setEmail(email);
 				setNickname(nickname);
 				setPhone(phone);
