@@ -14,7 +14,7 @@ import {
 } from './card.ts';
 import { TabTypes } from '../../utils/EnumTypes.ts';
 
-type Props = {
+export type Props = {
 	data: {
 		title: string;
 		thumbnail: string;

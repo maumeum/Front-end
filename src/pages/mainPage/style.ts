@@ -28,7 +28,7 @@ export const IntroducePage = styled.div`
 	margin: 4rem 0 4rem 4.5rem;
 	width: 36rem;
 	height: 54rem;
-	background-color: #ffffff;
+	background-color: ${({ theme }) => theme.colors.background};
 	border: none;
 	border-radius: 12px;
 	box-sizing: border-box;

@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
+import DataType from '@src/types/DataType.ts';
 
 type PostData = {
 	_id: string;
@@ -26,7 +27,7 @@ const reviewPage = () => {
 	const fetchPostList = async () => {
 		try {
 			const token = getToken();
-			const response = await get<PostData[]>('/api/review', {
+			const response = await get<DataType>('/api/review', {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
@@ -53,20 +54,21 @@ const reviewPage = () => {
 				<NumberWriteContainer>
 					<TotalPostNumber totalPosts={postListData.length} />
 				</NumberWriteContainer>
-				{postListData.map((postData) => (
-					<PostList
-						key={postData._id}
-						postTitle={
-							postData.title.slice(0, 50) +
-							(postData.title.length > 50 ? '...' : '')
-						}
-						postContents={
-							postData.content.slice(0, 50) +
-							(postData.content.length > 50 ? '...' : '')
-						}
-						onClick={() => navigateDetail(postData._id)}
-					/>
-				))}
+				{postListData &&
+					postListData.map((postData) => (
+						<PostList
+							key={postData._id}
+							postTitle={
+								postData.title.slice(0, 50) +
+								(postData.title.length > 50 ? '...' : '')
+							}
+							postContents={
+								postData.content.slice(0, 50) +
+								(postData.content.length > 50 ? '...' : '')
+							}
+							onClick={() => navigateDetail(postData._id)}
+						/>
+					))}
 			</ReviewPageContainer>
 		</>
 	);
