@@ -27,9 +27,12 @@ const Question = () => {
 	const fetchPostList = async () => {
 		try {
 			const token = getToken();
-			const response = await get<PostData[]>('/api/community', {
+			const response = await get<PostData[]>('/api/community/category/qna', {
 				headers: {
 					Authorization: `Bearer ${token}`,
+				},
+				params: {
+					postType: 'qna',
 				},
 			});
 			setPostListData(response);
@@ -45,10 +48,10 @@ const Question = () => {
 	};
 
 	const navigateWrite = () => {
-		navigate('/community/findfriend/write');
+		navigate('/community/question/write');
 	};
 	const navigateDetail = (postId: string) => {
-		navigate(`/community/findfriend/${postId}`);
+		navigate(`/community/question/${postId}`);
 	};
 
 	return (

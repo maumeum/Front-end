@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
 import {
 	DetailContainer,
 	Header,
@@ -58,6 +60,9 @@ const FindFriendDetail = () => {
 	const loggedInUser = '로그인한 사용자';
 	const isAuthor = loggedInUser === user_id;
 	const hasPostImage = !!images;
+	const formattedDate = dayjs(createdAt)
+		.locale('ko')
+		.format('YYYY년 MM월 DD일 HH:mm:ss');
 
 	return (
 		<>
@@ -67,7 +72,7 @@ const FindFriendDetail = () => {
 					<SubContainer>
 						<InfoBox>
 							<UserName>{user}</UserName>
-							<Date>작성일 : {createdAt}</Date>
+							<Date>작성일 : {formattedDate}</Date>
 						</InfoBox>
 						{isAuthor && <Btn onClick={handleEdit}>수정하기</Btn>}
 					</SubContainer>

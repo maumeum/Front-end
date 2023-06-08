@@ -27,11 +27,17 @@ const FindFriend = () => {
 	const fetchPostList = async () => {
 		try {
 			const token = getToken();
-			const response = await get<PostData[]>('/api/community', {
-				headers: {
-					Authorization: `Bearer ${token}`,
+			const response = await get<PostData[]>(
+				'/api/community/category/findfriend',
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+					params: {
+						postType: 'findfriend',
+					},
 				},
-			});
+			);
 			setPostListData(response);
 			console.log(response);
 		} catch (error) {
@@ -57,7 +63,7 @@ const FindFriend = () => {
 				<Menu title={'커뮤니티'} />
 			</MenuBar>
 			<PageContainer>
-				<TopBar title='동행 구합니다' text='같이 봉사할 친구를 모집해요' />
+				<TopBar title='동행 구해요' text='같이 봉사할 친구를 모집해요' />
 				<SearchBar onSearch={handleSearch} />
 				<NumberWriteContainer>
 					<TotalPostNumber totalPosts={postListData.length} />
