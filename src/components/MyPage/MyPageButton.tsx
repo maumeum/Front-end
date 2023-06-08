@@ -6,7 +6,7 @@ const MyPageButton = () => {
 		<>
 			{getToken() !== null ? (
 				<ButtonContainer to='/mypage'>
-					<ButtonWord>마이페이지</ButtonWord>
+					<ButtonWord>MY</ButtonWord>
 				</ButtonContainer>
 			) : (
 				''
