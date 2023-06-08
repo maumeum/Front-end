@@ -18,11 +18,10 @@ import {
 	Image,
 	Contentdiv,
 	Content,
-} from '@src/pages/community/style.ts';
+} from './style.ts';
 import CommentSection from '@src/components/Comment/Comment.tsx';
-import DataType from '@src/types/DataType';
 
-const ReviewDetail = () => {
+const FindFriendDetail = () => {
 	const navigate = useNavigate();
 	const { postId } = useParams();
 	const [post, setPost] = useState<any>([]);
@@ -35,21 +34,20 @@ const ReviewDetail = () => {
 	const fetchPost = async () => {
 		try {
 			const token = getToken();
-			const response = await get<DataType>(`/api/review/${postId}`, {
+			const response = await get(`/api/community/${postId}`, {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
 			});
 			setPost(response!.data.post.post);
 			setDataUser(response!.data.post);
-			console.log(response);
 		} catch (error) {
 			console.error('Error fetching post:', error);
 		}
 	};
 
 	const handleEdit = () => {
-		navigate(`/community/findfriend/edit/${postId}`);
+		navigate(`/community/question/edit/${postId}`);
 	};
 
 	if (!post) {
@@ -58,14 +56,12 @@ const ReviewDetail = () => {
 
 	const { title, user_id, createdAt, images, content } = post;
 	const { user } = datauser;
-	const loggedInUser = '로그인한 사용자';
+	const loggedInUser = user_id;
 	const isAuthor = loggedInUser === user_id;
 	const hasPostImage = !!images;
-
 	const formattedDate = dayjs(createdAt)
 		.locale('ko')
 		.format('YYYY년 MM월 DD일 HH:mm:ss');
-
 	return (
 		<>
 			<DetailContainer>
@@ -73,7 +69,7 @@ const ReviewDetail = () => {
 					<Title>{title}</Title>
 					<SubContainer>
 						<InfoBox>
-							<UserName>{user}</UserName>
+							<UserName>{}</UserName>
 							<Date>작성일 : {formattedDate}</Date>
 						</InfoBox>
 						{isAuthor && <Btn onClick={handleEdit}>수정하기</Btn>}
@@ -92,4 +88,4 @@ const ReviewDetail = () => {
 	);
 };
 
-export default ReviewDetail;
+export default FindFriendDetail;

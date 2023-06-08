@@ -8,14 +8,14 @@ const FindFriendWrite = () => {
 	const [postData, setPostData] = useState({
 		title: '',
 		content: '',
-		postType: 'withfriend',
+		postType: 'findfriend',
 	});
 
 	const onSavePost = (inputTitle: string, content: string) => {
 		setPostData({
 			title: inputTitle,
 			content: content,
-			postType: 'withfriend',
+			postType: 'findfriend',
 		});
 		console.log('Saved Post:', inputTitle, content);
 
@@ -27,7 +27,7 @@ const FindFriendWrite = () => {
 			{
 				title: inputTitle,
 				content: parse(content as string),
-				postType: 'withfriend',
+				postType: 'findfriend',
 			},
 			{
 				headers: {
@@ -41,7 +41,7 @@ const FindFriendWrite = () => {
 		setPostData({
 			title: '',
 			content: '',
-			postType: 'withfriend',
+			postType: 'findfriend',
 		});
 		console.log('Cancelled Post');
 	};

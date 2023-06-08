@@ -6,83 +6,44 @@ import {
 	NumberWriteContainer,
 	ReviewPageContainer,
 } from '../community/style.ts';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { get } from '@src/api/Api';
+import { getToken } from '@src/api/Token';
 
+type PostData = {
+	_id: string;
+	title: string;
+	content: string;
+};
 const reviewPage = () => {
+	const navigate = useNavigate();
+	const [postListData, setPostListData] = useState<PostData[]>([]);
+
+	useEffect(() => {
+		fetchPostList();
+	}, []);
+	const fetchPostList = async () => {
+		try {
+			const token = getToken();
+			const response = await get<PostData[]>('/api/review', {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
+			setPostListData(response.data);
+			console.log(response);
+		} catch (error) {
+			console.error('Error fetching post list:', error);
+		}
+	};
+	const navigateDetail = (postId: string) => {
+		navigate(`/review/${postId}`);
+	};
 	const handleSearch = (query: string) => {
 		//검색기능 구현 로직 작성예정
 		console.log('검색어:', query);
 	};
-
-	const postListData = [
-		{
-			id: '01',
-			postTitle: '5/20일 다녀온 희망보육원 봉사 후기',
-			postContents:
-				'봉사하기에 있는 적십자사 주최 캠페인을 가고싶은데 인원이 부족하네요 같이 갈사람 계신가요?',
-		},
-		{
-			id: '02',
-			postTitle: '사랑의 밥차 봉사 후기 공유드립니다^^',
-			postContents:
-				'산악 자전거를 좋아하고 경험이 있는 분들과 함께 타러 갈 예정입니다. 같이 가실 분 연락주세요.',
-		},
-		{
-			id: '03',
-			postTitle:
-				'너무너무 좋았던 봉사 공유드려요 아기 천사들 많이 만나고 왔어요!',
-			postContents:
-				'봉사하기에 있는 적십자사 주최 캠페인을 가고싶은데 인원이 부족하네요 같이 갈사람 계신가요?',
-		},
-		{
-			id: '03',
-			postTitle:
-				'너무너무 좋았던 봉사 공유드려요 아기 천사들 많이 만나고 왔어요!',
-			postContents:
-				'봉사하기에 있는 적십자사 주최 캠페인을 가고싶은데 인원이 부족하네요 같이 갈사람 계신가요?',
-		},
-		{
-			id: '03',
-			postTitle:
-				'너무너무 좋았던 봉사 공유드려요 아기 천사들 많이 만나고 왔어요!',
-			postContents:
-				'봉사하기에 있는 적십자사 주최 캠페인을 가고싶은데 인원이 부족하네요 같이 갈사람 계신가요?',
-		},
-		{
-			id: '03',
-			postTitle:
-				'너무너무 좋았던 봉사 공유드려요 아기 천사들 많이 만나고 왔어요!',
-			postContents:
-				'봉사하기에 있는 적십자사 주최 캠페인을 가고싶은데 인원이 부족하네요 같이 갈사람 계신가요?',
-		},
-		{
-			id: '03',
-			postTitle:
-				'너무너무 좋았던 봉사 공유드려요 아기 천사들 많이 만나고 왔어요!',
-			postContents:
-				'봉사하기에 있는 적십자사 주최 캠페인을 가고싶은데 인원이 부족하네요 같이 갈사람 계신가요?',
-		},
-		{
-			id: '03',
-			postTitle:
-				'너무너무 좋았던 봉사 공유드려요 아기 천사들 많이 만나고 왔어요!',
-			postContents:
-				'봉사하기에 있는 적십자사 주최 캠페인을 가고싶은데 인원이 부족하네요 같이 갈사람 계신가요?',
-		},
-		{
-			id: '03',
-			postTitle:
-				'너무너무 좋았던 봉사 공유드려요 아기 천사들 많이 만나고 왔어요!',
-			postContents:
-				'봉사하기에 있는 적십자사 주최 캠페인을 가고싶은데 인원이 부족하네요 같이 갈사람 계신가요?',
-		},
-		{
-			id: '03',
-			postTitle:
-				'너무너무 좋았던 봉사 공유드려요 아기 천사들 많이 만나고 왔어요!',
-			postContents:
-				'봉사하기에 있는 적십자사 주최 캠페인을 가고싶은데 인원이 부족하네요 같이 갈사람 계신가요?',
-		},
-	];
 
 	return (
 		<>
@@ -94,15 +55,16 @@ const reviewPage = () => {
 				</NumberWriteContainer>
 				{postListData.map((postData) => (
 					<PostList
-						key={postData.id}
+						key={postData._id}
 						postTitle={
-							postData.postTitle.slice(0, 50) +
-							(postData.postTitle.length > 50 ? '...' : '')
+							postData.title.slice(0, 50) +
+							(postData.title.length > 50 ? '...' : '')
 						}
 						postContents={
-							postData.postContents.slice(0, 50) +
-							(postData.postContents.length > 50 ? '...' : '')
+							postData.content.slice(0, 50) +
+							(postData.content.length > 50 ? '...' : '')
 						}
+						onClick={() => navigateDetail(postData._id)}
 					/>
 				))}
 			</ReviewPageContainer>
