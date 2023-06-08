@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ReactModal from 'react-modal';
 
@@ -13,16 +12,17 @@ import MyVolunHistory from '@pages/myPage/volunHistory';
 import MyVolunSuggest from '@pages/myPage/volunSuggest';
 import MyComment from '@pages/myPage/myComment';
 import MyReview from '@pages/myPage/myReview';
-import FindFriend from '@pages/community/findFriend';
-import Question from '@pages/community/question';
-import FindFriendWrite from '@pages/community/findFriendWrite';
-import QuestionWrite from '@pages/community/questionWrite';
+import FindFriend from '@src/pages/community/FindFriend';
+import Question from '@src/pages/community/Question';
+import FindFriendWrite from '@src/pages/community/FindFriendWrite';
+import QuestionWrite from '@src/pages/community/QuestionWrite';
 import Review from '@pages/reviewPage/reviewPage';
 import MyPage from '@pages/myPage/myPage';
 import UserInfoEdit from '@pages/myPage/userInfoEdit';
 import MyProfile from './pages/myPage/myProfile';
-import FindFriendDetail from '@pages/community/findFriendDetail';
+import FindFriendDetail from '@src/pages/community/FindFriendDetail';
 import Withdrawal from '@pages/myPage/withdrawal';
+import ReviewDetail from '@src/pages/reviewPage/ReviewDetail';
 
 function App() {
 	return (
@@ -52,6 +52,7 @@ function App() {
 					path='/community/findfriend/:postId'
 					element={<FindFriendDetail />}
 				/>
+				<Route path='/review/:postId' element={<ReviewDetail />} />
 				<Route path='/mypage/withdrawal' element={<Withdrawal />} />
 			</Routes>
 			<Footer />

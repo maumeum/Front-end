@@ -33,6 +33,55 @@ const reviewPage = () => {
 			postContents:
 				'봉사하기에 있는 적십자사 주최 캠페인을 가고싶은데 인원이 부족하네요 같이 갈사람 계신가요?',
 		},
+		{
+			id: '03',
+			postTitle:
+				'너무너무 좋았던 봉사 공유드려요 아기 천사들 많이 만나고 왔어요!',
+			postContents:
+				'봉사하기에 있는 적십자사 주최 캠페인을 가고싶은데 인원이 부족하네요 같이 갈사람 계신가요?',
+		},
+		{
+			id: '03',
+			postTitle:
+				'너무너무 좋았던 봉사 공유드려요 아기 천사들 많이 만나고 왔어요!',
+			postContents:
+				'봉사하기에 있는 적십자사 주최 캠페인을 가고싶은데 인원이 부족하네요 같이 갈사람 계신가요?',
+		},
+		{
+			id: '03',
+			postTitle:
+				'너무너무 좋았던 봉사 공유드려요 아기 천사들 많이 만나고 왔어요!',
+			postContents:
+				'봉사하기에 있는 적십자사 주최 캠페인을 가고싶은데 인원이 부족하네요 같이 갈사람 계신가요?',
+		},
+		{
+			id: '03',
+			postTitle:
+				'너무너무 좋았던 봉사 공유드려요 아기 천사들 많이 만나고 왔어요!',
+			postContents:
+				'봉사하기에 있는 적십자사 주최 캠페인을 가고싶은데 인원이 부족하네요 같이 갈사람 계신가요?',
+		},
+		{
+			id: '03',
+			postTitle:
+				'너무너무 좋았던 봉사 공유드려요 아기 천사들 많이 만나고 왔어요!',
+			postContents:
+				'봉사하기에 있는 적십자사 주최 캠페인을 가고싶은데 인원이 부족하네요 같이 갈사람 계신가요?',
+		},
+		{
+			id: '03',
+			postTitle:
+				'너무너무 좋았던 봉사 공유드려요 아기 천사들 많이 만나고 왔어요!',
+			postContents:
+				'봉사하기에 있는 적십자사 주최 캠페인을 가고싶은데 인원이 부족하네요 같이 갈사람 계신가요?',
+		},
+		{
+			id: '03',
+			postTitle:
+				'너무너무 좋았던 봉사 공유드려요 아기 천사들 많이 만나고 왔어요!',
+			postContents:
+				'봉사하기에 있는 적십자사 주최 캠페인을 가고싶은데 인원이 부족하네요 같이 갈사람 계신가요?',
+		},
 	];
 
 	return (
@@ -43,7 +92,7 @@ const reviewPage = () => {
 				<NumberWriteContainer>
 					<TotalPostNumber totalPosts={postListData.length} />
 				</NumberWriteContainer>
-				{postListData.map(postData => (
+				{postListData.map((postData) => (
 					<PostList
 						key={postData.id}
 						postTitle={

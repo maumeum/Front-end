@@ -1,4 +1,3 @@
-import React from 'react';
 import { VolunteerListType } from '@src/types/CardType';
 
 import {

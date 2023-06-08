@@ -1,4 +1,3 @@
-import React from 'react';
 import {
 	PostListContainer,
 	PostTitle,
@@ -9,12 +8,13 @@ import {
 type PostListProps = {
 	postTitle: string;
 	postContents: string;
+	onClick: () => void;
 };
-const PostList = ({ postTitle, postContents }: PostListProps) => {
+const PostList = ({ postTitle, postContents, onClick }: PostListProps) => {
 	return (
 		<>
 			<PostListLine />
-			<PostListContainer>
+			<PostListContainer onClick={onClick}>
 				<PostTitle>{postTitle}</PostTitle>
 				<PostContents>{postContents}</PostContents>
 			</PostListContainer>

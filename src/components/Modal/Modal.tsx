@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 
 import UserForm from '@components/UserForm/UserForm.tsx';

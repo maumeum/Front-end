@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import SearchBar from '@components/SearchBar/SearchBar';
@@ -48,7 +48,7 @@ const Search = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const responseData = await get<CommunityListType[]>(
-				`/commuities/search/?keyword=${query}`,
+				`/api/community/search?keyword=${query}`,
 			);
 			setCommunityList(responseData);
 		};

@@ -9,48 +9,69 @@ import {
 	ButtonContainer,
 } from '../WritePage/WritePageStyle';
 import 'react-quill/dist/quill.snow.css';
+import { quillModule } from '../Modal/quillModule';
+import parse from 'html-react-parser';
 
 type WritePageProps = {
-	title: string;
-	subtitle: string;
+	onSave: (inputTitle: string, content: string) => void;
+	onCancel: () => void;
 };
-const WritePage = ({ title, subtitle }: WritePageProps) => {
-	const quillRef = useRef();
+
+const WritePage: React.FC<WritePageProps> = ({ onSave, onCancel }) => {
+	const quillRef = useRef<ReactQuill>(null);
 	const [content, setContent] = useState('');
+	const [inputTitle, setInputTitle] = useState('');
 
 	const onClickHandler = () => {
-		console.log(content);
+		const parsedContent = parse(content);
+		const textContent = extractTextFromParsedContent(parsedContent);
+		onSave(inputTitle, textContent);
+		clearContent();
 	};
 
-	const modules = {
-		toolbar: {
-			container: [
-				[{ header: [1, 2, 3, false] }],
-				['bold', 'italic', 'underline', 'strike'],
-				['blockquote'],
-				[{ list: 'ordered' }, { list: 'bullet' }],
-				[{ color: [] }, { background: [] }],
-				[{ align: [] }, 'link', 'image'],
-			],
-		},
+	const deleteContent = () => {
+		clearContent();
+		onCancel();
 	};
+
+	const clearContent = () => {
+		setInputTitle('');
+		setContent('');
+		if (quillRef.current) {
+			quillRef.current.getEditor().setText('');
+		}
+	};
+	const extractTextFromParsedContent = (parsedContent: any): string => {
+		if (typeof parsedContent === 'string') {
+			return parsedContent;
+		}
+		if (parsedContent && parsedContent.props && parsedContent.props.children) {
+			return extractTextFromParsedContent(parsedContent.props.children);
+		}
+		return '';
+	};
+
 	return (
 		<>
 			<Container>
-				<TitleInput placeholder={title}></TitleInput>
+				<TitleInput
+					placeholder='제목을 입력해주세요'
+					value={inputTitle}
+					onChange={(e) => setInputTitle(e.target.value)}
+				/>
 				<TextContainer>
 					<ReactQuill
 						style={{ width: '112rem', height: '90rem', margin: '0 auto' }}
-						placeholder={subtitle}
+						placeholder='내용입력'
 						theme='snow'
 						ref={quillRef}
 						value={content}
 						onChange={setContent}
-						modules={modules}
+						modules={quillModule}
 					/>
 				</TextContainer>
 				<ButtonContainer>
-					<CancelButton>취소</CancelButton>
+					<CancelButton onClick={deleteContent}>취소</CancelButton>
 					<SubmitButton onClick={onClickHandler}>등록</SubmitButton>
 				</ButtonContainer>
 			</Container>

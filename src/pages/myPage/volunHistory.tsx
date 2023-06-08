@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
 	Container,
 	Main,
@@ -22,6 +22,7 @@ function myVolunHistory() {
 
 	const appliedData = [
 		{
+			id: 1,
 			title:
 				'세상에서 제일 재밌는 봉사활동, 런닝과 환경 보호를 한번에! 참여해보세요',
 			thumbnail: car,
@@ -32,6 +33,7 @@ function myVolunHistory() {
 			endDate: '2021-01-02',
 		},
 		{
+			id: 2,
 			title: '쪽방촌에 계시는 어른들에게 도시락을 전달해요!',
 			thumbnail: car,
 			nickname: '도시락요정',
@@ -41,6 +43,7 @@ function myVolunHistory() {
 			endDate: '2021-01-02',
 		},
 		{
+			id: 3,
 			title:
 				'세상에서 제일 재밌는 봉사활동, 런닝과 환경 보호를 한번에! 참여해보세요',
 			thumbnail: car,
@@ -51,6 +54,7 @@ function myVolunHistory() {
 			endDate: '2021-01-02',
 		},
 		{
+			id: 4,
 			title: '쪽방촌에 계시는 어른들에게 도시락을 전달해요!',
 			thumbnail: car,
 			nickname: '도시락요정',
@@ -60,6 +64,7 @@ function myVolunHistory() {
 			endDate: '2021-06-01',
 		},
 		{
+			id: 5,
 			title:
 				'세상에서 제일 재밌는 봉사활동, 런닝과 환경 보호를 한번에! 참여해보세요',
 			thumbnail: car,
@@ -70,6 +75,7 @@ function myVolunHistory() {
 			endDate: '2021-01-01',
 		},
 		{
+			id: 6,
 			title: '쪽방촌에 계시는 어른들에게 도시락을 전달해요!',
 			thumbnail: car,
 			nickname: '도시락요정',
@@ -79,6 +85,7 @@ function myVolunHistory() {
 			endDate: '2021-01-02',
 		},
 		{
+			id: 7,
 			title:
 				'세상에서 제일 재밌는 봉사활동, 런닝과 환경 보호를 한번에! 참여해보세요',
 			thumbnail: car,
@@ -89,6 +96,7 @@ function myVolunHistory() {
 			endDate: '2021-01-02',
 		},
 		{
+			id: 8,
 			title: '쪽방촌에 계시는 어른들에게 도시락을 전달해요!',
 			thumbnail: car,
 			nickname: '도시락요정',
@@ -101,6 +109,7 @@ function myVolunHistory() {
 
 	const completedData = [
 		{
+			id: 1,
 			title: '이건 완료된 봉사에서만 보이는 글 제목입니다. 제발 성공해라',
 			thumbnail: car,
 			nickname: '배가고파요배가고파',

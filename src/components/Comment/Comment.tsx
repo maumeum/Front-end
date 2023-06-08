@@ -16,6 +16,7 @@ import {
 	UserName,
 	Date,
 	Contents,
+	CommentHolder,
 } from './CommentStyle';
 import car from '@assets/images/car.png';
 
@@ -26,6 +27,7 @@ type Comment = {
 
 const CommentSection: React.FC = () => {
 	const userData = {
+		id: '01',
 		userName: '닉네임',
 		userProfile: car,
 		date: '23.05.21 12:00',
@@ -40,7 +42,7 @@ const CommentSection: React.FC = () => {
 	const handleCommentSubmit = () => {
 		if (comment.trim() !== '') {
 			const newComment: Comment = {
-				id: Date,
+				id: generateUniqueId(),
 				content: comment,
 			};
 			setComments([...comments, newComment]);
@@ -54,6 +56,9 @@ const CommentSection: React.FC = () => {
 		setComments((prevComments) =>
 			prevComments.filter((comment) => comment.id !== commentId),
 		);
+	};
+	const generateUniqueId = (): string => {
+		return Math.random().toString(36).substring(2);
 	};
 
 	return (
@@ -74,7 +79,7 @@ const CommentSection: React.FC = () => {
 				<Comment>댓글 목록</Comment>
 			</Title>
 			{comments.length === 0 ? (
-				<p>등록된 댓글이 없습니다.</p>
+				<CommentHolder>등록된 댓글이 없습니다.</CommentHolder>
 			) : (
 				comments.map((comment) => (
 					<CommentContainer key={comment.id}>
@@ -85,7 +90,7 @@ const CommentSection: React.FC = () => {
 								<Date>{userData.date}</Date>
 							</UserContainer>
 						</ProfileContainer>
-						<Contents>{comment.content}</Contents>
+						<Contents dangerouslySetInnerHTML={{ __html: comment.content }} />
 						<BtnContainer>
 							<Btn1>수정</Btn1>
 							<Btn2 onClick={() => deleteComment(comment.id)}>삭제</Btn2>

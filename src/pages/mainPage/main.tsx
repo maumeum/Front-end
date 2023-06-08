@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import { get } from '@api/Api';
 import {
@@ -6,6 +6,7 @@ import {
 	VolunteerListType,
 	ReviewListType,
 } from '@src/types/CardType';
+import DataType from '@src/types/DataType';
 import {
 	MainSection,
 	TopSlogan,
@@ -36,8 +37,8 @@ const Main = () => {
 	// 리뷰 데이터 불러오기
 	useEffect(() => {
 		const fetchData = async () => {
-			const responseData = await get<ReviewListType[]>('/api/review');
-			setReviewList(responseData);
+			const responseData = await get<DataType>('/api/review');
+			setReviewList(responseData.data);
 		};
 		fetchData();
 	}, []);
@@ -45,8 +46,8 @@ const Main = () => {
 	// 봉사활동 데이터 불러오기
 	useEffect(() => {
 		const fetchData = async () => {
-			const responseData = await get<VolunteerListType[]>('/api/volunteers');
-			setVolunteerList(responseData);
+			const responseData = await get<DataType>('/api/volunteers');
+			setVolunteerList(responseData.data);
 		};
 		fetchData();
 	}, []);
@@ -54,7 +55,7 @@ const Main = () => {
 	// 커뮤니티 데이터 불러오기
 	useEffect(() => {
 		const fetchData = async () => {
-			const responseData = await get<CommunityListType[]>('/commuities');
+			const responseData = await get<CommunityListType[]>('/api/community');
 			setCommunityList(responseData);
 		};
 		fetchData();
@@ -69,12 +70,13 @@ const Main = () => {
 			</TopSlogan>
 			<TopContainer>
 				<ReviewContainer>
-					{reviewList
-						.sort(() => Math.random() - 0.5)
-						.slice(0, 2)
-						.map((item, index) => (
-							<ReviewCard data={{ ...item, index }} key={item._id} />
-						))}
+					{reviewList &&
+						reviewList
+							.sort(() => Math.random() - 0.5)
+							.slice(0, 2)
+							.map((item, index) => (
+								<ReviewCard data={{ ...item, index }} key={item._id} />
+							))}
 				</ReviewContainer>
 				<IntroducePage>
 					<IntroduceTitle>
@@ -97,21 +99,19 @@ const Main = () => {
 			</TopContainer>
 			<MidSlogan>시간을 나눠 마음 채우기</MidSlogan>
 			<VolunteerContainer>
-				{volunteerList
-					.sort(() => Math.random() - 0.5)
-					.slice(0, 8)
-					.map((item) => (
-						<VolunteerCard key={item._id} data={item} />
-					))}
+				{volunteerList &&
+					volunteerList
+						.sort(() => Math.random() - 0.5)
+						.slice(0, 8)
+						.map((item) => <VolunteerCard key={item._id} data={item} />)}
 			</VolunteerContainer>
 			<CommunityTitle>커뮤니티</CommunityTitle>
 			<CommunityContainer>
-				{communityList
-					.sort(() => Math.random() - 0.5)
-					.slice(0, 6)
-					.map((item) => (
-						<CommunityCard key={item._id} data={item} />
-					))}
+				{communityList &&
+					communityList
+						.sort(() => Math.random() - 0.5)
+						.slice(0, 6)
+						.map((item) => <CommunityCard key={item._id} data={item} />)}
 			</CommunityContainer>
 		</MainSection>
 	);

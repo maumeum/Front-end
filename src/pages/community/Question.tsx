@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TopBar from '@components/TopBar/TopBar.tsx';
 import SearchBar from '@components/SearchBar/SearchBar.tsx';
@@ -8,28 +8,48 @@ import { NumberWriteContainer, PageContainer } from './style.ts';
 import PostList from '@components/PostList/PostList.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { MenuBar } from '@components/MyPage/myPage.ts';
-const question = () => {
+import { get } from '@src/api/Api';
+import { getToken } from '@src/api/Token';
+
+type PostData = {
+	_id: string;
+	title: string;
+	content: string;
+};
+const Question = () => {
 	const navigate = useNavigate();
+	const [postListData, setPostListData] = useState<PostData[]>([]);
+
+	useEffect(() => {
+		fetchPostList();
+	}, []);
+
+	const fetchPostList = async () => {
+		try {
+			const token = getToken();
+			const response = await get<PostData[]>('/api/community', {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
+			setPostListData(response);
+			console.log(response);
+		} catch (error) {
+			console.error('Error fetching post list:', error);
+		}
+	};
+
 	const handleSearch = (query: string) => {
+		// 검색기능 구현 로직 작성예정
 		console.log('검색어:', query);
 	};
+
 	const navigateWrite = () => {
-		navigate('/community/question/write');
+		navigate('/community/findfriend/write');
 	};
-	const postListData = [
-		{
-			id: '01',
-			postTitle: '봉사활동 한번 신청하면 달마다 주기적으로 가야하는 건가요?',
-			postContents:
-				'저는 한번만 참여하고 싶은데 혹시 봉사활동 신청하면 주기적으로 가야하는건지 궁금해요',
-		},
-		{
-			id: '02',
-			postTitle: '한강 쓰레기줍기 행사 어떤 준비물 제공되는지 아시는분?',
-			postContents:
-				'쓰레기줍기 행사 참여하려고 하는데 어떤 준비물 제공되는지 궁금합니다. 아니면 집에서 미리 준비해가야하는 건가요?',
-		},
-	];
+	const navigateDetail = (postId: string) => {
+		navigate(`/community/findfriend/${postId}`);
+	};
 
 	return (
 		<>
@@ -45,15 +65,16 @@ const question = () => {
 				</NumberWriteContainer>
 				{postListData.map((postData) => (
 					<PostList
-						key={postData.id}
+						key={postData._id}
 						postTitle={
-							postData.postTitle.slice(0, 50) +
-							(postData.postTitle.length > 50 ? '...' : '')
+							postData.title.slice(0, 50) +
+							(postData.title.length > 50 ? '...' : '')
 						}
 						postContents={
-							postData.postContents.slice(0, 50) +
-							(postData.postContents.length > 50 ? '...' : '')
+							postData.content.slice(0, 50) +
+							(postData.content.length > 50 ? '...' : '')
 						}
+						onClick={() => navigateDetail(postData._id)}
 					/>
 				))}
 			</PageContainer>
@@ -61,4 +82,4 @@ const question = () => {
 	);
 };
 
-export default question;
+export default Question;

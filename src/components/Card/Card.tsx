@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Modal from '@components/Modal/Modal.tsx';
 import Selector from '@components/Selector/Selector.tsx';
 import { SmallButton } from '@components/Buttons/SmallButton.ts';
