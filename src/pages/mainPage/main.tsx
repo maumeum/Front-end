@@ -55,8 +55,8 @@ const Main = () => {
 	// 커뮤니티 데이터 불러오기
 	useEffect(() => {
 		const fetchData = async () => {
-			const responseData = await get<CommunityListType[]>('/api/community');
-			setCommunityList(responseData);
+			const responseData = await get<DataType>('/api/community');
+			setCommunityList(responseData.data);
 		};
 		fetchData();
 	}, []);

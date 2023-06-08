@@ -21,6 +21,7 @@ import {
 	BtnDelete,
 } from './style.ts';
 import CommentSection from '@src/components/Comment/Comment.tsx';
+import DataType from '@src/types/DataType.ts';
 
 const FindFriendDetail = () => {
 	const navigate = useNavigate();
@@ -37,7 +38,7 @@ const FindFriendDetail = () => {
 	const fetchPost = async () => {
 		try {
 			const token = getToken();
-			const response = await get(`/api/community/${postId}`, {
+			const response = await get<DataType>(`/api/community/${postId}`, {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
@@ -53,7 +54,7 @@ const FindFriendDetail = () => {
 	const loginUserLogic = async () => {
 		try {
 			const token = getToken();
-			const response = await get(`/api/community/check/${postId}`, {
+			const response = await get<DataType>(`/api/community/check/${postId}`, {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},

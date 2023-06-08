@@ -20,6 +20,7 @@ import {
 	Content,
 } from '@src/pages/community/style.ts';
 import CommentSection from '@src/components/Comment/Comment.tsx';
+import DataType from '@src/types/DataType';
 
 const ReviewDetail = () => {
 	const navigate = useNavigate();
@@ -34,7 +35,7 @@ const ReviewDetail = () => {
 	const fetchPost = async () => {
 		try {
 			const token = getToken();
-			const response = await get(`/api/review/${postId}`, {
+			const response = await get<DataType>(`/api/review/${postId}`, {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},

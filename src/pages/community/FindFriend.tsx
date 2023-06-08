@@ -10,6 +10,7 @@ import Menu from '@components/Menu/Menu.tsx';
 import { MenuBar } from '@components/MyPage/myPage.ts';
 import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
+import DataType from '@src/types/DataType.ts';
 
 type PostData = {
 	_id: string;
@@ -27,7 +28,7 @@ const FindFriend = () => {
 	const fetchPostList = async () => {
 		try {
 			const token = getToken();
-			const response = await get<PostData[]>(
+			const response = await get<DataType>(
 				'/api/community/category/findfriend',
 				{
 					headers: {
@@ -69,20 +70,21 @@ const FindFriend = () => {
 					<TotalPostNumber totalPosts={postListData.length} />
 					<WriteButton toNavigate={navigateWrite} />
 				</NumberWriteContainer>
-				{postListData.map((postData) => (
-					<PostList
-						key={postData._id}
-						postTitle={
-							postData.title.slice(0, 50) +
-							(postData.title.length > 50 ? '...' : '')
-						}
-						postContents={
-							postData.content.slice(0, 50) +
-							(postData.content.length > 50 ? '...' : '')
-						}
-						onClick={() => navigateDetail(postData._id)}
-					/>
-				))}
+				{postListData &&
+					postListData.map((postData) => (
+						<PostList
+							key={postData._id}
+							postTitle={
+								postData.title.slice(0, 50) +
+								(postData.title.length > 50 ? '...' : '')
+							}
+							postContents={
+								postData.content.slice(0, 50) +
+								(postData.content.length > 50 ? '...' : '')
+							}
+							onClick={() => navigateDetail(postData._id)}
+						/>
+					))}
 			</PageContainer>
 		</>
 	);

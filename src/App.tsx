@@ -23,6 +23,7 @@ import MyProfile from './pages/myPage/myProfile';
 import FindFriendDetail from '@src/pages/community/FindFriendDetail';
 import Withdrawal from '@pages/myPage/withdrawal';
 import ReviewDetail from '@src/pages/reviewPage/ReviewDetail';
+import TeamAuth from '@pages/admin/TeamAuth';
 
 function App() {
 	return (
@@ -51,6 +52,7 @@ function App() {
 				<Route path='/community/:postId' element={<FindFriendDetail />} />
 				<Route path='/review/:postId' element={<ReviewDetail />} />
 				<Route path='/mypage/withdrawal' element={<Withdrawal />} />
+				<Route path='/admin/team_auth' element={<TeamAuth />} />
 			</Routes>
 			<Footer />
 		</Router>

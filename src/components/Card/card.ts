@@ -237,3 +237,80 @@ export const VolunteerContent = styled.p`
 	margin-top: 0;
 	font-size: 1.3rem;
 `;
+
+// team card
+
+export const TeamCardSection = styled.div`
+	margin-bottom: 6rem;
+	width: 31rem;
+	background-color: #ffffff;
+	filter: drop-shadow(0 2px 10px rgb(0, 0, 0, 10%));
+	border-radius: 12px;
+	word-break: keep-all;
+	cursor: pointer;
+`;
+
+export const TeamImageContainer = styled.div`
+	margin-bottom: 0;
+`;
+
+export const TeamImage = styled.img`
+	margin: 2.5rem;
+	width: 80%;
+	aspect-ratio: 1;
+	overflow: hidden;
+`;
+
+export const TeamMainContainer = styled.div`
+	margin: 0 2.5rem 2.5rem;
+`;
+
+export const TeamName = styled.div`
+	font-size: 1.5rem;
+	text-align: start;
+`;
+
+export const TeamDescContainer = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+`;
+
+export const DescContainer = styled.div`
+	text-align: start;
+`;
+
+export const WriteDate = styled.p`
+	font-size: 1.2rem;
+	color: #d3d3d3;
+`;
+
+export const TeamUserNickname = styled.p`
+	font-size: 1.2rem;
+	color: #202020;
+`;
+
+export const TeamButtonContainer = styled.div`
+	display: flex;
+`;
+
+export const AcceptButton = styled.button`
+	margin-right: 1.5rem;
+	width: 5rem;
+	height: 3rem;
+	border-radius: 6px;
+	border: none;
+	background-color: #aacb73;
+	font-size: 1.2rem;
+	cursor: pointer;
+`;
+
+export const RefuseButton = styled.button`
+	width: 5rem;
+	height: 3rem;
+	border-radius: 6px;
+	border: none;
+	background-color: #ffd4d4;
+	font-size: 1.2rem;
+	cursor: pointer;
+`;
