@@ -26,7 +26,7 @@ const ReviewDetail = () => {
 	const navigate = useNavigate();
 	const { postId } = useParams();
 	const [post, setPost] = useState<any>([]);
-	const [datauser, setDataUser] = useState<any>('');
+	//const [datauser, setDataUser] = useState<any>('');
 
 	useEffect(() => {
 		fetchPost();
@@ -35,18 +35,19 @@ const ReviewDetail = () => {
 	const fetchPost = async () => {
 		try {
 			const token = getToken();
-			const response = await get<DataType>(`/api/review/${postId}`, {
+			const response = await get<DataType>(`/api/review/detail/${postId}`, {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
 			});
-			setPost(response!.data.post.post);
-			setDataUser(response!.data.post);
+			setPost(response.data);
 			console.log(response);
+			//setDataUser(response.data);
 		} catch (error) {
 			console.error('Error fetching post:', error);
 		}
 	};
+	//로그인한 사용자 구분 로직 받기
 
 	const handleEdit = () => {
 		navigate(`/community/findfriend/edit/${postId}`);
@@ -56,10 +57,9 @@ const ReviewDetail = () => {
 		return <div>Loading...</div>;
 	}
 
-	const { title, user_id, createdAt, images, content } = post;
-	const { user } = datauser;
+	const { title, _id, createdAt, images, content } = post;
 	const loggedInUser = '로그인한 사용자';
-	const isAuthor = loggedInUser === user_id;
+	const isAuthor = loggedInUser === _id;
 	const hasPostImage = !!images;
 
 	const formattedDate = dayjs(createdAt)
@@ -73,7 +73,7 @@ const ReviewDetail = () => {
 					<Title>{title}</Title>
 					<SubContainer>
 						<InfoBox>
-							<UserName>{user}</UserName>
+							<UserName>유저네임</UserName>
 							<Date>작성일 : {formattedDate}</Date>
 						</InfoBox>
 						{isAuthor && <Btn onClick={handleEdit}>수정하기</Btn>}
