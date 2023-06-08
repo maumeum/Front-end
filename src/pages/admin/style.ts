@@ -18,17 +18,20 @@ export const ClickTopBar = styled.div`
 	width: 10%;
 	text-align: center;
 	padding: 2rem 1rem;
-	border-bottom: 1px solid #aacb73;
+	border-bottom: ${(props) =>
+		props.className === 'curr' ? '1px solid #aacb73' : 'none'};
 	font-size: 1.5rem;
-	color: #aacb73;
+	color: ${(props) => (props.className === 'curr' ? '#aacb73' : '#202020')};
+	cursor: pointer;
 `;
 
 export const TopBar = styled.div`
 	width: 10%;
 	text-align: center;
 	padding: 2rem 1rem;
+	border-bottom: 1px solid #aacb73;
 	font-size: 1.5rem;
-	color: #202020;
+	color: #aacb73;
 `;
 
 export const MenuBar = styled.div`

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { get } from '@api/Api';
-import { CommunityListType } from '@src/types/CardType';
+import { CommunityListType, ReviewListType } from '@src/types/CardType';
 import DataType from '@src/types/DataType';
 import Menu from '@components/Menu/Menu.tsx';
 import PostList from '@components/PostList/PostList';
@@ -16,6 +16,9 @@ import {
 
 const Report = () => {
 	const [communityList, setCommunityList] = useState<CommunityListType[]>([]);
+	const [reviewList, setReviewList] = useState<ReviewListType[]>([]);
+	const [communityNav, setCommunityNav] = useState<boolean>(true);
+	const [reviewNav, setReviewNav] = useState<boolean>(false);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -26,8 +29,32 @@ const Report = () => {
 		fetchData();
 	}, []);
 
-	const navigateDetail = (postId: string) => {
+	useEffect(() => {
+		const fetchData = async () => {
+			const responseData = await get<DataType>('/api/review');
+			setReviewList(responseData.data);
+		};
+		fetchData();
+	}, []);
+
+	// 세부 글 클릭
+	const postClick = (postId: string) => {
 		navigate(`/community/${postId}`);
+	};
+
+	const reviewClick = () => {
+		navigate('/admin/report');
+	};
+
+	// 상단 nav바 클릭
+	const reviewNavClick = () => {
+		setCommunityNav(false);
+		setReviewNav(true);
+	};
+
+	const communityNavClick = () => {
+		setCommunityNav(true);
+		setReviewNav(false);
 	};
 
 	return (
@@ -36,11 +63,20 @@ const Report = () => {
 				<Menu title='관리자' />
 			</MenuBar>
 			<TopBarContainer>
-				<TopBar>리뷰 글 목록</TopBar>
-				<ClickTopBar>커뮤니티 글 목록</ClickTopBar>
+				<ClickTopBar
+					onClick={reviewNavClick}
+					className={reviewNav ? 'curr' : ''}>
+					리뷰 글 목록
+				</ClickTopBar>
+				<ClickTopBar
+					onClick={communityNavClick}
+					className={communityNav ? 'curr' : ''}>
+					커뮤니티 글 목록
+				</ClickTopBar>
 			</TopBarContainer>
 			<PostContainer>
 				{communityList &&
+					communityNav &&
 					communityList.map((postData) => (
 						<PostList
 							key={postData._id}
@@ -52,7 +88,23 @@ const Report = () => {
 								postData.content.slice(0, 50) +
 								(postData.content.length > 50 ? '...' : '')
 							}
-							onClick={() => navigateDetail(postData._id)}
+							onClick={() => postClick(postData._id)}
+						/>
+					))}
+				{reviewList &&
+					reviewNav &&
+					reviewList.map((postData) => (
+						<PostList
+							key={postData._id}
+							postTitle={
+								postData.title.slice(0, 50) +
+								(postData.title.length > 50 ? '...' : '')
+							}
+							postContents={
+								postData.content.slice(0, 50) +
+								(postData.content.length > 50 ? '...' : '')
+							}
+							onClick={() => reviewClick()}
 						/>
 					))}
 			</PostContainer>
