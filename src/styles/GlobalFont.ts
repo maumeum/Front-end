@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import Font from '../assets/fonts/KakaoBig-normal-400-100_1.woff';
+import Font from '/fonts/KakaoBig-normal-400-100_1.woff';
 
 export default createGlobalStyle`
   @font-face {

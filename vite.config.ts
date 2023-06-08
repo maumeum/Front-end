@@ -9,6 +9,7 @@ dotenv.config();
 export default defineConfig({
 	resolve: {
 		alias: [
+			{ find: '@public', replacement: resolve(__dirname, 'public') },
 			{ find: '@src', replacement: resolve(__dirname, 'src') },
 			{
 				find: '@components',
