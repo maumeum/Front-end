@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {
 	DataName,
 	DataInput,
@@ -52,7 +50,6 @@ const InputForm = ({
 	passwordData,
 	validPassword,
 }: InputContainerProps) => {
-
 	const getError = ({
 		data,
 		submit,
@@ -79,7 +76,7 @@ const InputForm = ({
 
 	return (
 		<InputContainer>
-			{name !== 'email' ? 
+			{name !== 'email' ? (
 				<>
 					<DataName>{dataName}</DataName>
 					<DataInput
@@ -90,12 +87,19 @@ const InputForm = ({
 						onChange={onChangeFn}
 						value={value}
 					/>
-					{getError({ data: value, submit, errorMessage, validFn: validFn, validPassword: validPassword, passwordData: passwordData })}
+					{getError({
+						data: value,
+						submit,
+						errorMessage,
+						validFn: validFn,
+						validPassword: validPassword,
+						passwordData: passwordData,
+					})}
 				</>
-				: <>
+			) : (
+				<>
 					<DataName>{dataName}</DataName>
-					<EmailContainer
-						className={submit && value === '' ? 'submit' : '' }>
+					<EmailContainer className={submit && value === '' ? 'submit' : ''}>
 						<EmailData
 							type={inputType}
 							name={name}
@@ -105,8 +109,16 @@ const InputForm = ({
 						/>
 						<EmailButton>중복 확인</EmailButton>
 					</EmailContainer>
-					{getError({ data: value, submit, errorMessage, validFn: validFn, validPassword: validPassword, passwordData: passwordData })}
-				</>}
+					{getError({
+						data: value,
+						submit,
+						errorMessage,
+						validFn: validFn,
+						validPassword: validPassword,
+						passwordData: passwordData,
+					})}
+				</>
+			)}
 		</InputContainer>
 	);
 };

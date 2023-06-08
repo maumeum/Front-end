@@ -1,6 +1,16 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { HeaderSection, HeaderContainer, LogoContainer, MainLogo, NavContainer, NavCategory, UtilContainer, LoginButton, SearchButton, SearchIcon } from './style';
+import {
+	HeaderSection,
+	HeaderContainer,
+	LogoContainer,
+	MainLogo,
+	NavContainer,
+	NavCategory,
+	UtilContainer,
+	LoginButton,
+	SearchButton,
+	SearchIcon,
+} from './style';
 
 import mainLogo from '../../assets/icons/mainlogo.svg';
 import searchLogo from '../../assets/icons/search.svg';

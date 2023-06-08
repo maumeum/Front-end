@@ -1,12 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Card from './Card.tsx';
-import CommunityCard from './CommunityCard.tsx';
-import ReviewCard from './ReviewCard.tsx';
-import VolunteerCard from './VolunteerCard.tsx';
 import car from '@src/assets/images/car.png';
 
 const meta: Meta<typeof Card> = {
-	title: 'Components/Card',
+	title: 'Components/Card/Card',
 	component: Card,
 	tags: ['autodocs'],
 	decorators: [

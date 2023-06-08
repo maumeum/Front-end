@@ -1,7 +1,7 @@
 import { DefaultTheme } from 'styled-components';
 
 const colors = {
-	background: '#FFFFFF',
+	background: '#FFFFFF', // 하얀색
 	error: '#EB5757', // 붉은색
 	text: '#202020', // 검은색
 
@@ -25,7 +25,7 @@ const colors = {
 };
 
 const radius = {
-	// em 또는 rem으로 변경 필요?
+	// em 또는 rem으로 변경?
 	s1: '4px',
 	s2: '8px',
 	s3: '12px',
