@@ -11,7 +11,7 @@ type MenuItem = {
 };
 
 type MenuItems = {
-	[key in '마이페이지' | '커뮤니티']: MenuItem[];
+	[key in '마이페이지' | '커뮤니티' | '관리자']: MenuItem[];
 };
 const MENU_ITEMS: MenuItems = {
 	마이페이지: [
@@ -26,6 +26,11 @@ const MENU_ITEMS: MenuItems = {
 	커뮤니티: [
 		{ link: '/community/findfriend', label: '동행 구해요' },
 		{ link: '/community/question', label: '궁금해요' },
+	],
+	관리자: [
+		{ link: '/admin/report', label: '신고 내역' },
+		{ link: '/admin/team_auth', label: '단체 인증 요청' },
+		{ link: '/admin/user_manage', label: '유저 관리' },
 	],
 };
 
