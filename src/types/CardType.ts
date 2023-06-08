@@ -12,12 +12,12 @@ export interface ReviewListType {
 	_id: string;
 	title: string;
 	content: string;
-	images: string[];
 	volunteer_id: string;
 	user_id: {
 		nickname: string;
 	};
 	index: number;
+	images?: string[];
 }
 
 export interface VolunteerListType {
@@ -25,14 +25,23 @@ export interface VolunteerListType {
 	title: string;
 	content: string;
 	centName: string;
-	createdAt: string;
 	statusName: string;
 	deadline: string;
 	applyCount: number;
 	registerCount: number;
 	actTypeName: string;
 	teenager: boolean;
-	images: string[];
 	user_id: string;
-	updateAt: string;
+	images?: string[];
+}
+
+export interface TeamListType {
+	_id: number;
+	category: string;
+	teamName: string;
+	userId: {
+		nickname: string;
+	};
+	createdAt: string;
+	image?: string;
 }

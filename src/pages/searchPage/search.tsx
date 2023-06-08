@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import SearchBar from '@components/SearchBar/SearchBar';
 import { get } from '@api/Api';
 import { CommunityListType, VolunteerListType } from '@src/types/CardType';
+import DataType from '@src/types/DataType';
 import {
 	SearchSection,
 	VolunteerContainer,
@@ -47,10 +48,10 @@ const Search = () => {
 	// 커뮤니티 조회
 	useEffect(() => {
 		const fetchData = async () => {
-			const responseData = await get<CommunityListType[]>(
+			const responseData = await get<DataType>(
 				`/api/community/search?keyword=${query}`,
 			);
-			setCommunityList(responseData);
+			setCommunityList(responseData.data);
 		};
 		fetchData();
 	}, [query]);

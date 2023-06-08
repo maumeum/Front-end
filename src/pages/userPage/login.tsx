@@ -66,8 +66,9 @@ const Login = () => {
 				icon: 'error',
 				title: '이메일 또는 비밀번호가 일치하지 않습니다.',
 				confirmButtonColor: '#d33',
+			}).then(() => {
+				window.location.reload();
 			});
-			window.location.reload();
 		}
 	};
 
