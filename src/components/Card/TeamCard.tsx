@@ -45,7 +45,7 @@ const TeamCard = ({ data }: TeamCardProps) => {
 	// 거부
 	const refuseHandler = () => {
 		Swal.fire({
-			title: '수락 하시겠습니까?',
+			title: '거부 하시겠습니까?',
 			icon: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: '#3085d6',
@@ -54,7 +54,7 @@ const TeamCard = ({ data }: TeamCardProps) => {
 			cancelButtonText: '아니오',
 		}).then((result) => {
 			if (result.isConfirmed) {
-				Swal.fire('수락되었습니다.');
+				Swal.fire('거부되었습니다.');
 			}
 		});
 	};
