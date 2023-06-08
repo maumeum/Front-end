@@ -1,3 +1,5 @@
+import { VolunteerListType } from '@src/types/CardType';
+
 import {
 	VolunteerSection,
 	VolunteerImgContainer,
@@ -8,24 +10,8 @@ import {
 	VolunteerContent,
 } from '@components/Card/card';
 
-interface listType {
-	title: string;
-	content: string;
-	centName: string;
-	createdAt: string;
-	statusName: string;
-	deadline: string;
-	applyCount: number;
-	registerCount: number;
-	actTypeName: string;
-	teenager: boolean;
-	images: string[];
-	user_id: string;
-	updateAt: string;
-}
-
 interface VolunteerCardProps {
-	data: listType;
+	data: VolunteerListType;
 }
 
 import imgData from '../../assets/images/volunteer1.jpg';

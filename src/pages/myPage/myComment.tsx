@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
 	Container,
 	Main,
@@ -8,9 +8,10 @@ import {
 import Tab from '@components/Tab/Tab.tsx';
 import MyPost from '@components/MyPost/MyPost.tsx';
 import Menu from '@components/Menu/Menu.tsx';
-import { TabTypes } from '@components/Tab/TabTypes.ts';
+import { TabTypes } from '@src/utils/EnumTypes';
 const data = [
 	{
+		id: 1,
 		title:
 			'한강 플로깅 같이 하실분 구합니다~ 카카오톡 오픈채팅방으로 들어오세요',
 		content:
@@ -19,6 +20,7 @@ const data = [
 		date: '2022-01-01',
 	},
 	{
+		id: 2,
 		title:
 			'유기견 봉사활동 고등학생때 가봤는데 냄새때문에 너무 힘들었어요.. 혹시 견사청소쪽 말고 다른 활동 위주인 단체있을가요',
 		content:

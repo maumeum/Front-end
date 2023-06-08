@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
 	Container,
 	Main,
@@ -7,18 +7,18 @@ import {
 } from '@components/MyPage/myPage.ts';
 import Tab from '@components/Tab/Tab.tsx';
 import Menu from '@components/Menu/Menu.tsx';
-import { TabTypes } from '@components/Tab/TabTypes.ts';
+import { TabTypes } from '@src/utils/EnumTypes';
+import MyPageUserForm from '@components/UserForm/MyPageUserForm';
 
-import SingUp from '@pages/userPage/signUp.tsx';
 function myPage() {
-	const [currTab] = useState<TabTypes>(TabTypes.EDIT_MYINFO);
-	const tabs = [TabTypes.EDIT_MYINFO];
+	const [currTab] = useState<TabTypes>(TabTypes.MYPAGE);
+	const tabs = [TabTypes.MYPAGE];
 
 	const myInfo = {
 		email: 'abc@naver.com',
 		nickname: '안녕하세요',
 		password: '12345',
-		pwdcheck: '1234',
+		pwdcheck: '12345',
 		phoneNum: '1234',
 	};
 
@@ -31,7 +31,7 @@ function myPage() {
 				<TabMenu>
 					<Tab currTab={currTab} tabs={tabs} />
 				</TabMenu>
-				<SingUp mypage='mypage' />
+				<MyPageUserForm myInfo={myInfo} pageType={TabTypes.MYPAGE} />
 			</Main>
 		</Container>
 	);

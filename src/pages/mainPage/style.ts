@@ -88,6 +88,7 @@ export const VolunteerContainer = styled.div`
 	margin: 4rem 40rem;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
+	column-gap: 2rem;
 `;
 
 export const CommunityTitle = styled.h2`

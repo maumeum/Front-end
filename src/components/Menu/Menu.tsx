@@ -12,8 +12,12 @@ function Menu({ title }: MenuProps) {
 				<>
 					<MenuTitle>{title}</MenuTitle>
 					<Menus>
-						<p>프로필 수정</p>
-						<p>내 정보 수정</p>
+						<Link to='/mypage'>
+							<p>마이페이지</p>
+						</Link>
+						<Link to='/mypage/profile'>
+							<p>프로필 정보 수정</p>
+						</Link>
 						<Link to='/mypage/review'>
 							<p>내가 쓴 리뷰</p>
 						</Link>
@@ -26,7 +30,9 @@ function Menu({ title }: MenuProps) {
 						<Link to='/mypage/suggest'>
 							<p>내가 등록한 봉사</p>
 						</Link>
-						<p>회원탈퇴</p>
+						<Link to='/mypage/withdrawal'>
+							<p>회원탈퇴</p>
+						</Link>
 					</Menus>
 				</>
 			)}
@@ -40,6 +46,23 @@ function Menu({ title }: MenuProps) {
 						</Link>
 						<Link to='/community/question'>
 							<p>궁금해요</p>
+						</Link>
+					</Menus>
+				</>
+			)}
+
+			{title === '관리자' && (
+				<>
+					<MenuTitle>{title}</MenuTitle>
+					<Menus>
+						<Link to='/admin/report'>
+							<p>신고 내역</p>
+						</Link>
+						<Link to='/admin/team_auth'>
+							<p>단체 인증 요청</p>
+						</Link>
+						<Link to='/admin/user_manage'>
+							<p>유저 관리</p>
 						</Link>
 					</Menus>
 				</>

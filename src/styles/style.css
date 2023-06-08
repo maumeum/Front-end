@@ -35,17 +35,17 @@
 
 @font-face {
 	font-family: 'kakaoBig';
-	src: url('/assets/fonts/KakaoBig-normal-400-100_1.ttf') format('truetype');
+	src: url('/fonts/KakaoBig-normal-400-100_1.ttf') format('truetype');
 }
 
 @font-face {
 	font-family: 'kakaoOTFReg';
-	src: url('/assets/fonts/KakaoOTFRegular.otf') format('opentype');
+	src: url('/fonts/KakaoOTFRegular.otf') format('opentype');
 }
 
 @font-face {
 	font-family: 'kakaoReg';
-	src: url('/assets/fonts/KakaoRegular.ttf') format('truetype');
+	src: url('/fonts/KakaoRegular.ttf') format('truetype');
 }
 
 /* button_layout */

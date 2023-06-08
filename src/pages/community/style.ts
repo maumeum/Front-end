@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const PageContainer = styled.div`
 	margin-bottom: 40rem;
-	margin-top: -25rem;
+	margin-top: -30rem;
 	margin-left: 15rem;
 `;
 
@@ -46,7 +46,17 @@ export const Btn = styled.button`
 	border-radius: 3.3rem;
 	border: none;
 	height: 6.6rem;
-	width: 16.1rem;
+	width: 13rem;
+	margin-top: 2rem;
+	cursor: pointer;
+	margin-left: 50rem;
+`;
+export const BtnDelete = styled.button`
+	background-color: #ffd4d4;
+	border-radius: 3.3rem;
+	border: none;
+	height: 6.6rem;
+	width: 13rem;
 	margin-top: 2rem;
 	cursor: pointer;
 `;
@@ -69,4 +79,5 @@ export const Contentdiv = styled.div`
 `;
 export const Content = styled.p`
 	font-size: 2.4rem;
+	line-height: 5rem;
 `;

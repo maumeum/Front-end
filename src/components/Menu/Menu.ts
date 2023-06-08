@@ -17,6 +17,7 @@ export const Menus = styled.div`
 	color: #000000;
 	a {
 		text-decoration: none;
+		color: inherit;
 		&:visited {
 			text-decoration: none;
 			color: #000000;

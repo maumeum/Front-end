@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Modal from '@components/Modal/Modal.tsx';
 import Selector from '@components/Selector/Selector.tsx';
 import { SmallButton } from '@components/Buttons/SmallButton.ts';
@@ -12,7 +12,7 @@ import {
 	ButtonContainer,
 	SelectContainer,
 } from './card.ts';
-import { TabTypes } from '../Tab/TabTypes.ts';
+import { TabTypes } from '../../utils/EnumTypes.ts';
 
 export type Props = {
 	data: {

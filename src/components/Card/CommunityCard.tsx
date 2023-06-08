@@ -1,19 +1,13 @@
+import { CommunityListType } from '@src/types/CardType';
+
 import {
 	CommunityContainer,
 	PostType,
 	CommunityTitle,
 } from '@components/Card/card';
 
-interface listType {
-	user_id: {
-		nickname: string;
-	};
-	title: string;
-	postType: string;
-}
-
 interface CommunityCardProps {
-	data: listType;
+	data: CommunityListType;
 }
 
 const CommunityCard = ({ data }: CommunityCardProps) => {

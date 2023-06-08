@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 const flexcenter = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 `;
 
 // 로그인 css
@@ -83,7 +83,7 @@ export const SignUpButton = styled(NavLink)`
 `;
 
 type SignUpProps = {
-	mypage?: string;
+	pageType?: string;
 };
 
 // 회원가입 css
@@ -92,14 +92,16 @@ export const SignUpSection = styled.div<SignUpProps>`
 	position: relative;
 	margin: 17rem 68.5rem 26.5rem;
 	height: 77rem;
+	width: 60rem;
 	background-color: #f7f8f9;
 	border-radius: 20px;
 	filter: drop-shadow(0 4px 4px rgb(0, 0, 0, 25%));
 
-	${(props) =>
-		props.mypage === 'mypage' &&
+	${({ pageType }) =>
+		pageType &&
 		css`
 			width: 60rem;
+			height: 60rem;
 			margin: 5rem 0 10rem;
 			left: 30.5rem;
 		`}
@@ -140,9 +142,9 @@ export const DataName = styled.p`
 	color: #666666;
 `;
 
-export const EmailData = styled.input`
+export const EmailData = styled.input<SignUpProps>`
 	padding-left: 1rem;
-  width: 70%;
+	width: 70%;
 	border: none;
 	outline: none;
 	text-align: start;
@@ -161,11 +163,6 @@ export const EmailButton = styled.button<SignUpProps>`
 	font-weight: 100;
 	font-size: 1.2rem;
 	cursor: pointer;
-	${(props) =>
-		props.mypage === 'mypage' &&
-		css`
-			cursor: not-allowed;
-		`}
 `;
 
 export const DataInput = styled.input<SignUpProps>`
@@ -189,4 +186,10 @@ export const CheckValue = styled.p`
 	margin: 0.2rem 0.3rem 0;
 	color: #eb5757;
 	font-size: 1.2rem;
+`;
+
+export const WithdrawalSection = styled.div`
+	margin-left: 2rem;
+	margin-bottom: 3rem;
+	width: 70%;
 `;

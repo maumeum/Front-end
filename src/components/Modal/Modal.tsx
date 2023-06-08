@@ -51,7 +51,7 @@ const Modal = ({ isOpen, closeModal, user }: ModalProps) => {
 				</>
 			) : (
 				<>
-					<UserForm />
+					<UserForm closeModal={closeModal} />
 				</>
 			)}
 		</ReactModal>

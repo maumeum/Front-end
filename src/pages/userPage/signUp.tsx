@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
+import { post } from '@api/Api';
+import DataType from '@src/types/DataType';
 import LargeButton from '@components/Buttons/LargeButton';
 import { SignUpSection, SignUpForm } from './style';
-import Swal from 'sweetalert2';
-import Modal from '@components/Modal/Modal.tsx';
+
 import {
 	validEmail,
 	validPassword,
 	validPhoneNum,
-} from '@src/utils/signUpCheck.ts';
+} from '@utils/signUpCheck.ts';
 import {
 	emailError,
 	nicknameError,
 	passwordError,
 	passwordCheckError,
 	phoneNumError,
-} from '@src/utils/errorMessage.ts';
-import InputForm from '@src/components/UserForm/InputForm.tsx';
+} from '@utils/errorMessage.ts';
+import InputForm from '@components/UserForm/InputForm.tsx';
 
-type Props = {
-	mypage?: string;
-};
-
-const SignUp = ({ mypage }: Props) => {
+const SignUp = () => {
 	const [email, setEmail] = useState<string>('');
 	const [nickname, setNickname] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
@@ -29,28 +29,25 @@ const SignUp = ({ mypage }: Props) => {
 	const [phoneNum, setPhoneNum] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
 
+	const navigate = useNavigate();
+
 	// inputValue 함수
 	const getFormChanger =
 		(setter: React.Dispatch<React.SetStateAction<string>>) =>
-			(e: React.ChangeEvent<HTMLInputElement>) => {
-				setSubmit(false);
-				setter(e.target.value);
-			};
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			setSubmit(false);
+			setter(e.target.value);
+		};
 
-	//회원정보 수정 클릭시 모달
-	const [isOpen, setIsOpen] = useState(false);
+	// //회원정보 수정 클릭시 모달
+	// const [isOpen, setIsOpen] = useState(false);
 
-	function closeModal() {
-		setIsOpen(false);
-	}
-	const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+	// function closeModal() {
+	// 	setIsOpen(false);
+	// }
+
+	const clickHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		// 상태 초기화
-		{
-			if (mypage) {
-				setIsOpen(true);
-				return;
-			}
-		}
 		setSubmit(false);
 		e.preventDefault();
 		setSubmit(true);
@@ -62,23 +59,23 @@ const SignUp = ({ mypage }: Props) => {
 				title: '비밀번호가 일치하지 않습니다.',
 				confirmButtonColor: '#d33',
 			});
-		}
-
-		// 회원가입 완료
-		if (
+		} else if (
 			validEmail(email) &&
 			validPassword(password) &&
 			validPhoneNum(phoneNum)
 		) {
+			// 유저 정보 저장
+			await post<DataType>('/api/signup', {
+				email,
+				password,
+				nickname,
+				phone: phoneNum,
+			});
+			navigate('/');
 			Swal.fire({
 				title: '마음이음에 오신 것을 환영합니다!',
+				text: '로그인을 해주세요.',
 				confirmButtonColor: 'var(--button--color)',
-			});
-		} else {
-			Swal.fire({
-				icon: 'error',
-				title: '정보를 모두 입력해주세요.',
-				confirmButtonColor: '#d33',
 			});
 		}
 	};
@@ -141,7 +138,6 @@ const SignUp = ({ mypage }: Props) => {
 					validFn={validPhoneNum}
 				/>
 				<LargeButton onClick={clickHandler}>회원가입</LargeButton>
-				<Modal isOpen={isOpen} closeModal={closeModal} user={'user'} />
 			</SignUpForm>
 		</SignUpSection>
 	);
