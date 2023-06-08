@@ -48,10 +48,7 @@ function App() {
 				<Route path='/mypage' element={<MyPage />} />
 				<Route path='/mypage/edit' element={<UserInfoEdit />} />
 				<Route path='/mypage/profile' element={<MyProfile />} />
-				<Route
-					path='/community/findfriend/:postId'
-					element={<FindFriendDetail />}
-				/>
+				<Route path='/community/:postId' element={<FindFriendDetail />} />
 				<Route path='/review/:postId' element={<ReviewDetail />} />
 				<Route path='/mypage/withdrawal' element={<Withdrawal />} />
 			</Routes>

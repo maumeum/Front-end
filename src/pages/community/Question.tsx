@@ -35,7 +35,7 @@ const Question = () => {
 					postType: 'qna',
 				},
 			});
-			setPostListData(response);
+			setPostListData(response.data);
 			console.log(response);
 		} catch (error) {
 			console.error('Error fetching post list:', error);
@@ -51,7 +51,7 @@ const Question = () => {
 		navigate('/community/question/write');
 	};
 	const navigateDetail = (postId: string) => {
-		navigate(`/community/question/${postId}`);
+		navigate(`/community/${postId}`);
 	};
 
 	return (

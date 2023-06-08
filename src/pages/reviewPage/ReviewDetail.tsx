@@ -34,13 +34,13 @@ const ReviewDetail = () => {
 	const fetchPost = async () => {
 		try {
 			const token = getToken();
-			const response = await get(`/api/community/${postId}`, {
+			const response = await get(`/api/review/${postId}`, {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
 			});
-			setPost(response!.post.post);
-			setDataUser(response!.post);
+			setPost(response!.data.post.post);
+			setDataUser(response!.data.post);
 			console.log(response);
 		} catch (error) {
 			console.error('Error fetching post:', error);
@@ -72,7 +72,7 @@ const ReviewDetail = () => {
 					<Title>{title}</Title>
 					<SubContainer>
 						<InfoBox>
-							<UserName>{formattedDate}</UserName>
+							<UserName>{user}</UserName>
 							<Date>작성일 : {formattedDate}</Date>
 						</InfoBox>
 						{isAuthor && <Btn onClick={handleEdit}>수정하기</Btn>}

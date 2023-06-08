@@ -18,7 +18,6 @@ import {
 	Image,
 	Contentdiv,
 	Content,
-	BtnDelete,
 } from './style.ts';
 import CommentSection from '@src/components/Comment/Comment.tsx';
 
@@ -27,11 +26,9 @@ const FindFriendDetail = () => {
 	const { postId } = useParams();
 	const [post, setPost] = useState<any>([]);
 	const [datauser, setDataUser] = useState<any>('');
-	const [loginUser, setLoginUser] = useState(false);
 
 	useEffect(() => {
 		fetchPost();
-		loginUserLogic();
 	}, []);
 
 	const fetchPost = async () => {
@@ -43,42 +40,28 @@ const FindFriendDetail = () => {
 				},
 			});
 			setPost(response!.data.post.post);
-			setDataUser(response!.data.post.user);
-			console.log(response);
-		} catch (error) {
-			console.error('Error fetching post:', error);
-		}
-	};
-
-	const loginUserLogic = async () => {
-		try {
-			const token = getToken();
-			const response = await get(`/api/community/check/${postId}`, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
-			setLoginUser(response!.data);
-			console.log(response);
+			setDataUser(response!.data.post);
 		} catch (error) {
 			console.error('Error fetching post:', error);
 		}
 	};
 
 	const handleEdit = () => {
-		navigate(`/community/findfriend/edit/${postId}`);
+		navigate(`/community/question/edit/${postId}`);
 	};
 
 	if (!post) {
 		return <div>Loading...</div>;
 	}
 
-	const { title, createdAt, images, content } = post;
+	const { title, user_id, createdAt, images, content } = post;
+	const { user } = datauser;
+	const loggedInUser = user_id;
+	const isAuthor = loggedInUser === user_id;
 	const hasPostImage = !!images;
 	const formattedDate = dayjs(createdAt)
 		.locale('ko')
 		.format('YYYY년 MM월 DD일 HH:mm:ss');
-
 	return (
 		<>
 			<DetailContainer>
@@ -86,11 +69,10 @@ const FindFriendDetail = () => {
 					<Title>{title}</Title>
 					<SubContainer>
 						<InfoBox>
-							<UserName>{datauser}</UserName>
+							<UserName>{}</UserName>
 							<Date>작성일 : {formattedDate}</Date>
 						</InfoBox>
-						{loginUser && <Btn onClick={handleEdit}>수정하기</Btn>}
-						{loginUser && <BtnDelete onClick={handleEdit}>삭제하기</BtnDelete>}
+						{isAuthor && <Btn onClick={handleEdit}>수정하기</Btn>}
 					</SubContainer>
 				</Header>
 				<Line></Line>

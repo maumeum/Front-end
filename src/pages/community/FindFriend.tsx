@@ -38,7 +38,7 @@ const FindFriend = () => {
 					},
 				},
 			);
-			setPostListData(response);
+			setPostListData(response.data);
 			console.log(response);
 		} catch (error) {
 			console.error('Error fetching post list:', error);
@@ -54,7 +54,7 @@ const FindFriend = () => {
 		navigate('/community/findfriend/write');
 	};
 	const navigateDetail = (postId: string) => {
-		navigate(`/community/findfriend/${postId}`);
+		navigate(`/community/${postId}`);
 	};
 
 	return (

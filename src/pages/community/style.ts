@@ -46,7 +46,17 @@ export const Btn = styled.button`
 	border-radius: 3.3rem;
 	border: none;
 	height: 6.6rem;
-	width: 16.1rem;
+	width: 13rem;
+	margin-top: 2rem;
+	cursor: pointer;
+	margin-left: 50rem;
+`;
+export const BtnDelete = styled.button`
+	background-color: #ffd4d4;
+	border-radius: 3.3rem;
+	border: none;
+	height: 6.6rem;
+	width: 13rem;
 	margin-top: 2rem;
 	cursor: pointer;
 `;
