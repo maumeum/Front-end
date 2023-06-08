@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { get } from '@src/api/Api';
+import { get, del } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
@@ -18,6 +18,7 @@ import {
 	Image,
 	Contentdiv,
 	Content,
+	BtnDelete,
 } from '@src/pages/community/style.ts';
 import CommentSection from '@src/components/Comment/Comment.tsx';
 import DataType from '@src/types/DataType';
@@ -26,10 +27,12 @@ const ReviewDetail = () => {
 	const navigate = useNavigate();
 	const { postId } = useParams();
 	const [post, setPost] = useState<any>([]);
-	//const [datauser, setDataUser] = useState<any>('');
+	const [loginUser, setLoginUser] = useState(false);
+	const [datauser, setDataUser] = useState<any>('');
 
 	useEffect(() => {
 		fetchPost();
+		loginUserLogic();
 	}, []);
 
 	const fetchPost = async () => {
@@ -41,13 +44,28 @@ const ReviewDetail = () => {
 				},
 			});
 			setPost(response.data);
+			setDataUser(response.data.user_id);
 			console.log(response);
 			//setDataUser(response.data);
 		} catch (error) {
 			console.error('Error fetching post:', error);
 		}
 	};
-	//로그인한 사용자 구분 로직 받기
+
+	const loginUserLogic = async () => {
+		try {
+			const token = getToken();
+			const response = await get<DataType>(`/review/check/${postId}`, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
+			setLoginUser(response.data);
+			console.log(response);
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	const handleEdit = () => {
 		navigate(`/community/findfriend/edit/${postId}`);
@@ -57,9 +75,21 @@ const ReviewDetail = () => {
 		return <div>Loading...</div>;
 	}
 
+	const handleDelete = async () => {
+		try {
+			const token = getToken();
+			await del<DataType>(`/api/review/users/${postId}`, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
+			navigate('/review');
+		} catch (error) {
+			console.log('Error delecting post:', error);
+		}
+	};
+
 	const { title, _id, createdAt, images, content } = post;
-	const loggedInUser = '로그인한 사용자';
-	const isAuthor = loggedInUser === _id;
 	const hasPostImage = !!images;
 
 	const formattedDate = dayjs(createdAt)
@@ -73,10 +103,13 @@ const ReviewDetail = () => {
 					<Title>{title}</Title>
 					<SubContainer>
 						<InfoBox>
-							<UserName>유저네임</UserName>
+							<UserName>{datauser.nickname}</UserName>
 							<Date>작성일 : {formattedDate}</Date>
 						</InfoBox>
-						{isAuthor && <Btn onClick={handleEdit}>수정하기</Btn>}
+						{loginUser && <Btn onClick={handleEdit}>수정하기</Btn>}
+						{loginUser && (
+							<BtnDelete onClick={handleDelete}>삭제하기</BtnDelete>
+						)}
 					</SubContainer>
 				</Header>
 				<Line></Line>
