@@ -25,6 +25,7 @@ import Withdrawal from '@pages/myPage/withdrawal';
 import ReviewDetail from '@src/pages/reviewPage/ReviewDetail';
 import TeamAuth from '@pages/admin/TeamAuth';
 import Report from '@pages/admin/Report';
+import CommunityEditPage from '@src/pages/community/CommunityEditPage';
 
 function App() {
 	return (
@@ -51,6 +52,7 @@ function App() {
 				<Route path='/mypage/edit' element={<UserInfoEdit />} />
 				<Route path='/mypage/profile' element={<MyProfile />} />
 				<Route path='/community/:postId' element={<FindFriendDetail />} />
+				<Route path='community/edit/:postId' element={<CommunityEditPage />} />
 				<Route path='/review/:postId' element={<ReviewDetail />} />
 				<Route path='/mypage/withdrawal' element={<Withdrawal />} />
 				<Route path='/admin/team_auth' element={<TeamAuth />} />
