@@ -25,8 +25,8 @@ const Report = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const responseData = await get<DataType>('/api/review');
-			setReviewList(responseData.data);
+			const responseData = await get<DataType>('/api/review?limit=0&skip=10');
+			setReviewList(responseData.data.reviews);
 		};
 		fetchData();
 	}, []);
