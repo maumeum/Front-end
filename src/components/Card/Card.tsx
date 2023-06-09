@@ -13,30 +13,50 @@ import {
 	SelectContainer,
 } from './card.ts';
 import { TabTypes } from '../../utils/EnumTypes.ts';
+import { post } from '@src/api/Api';
+import { getToken } from '@src/api/Token';
+import Swal from 'sweetalert2';
+import car from '@src/assets/images/car.png';
 
 export type Props = {
 	data: {
-		title: string;
-		thumbnail: string;
-		nickname: string;
-		profile: string;
-		recruitStatus: string;
-		startDate: string;
-		endDate: string;
+		createdAt: string;
+		isParticipate?: boolean;
+		volunteer_id: {
+			startDate: string;
+			endDate: string;
+			_id: string;
+			title: string;
+			centName: string;
+			statusName: string;
+			deadline: string;
+			images: string[];
+		};
 	};
 	currTab: string;
 };
 
+function truncateDate(date: string) {
+	if (!date) {
+		return '';
+	}
+	return date.split('T')[0];
+}
+
+function truncateCentName(name: string) {
+	if (!name) {
+		return '';
+	}
+	if (name.length > 10) {
+		return `${name.slice(0, 10)}...`;
+	} else {
+		return name;
+	}
+}
+
 function Card({ currTab, data }: Props) {
-	const {
-		title,
-		thumbnail,
-		nickname,
-		recruitStatus,
-		profile,
-		startDate,
-		endDate,
-	} = data;
+	const { _id, title, centName, statusName, images, startDate, endDate } =
+		data.volunteer_id;
 
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -44,31 +64,70 @@ function Card({ currTab, data }: Props) {
 		setIsOpen(true);
 	};
 
-	function closeModal() {
+	const closeModal = () => {
 		setIsOpen(false);
-	}
+	};
 
 	const handleRecruitmentStatusChange = (selectedValue: string) => {
 		console.log('Selected Value:', selectedValue);
+	};
+
+	const handleParticipated = async () => {
+		console.log(_id);
+		console.log(getToken());
+		try {
+			await post(
+				`/api/review/users/participation/${_id}`,
+				{},
+				{
+					headers: {
+						Authorization: `Bearer ${getToken()}`,
+					},
+				},
+			);
+			Swal.fire({
+				title: '참여하신 활동이 맞으십니까?',
+				text: '커뮤니티 경험 향상을 위해 거짓 정보는 지양해주세요!',
+				icon: 'info',
+				showCancelButton: true,
+				confirmButtonColor: '#ffd4d4',
+				cancelButtonColor: '#afcd81',
+				confirmButtonText: '네',
+				cancelButtonText: '아니요',
+			}).then((result) => {
+				if (result.isConfirmed) {
+					Swal.fire('완료된 봉사로 변경되었습니다!', 'success');
+				}
+			});
+		} catch (error) {
+			console.log(error);
+			Swal.fire({
+				title: '활동이 시작되지 않은 봉사입니다.',
+				icon: 'success',
+				confirmButtonColor: 'var(--button--color)',
+			});
+		}
 	};
 
 	return (
 		<>
 			<CardContainer currTab={currTab}>
 				<ImgBox>
-					<img src={thumbnail} alt='' />
+					<img src={car} alt='' />
 					<Badge currTab={currTab}>
-						<p>{recruitStatus}</p>
+						<p>{statusName}</p>
 					</Badge>
 				</ImgBox>
 				<ContentBox>
 					<VolunInfo>
 						<p>{title}</p>
-						<p>{`활동기간: ${startDate} ~ ${endDate}`}</p>
+						<p>{`활동기간: ${truncateDate(startDate)} ~ ${truncateDate(
+							endDate,
+						)}`}</p>
 					</VolunInfo>
 					<UserInfo>
-						<img src={profile} alt='작성자 프로필사진' />
-						<p>{nickname}</p>
+						<img src={car} alt='작성자 프로필사진' />
+						<p>{truncateCentName(centName)}</p>
 						{currTab === TabTypes.VOLUNTEER_COMPLETED && (
 							<ButtonContainer>
 								<SmallButton onClick={openModal}>리뷰작성</SmallButton>
@@ -79,7 +138,12 @@ function Card({ currTab, data }: Props) {
 								<Selector onChange={handleRecruitmentStatusChange} />
 							</SelectContainer>
 						)}
-						<Modal isOpen={isOpen} closeModal={closeModal} />
+						{currTab === TabTypes.VOLUNTEER_APPLIED && (
+							<ButtonContainer>
+								<SmallButton onClick={handleParticipated}>참여완료</SmallButton>
+							</ButtonContainer>
+						)}
+						<Modal isOpen={isOpen} closeModal={closeModal} id={_id} />
 					</UserInfo>
 				</ContentBox>
 			</CardContainer>

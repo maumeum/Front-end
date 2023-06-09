@@ -11,7 +11,7 @@ const GlobalStyles = createGlobalStyle`
   * {
     font-family: 'Kakao', AppleSDGothicNeo, sans-serif;
   }
-
+  
   html {
     font-size: 62.5%;
     letter-spacing: -0.05px;
@@ -60,7 +60,7 @@ const GlobalStyles = createGlobalStyle`
       font-size: 128.5%;
     }
   }
-  
+
   body {
     display: block;
     margin: 0;

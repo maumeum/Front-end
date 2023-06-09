@@ -25,6 +25,7 @@ import Withdrawal from '@pages/myPage/withdrawal';
 import ReviewDetail from '@src/pages/reviewPage/ReviewDetail';
 import TeamAuth from '@pages/admin/TeamAuth';
 import Report from '@pages/admin/Report';
+import Error from '@pages/errorPage/Error';
 
 function App() {
 	return (
@@ -55,6 +56,7 @@ function App() {
 				<Route path='/mypage/withdrawal' element={<Withdrawal />} />
 				<Route path='/admin/team_auth' element={<TeamAuth />} />
 				<Route path='/admin/report' element={<Report />} />
+				<Route path='error' element={<Error />} />
 			</Routes>
 			<Footer />
 		</Router>

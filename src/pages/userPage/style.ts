@@ -101,7 +101,7 @@ export const SignUpSection = styled.div<SignUpProps>`
 		pageType &&
 		css`
 			width: 60rem;
-			height: 60rem;
+			height: 50rem;
 			margin: 5rem 0 10rem;
 			left: 30.5rem;
 		`}
@@ -192,4 +192,19 @@ export const WithdrawalSection = styled.div`
 	margin-left: 2rem;
 	margin-bottom: 3rem;
 	width: 70%;
+`;
+
+export const WithdrawalContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
+
+export const ButtonContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	button + button {
+		margin-top: 3rem;
+	}
 `;

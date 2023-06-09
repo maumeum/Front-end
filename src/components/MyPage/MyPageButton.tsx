@@ -1,13 +1,31 @@
+import { useEffect } from 'react';
+
+import useAuthStore from '@src/store/useAuthStore';
 import { getToken } from '@api/Token';
 import { ButtonContainer, ButtonWord } from './myPage.ts';
 
 const MyPageButton = () => {
+	const { userData, initialize } = useAuthStore();
+
+	// user 정보 불러오기
+	useEffect(() => {
+		initialize();
+	}, []);
+
 	return (
 		<>
 			{getToken() !== null ? (
-				<ButtonContainer to='/mypage'>
-					<ButtonWord>MY</ButtonWord>
-				</ButtonContainer>
+				<>
+					{userData !== null && userData.role === 'user' ? (
+						<ButtonContainer to='/mypage'>
+							<ButtonWord>MY</ButtonWord>
+						</ButtonContainer>
+					) : (
+						<ButtonContainer to='/admin/team_auth'>
+							<ButtonWord>관리자</ButtonWord>
+						</ButtonContainer>
+					)}
+				</>
 			) : (
 				''
 			)}
