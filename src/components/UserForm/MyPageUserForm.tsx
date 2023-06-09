@@ -27,6 +27,10 @@ import { get, patch } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType';
 
+// props값에 따라 조건부로 렌더링 되는 부분이 많아서 로직이 복잡해 고민입니다
+//컴포넌트간 결합도가 너무 강해서 그런거겠죠..? 추후 어떻게 분리를 하거나 변경해야할지
+//방향성을 알고싶습니다!
+
 type MyPageUserFormProps = {
 	pageType: string; //readOnly설정을 위한 props 값
 };
@@ -72,7 +76,6 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 	const navigate = useNavigate();
 
 	//모달설정
-
 	const [isOpen, setIsOpen] = useState(false);
 	const [editMode, setEditMode] = useState(false);
 	const [authMode, setAuthMode] = useState(false);
@@ -132,7 +135,11 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 					},
 				);
 			} catch (error) {
-				console.log(error);
+				Swal.fire({
+					title: '회원정보 수정에 실패했습니다',
+					icon: 'error',
+					confirmButtonColor: 'var(--button--color)',
+				});
 			}
 		}
 		if (validPhoneNum(phone) && nickname.length > 0) {

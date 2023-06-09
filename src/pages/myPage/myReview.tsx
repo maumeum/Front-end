@@ -13,7 +13,6 @@ import { TabTypes } from '@src/utils/EnumTypes';
 import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType';
-import Swal from 'sweetalert2';
 
 type ReviewProps = {
 	title: string;
@@ -22,7 +21,7 @@ type ReviewProps = {
 	_id: string;
 };
 
-function myReview() {
+function MyReview() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -59,6 +58,7 @@ function myReview() {
 					<TabMenu>
 						<Tab currTab={currTab} tabs={tabs} />
 					</TabMenu>
+					{data.length === 0 && <div>작성된 리뷰가 없습니다.</div>}
 					{data.map((data) => {
 						return (
 							<MyPost
@@ -75,4 +75,4 @@ function myReview() {
 	);
 }
 
-export default myReview;
+export default MyReview;

@@ -15,6 +15,7 @@ import { TabTypes } from '@src/utils/EnumTypes';
 import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType';
+import Swal from 'sweetalert2';
 
 interface ResponseData {
 	_id: string;
@@ -34,7 +35,7 @@ interface ResponseData {
 	updatedAt: string;
 }
 
-function volunSuggest() {
+function VolunSuggest() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -45,10 +46,13 @@ function volunSuggest() {
 				});
 				setDataList(response.data as ResponseData[]);
 			} catch (error) {
-				console.log(error);
+				Swal.fire({
+					title: '데이터를 불러오는데 실패하였습니다.',
+					icon: 'error',
+					confirmButtonColor: 'var(--button--color)',
+				});
 			}
 		};
-
 		fetchData();
 	}, []);
 
@@ -57,6 +61,7 @@ function volunSuggest() {
 	const [currTab] = useState<TabTypes>(TabTypes.VOLUNTEER_SUGGEST);
 
 	const transformData = dataList.map((data) => {
+		//Card 컴포넌트 형식에 맞게 데이터형태 변환
 		return {
 			createdAt: data.createdAt,
 			volunteer_id: {
@@ -84,6 +89,9 @@ function volunSuggest() {
 						<Tab currTab={currTab} tabs={tabs} />
 					</TabMenu>
 					<CardBox>
+						{dataList.length === 0 && (
+							<div>내가 등록한 봉사 내역이 없습니다.</div>
+						)}
 						{transformData.map((data) => (
 							<Card key={data.volunteer_id._id} data={data} currTab={currTab} />
 						))}
@@ -94,4 +102,4 @@ function volunSuggest() {
 	);
 }
 
-export default volunSuggest;
+export default VolunSuggest;

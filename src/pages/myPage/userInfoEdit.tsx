@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
 	Container,
 	Main,
@@ -9,10 +9,8 @@ import Tab from '@components/Tab/Tab.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/utils/EnumTypes';
 import MyPageUserForm from '@components/UserForm/MyPageUserForm';
-import { getToken } from '@src/api/Token';
-import Swal from 'sweetalert2';
 
-function userInfoEdit() {
+function UserInfoEdit() {
 	const [currTab] = useState<TabTypes>(TabTypes.EDIT_MYINFO);
 	const tabs = [TabTypes.EDIT_MYINFO];
 
@@ -32,4 +30,4 @@ function userInfoEdit() {
 	);
 }
 
-export default userInfoEdit;
+export default UserInfoEdit;

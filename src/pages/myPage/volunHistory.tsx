@@ -6,8 +6,6 @@ import {
 	TabMenu,
 	CardBox,
 } from '@components/MyPage/myPage.ts';
-import car from '@src/assets/images/car.png';
-
 import Tab from '@components/Tab/Tab.tsx';
 import Card from '@components/Card/Card.tsx';
 import Menu from '@components/Menu/Menu.tsx';
@@ -33,25 +31,7 @@ type VolunProps = {
 	};
 };
 
-const completedData1 = [
-	{
-		createdAt: '2021-01-01',
-		_id: '1',
-		isParticipate: false,
-		volunteer_id: {
-			startDate: '2021-01-01',
-			endDate: '2021-01-02',
-			_id: '6478ac1fb4594284808acbea',
-			title: '이건 완료된 봉사에서만 보이는 글 제목입니다. 제발 성공해라',
-			centName: '배가고파요배가고파',
-			statusName: '모집중',
-			deadline: '내일까지모집',
-			images: [car],
-		},
-	},
-];
-
-function myVolunHistory() {
+function MyVolunHistory() {
 	const [currTab, setCurrTab] = useState<TabTypes>(TabTypes.VOLUNTEER_APPLIED);
 	const tabs = [TabTypes.VOLUNTEER_APPLIED, TabTypes.VOLUNTEER_COMPLETED];
 	const handleClickTab = (tab: TabTypes) => {
@@ -71,7 +51,11 @@ function myVolunHistory() {
 				});
 				setAppliedData(response.data as VolunProps[]);
 			} catch (error) {
-				console.log(error);
+				Swal.fire({
+					title: '데이터를 불러오는데 실패하였습니다.',
+					icon: 'error',
+					confirmButtonColor: 'var(--button--color)',
+				});
 			}
 		};
 
@@ -91,7 +75,6 @@ function myVolunHistory() {
 				console.log(error);
 			}
 		};
-
 		fetchData();
 	}, []);
 
@@ -113,7 +96,7 @@ function myVolunHistory() {
 						<Tab currTab={currTab} onClick={handleClickTab} tabs={tabs} />
 					</TabMenu>
 					<CardBox>
-						{data.length === 0 && <h1>봉사 내역이 존재하지 않습니다.</h1>}
+						{data.length === 0 && <div>봉사 내역이 존재하지 않습니다.</div>}
 						{data.map((data) => (
 							<Card key={data.volunteer_id._id} currTab={currTab} data={data} />
 						))}
@@ -124,4 +107,4 @@ function myVolunHistory() {
 	);
 }
 
-export default myVolunHistory;
+export default MyVolunHistory;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
 	Container,
 	Main,
@@ -9,10 +9,8 @@ import Tab from '@components/Tab/Tab.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/utils/EnumTypes';
 import MyPageUserForm from '@components/UserForm/MyPageUserForm';
-import { getToken } from '@src/api/Token';
-import Swal from 'sweetalert2';
 
-function myPage() {
+function MyPage() {
 	const [currTab] = useState<TabTypes>(TabTypes.MYPAGE);
 	const tabs = [TabTypes.MYPAGE];
 
@@ -31,4 +29,4 @@ function myPage() {
 	);
 }
 
-export default myPage;
+export default MyPage;

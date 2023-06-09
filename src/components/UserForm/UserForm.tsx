@@ -13,8 +13,6 @@ import { passwordError, passwordCheckError } from '@src/utils/errorMessage.ts';
 import InputForm from '@src/components/UserForm/InputForm.tsx';
 import { getToken, deleteToken } from '@src/api/Token';
 
-const token = getToken();
-
 type UserFormProps = {
 	closeModal: () => void;
 	editMode?: boolean;
@@ -55,7 +53,7 @@ function UserForm({ closeModal, editMode, authMode }: UserFormProps) {
 					{ password },
 					{
 						headers: {
-							Authorization: `Bearer ${token}`,
+							Authorization: `Bearer ${getToken()}`,
 						},
 					},
 				);
@@ -68,7 +66,6 @@ function UserForm({ closeModal, editMode, authMode }: UserFormProps) {
 				//회원정보 수정하는 컴포넌트
 				navigate('/mypage/edit');
 			} catch (error) {
-				console.log(error);
 				Swal.fire({
 					title: '비밀번호가 일치하지 않습니다',
 					icon: 'error',
@@ -95,7 +92,7 @@ function UserForm({ closeModal, editMode, authMode }: UserFormProps) {
 						{ password },
 						{
 							headers: {
-								Authorization: `Bearer ${token}`,
+								Authorization: `Bearer ${getToken()}`,
 							},
 						},
 					);
@@ -103,12 +100,17 @@ function UserForm({ closeModal, editMode, authMode }: UserFormProps) {
 						title: '비밀번호가 변경되었습니다! 재로그인 해주세요:)',
 						confirmButtonColor: 'var(--button--color)',
 					});
-					//모달닫고 로그아웃하고 메인으로이동시키기
 					closeModal();
 					deleteToken();
 					navigate('/login');
 				} catch (error) {
-					console.log(error);
+					Swal.fire({
+						//이런식으로 alert를 통해 유저에게 실패정보를 주는 경우에는
+						//백엔드쪽에서 넘어오는 에러에 따라 유저에게 다양한 alert를 띄워주어야할까요?
+						title: '비밀번호를 확인해주세요!',
+						icon: 'error',
+						confirmButtonColor: 'var(--button--color)',
+					});
 				}
 			}
 		}

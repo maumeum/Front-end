@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Modal from '@components/Modal/Modal.tsx';
 import Selector from '@components/Selector/Selector.tsx';
 import { SmallButton } from '@components/Buttons/SmallButton.ts';
@@ -92,7 +92,6 @@ function Card({ currTab, data }: Props) {
 					);
 					setSelectedStatus(selectedValue);
 				} catch (error) {
-					console.log(error);
 					Swal.fire({
 						title: '모집상태 변경에 실패하였습니다 :(',
 						icon: 'error',
@@ -103,6 +102,8 @@ function Card({ currTab, data }: Props) {
 					title: `${selectedValue} (으)로 상태가 변경되었습니다`,
 					icon: 'success',
 					confirmButtonColor: 'var(--button--color)',
+				}).then(() => {
+					window.location.reload();
 				});
 			}
 		});
@@ -134,7 +135,6 @@ function Card({ currTab, data }: Props) {
 				}
 			});
 		} catch (error) {
-			console.log(error);
 			Swal.fire({
 				title: '활동이 시작되지 않은 봉사입니다.',
 				icon: 'success',
@@ -147,7 +147,7 @@ function Card({ currTab, data }: Props) {
 		<>
 			<CardContainer currTab={currTab} statusName={statusName}>
 				<ImgBox>
-					<img src={car} alt='' />
+					<img src={car} alt='유저프로필' />
 					<Badge currTab={currTab} statusName={selectedStatus}>
 						<p>{statusName}</p>
 					</Badge>
@@ -159,7 +159,7 @@ function Card({ currTab, data }: Props) {
 							endDate,
 						)}`}</p>
 					</VolunInfo>
-					{/* 컴포넌트 분리 시급.. */}
+					{/* 컴포넌트 분리 시급... */}
 					<UserInfo>
 						<img src={car} alt='작성자 프로필사진' />
 						<p>{truncateCentName(centName)}</p>

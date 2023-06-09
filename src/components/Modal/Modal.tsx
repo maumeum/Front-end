@@ -10,7 +10,6 @@ type ModalProps = {
 	editMode?: boolean;
 	authMode?: boolean;
 	id?: string;
-	isParticipate: boolean;
 };
 
 const Modal = ({
@@ -20,17 +19,15 @@ const Modal = ({
 	editMode,
 	authMode,
 	id,
-	isParticipate,
 }: ModalProps) => {
-	const handleSubmit = () => {
-		//요청보내는 코드 들어가야하는 부분
+	const handleClose = () => {
 		closeModal();
 	};
 
 	return (
 		<ReactModal
 			isOpen={isOpen}
-			onRequestClose={handleSubmit}
+			onRequestClose={handleClose}
 			style={customStyles}>
 			{user ? (
 				<UserForm
