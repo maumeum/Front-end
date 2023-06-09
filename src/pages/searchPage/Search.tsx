@@ -37,10 +37,10 @@ const Search = () => {
 	// 봉사활동 조회
 	useEffect(() => {
 		const fetchData = async () => {
-			const responseData = await get<VolunteerListType[]>(
+			const responseData = await get<DataType>(
 				`/api/volunteers/search/?keyword=${query}`,
 			);
-			setVolunteerList(responseData);
+			setVolunteerList(responseData.data);
 		};
 		fetchData();
 	}, [query]);
