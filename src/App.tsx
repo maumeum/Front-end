@@ -26,6 +26,7 @@ import ReviewDetail from '@src/pages/reviewPage/ReviewDetail';
 import TeamAuth from '@pages/admin/TeamAuth';
 import Report from '@pages/admin/Report';
 import Error from '@pages/errorPage/Error';
+import PrivateRoute from '@utils/PrivateRoute';
 
 function App() {
 	return (
@@ -33,9 +34,6 @@ function App() {
 			<Header />
 			<Routes>
 				<Route path='/' element={<Main />} />
-				<Route path='/mypage/history' element={<MyVolunHistory />} />
-				<Route path='/mypage/suggest' element={<MyVolunSuggest />} />
-				<Route path='/mypage/comment' element={<MyComment />} />
 				<Route path='/community/findfriend' element={<FindFriend />} />
 				<Route path='/community/question' element={<Question />} />
 				<Route
@@ -47,16 +45,22 @@ function App() {
 				<Route path='/sign_up' element={<SignUp />} />
 				<Route path='/search' element={<Search />} />
 				<Route path='/review' element={<Review />} />
-				<Route path='/mypage/review' element={<MyReview />} />
-				<Route path='/mypage' element={<MyPage />} />
-				<Route path='/mypage/edit' element={<UserInfoEdit />} />
-				<Route path='/mypage/profile' element={<MyProfile />} />
-				<Route path='/community/:postId' element={<FindFriendDetail />} />
 				<Route path='/review/:postId' element={<ReviewDetail />} />
-				<Route path='/mypage/withdrawal' element={<Withdrawal />} />
 				<Route path='/admin/team_auth' element={<TeamAuth />} />
 				<Route path='/admin/report' element={<Report />} />
-				<Route path='error' element={<Error />} />
+				<Route path='/community/:postId' element={<FindFriendDetail />} />
+
+				{/* 권한이 필요한 페이지들 */}
+				<Route element={<PrivateRoute authentication={true} />}>
+					<Route path='/mypage/review' element={<MyReview />} />
+					<Route path='/mypage' element={<MyPage />} />
+					<Route path='/mypage/history' element={<MyVolunHistory />} />
+					<Route path='/mypage/suggest' element={<MyVolunSuggest />} />
+					<Route path='/mypage/comment' element={<MyComment />} />
+					<Route path='/mypage/edit' element={<UserInfoEdit />} />
+					<Route path='/mypage/profile' element={<MyProfile />} />
+					<Route path='/mypage/withdrawal' element={<Withdrawal />} />
+				</Route>
 			</Routes>
 			<Footer />
 		</Router>

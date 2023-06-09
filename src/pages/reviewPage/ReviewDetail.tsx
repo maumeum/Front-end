@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { get, del } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
+import Parser from 'html-react-parser';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import {
@@ -45,6 +46,8 @@ const ReviewDetail = () => {
 			});
 			setPost(response.data);
 			setDataUser(response.data.user_id);
+			console.log(response.data);
+			// console.log(response.data.content);
 			//setDataUser(response.data);
 		} catch (error) {
 			console.error('Error fetching post:', error);
@@ -115,7 +118,10 @@ const ReviewDetail = () => {
 				<ContentContainer>
 					{hasPostImage && <Image src={images} alt='content-image' />}
 					<Contentdiv>
-						<Content>{content}</Content>
+						{/* <Content>{Parser(content)}</Content> */}
+						<Content>
+							{typeof content === 'string' ? Parser(content) : null}
+						</Content>
 					</Contentdiv>
 				</ContentContainer>
 			</DetailContainer>

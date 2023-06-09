@@ -5,10 +5,12 @@ import { customStyles } from '@components/Modal/modal';
 import MyReview from '../MyPost/MyReview';
 type ModalProps = {
 	isOpen: boolean;
-	closeModal?: () => void;
+	closeModal: () => void;
 	user?: string;
 	editMode?: boolean;
 	authMode?: boolean;
+	id?: string;
+	isParticipate: boolean;
 };
 
 const Modal = ({
@@ -17,6 +19,8 @@ const Modal = ({
 	user,
 	editMode,
 	authMode,
+	id,
+	isParticipate,
 }: ModalProps) => {
 	const handleSubmit = () => {
 		//요청보내는 코드 들어가야하는 부분
@@ -35,7 +39,7 @@ const Modal = ({
 					authMode={authMode}
 				/>
 			) : (
-				<MyReview closeModal={closeModal} />
+				<MyReview closeModal={closeModal} id={id} />
 			)}
 		</ReactModal>
 	);

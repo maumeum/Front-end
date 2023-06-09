@@ -13,6 +13,7 @@ export const customStyles = {
 		bottom: 'auto',
 		margin: 'auto',
 		transform: 'translate(-50%, -50%)',
+		width: '73rem',
 	},
 };
 

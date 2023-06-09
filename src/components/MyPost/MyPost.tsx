@@ -76,7 +76,6 @@ function MyPost({ currTab, data, onRemovePost }: PostProps) {
 				});
 			}
 		} else if (currTab === TabTypes.WRITTEN_POSTS) {
-			console.log(currTab);
 			try {
 				const response = await del(`/api/community/${_id}`, {
 					headers: {
@@ -105,7 +104,7 @@ function MyPost({ currTab, data, onRemovePost }: PostProps) {
 		<>
 			<PostListContainer>
 				<PostBox>
-					{/* //데이터 없으면 없다고 표시 */}
+					{!data && <Title>등록된 게시글이 없습니다</Title>}
 					<Title>{truncatedTitle}</Title>
 					<Description>
 						<TruncatedDescription
