@@ -21,8 +21,7 @@ import car from '@src/assets/images/car.png';
 type Props = {
 	data: {
 		createdAt: string;
-		_id: string;
-		isParticipate: boolean;
+		isParticipate?: boolean;
 		volunteer_id: {
 			startDate: string;
 			endDate: string;

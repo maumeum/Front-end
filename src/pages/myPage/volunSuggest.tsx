@@ -75,10 +75,12 @@ function volunSuggest() {
 
 		fetchData();
 	}, []);
+
 	const [dataList, setDataList] = useState<ResponseData[]>([]);
 	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
 	const [currTab] = useState<TabTypes>(TabTypes.VOLUNTEER_SUGGEST);
 	console.log(dataList);
+
 	const transformData = dataList.map((data) => {
 		return {
 			createdAt: data.createdAt,
