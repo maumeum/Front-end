@@ -1,85 +1,147 @@
-import React, { useState, useEffect } from 'react';
-import { SignUpSection, SignUpForm } from '@pages/userPage/style';
 import {
-	validEmail,
-	validPassword,
-	validPhoneNum,
-} from '@src/utils/signUpCheck.ts';
+	useState,
+	useEffect,
+	MouseEvent,
+	SetStateAction,
+	Dispatch,
+	ChangeEvent,
+} from 'react';
+import {
+	SignUpSection,
+	SignUpForm,
+	ButtonContainer,
+} from '@pages/userPage/style';
+import { validEmail, validPhoneNum } from '@src/utils/signUpCheck.ts';
 import {
 	emailError,
 	nicknameError,
-	passwordError,
-	passwordCheckError,
 	phoneNumError,
 } from '@src/utils/errorMessage.ts';
 import Swal from 'sweetalert2';
 import InputForm from '@src/components/UserForm/InputForm.tsx';
 import LargeButton from '@components/Buttons/LargeButton';
 import Modal from '@components/Modal/Modal.tsx';
+import { useNavigate } from 'react-router-dom';
 import { TabTypes } from '@src/utils/EnumTypes';
+import { get, patch } from '@src/api/Api';
+import { getToken } from '@src/api/Token';
+import DataType from '@src/types/DataType';
 
 type MyPageUserFormProps = {
-	pageType: string;
-	myInfo: {
-		email: string;
-		nickname: string;
-		password: string;
-		pwdcheck: string;
-		phoneNum: string;
-	};
+	pageType: string; //readOnly설정을 위한 props 값
 };
 
-function MyPageUserForm({ myInfo, pageType }: MyPageUserFormProps) {
-	useEffect(() => {
-		const { nickname, password, pwdcheck, phoneNum } = myInfo;
-		setNickname(nickname);
-		setCheckPassword(pwdcheck);
-		setPhoneNum(phoneNum);
-		setPassword(password);
-	}, []);
+type UserInfo = {
+	email: string;
+	nickname: string;
+	_id: string;
+	phone: string;
+	image: string;
+};
 
+function MyPageUserForm({ pageType }: MyPageUserFormProps) {
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await get<DataType>('/api/users/info', {
+					headers: {
+						Authorization: `Bearer ${getToken()}`,
+					},
+				});
+				const { email, nickname, phone } = response.data as UserInfo;
+				setEmail(email);
+				setNickname(nickname);
+				setPhone(phone);
+				setInitialNickname(nickname);
+				setInitialPhone(phone);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		fetchData();
+	}, []);
+	const [initialNickname, setInitialNickname] = useState<string>('');
+	const [initialPhone, setInitialPhone] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
 	const [nickname, setNickname] = useState<string>('');
-	const [password, setPassword] = useState<string>('');
-	const [checkPassword, setCheckPassword] = useState<string>('');
-	const [phoneNum, setPhoneNum] = useState<string>('');
+	const [phone, setPhone] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
+
 	const isMyPage = pageType === TabTypes.MYPAGE;
+	const navigate = useNavigate();
 
 	//모달설정
+
 	const [isOpen, setIsOpen] = useState(false);
+	const [editMode, setEditMode] = useState(false);
+	const [authMode, setAuthMode] = useState(false);
+
 	const openModal = () => {
 		setIsOpen(true);
 	};
-	function closeModal() {
+	const closeModal = () => {
 		setIsOpen(false);
-	}
+	};
+	const changePwClickHandler = () => {
+		setEditMode(true);
+		setAuthMode(false);
+		setIsOpen(true);
+	};
 	// inputValue 함수
 	const getFormChanger =
-		(setter: React.Dispatch<React.SetStateAction<string>>) =>
-		(e: React.ChangeEvent<HTMLInputElement>) => {
+		(setter: Dispatch<SetStateAction<string>>) =>
+		(e: ChangeEvent<HTMLInputElement>) => {
 			setSubmit(false);
 			setter(e.target.value);
 		};
 
-	const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+	//유저값 변경 확인
+	const isInfoChanged = () => {
+		return initialNickname !== nickname || initialPhone !== phone;
+	};
+	const isNicknameValid = nickname.length > 0;
+	const isPhoneValid = validPhoneNum(phone);
+	const isButtonDisabled =
+		!isMyPage && !(isNicknameValid && isPhoneValid && isInfoChanged());
+
+	const clickHandler = async (e: MouseEvent<HTMLButtonElement>) => {
 		{
-			isMyPage ? openModal() : null;
+			if (isMyPage) {
+				setEditMode(false);
+				setAuthMode(true);
+				openModal();
+				return;
+			}
 		}
 		// 상태 초기화
 		setSubmit(false);
 		e.preventDefault();
 		setSubmit(true);
 
-		// 비밀번호 일치여부
-		if (password !== checkPassword) {
-			Swal.fire({
-				icon: 'error',
-				title: '비밀번호가 일치하지 않습니다.',
-				confirmButtonColor: '#d33',
-			});
+		//회원정보 수정 요청
+		{
+			try {
+				await patch(
+					'/api/users/info',
+					{ nickname, phone },
+					{
+						headers: {
+							Authorization: `Bearer ${getToken()}`,
+						},
+					},
+				);
+			} catch (error) {
+				console.log(error);
+			}
 		}
-		console.log(nickname);
+		if (validPhoneNum(phone) && nickname.length > 0) {
+			Swal.fire({
+				title: '회원정보가 수정되었습니다!',
+				confirmButtonColor: 'var(--button--color)',
+			});
+			navigate('/mypage');
+		}
 	};
 
 	return (
@@ -93,7 +155,6 @@ function MyPageUserForm({ myInfo, pageType }: MyPageUserFormProps) {
 							dataName='이메일'
 							inputType='text'
 							name='email'
-							placeholder={myInfo.email}
 							value={email}
 							onChangeFn={getFormChanger(setEmail)}
 							errorMessage={emailError}
@@ -106,50 +167,39 @@ function MyPageUserForm({ myInfo, pageType }: MyPageUserFormProps) {
 						dataName='닉네임'
 						inputType='text'
 						name='nickname'
-						placeholder={myInfo.nickname}
 						value={nickname}
 						onChangeFn={getFormChanger(setNickname)}
 						errorMessage={nicknameError}
 					/>
-					<InputForm
-						isMyPage={isMyPage}
-						submit={submit}
-						dataName='비밀번호'
-						inputType='password'
-						name='password'
-						placeholder='비밀번호 4~20자 입력'
-						value={password}
-						onChangeFn={getFormChanger(setPassword)}
-						errorMessage={passwordError}
-						validPassword={validPassword}
-					/>
-					{isMyPage ? null : (
-						<InputForm
-							submit={submit}
-							dataName='비밀번호 확인'
-							inputType='password'
-							name='checkPassword'
-							placeholder='비밀번호 다시 입력'
-							value={checkPassword}
-							onChangeFn={getFormChanger(setCheckPassword)}
-							errorMessage={passwordCheckError}
-							passwordData={password}
-						/>
-					)}
+
 					<InputForm
 						isMyPage={isMyPage}
 						submit={submit}
 						dataName='핸드폰 번호'
 						inputType='text'
 						name='phoneNum'
-						placeholder="핸드폰 번호('-'없이 입력)"
-						value={phoneNum}
-						onChangeFn={getFormChanger(setPhoneNum)}
+						value={phone}
+						onChangeFn={getFormChanger(setPhone)}
 						errorMessage={phoneNumError}
 						validFn={validPhoneNum}
 					/>
-					<LargeButton onClick={clickHandler}>회원정보수정</LargeButton>
-					<Modal isOpen={isOpen} closeModal={closeModal} user={'user'} />
+					<ButtonContainer>
+						{!isMyPage && (
+							<LargeButton onClick={changePwClickHandler}>
+								비밀번호변경
+							</LargeButton>
+						)}
+						<LargeButton onClick={clickHandler} disabled={isButtonDisabled}>
+							회원정보수정
+						</LargeButton>
+					</ButtonContainer>
+					<Modal
+						isOpen={isOpen}
+						closeModal={closeModal}
+						user={'user'}
+						editMode={editMode}
+						authMode={authMode}
+					/>
 				</SignUpForm>
 			</SignUpSection>
 		</>

@@ -28,7 +28,7 @@ interface InputContainerProps {
 	dataName: string;
 	inputType: string;
 	name: string;
-	placeholder: string;
+	placeholder?: string;
 	value: string;
 	onChangeFn: any;
 	errorMessage: {

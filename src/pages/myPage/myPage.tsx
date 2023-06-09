@@ -9,18 +9,20 @@ import Tab from '@components/Tab/Tab.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/utils/EnumTypes';
 import MyPageUserForm from '@components/UserForm/MyPageUserForm';
+import { getToken } from '@src/api/Token';
+import Swal from 'sweetalert2';
 
+if (!getToken()) {
+	window.location.href = '/';
+	Swal.fire({
+		title: '로그인이 필요한 서비스입니다.',
+		icon: 'info',
+		confirmButtonColor: 'var(--button--color)',
+	});
+}
 function myPage() {
 	const [currTab] = useState<TabTypes>(TabTypes.MYPAGE);
 	const tabs = [TabTypes.MYPAGE];
-
-	const myInfo = {
-		email: 'abc@naver.com',
-		nickname: '안녕하세요',
-		password: '12345',
-		pwdcheck: '12345',
-		phoneNum: '1234',
-	};
 
 	return (
 		<Container>
@@ -31,7 +33,7 @@ function myPage() {
 				<TabMenu>
 					<Tab currTab={currTab} tabs={tabs} />
 				</TabMenu>
-				<MyPageUserForm myInfo={myInfo} pageType={TabTypes.MYPAGE} />
+				<MyPageUserForm pageType={TabTypes.MYPAGE} />
 			</Main>
 		</Container>
 	);

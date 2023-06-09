@@ -4,6 +4,7 @@ import { get } from '@api/Api';
 
 import UserType from '@src/types/UserType';
 import AuthType from '@src/types/AuthType';
+import DataType from '@src/types/DataType';
 
 const useAuthStore = create<AuthType>((set) => ({
 	userData: null,
@@ -11,12 +12,12 @@ const useAuthStore = create<AuthType>((set) => ({
 	initialize: () => {
 		const fetchData = async () => {
 			if (getToken() !== null) {
-				const responseData = await get<UserType>('/api/users/info', {
+				const responseData = await get<DataType>('/api/users/info', {
 					headers: {
 						Authorization: `Bearer ${getToken()}`,
 					},
 				});
-				useAuthStore.setState({ userData: responseData });
+				useAuthStore.setState({ userData: responseData.data as UserType });
 			} else {
 				return undefined;
 			}

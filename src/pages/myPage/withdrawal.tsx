@@ -10,7 +10,11 @@ import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/utils/EnumTypes';
 import TopBar from '@components/TopBar/TopBar.tsx';
 import LargeButton from '@components/Buttons/LargeButton';
-import { SignUpForm, WithdrawalSection } from '@pages/userPage/style';
+import {
+	SignUpForm,
+	WithdrawalSection,
+	WithdrawalContainer,
+} from '@pages/userPage/style';
 import { validEmail, validPassword } from '@src/utils/signUpCheck.ts';
 import { emailError, passwordError } from '@src/utils/errorMessage.ts';
 import InputForm from '@src/components/UserForm/InputForm.tsx';
@@ -69,39 +73,40 @@ function withdrawal() {
 				<TabMenu>
 					<Tab currTab={currTab} tabs={tabs} />
 				</TabMenu>
-
-				<WithdrawalSection>
-					<TopBar
-						title='회원탈퇴'
-						text='계정을 삭제하시려면 아래 정보를 입력하세요'
-						modal={'modal'}
-					/>
-					<SignUpForm>
-						<InputForm
-							submit={submit}
-							dataName='이메일'
-							inputType='text'
-							name='nickname'
-							placeholder='이메일을 입력해주세요.'
-							value={email}
-							onChangeFn={getFormChanger(setEmail)}
-							errorMessage={emailError}
-							validFn={validEmail}
+				<WithdrawalContainer>
+					<WithdrawalSection>
+						<TopBar
+							title='회원탈퇴'
+							text='계정을 삭제하시려면 아래 정보를 입력하세요'
+							modal={'modal'}
 						/>
-						<InputForm
-							submit={submit}
-							dataName='비밀번호'
-							inputType='password'
-							name='password'
-							placeholder='비밀번호 4~20자 입력'
-							value={password}
-							onChangeFn={getFormChanger(setPassword)}
-							errorMessage={passwordError}
-							validPassword={validPassword}
-						/>
-						<LargeButton onClick={handleSubmit}>탈퇴하기</LargeButton>
-					</SignUpForm>
-				</WithdrawalSection>
+						<SignUpForm>
+							<InputForm
+								submit={submit}
+								dataName='이메일'
+								inputType='text'
+								name='nickname'
+								placeholder='이메일을 입력해주세요.'
+								value={email}
+								onChangeFn={getFormChanger(setEmail)}
+								errorMessage={emailError}
+								validFn={validEmail}
+							/>
+							<InputForm
+								submit={submit}
+								dataName='비밀번호'
+								inputType='password'
+								name='password'
+								placeholder='비밀번호 4~20자 입력'
+								value={password}
+								onChangeFn={getFormChanger(setPassword)}
+								errorMessage={passwordError}
+								validPassword={validPassword}
+							/>
+							<LargeButton onClick={handleSubmit}>탈퇴하기</LargeButton>
+						</SignUpForm>
+					</WithdrawalSection>
+				</WithdrawalContainer>
 			</Main>
 		</Container>
 	);
