@@ -14,6 +14,7 @@ import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/utils/EnumTypes';
 import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
+import DataType from '@src/types/DataType';
 
 const props = [
 	{
@@ -61,12 +62,12 @@ function volunSuggest() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get('/api/volunteers/registeration', {
+				const response = await get<DataType>('/api/volunteers/registeration', {
 					headers: {
 						Authorization: `Bearer ${getToken()}`,
 					},
 				});
-				setDataList(response as ResponseData[]);
+				setDataList(response.data as ResponseData[]);
 			} catch (error) {
 				console.log(error);
 			}
