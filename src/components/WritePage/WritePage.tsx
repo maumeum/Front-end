@@ -13,11 +13,11 @@ import { quillModule } from '../Modal/quillModule';
 import parse from 'html-react-parser';
 
 type WritePageProps = {
-	onSave: (inputTitle: string, content: string) => void;
+	onSave: (inputTitle: string, textContent: string) => void;
 	onCancel: () => void;
 };
 
-const WritePage: React.FC<WritePageProps> = ({ onSave, onCancel }) => {
+const WritePage = ({ onSave, onCancel }: WritePageProps) => {
 	const quillRef = useRef<ReactQuill>(null);
 	const [content, setContent] = useState('');
 	const [inputTitle, setInputTitle] = useState('');

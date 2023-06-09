@@ -25,6 +25,7 @@ import Withdrawal from '@pages/myPage/withdrawal';
 import ReviewDetail from '@src/pages/reviewPage/ReviewDetail';
 import TeamAuth from '@pages/admin/TeamAuth';
 import Report from '@pages/admin/Report';
+import CommunityEditPage from '@src/pages/community/CommunityEditPage';
 import Error from '@pages/errorPage/Error';
 import PrivateRoute from '@utils/PrivateRoute';
 
@@ -45,6 +46,8 @@ function App() {
 				<Route path='/sign_up' element={<SignUp />} />
 				<Route path='/search' element={<Search />} />
 				<Route path='/review' element={<Review />} />
+				<Route path='/community/:postId' element={<FindFriendDetail />} />
+				<Route path='community/edit/:postId' element={<CommunityEditPage />} />
 				<Route path='/review/:postId' element={<ReviewDetail />} />
 				<Route path='/admin/team_auth' element={<TeamAuth />} />
 				<Route path='/admin/report' element={<Report />} />

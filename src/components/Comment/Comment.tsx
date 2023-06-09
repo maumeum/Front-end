@@ -43,6 +43,7 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 				},
 			});
 			setValue(response.data);
+			console.log(response.data);
 		} catch (error) {
 			console.error('Error fetching post:', error);
 		}
@@ -107,7 +108,7 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 						<ProfileContainer>
 							{/* <Profile src={} alt='user-profile' /> */}
 							<UserContainer>
-								<UserName>예정</UserName>
+								<UserName>{comment.user_id.nickname}</UserName>
 								<Date>{comment.createdAt}</Date>
 							</UserContainer>
 						</ProfileContainer>
