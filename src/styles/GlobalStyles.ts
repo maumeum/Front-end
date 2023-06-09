@@ -1,13 +1,16 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
-
   :root {
     --color--footer: #f5d4d4;
     --button--color: #aacb73;
     --little-color: #cde990;
     --card--color: #ffffe8;
   } 
+
+  * {
+    font-family: 'Kakao', AppleSDGothicNeo, sans-serif;
+  }
   
   html {
     font-size: 62.5%;
@@ -55,10 +58,10 @@ const GlobalStyles = createGlobalStyle`
     
     @media all and (min-width: 3850px) {
       font-size: 128.5%;
+    }
   }
 
   body {
-    font-family: 'Kakao', AppleSDGothicNeo, sans-serif;
     display: block;
     margin: 0;
     -webkit-font-smoothing: antialiased;
@@ -69,7 +72,6 @@ const GlobalStyles = createGlobalStyle`
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
-}
 `;
 
 export default GlobalStyles;

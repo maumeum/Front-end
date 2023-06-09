@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { useParams } from 'react-router-dom';
 import { getToken } from '@src/api/Token';
 import {
 	Container,
@@ -20,23 +19,16 @@ import {
 	Contents,
 	CommentHolder,
 } from './CommentStyle';
-import car from '@assets/images/car.png';
 import DataType from '@src/types/DataType';
 import { get, post } from '@src/api/Api';
 
-type Comment = {
-	id: string;
-	content: string;
+type CommentProps = {
+	postId: string;
 };
 
-const CommentSection: React.FC = () => {
-	const [comment, setComment] = useState('');
-	const [comments, setComments] = useState<Comment[]>([]);
-	const { post_id } = useParams();
+const CommentSection: React.FC<CommentProps> = ({ postId }) => {
+	const [inputArea, setInputArea] = useState('');
 	const [value, setValue] = useState<any>([]);
-	const [document, setDocument] = useState({
-		content: '',
-	});
 
 	useEffect(() => {
 		getComments();
@@ -45,58 +37,49 @@ const CommentSection: React.FC = () => {
 	const getComments = async () => {
 		try {
 			const token = getToken();
-			const response = await get<DataType>(
-				'/api/postComments/647ff688c388f06766412d2f',
-				{
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
+			const response = await get<DataType>(`/api/postComments/${postId}`, {
+				headers: {
+					Authorization: `Bearer ${token}`,
 				},
-			);
+			});
 			setValue(response.data);
-			console.log(response);
 		} catch (error) {
 			console.error('Error fetching post:', error);
 		}
 	};
 
 	const handleCommentChange = (value: string) => {
-		setComment(value);
+		setInputArea(value);
 	};
 
-	const handleCommentSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+	const handleCommentSubmit = async (
+		event: React.MouseEvent<HTMLButtonElement>,
+	) => {
 		event.preventDefault();
 
-		setDocument({
-			content: comment,
-		});
-		console.log('Saved Comment:', comment);
-
-		const token = getToken();
-		post(
-			'/api/postComments',
-			{
-				content: comment,
-			},
-			{
-				headers: {
-					Authorization: `Bearer ${token}`,
+		if (inputArea.trim() === '') {
+			return;
+		}
+		try {
+			const token = getToken();
+			await post(
+				'/api/postComments/',
+				{
+					post_id: postId,
+					content: inputArea,
 				},
-			},
-		);
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				},
+			);
+			setInputArea('');
+			getComments();
+		} catch (error) {
+			console.log('Error posting comment:', error);
+		}
 	};
-	const handleCommentDelete = () => {
-		setComment('');
-	};
-	const deleteComment = (commentId: string) => {
-		setComments((prevComments) =>
-			prevComments.filter((comment) => comment.id !== commentId),
-		);
-	};
-	// const generateUniqueId = (): string => {
-	// 	return Math.random().toString(36).substring(2);
-	// };
-	const { createdAt, user, content } = value;
 
 	return (
 		<Container>
@@ -105,9 +88,9 @@ const CommentSection: React.FC = () => {
 				<Comment>댓글 작성</Comment>
 			</Title>
 
-			<ReactQuill value={comment} onChange={handleCommentChange} />
+			<ReactQuill value={inputArea} onChange={handleCommentChange} />
 			<BtnContainer>
-				<Btn1 onClick={handleCommentDelete}>취소</Btn1>
+				<Btn1>취소</Btn1>
 				<Btn2 onClick={handleCommentSubmit}>등록</Btn2>
 			</BtnContainer>
 
@@ -115,23 +98,24 @@ const CommentSection: React.FC = () => {
 				<Box></Box>
 				<Comment>댓글 목록</Comment>
 			</Title>
-			{comments.length === 0 ? (
+			{value.length === 0 ? (
 				<CommentHolder>등록된 댓글이 없습니다.</CommentHolder>
 			) : (
-				comments &&
-				comments.map((comment) => (
-					<CommentContainer key={comment.id}>
+				value &&
+				value.map((comment: any) => (
+					<CommentContainer key={comment._id}>
 						<ProfileContainer>
 							{/* <Profile src={} alt='user-profile' /> */}
 							<UserContainer>
-								<UserName>{user}</UserName>
-								<Date>{createdAt}</Date>
+								<UserName>예정</UserName>
+								<Date>{comment.createdAt}</Date>
 							</UserContainer>
 						</ProfileContainer>
-						<Contents dangerouslySetInnerHTML={{ __html: content }} />
+						<Contents
+							dangerouslySetInnerHTML={{ __html: comment.content }}></Contents>
 						<BtnContainer>
 							<Btn1>수정</Btn1>
-							<Btn2 onClick={() => deleteComment(comment.id)}>삭제</Btn2>
+							<Btn2>삭제</Btn2>
 						</BtnContainer>
 					</CommentContainer>
 				))
@@ -139,5 +123,4 @@ const CommentSection: React.FC = () => {
 		</Container>
 	);
 };
-
 export default CommentSection;
