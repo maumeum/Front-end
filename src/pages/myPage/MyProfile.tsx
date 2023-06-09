@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
 	Container,
 	Main,
@@ -10,20 +10,8 @@ import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/utils/EnumTypes';
 import MyIntro from '@components/Profile/MyIntro.tsx';
 import ProfileImg from '@components/Profile/ProfileImg.tsx';
-import { getToken } from '@src/api/Token';
-import Swal from 'sweetalert2';
 
-function myProfile() {
-	useEffect(() => {
-		if (!getToken()) {
-			window.location.href = '/';
-			Swal.fire({
-				title: '로그인이 필요한 서비스입니다.',
-				icon: 'info',
-				confirmButtonColor: 'var(--button--color)',
-			});
-		}
-	}, []);
+function MyProfile() {
 	const [currImgTab] = useState<TabTypes>(TabTypes.EDIT_PROFILE);
 	const tabs_img = [TabTypes.EDIT_PROFILE];
 	const [currIntroTab] = useState<TabTypes>(TabTypes.EDIT_INTRO);
@@ -52,4 +40,4 @@ function myProfile() {
 	);
 }
 
-export default myProfile;
+export default MyProfile;

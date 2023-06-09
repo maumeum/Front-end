@@ -52,10 +52,7 @@ function MyPost({ currTab, data, onRemovePost }: PostProps) {
 	};
 
 	const handleDeleteClick = async () => {
-		console.log(_id);
-
 		if (currTab === TabTypes.WRITTEN_REVIEW) {
-			console.log(currTab);
 			try {
 				await del(`/api/review/users/${_id}`, {
 					headers: {
@@ -76,14 +73,12 @@ function MyPost({ currTab, data, onRemovePost }: PostProps) {
 				});
 			}
 		} else if (currTab === TabTypes.WRITTEN_POSTS) {
-			console.log(currTab);
 			try {
-				const response = await del(`/api/community/${_id}`, {
+				await del(`/api/community/${_id}`, {
 					headers: {
 						Authorization: `Bearer ${getToken()}`,
 					},
 				});
-				console.log(response);
 				onRemovePost(data._id);
 				Swal.fire({
 					title: '게시글 삭제되었습니다',
@@ -91,7 +86,6 @@ function MyPost({ currTab, data, onRemovePost }: PostProps) {
 					confirmButtonColor: 'var(--button--color)',
 				});
 			} catch (error) {
-				console.log(error);
 				Swal.fire({
 					title: '게시글 삭제에 실패했습니다.',
 					icon: 'error',
@@ -105,7 +99,6 @@ function MyPost({ currTab, data, onRemovePost }: PostProps) {
 		<>
 			<PostListContainer>
 				<PostBox>
-					{/* //데이터 없으면 없다고 표시 */}
 					<Title>{truncatedTitle}</Title>
 					<Description>
 						<TruncatedDescription

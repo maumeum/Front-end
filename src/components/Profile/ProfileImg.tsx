@@ -19,31 +19,24 @@ function ProfileImg() {
 	}, []);
 
 	useEffect(() => {
-		//유저의 이미지가 변하면 after이미지를 선택하면-> after이미지를 before이미지로 변경해줘야함
 		setBeforeImg(userData?.image);
-		console.log('이비지 변경됨');
-		console.log('beforeImg', beforeImg);
-		console.log('afterImg', afterImg);
 	}, [userData]);
 
-	const [beforeImg, setBeforeImg] = useState<string | undefined>(''); //기존 이미지
-	const [afterImg, setAfterImg] = useState<string>(''); //변경하고자하는 이미지
-	const [isUpload, setIsUpload] = useState<boolean>(false); //업로드 여부 -> 업로드 되면 true 미리보기 사진으로 보여짐 , 삭제하기버튼
+	const [beforeImg, setBeforeImg] = useState<string | undefined>('');
+	const [afterImg, setAfterImg] = useState<string>('');
+	const [isUpload, setIsUpload] = useState<boolean>(false);
 	const [file, setFile] = useState<File | null>(null);
 
 	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const selectedFile = e.target.files?.[0]; //input 으로넘긴 file데이터
-		console.log(selectedFile);
+		const selectedFile = e.target.files?.[0];
 		if (selectedFile) {
-			//파일이있으면
-			const reader = new FileReader(); // 파일리더를만들어서 file데이터를 읽음
+			const reader = new FileReader();
 			reader.readAsDataURL(selectedFile);
 			reader.onload = () => {
-				//성공적으로 읽으면
-				const imageDataUrl = reader.result as string; //결과를 변수에 저장
-				setAfterImg(imageDataUrl); //파일을 url로 바꾼 데이터를 afterImage에 저장
+				const imageDataUrl = reader.result as string;
+				setAfterImg(imageDataUrl);
 			};
-			setFile(selectedFile); //
+			setFile(selectedFile);
 			setIsUpload(true);
 		}
 	};
@@ -53,7 +46,7 @@ function ProfileImg() {
 			setAfterImg(beforeImg);
 		}
 		setIsUpload(false);
-		setFile(null); // 파일 상태 초기화
+		setFile(null);
 	};
 
 	const handleDeleteImage = () => {
@@ -69,7 +62,7 @@ function ProfileImg() {
 			//여기에 기본이미지 변경 api
 			if (result.isConfirmed) {
 				Swal.fire({
-					title: '변경되었습니다!',
+					title: '기본이미지로 변경되었습니다!',
 					icon: 'success',
 					confirmButtonColor: 'var(--button--color)',
 				});
@@ -79,12 +72,15 @@ function ProfileImg() {
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
-		const formData = new FormData(); //키밸류
-
+		const formData = new FormData();
 		if (file) {
 			formData.append('image', file);
 		} else {
-			console.log('업로드할 이미지가 없습니다.');
+			Swal.fire({
+				title: '업로드할 이미지가 없습니다',
+				icon: 'error',
+				confirmButtonColor: 'var(--button--color)',
+			});
 			return;
 		}
 		try {
@@ -96,7 +92,11 @@ function ProfileImg() {
 			});
 			setIsUpload(true);
 		} catch (error) {
-			console.log(error);
+			Swal.fire({
+				title: '이미지 변경에 실패했습니다.',
+				icon: 'error',
+				confirmButtonColor: 'var(--button--color)',
+			});
 			return;
 		}
 		Swal.fire({

@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components';
+import { TabTypes, VolunteerTypes } from '@src/utils/EnumTypes';
 
 interface CardProps {
 	currTab: string;
+	statusName: string;
 }
 
 export const CardContainer = styled.div<CardProps>`
@@ -91,7 +93,13 @@ export const Badge = styled.div<CardProps>`
 		text-align: center;
 	}
 	${({ currTab }) =>
-		currTab === '완료한 봉사' &&
+		currTab === TabTypes.VOLUNTEER_COMPLETED &&
+		css`
+			background: #53595b;
+		`}
+	${({ statusName }) =>
+		(statusName === VolunteerTypes.COMPLETED ||
+			statusName === VolunteerTypes.DISCONTINUE) &&
 		css`
 			background: #53595b;
 		`}

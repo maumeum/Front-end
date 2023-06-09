@@ -77,7 +77,7 @@ export const Contentdiv = styled.div`
 	margin-top: 10rem;
 	margin-bottom: 20rem;
 `;
-export const Content = styled.p`
+export const Content = styled.div`
 	font-size: 2.4rem;
 	line-height: 5rem;
 `;

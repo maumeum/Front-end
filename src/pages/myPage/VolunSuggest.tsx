@@ -15,31 +15,8 @@ import { TabTypes } from '@src/utils/EnumTypes';
 import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType';
+import Swal from 'sweetalert2';
 
-const props = [
-	{
-		id: 1,
-		title:
-			'지금 당장 이메일 내의 스팸메시지를 삭제해보세요! 탄소가 줄어듭니다.',
-		thumbnail: car,
-		nickname: '스팸메시지지우기',
-		profile: car,
-		recruitStatus: '모집중',
-		startDate: '2021-01-01',
-		endDate: '2021-01-02',
-	},
-	{
-		id: 2,
-		title:
-			'페트병의 라벨을 잘 제거합시다! 1초의 행동으로 환경을 보호할 수 있습니다',
-		thumbnail: car,
-		nickname: '라벨요정',
-		profile: car,
-		recruitStatus: '모집완료',
-		startDate: '2021-01-01',
-		endDate: '2021-01-02',
-	},
-];
 interface ResponseData {
 	_id: string;
 	title: string;
@@ -58,30 +35,33 @@ interface ResponseData {
 	updatedAt: string;
 }
 
-function volunSuggest() {
+function VolunSuggest() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>('/api/volunteers/registeration', {
+				const response = await get<DataType>('/api/volunteers/registerations', {
 					headers: {
 						Authorization: `Bearer ${getToken()}`,
 					},
 				});
 				setDataList(response.data as ResponseData[]);
 			} catch (error) {
-				console.log(error);
+				Swal.fire({
+					title: '데이터를 불러오는데 실패하였습니다.',
+					icon: 'error',
+					confirmButtonColor: 'var(--button--color)',
+				});
 			}
 		};
-
 		fetchData();
 	}, []);
 
 	const [dataList, setDataList] = useState<ResponseData[]>([]);
 	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
 	const [currTab] = useState<TabTypes>(TabTypes.VOLUNTEER_SUGGEST);
-	console.log(dataList);
 
 	const transformData = dataList.map((data) => {
+		//Card 컴포넌트 형식에 맞게 데이터형태 변환
 		return {
 			createdAt: data.createdAt,
 			volunteer_id: {
@@ -109,6 +89,9 @@ function volunSuggest() {
 						<Tab currTab={currTab} tabs={tabs} />
 					</TabMenu>
 					<CardBox>
+						{dataList.length === 0 && (
+							<div>내가 등록한 봉사 내역이 없습니다.</div>
+						)}
 						{transformData.map((data) => (
 							<Card key={data.volunteer_id._id} data={data} currTab={currTab} />
 						))}
@@ -119,4 +102,4 @@ function volunSuggest() {
 	);
 }
 
-export default volunSuggest;
+export default VolunSuggest;

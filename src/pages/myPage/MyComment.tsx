@@ -14,18 +14,6 @@ import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import Swal from 'sweetalert2';
 
-const comment1 = [
-	{
-		title: '이건 완료된 봉사에서만 보이는 글 제목입니다. 제발 성공해라',
-		content:
-			'지역은 충남 천안근처였으면 좋겠습니다.! 아니면 여기서 자차타고 한시간 거리도 좋아요! 댓 주세용',
-		postType: '동행구해요',
-		createdAt: '2022-01-01',
-		_id: '123123',
-		images: null,
-	},
-];
-
 type CommunityProps = {
 	title: string;
 	content: string;
@@ -35,16 +23,8 @@ type CommunityProps = {
 	postType: string;
 };
 
-function myComment() {
+function MyComment() {
 	useEffect(() => {
-		if (!getToken()) {
-			window.location.href = '/';
-			Swal.fire({
-				title: '로그인이 필요한 서비스입니다.',
-				icon: 'info',
-				confirmButtonColor: 'var(--button--color)',
-			});
-		}
 		const fetchData = async () => {
 			try {
 				const response = await get<DataType>('/api/community/user', {
@@ -55,7 +35,11 @@ function myComment() {
 
 				setPost(response.data as CommunityProps[]);
 			} catch (error) {
-				console.log(error);
+				Swal.fire({
+					title: '데이터를 불러오는데 실패하였습니다.',
+					icon: 'error',
+					confirmButtonColor: 'var(--button--color)',
+				});
 			}
 		};
 
@@ -72,7 +56,11 @@ function myComment() {
 				});
 				setComment(response as CommunityProps[]);
 			} catch (error) {
-				console.log(error);
+				Swal.fire({
+					title: '데이터를 불러오는데 실패하였습니다.',
+					icon: 'error',
+					confirmButtonColor: 'var(--button--color)',
+				});
 			}
 		};
 
@@ -107,6 +95,7 @@ function myComment() {
 					<TabMenu>
 						<Tab currTab={currTab} onClick={handleClickTab} tabs={tabs} />
 					</TabMenu>
+					{data.length === 0 && <p>나의 활동내역이 없습니다</p>}
 					{data.map((data) => {
 						return (
 							<MyPost
@@ -123,4 +112,4 @@ function myComment() {
 	);
 }
 
-export default myComment;
+export default MyComment;

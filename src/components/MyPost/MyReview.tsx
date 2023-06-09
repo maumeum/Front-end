@@ -3,38 +3,45 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { BtnConatiner, TitleInput } from '@components/Modal/modal';
 import { post } from '@src/api/Api';
-import { getToken } from '@src/api/Token';
 import LargeButton from '@components/Buttons/LargeButton';
 import TopBar from '@components/TopBar/TopBar';
-// import { quillModule } from '@components/Modal/quillModule.ts';
+import Parser from 'html-react-parser';
+import { getToken } from '@src/api/Token';
+
+// 코치님 여기는 코드리뷰 안해주셔도 됩니다!!! 그 react-quill의 그곳입니다
+// 중간에 여기를 모르고 올려버려서 ㅠㅠ,,, 여기 코드도 같이 올라가게 되었는데
+// 이미 한번 올라간 코드라 수습이 안되어서 올리게되었습니다 (혹시 이런경우 어떻게 해야하나요?)
+//이미 stash의 타이밍을 놓쳤을때..@
 
 type MyReviewProps = {
 	closeModal: () => void;
 	id?: string;
 };
 
+export interface EditorContentChanged {
+	html: string;
+	markdown: string;
+}
+
 function MyReview({ closeModal, id }: MyReviewProps) {
 	const [title, setTitle] = useState<string>('');
-	// const [content, setContent] = useState<string>('');
-	const [value, setValue] = useState('');
+	const [value, setValue] = useState<any>('');
 	const quillRef = useRef<ReactQuill | null>(null);
 	const [file, setFile] = useState<File | null>(null);
-
 	const placeholder = '본문을 입력해주세요';
 
-	// const handleChange = (value: string) => {
-	// 	// console.log(value);
-	// 	setValue(value);
-	// };
-
+	const onEditorContentChanged = (content: string) => {
+		setValue(content);
+	};
+	//멀터쓰면 어차피 이미지 바디에 담기는거? 멀터 이미지 여러개보내기기
 	const handleSubmit = async () => {
-		//요청보내는 코드 들어가야하는 부분
 		try {
 			const response = await post(
 				'/api/review',
 				{ title: title, content: value, volunteer_id: id },
 				{
 					headers: {
+						'Content-Type': 'multipart/form-data',
 						Authorization: `Bearer ${getToken()}`,
 					},
 				},
@@ -67,16 +74,24 @@ function MyReview({ closeModal, id }: MyReviewProps) {
 			if (input.files) {
 				const imgFile = input.files[0];
 				setFile(imgFile);
+
 				// multer에 맞는 형식으로 데이터 만들어준다.
 				const formData = new FormData();
-				if (file) {
-					formData.append('img', file); // formData는 키-밸류 구조
+				if (imgFile) {
+					formData.append('image', imgFile); // formData는 키-밸류 구조
+					formData.append('volunteer_id', id);
+					console.log('파일');
 				}
 				// 백엔드 multer라우터에 이미지를 보낸다.
 
 				try {
-					const result = await post('api/review', formData);
-					console.log('성공 시, 백엔드가 보내주는 데이터', result.data.url);
+					const result = await post('/api/review', formData, {
+						headers: {
+							Authorization: `Bearer ${getToken()}`,
+						},
+					});
+					console.log('성공 시, 백엔드가 보내주는 데이터', result);
+
 					const IMG_URL = result.data.url;
 					// 이 URL을 img 태그의 src에 넣은 요소를 현재 에디터의 커서에 넣어주면 에디터 내에서 이미지가 나타난다
 					// src가 base64가 아닌 짧은 URL이기 때문에 데이터베이스에 에디터의 전체 글 내용을 저장할 수있게된다
@@ -108,6 +123,49 @@ function MyReview({ closeModal, id }: MyReviewProps) {
 					['image'],
 					[{ header: [1, 2, 3, false] }],
 					['bold', 'italic', 'underline', 'strike', 'blockquote'],
+					[
+						{
+							color: [
+								'#000000',
+								'#e60000',
+								'#ff9900',
+								'#ffff00',
+								'#008a00',
+								'#0066cc',
+								'#9933ff',
+								'#ffffff',
+								'#facccc',
+								'#ffebcc',
+								'#ffffcc',
+								'#cce8cc',
+								'#cce0f5',
+								'#ebd6ff',
+								'#bbbbbb',
+								'#f06666',
+								'#ffc266',
+								'#ffff66',
+								'#66b966',
+								'#66a3e0',
+								'#c285ff',
+								'#888888',
+								'#a10000',
+								'#b26b00',
+								'#b2b200',
+								'#006100',
+								'#0047b2',
+								'#6b24b2',
+								'#444444',
+								'#5c0000',
+								'#663d00',
+								'#666600',
+								'#003700',
+								'#002966',
+								'#3d1466',
+								'custom-color',
+							],
+						},
+						{ background: [] },
+					],
 				],
 				handlers: {
 					// 이미지 처리는 우리가 직접 imageHandler라는 함수로 처리할 것이다.
@@ -125,6 +183,7 @@ function MyReview({ closeModal, id }: MyReviewProps) {
 		'strike',
 		'blockquote',
 		'image',
+		'color',
 	];
 
 	return (
@@ -138,15 +197,13 @@ function MyReview({ closeModal, id }: MyReviewProps) {
 				placeholder='제목을 입력해주세요.'
 				onChange={handleTitleChange}
 			/>
+			{Parser('<h1 style="color:red">hello</h1><p>hi</p>')}
 			<ReactQuill
-				// onChange={handleChange}
-				onChange={setValue}
-				// modules={quillModule}
+				onChange={onEditorContentChanged}
 				modules={modules}
 				placeholder={placeholder}
 				style={{ height: '35rem', marginTop: '2rem' }}
 				formats={formats}
-				value={value}
 				ref={quillRef}
 			/>
 			<BtnConatiner>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
 	Container,
 	Main,
@@ -19,13 +20,16 @@ import { validEmail, validPassword } from '@src/utils/signUpCheck.ts';
 import { emailError, passwordError } from '@src/utils/errorMessage.ts';
 import InputForm from '@src/components/UserForm/InputForm.tsx';
 import Swal from 'sweetalert2';
+import { del } from '@src/api/Api';
+import { getToken, deleteToken } from '@src/api/Token';
 
-function withdrawal() {
+function Withdrawal() {
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
 	const [currTab] = useState<TabTypes>(TabTypes.WITHDRAWAL);
 	const tabs = [TabTypes.WITHDRAWAL];
+	const navigate = useNavigate();
 
 	// inputValue 함수
 	const getFormChanger =
@@ -54,8 +58,30 @@ function withdrawal() {
 			cancelButtonColor: '#afcd81',
 			confirmButtonText: '네',
 			cancelButtonText: '아니요',
-		}).then((result) => {
+		}).then(async (result) => {
 			if (result.isConfirmed) {
+				try {
+					await del(
+						'/api/users',
+						{ email: email, password: password },
+						{
+							headers: {
+								Authorization: `Bearer ${getToken()}`,
+							},
+						},
+					);
+				} catch (error) {
+					Swal.fire({
+						title: '이메일 혹은 비밀번호를 확인해주세요!',
+						icon: 'info',
+						confirmButtonColor: 'var(--button--color)',
+					});
+					return;
+				}
+
+				deleteToken();
+				navigate('/');
+
 				Swal.fire(
 					'탈퇴되었습니다.',
 					'다음에 다시 만날 날을 기대합니다!👋🏻',
@@ -112,4 +138,4 @@ function withdrawal() {
 	);
 }
 
-export default withdrawal;
+export default Withdrawal;

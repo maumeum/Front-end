@@ -13,10 +13,11 @@ import {
 	SelectContainer,
 } from './card.ts';
 import { TabTypes } from '../../utils/EnumTypes.ts';
-import { post } from '@src/api/Api';
+import { post, patch } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import Swal from 'sweetalert2';
 import car from '@src/assets/images/car.png';
+import { VolunteerTypes } from '@src/utils/EnumTypes';
 
 export type Props = {
 	data: {
@@ -57,8 +58,8 @@ function truncateCentName(name: string) {
 function Card({ currTab, data }: Props) {
 	const { _id, title, centName, statusName, images, startDate, endDate } =
 		data.volunteer_id;
-
 	const [isOpen, setIsOpen] = useState(false);
+	const [selectedStatus, setSelectedStatus] = useState<string>(statusName);
 
 	const openModal = () => {
 		setIsOpen(true);
@@ -69,12 +70,46 @@ function Card({ currTab, data }: Props) {
 	};
 
 	const handleRecruitmentStatusChange = (selectedValue: string) => {
-		console.log('Selected Value:', selectedValue);
+		Swal.fire({
+			title: '봉사활동 상태를 변경하시겠습니까??',
+			icon: 'info',
+			showCancelButton: true,
+			confirmButtonColor: '#ffd4d4',
+			cancelButtonColor: '#afcd81',
+			confirmButtonText: '네',
+			cancelButtonText: '아니요',
+		}).then(async (result) => {
+			if (result.isConfirmed) {
+				try {
+					await patch(
+						`/api/volunteers/registerations/${_id}`,
+						{ statusName: selectedValue },
+						{
+							headers: {
+								Authorization: `Bearer ${getToken()}`,
+							},
+						},
+					);
+					setSelectedStatus(selectedValue);
+				} catch (error) {
+					Swal.fire({
+						title: '모집상태 변경에 실패하였습니다 :(',
+						icon: 'error',
+						confirmButtonColor: 'var(--button--color)',
+					});
+				}
+				Swal.fire({
+					title: `${selectedValue} (으)로 상태가 변경되었습니다`,
+					icon: 'success',
+					confirmButtonColor: 'var(--button--color)',
+				}).then(() => {
+					window.location.reload();
+				});
+			}
+		});
 	};
 
 	const handleParticipated = async () => {
-		console.log(_id);
-		console.log(getToken());
 		try {
 			await post(
 				`/api/review/users/participation/${_id}`,
@@ -100,7 +135,6 @@ function Card({ currTab, data }: Props) {
 				}
 			});
 		} catch (error) {
-			console.log(error);
 			Swal.fire({
 				title: '활동이 시작되지 않은 봉사입니다.',
 				icon: 'success',
@@ -111,10 +145,10 @@ function Card({ currTab, data }: Props) {
 
 	return (
 		<>
-			<CardContainer currTab={currTab}>
+			<CardContainer currTab={currTab} statusName={statusName}>
 				<ImgBox>
-					<img src={car} alt='' />
-					<Badge currTab={currTab}>
+					<img src={car} alt='유저프로필' />
+					<Badge currTab={currTab} statusName={selectedStatus}>
 						<p>{statusName}</p>
 					</Badge>
 				</ImgBox>
@@ -125,17 +159,22 @@ function Card({ currTab, data }: Props) {
 							endDate,
 						)}`}</p>
 					</VolunInfo>
+					{/* 컴포넌트 분리 시급... */}
 					<UserInfo>
 						<img src={car} alt='작성자 프로필사진' />
 						<p>{truncateCentName(centName)}</p>
-						{currTab === TabTypes.VOLUNTEER_COMPLETED && (
-							<ButtonContainer>
-								<SmallButton onClick={openModal}>리뷰작성</SmallButton>
-							</ButtonContainer>
-						)}
+						{currTab === TabTypes.VOLUNTEER_COMPLETED &&
+							statusName !== VolunteerTypes.DISCONTINUE && (
+								<ButtonContainer>
+									<SmallButton onClick={openModal}>리뷰작성</SmallButton>
+								</ButtonContainer>
+							)}
 						{currTab === TabTypes.VOLUNTEER_SUGGEST && (
 							<SelectContainer>
-								<Selector onChange={handleRecruitmentStatusChange} />
+								<Selector
+									value={selectedStatus}
+									onChange={handleRecruitmentStatusChange}
+								/>
 							</SelectContainer>
 						)}
 						{currTab === TabTypes.VOLUNTEER_APPLIED && (

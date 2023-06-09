@@ -58,12 +58,14 @@ export const patch = async <T>(
 //axios delete
 export const del = async <T>(
 	url: string,
+	data?: any,
 	config?: AxiosRequestConfig,
 ): Promise<T> => {
 	const fullURL = apiURL + url;
 	return request<T>({
 		url: fullURL,
 		method: 'DELETE',
+		...(data && { data }),
 		...config,
 	});
 };
