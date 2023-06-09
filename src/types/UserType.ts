@@ -5,6 +5,7 @@ interface UserType {
 	phone: string;
 	image: string;
 	introduction: string;
+	role: string;
 }
 
 export default UserType;
