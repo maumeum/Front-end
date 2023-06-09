@@ -17,15 +17,6 @@ import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType';
 import Swal from 'sweetalert2';
 
-if (!getToken()) {
-	window.location.href = '/';
-	Swal.fire({
-		title: '로그인이 필요한 서비스입니다.',
-		icon: 'info',
-		confirmButtonColor: 'var(--button--color)',
-	});
-}
-
 type VolunProps = {
 	createdAt: string;
 	_id: string;
@@ -71,15 +62,22 @@ function myVolunHistory() {
 	const [data, setData] = useState<VolunProps[]>([]);
 
 	useEffect(() => {
+		if (!getToken()) {
+			window.location.href = '/';
+			Swal.fire({
+				title: '로그인이 필요한 서비스입니다.',
+				icon: 'info',
+				confirmButtonColor: 'var(--button--color)',
+			});
+		}
 		const fetchData = async () => {
 			try {
-				const response = await get('/api/applications', {
+				const response = await get<DataType>('/api/applications', {
 					headers: {
 						Authorization: `Bearer ${getToken()}`,
 					},
 				});
-				console.log(response);
-				setAppliedData(response as VolunProps[]);
+				setAppliedData(response.data as VolunProps[]);
 			} catch (error) {
 				console.log(error);
 			}

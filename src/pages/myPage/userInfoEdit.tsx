@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
 	Container,
 	Main,
@@ -12,16 +12,18 @@ import MyPageUserForm from '@components/UserForm/MyPageUserForm';
 import { getToken } from '@src/api/Token';
 import Swal from 'sweetalert2';
 
-if (!getToken()) {
-	window.location.href = '/';
-	Swal.fire({
-		title: '로그인이 필요한 서비스입니다.',
-		icon: 'info',
-		confirmButtonColor: 'var(--button--color)',
-	});
-}
-
 function userInfoEdit() {
+	useEffect(() => {
+		if (!getToken()) {
+			window.location.href = '/';
+			Swal.fire({
+				title: '로그인이 필요한 서비스입니다.',
+				icon: 'info',
+				confirmButtonColor: 'var(--button--color)',
+			});
+		}
+	}, []);
+
 	const [currTab] = useState<TabTypes>(TabTypes.EDIT_MYINFO);
 	const tabs = [TabTypes.EDIT_MYINFO];
 

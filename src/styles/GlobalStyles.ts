@@ -1,8 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset';
 
 const GlobalStyles = createGlobalStyle`
-  ${reset}
+
   :root {
     --color--footer: #f5d4d4;
     --button--color: #aacb73;
@@ -70,6 +69,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
+}
 `;
 
 export default GlobalStyles;
