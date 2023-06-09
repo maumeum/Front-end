@@ -14,15 +14,6 @@ import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import Swal from 'sweetalert2';
 
-if (!getToken()) {
-	window.location.href = '/';
-	Swal.fire({
-		title: '로그인이 필요한 서비스입니다.',
-		icon: 'info',
-		confirmButtonColor: 'var(--button--color)',
-	});
-}
-
 const comment1 = [
 	{
 		title: '이건 완료된 봉사에서만 보이는 글 제목입니다. 제발 성공해라',
@@ -46,6 +37,14 @@ type CommunityProps = {
 
 function myComment() {
 	useEffect(() => {
+		if (!getToken()) {
+			window.location.href = '/';
+			Swal.fire({
+				title: '로그인이 필요한 서비스입니다.',
+				icon: 'info',
+				confirmButtonColor: 'var(--button--color)',
+			});
+		}
 		const fetchData = async () => {
 			try {
 				const response = await get<DataType>('/api/community/user', {
@@ -53,7 +52,7 @@ function myComment() {
 						Authorization: `Bearer ${getToken()}`,
 					},
 				});
-				console.log(response);
+
 				setPost(response.data as CommunityProps[]);
 			} catch (error) {
 				console.log(error);
@@ -71,7 +70,6 @@ function myComment() {
 						Authorization: `Bearer ${getToken()}`,
 					},
 				});
-				console.log(response);
 				setComment(response as CommunityProps[]);
 			} catch (error) {
 				console.log(error);

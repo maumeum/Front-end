@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
 	Container,
 	Main,
@@ -13,16 +13,17 @@ import ProfileImg from '@components/Profile/ProfileImg.tsx';
 import { getToken } from '@src/api/Token';
 import Swal from 'sweetalert2';
 
-if (!getToken()) {
-	window.location.href = '/';
-	Swal.fire({
-		title: '로그인이 필요한 서비스입니다.',
-		icon: 'info',
-		confirmButtonColor: 'var(--button--color)',
-	});
-}
-
 function myProfile() {
+	useEffect(() => {
+		if (!getToken()) {
+			window.location.href = '/';
+			Swal.fire({
+				title: '로그인이 필요한 서비스입니다.',
+				icon: 'info',
+				confirmButtonColor: 'var(--button--color)',
+			});
+		}
+	}, []);
 	const [currImgTab] = useState<TabTypes>(TabTypes.EDIT_PROFILE);
 	const tabs_img = [TabTypes.EDIT_PROFILE];
 	const [currIntroTab] = useState<TabTypes>(TabTypes.EDIT_INTRO);
