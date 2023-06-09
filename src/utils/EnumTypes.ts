@@ -12,3 +12,9 @@ export enum TabTypes {
 	WRITTEN_REVIEW = '내가 쓴 리뷰',
 	WITHDRAWAL = '회원탈퇴',
 }
+
+export enum VolunteerTypes {
+	COMPLETED = '모집완료',
+	DISCONTINUE = '모집중단',
+	CONTINUE = '모집중',
+}
