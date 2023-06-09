@@ -19,6 +19,8 @@ import { validEmail, validPassword } from '@src/utils/signUpCheck.ts';
 import { emailError, passwordError } from '@src/utils/errorMessage.ts';
 import InputForm from '@src/components/UserForm/InputForm.tsx';
 import Swal from 'sweetalert2';
+import { del } from '@src/api/Api';
+import { getToken } from '@src/api/Token';
 
 function withdrawal() {
 	const [email, setEmail] = useState<string>('');
@@ -54,8 +56,28 @@ function withdrawal() {
 			cancelButtonColor: '#afcd81',
 			confirmButtonText: '네',
 			cancelButtonText: '아니요',
-		}).then((result) => {
+		}).then(async (result) => {
 			if (result.isConfirmed) {
+				try {
+					// await del(
+					// 	'/api/applications',
+					// 	{ email: email, password: password },
+					// 	{
+					// 		headers: {
+					// 			Authorization: `Bearer ${getToken()}`,
+					// 		},
+					// 	},
+					// );
+				} catch (error) {
+					console.log(error);
+					Swal.fire({
+						title: '이메일 혹은 비밀번호를 확인해주세요!',
+						icon: 'info',
+						confirmButtonColor: 'var(--button--color)',
+					});
+					return;
+				}
+
 				Swal.fire(
 					'탈퇴되었습니다.',
 					'다음에 다시 만날 날을 기대합니다!👋🏻',

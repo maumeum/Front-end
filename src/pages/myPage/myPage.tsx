@@ -13,16 +13,6 @@ import { getToken } from '@src/api/Token';
 import Swal from 'sweetalert2';
 
 function myPage() {
-	useEffect(() => {
-		if (!getToken()) {
-			window.location.href = '/';
-			Swal.fire({
-				title: '로그인이 필요한 서비스입니다.',
-				icon: 'info',
-				confirmButtonColor: 'var(--button--color)',
-			});
-		}
-	}, []);
 	const [currTab] = useState<TabTypes>(TabTypes.MYPAGE);
 	const tabs = [TabTypes.MYPAGE];
 
