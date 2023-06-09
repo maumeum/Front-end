@@ -67,7 +67,9 @@ const FindFriendDetail = () => {
 	};
 
 	const handleEdit = () => {
-		navigate(`/community/findfriend/edit/${postId}`);
+		navigate(`/community/edit/${postId}`, {
+			state: { postId },
+		});
 	};
 
 	const handleDelete = async () => {
