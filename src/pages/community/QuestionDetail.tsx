@@ -18,17 +18,16 @@ import {
 	Image,
 	Contentdiv,
 	Content,
-	BtnDelete,
-} from '@src/pages/community/style.ts';
+} from './style.ts';
 import CommentSection from '@src/components/Comment/Comment.tsx';
-import DataType from '@src/types/DataType';
+import DataType from '@src/types/DataType.ts';
 
-const ReviewDetail = () => {
+const FindFriendDetail = () => {
 	const navigate = useNavigate();
 	const { postId } = useParams();
 	const [post, setPost] = useState<any>([]);
-	const [loginUser, setLoginUser] = useState(false);
 	const [datauser, setDataUser] = useState<any>('');
+	const [loginUser, setLoginUser] = useState(false);
 
 	useEffect(() => {
 		fetchPost();
@@ -38,24 +37,21 @@ const ReviewDetail = () => {
 	const fetchPost = async () => {
 		try {
 			const token = getToken();
-			const response = await get<DataType>(`/api/review/detail/${postId}`, {
+			const response = await get<DataType>(`/api/community/${postId}`, {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
 			});
-			setPost(response.data);
-			setDataUser(response.data.user_id);
-			console.log(response);
-			//setDataUser(response.data);
+			setPost(response.data.post.post);
+			setDataUser(response.data.post);
 		} catch (error) {
 			console.error('Error fetching post:', error);
 		}
 	};
-
 	const loginUserLogic = async () => {
 		try {
 			const token = getToken();
-			const response = await get<DataType>(`/review/check/${postId}`, {
+			const response = await get<DataType>(`/api/community/check/${postId}`, {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
@@ -63,35 +59,34 @@ const ReviewDetail = () => {
 			setLoginUser(response.data);
 			console.log(response);
 		} catch (error) {
-			console.error(error);
+			console.error('Error fetching post:', error);
 		}
 	};
 
 	const handleEdit = () => {
-		navigate(`/community/findfriend/edit/${postId}`);
+		navigate(`/community/question/edit/${postId}`);
+	};
+
+	const handleDelete = async () => {
+		try {
+			const token = getToken();
+			await del<DataType>(`/api/community/${postId}`, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
+			navigate('/community/question');
+		} catch (error) {
+			console.log('Error delecting post:', error);
+		}
 	};
 
 	if (!post) {
 		return <div>Loading...</div>;
 	}
 
-	const handleDelete = async () => {
-		try {
-			const token = getToken();
-			await del<DataType>(`/api/review/users/${postId}`, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
-			navigate('/review');
-		} catch (error) {
-			console.log('Error delecting post:', error);
-		}
-	};
-
-	const { title, _id, createdAt, images, content } = post;
+	const { title, createdAt, images, content } = post;
 	const hasPostImage = !!images;
-
 	const formattedDate = dayjs(createdAt)
 		.locale('ko')
 		.format('YYYY년 MM월 DD일 HH:mm:ss');
@@ -103,13 +98,11 @@ const ReviewDetail = () => {
 					<Title>{title}</Title>
 					<SubContainer>
 						<InfoBox>
-							<UserName>{datauser.nickname}</UserName>
+							<UserName>{datauser}</UserName>
 							<Date>작성일 : {formattedDate}</Date>
 						</InfoBox>
 						{loginUser && <Btn onClick={handleEdit}>수정하기</Btn>}
-						{loginUser && (
-							<BtnDelete onClick={handleDelete}>삭제하기</BtnDelete>
-						)}
+						{loginUser && <Btn onClick={handleDelete}>삭제하기</Btn>}
 					</SubContainer>
 				</Header>
 				<Line></Line>
@@ -125,4 +118,4 @@ const ReviewDetail = () => {
 	);
 };
 
-export default ReviewDetail;
+export default FindFriendDetail;

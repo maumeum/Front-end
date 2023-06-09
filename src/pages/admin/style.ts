@@ -9,9 +9,20 @@ export const TeamCardContainer = styled.div`
 `;
 
 export const TopBarContainer = styled.div`
+	display: flex;
 	width: 112rem;
-	margin: 0 auto;
-	margin-top: 6.4rem;
+	margin: 6.4rem auto 0;
+`;
+
+export const ClickTopBar = styled.div`
+	width: 10%;
+	text-align: center;
+	padding: 2rem 1rem;
+	border-bottom: ${(props) =>
+		props.className === 'curr' ? '1px solid #aacb73' : 'none'};
+	font-size: 1.5rem;
+	color: ${(props) => (props.className === 'curr' ? '#aacb73' : '#202020')};
+	cursor: pointer;
 `;
 
 export const TopBar = styled.div`
@@ -29,4 +40,8 @@ export const MenuBar = styled.div`
 	border-radius: 5px;
 	margin: 15.5rem 0 0 10rem;
 	top: 5.5rem;
+`;
+
+export const PostContainer = styled.div`
+	margin: 6.4rem auto;
 `;

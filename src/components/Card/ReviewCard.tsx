@@ -1,5 +1,4 @@
 import { ReviewListType } from '@src/types/CardType.ts';
-
 import {
 	ReviewSection,
 	ImageContainer,

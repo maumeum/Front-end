@@ -6,6 +6,7 @@ export interface CommunityListType {
 	};
 	title: string;
 	postType: string;
+	content: string;
 }
 
 export interface ReviewListType {

@@ -3,19 +3,21 @@ import WritePage from '@components/WritePage/WritePage';
 import { post } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import parse from 'html-react-parser';
+import { useNavigate } from 'react-router-dom';
 
 const FindFriendWrite = () => {
+	const navigate = useNavigate();
 	const [postData, setPostData] = useState({
 		title: '',
 		content: '',
-		postType: 'withfriend',
+		postType: 'findfriend',
 	});
 
 	const onSavePost = (inputTitle: string, content: string) => {
 		setPostData({
 			title: inputTitle,
 			content: content,
-			postType: 'withfriend',
+			postType: 'findfriend',
 		});
 		console.log('Saved Post:', inputTitle, content);
 
@@ -27,7 +29,7 @@ const FindFriendWrite = () => {
 			{
 				title: inputTitle,
 				content: parse(content as string),
-				postType: 'withfriend',
+				postType: 'findfriend',
 			},
 			{
 				headers: {
@@ -35,13 +37,14 @@ const FindFriendWrite = () => {
 				},
 			},
 		);
+		navigate('/community/findfriend');
 	};
 
 	const onCancelPost = () => {
 		setPostData({
 			title: '',
 			content: '',
-			postType: 'withfriend',
+			postType: 'findfriend',
 		});
 		console.log('Cancelled Post');
 	};

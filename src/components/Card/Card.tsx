@@ -18,7 +18,7 @@ import { getToken } from '@src/api/Token';
 import Swal from 'sweetalert2';
 import car from '@src/assets/images/car.png';
 
-type Props = {
+export type Props = {
 	data: {
 		createdAt: string;
 		isParticipate?: boolean;

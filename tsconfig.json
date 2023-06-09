@@ -17,6 +17,7 @@
 		/* path alias */
 		"baseUrl": ".",
 		"paths": {
+			"@public/*": ["public/*"],
 			"@src/*": ["src/*"],
 			"@components/*": ["src/components/*"],
 			"@pages/*": ["src/pages/*"],

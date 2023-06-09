@@ -9,9 +9,9 @@ export const CardContainer = styled.div<CardProps>`
 	flex-direction: column;
 	/* width: calc(100% - 0.3rem); */
 	min-height: 42.9rem;
-	border-radius: 8px;
+	border-radius: ${({ theme }) => theme.radius.s2};
 	cursor: pointer;
-	background-color: white;
+	background-color: ${({ theme }) => theme.colors.background};
 	flex-wrap: nowrap;
 `;
 
@@ -20,12 +20,12 @@ export const ImgBox = styled.div`
 	img {
 		width: 100%;
 		height: 26.5rem;
-		border-radius: 5px;
+		border-radius: ${({ theme }) => theme.radius.s1};
 	}
 `;
 
 export const ContentBox = styled.div`
-	font-weight: bold;
+	font-weight: ${({ theme }) => theme.typography.weight.bold};
 	display: flex;
 	flex-direction: column;
 	padding: 1rem;
@@ -33,10 +33,9 @@ export const ContentBox = styled.div`
 
 export const VolunInfo = styled.div`
 	height: 100px;
-
 	p {
 		word-break: keep-all;
-		font-family: 'KakaoBig Regular', 'Apple SD Gothic Neo';
+
 		font-size: 1.7rem;
 		line-height: 2.4rem;
 		letter-spacing: -0.1px;
@@ -237,7 +236,6 @@ export const VolunteerContent = styled.p`
 	margin-top: 0;
 	font-size: 1.3rem;
 `;
-
 // team card
 
 export const TeamCardSection = styled.div`
