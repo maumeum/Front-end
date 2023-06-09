@@ -33,7 +33,7 @@ type VolunProps = {
 	};
 };
 
-const completedData = [
+const completedData1 = [
 	{
 		createdAt: '2021-01-01',
 		_id: '1',
@@ -58,13 +58,13 @@ function myVolunHistory() {
 		setCurrTab(tab);
 	};
 	const [appliedData, setAppliedData] = useState<VolunProps[]>([]);
-	// const [completedData, setCompletedData] = useState<VolunProps[]>([]);
+	const [completedData, setCompletedData] = useState<VolunProps[]>([]);
 	const [data, setData] = useState<VolunProps[]>([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>('/api/applications', {
+				const response = await get<DataType>('/api/applications?status=true', {
 					headers: {
 						Authorization: `Bearer ${getToken()}`,
 					},
@@ -79,97 +79,27 @@ function myVolunHistory() {
 	}, []);
 
 	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await get<DataType>('/api/applications?status=false', {
+					headers: {
+						Authorization: `Bearer ${getToken()}`,
+					},
+				});
+				setCompletedData(response.data as VolunProps[]);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		fetchData();
+	}, []);
+
+	useEffect(() => {
 		currTab === TabTypes.VOLUNTEER_APPLIED
 			? setData(appliedData)
 			: setData(completedData);
 	}, [currTab, appliedData, completedData]);
-
-	const appliedData1 = [
-		{
-			id: 1,
-			title:
-				'세상에서 제일 재밌는 봉사활동, 런닝과 환경 보호를 한번에! 참여해보세요',
-			thumbnail: car,
-			nickname: '내닉네임은너무나도길어',
-			profile: car,
-			recruitStatus: '모집중',
-			startDate: '2021-01-01',
-			endDate: '2021-01-02',
-		},
-		{
-			id: 2,
-			title: '쪽방촌에 계시는 어른들에게 도시락을 전달해요!',
-			thumbnail: car,
-			nickname: '도시락요정',
-			profile: car,
-			recruitStatus: '모집완료',
-			startDate: '2021-01-01',
-			endDate: '2021-01-02',
-		},
-		{
-			id: 3,
-			title:
-				'세상에서 제일 재밌는 봉사활동, 런닝과 환경 보호를 한번에! 참여해보세요',
-			thumbnail: car,
-			nickname: '내닉네임은너무나도길어',
-			profile: car,
-			recruitStatus: '모집중',
-			startDate: '2021-01-01',
-			endDate: '2021-01-02',
-		},
-		{
-			id: 4,
-			title: '쪽방촌에 계시는 어른들에게 도시락을 전달해요!',
-			thumbnail: car,
-			nickname: '도시락요정',
-			profile: car,
-			recruitStatus: '모집완료',
-			startDate: '2021-06-01',
-			endDate: '2021-06-01',
-		},
-		{
-			id: 5,
-			title:
-				'세상에서 제일 재밌는 봉사활동, 런닝과 환경 보호를 한번에! 참여해보세요',
-			thumbnail: car,
-			nickname: '내닉네임은너무나도길어',
-			profile: car,
-			recruitStatus: '모집중',
-			startDate: '2021-01-01',
-			endDate: '2021-01-01',
-		},
-		{
-			id: 6,
-			title: '쪽방촌에 계시는 어른들에게 도시락을 전달해요!',
-			thumbnail: car,
-			nickname: '도시락요정',
-			profile: car,
-			recruitStatus: '모집완료',
-			startDate: '2021-01-01',
-			endDate: '2021-01-02',
-		},
-		{
-			id: 7,
-			title:
-				'세상에서 제일 재밌는 봉사활동, 런닝과 환경 보호를 한번에! 참여해보세요',
-			thumbnail: car,
-			nickname: '내닉네임은너무나도길어',
-			profile: car,
-			recruitStatus: '모집중',
-			startDate: '2021-01-01',
-			endDate: '2021-01-02',
-		},
-		{
-			id: 8,
-			title: '쪽방촌에 계시는 어른들에게 도시락을 전달해요!',
-			thumbnail: car,
-			nickname: '도시락요정',
-			profile: car,
-			recruitStatus: '모집완료',
-			startDate: '2021-01-01',
-			endDate: '2021-01-02',
-		},
-	];
 
 	return (
 		<>
@@ -183,6 +113,7 @@ function myVolunHistory() {
 						<Tab currTab={currTab} onClick={handleClickTab} tabs={tabs} />
 					</TabMenu>
 					<CardBox>
+						{data.length === 0 && <h1>봉사 내역이 존재하지 않습니다.</h1>}
 						{data.map((data) => (
 							<Card key={data.volunteer_id._id} currTab={currTab} data={data} />
 						))}

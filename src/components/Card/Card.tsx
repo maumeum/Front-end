@@ -17,6 +17,7 @@ import { post } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import Swal from 'sweetalert2';
 import car from '@src/assets/images/car.png';
+import { VolunteerTypes } from '@src/utils/EnumTypes';
 
 export type Props = {
 	data: {
@@ -73,8 +74,6 @@ function Card({ currTab, data }: Props) {
 	};
 
 	const handleParticipated = async () => {
-		console.log(_id);
-		console.log(getToken());
 		try {
 			await post(
 				`/api/review/users/participation/${_id}`,
@@ -128,11 +127,12 @@ function Card({ currTab, data }: Props) {
 					<UserInfo>
 						<img src={car} alt='작성자 프로필사진' />
 						<p>{truncateCentName(centName)}</p>
-						{currTab === TabTypes.VOLUNTEER_COMPLETED && (
-							<ButtonContainer>
-								<SmallButton onClick={openModal}>리뷰작성</SmallButton>
-							</ButtonContainer>
-						)}
+						{currTab === TabTypes.VOLUNTEER_COMPLETED &&
+							statusName !== VolunteerTypes.DISCONTINUE && (
+								<ButtonContainer>
+									<SmallButton onClick={openModal}>리뷰작성</SmallButton>
+								</ButtonContainer>
+							)}
 						{currTab === TabTypes.VOLUNTEER_SUGGEST && (
 							<SelectContainer>
 								<Selector onChange={handleRecruitmentStatusChange} />
