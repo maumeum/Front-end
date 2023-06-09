@@ -1,15 +1,17 @@
 import { createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset';
 
 const GlobalStyles = createGlobalStyle`
-  ${reset}
   :root {
     --color--footer: #f5d4d4;
     --button--color: #aacb73;
     --little-color: #cde990;
     --card--color: #ffffe8;
   } 
-  
+
+  * {
+    font-family: 'Kakao', AppleSDGothicNeo, sans-serif;
+  }
+
   html {
     font-size: 62.5%;
     letter-spacing: -0.05px;
@@ -56,10 +58,10 @@ const GlobalStyles = createGlobalStyle`
     
     @media all and (min-width: 3850px) {
       font-size: 128.5%;
+    }
   }
-
+  
   body {
-    font-family: 'Kakao', AppleSDGothicNeo, sans-serif;
     display: block;
     margin: 0;
     -webkit-font-smoothing: antialiased;
