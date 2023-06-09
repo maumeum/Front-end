@@ -58,13 +58,34 @@ function ProfileImg() {
 			cancelButtonColor: '#afcd81',
 			confirmButtonText: '네',
 			cancelButtonText: '아니요',
-		}).then((result) => {
+		}).then(async (result) => {
 			//여기에 기본이미지 변경 api
+			try {
+				await patch(
+					'/api//users/original/image',
+					{},
+					{
+						headers: {
+							Authorization: `Bearer ${getToken()}`,
+						},
+					},
+				);
+				Swal.fire({
+					title: '기본이미지로 변경되었습니다',
+					icon: 'success',
+					confirmButtonText: '확인',
+					confirmButtonColor: 'var(--button--color)',
+				});
+			} catch (error) {
+				console.log(error);
+			}
 			if (result.isConfirmed) {
 				Swal.fire({
 					title: '기본이미지로 변경되었습니다!',
 					icon: 'success',
 					confirmButtonColor: 'var(--button--color)',
+				}).then(() => {
+					window.location.reload();
 				});
 			}
 		});
@@ -103,6 +124,8 @@ function ProfileImg() {
 			title: '프로필 사진이 변경되었습니다',
 			icon: 'success',
 			confirmButtonColor: 'var(--button--color)',
+		}).then(() => {
+			window.location.reload();
 		});
 	};
 	return (
