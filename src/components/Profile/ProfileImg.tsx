@@ -19,12 +19,16 @@ function ProfileImg() {
 	}, []);
 
 	useEffect(() => {
+		//유저의 이미지가 변하면 after이미지를 선택하면-> after이미지를 before이미지로 변경해줘야함
 		setBeforeImg(userData?.image);
+		console.log('이비지 변경됨');
+		console.log('beforeImg', beforeImg);
+		console.log('afterImg', afterImg);
 	}, [userData]);
 
-	const [beforeImg, setBeforeImg] = useState<string | undefined>('');
-	const [afterImg, setAfterImg] = useState<string>('');
-	const [isUpload, setIsUpload] = useState<boolean>(false);
+	const [beforeImg, setBeforeImg] = useState<string | undefined>(''); //기존 이미지
+	const [afterImg, setAfterImg] = useState<string>(''); //변경하고자하는 이미지
+	const [isUpload, setIsUpload] = useState<boolean>(false); //업로드 여부 -> 업로드 되면 true 미리보기 사진으로 보여짐 , 삭제하기버튼
 	const [file, setFile] = useState<File | null>(null);
 
 	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,10 +53,28 @@ function ProfileImg() {
 			setAfterImg(beforeImg);
 		}
 		setIsUpload(false);
+		setFile(null); // 파일 상태 초기화
 	};
 
 	const handleDeleteImage = () => {
-		console.log('이미지 취소 요청');
+		Swal.fire({
+			title: '기본 이미지로 변경하시겠습니까??',
+			icon: 'info',
+			showCancelButton: true,
+			confirmButtonColor: '#ffd4d4',
+			cancelButtonColor: '#afcd81',
+			confirmButtonText: '네',
+			cancelButtonText: '아니요',
+		}).then((result) => {
+			//여기에 기본이미지 변경 api
+			if (result.isConfirmed) {
+				Swal.fire({
+					title: '변경되었습니다!',
+					icon: 'success',
+					confirmButtonColor: 'var(--button--color)',
+				});
+			}
+		});
 	};
 
 	const handleSubmit = async (e: FormEvent) => {
@@ -108,7 +130,7 @@ function ProfileImg() {
 						<button>저장하기</button>
 						{isUpload ? (
 							<button type='button' onClick={handleResetImage}>
-								삭제하기
+								취소하기
 							</button>
 						) : (
 							<button type='button' onClick={handleDeleteImage}>

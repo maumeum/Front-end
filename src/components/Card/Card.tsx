@@ -43,6 +43,17 @@ function truncateDate(date: string) {
 	return date.split('T')[0];
 }
 
+function truncateCentName(name: string) {
+	if (!name) {
+		return '';
+	}
+	if (name.length > 10) {
+		return `${name.slice(0, 10)}...`;
+	} else {
+		return name;
+	}
+}
+
 function Card({ currTab, data }: Props) {
 	const { _id, title, centName, statusName, images, startDate, endDate } =
 		data.volunteer_id;
@@ -116,7 +127,7 @@ function Card({ currTab, data }: Props) {
 					</VolunInfo>
 					<UserInfo>
 						<img src={car} alt='작성자 프로필사진' />
-						<p>{centName}</p>
+						<p>{truncateCentName(centName)}</p>
 						{currTab === TabTypes.VOLUNTEER_COMPLETED && (
 							<ButtonContainer>
 								<SmallButton onClick={openModal}>리뷰작성</SmallButton>
