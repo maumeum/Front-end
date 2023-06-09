@@ -11,7 +11,7 @@ const GlobalStyles = createGlobalStyle`
   * {
     font-family: 'Kakao', AppleSDGothicNeo, sans-serif;
   }
-  
+
   html {
     font-size: 62.5%;
     letter-spacing: -0.05px;
