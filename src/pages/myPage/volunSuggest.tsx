@@ -16,30 +16,6 @@ import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType';
 
-const props = [
-	{
-		id: 1,
-		title:
-			'지금 당장 이메일 내의 스팸메시지를 삭제해보세요! 탄소가 줄어듭니다.',
-		thumbnail: car,
-		nickname: '스팸메시지지우기',
-		profile: car,
-		recruitStatus: '모집중',
-		startDate: '2021-01-01',
-		endDate: '2021-01-02',
-	},
-	{
-		id: 2,
-		title:
-			'페트병의 라벨을 잘 제거합시다! 1초의 행동으로 환경을 보호할 수 있습니다',
-		thumbnail: car,
-		nickname: '라벨요정',
-		profile: car,
-		recruitStatus: '모집완료',
-		startDate: '2021-01-01',
-		endDate: '2021-01-02',
-	},
-];
 interface ResponseData {
 	_id: string;
 	title: string;
@@ -62,7 +38,7 @@ function volunSuggest() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>('/api/volunteers/registeration', {
+				const response = await get<DataType>('/api/volunteers/registerations', {
 					headers: {
 						Authorization: `Bearer ${getToken()}`,
 					},
@@ -79,7 +55,6 @@ function volunSuggest() {
 	const [dataList, setDataList] = useState<ResponseData[]>([]);
 	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
 	const [currTab] = useState<TabTypes>(TabTypes.VOLUNTEER_SUGGEST);
-	console.log(dataList);
 
 	const transformData = dataList.map((data) => {
 		return {
