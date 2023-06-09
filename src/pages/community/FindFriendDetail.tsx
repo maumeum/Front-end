@@ -25,7 +25,7 @@ import DataType from '@src/types/DataType.ts';
 
 const FindFriendDetail = () => {
 	const navigate = useNavigate();
-	const { postId } = useParams();
+	const { postId } = useParams() as { postId: string };
 	const [post, setPost] = useState<any>([]);
 	const [datauser, setDataUser] = useState<any>('');
 	const [loginUser, setLoginUser] = useState(false);
@@ -118,7 +118,7 @@ const FindFriendDetail = () => {
 					</Contentdiv>
 				</ContentContainer>
 			</DetailContainer>
-			<CommentSection />
+			<CommentSection postId={postId} />
 		</>
 	);
 };

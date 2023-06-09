@@ -25,7 +25,7 @@ import DataType from '@src/types/DataType';
 
 const ReviewDetail = () => {
 	const navigate = useNavigate();
-	const { postId } = useParams();
+	const { postId } = useParams() as { postId: string };
 	const [post, setPost] = useState<any>([]);
 	const [loginUser, setLoginUser] = useState(false);
 	const [datauser, setDataUser] = useState<any>('');
@@ -45,7 +45,6 @@ const ReviewDetail = () => {
 			});
 			setPost(response.data);
 			setDataUser(response.data.user_id);
-			console.log(response);
 			//setDataUser(response.data);
 		} catch (error) {
 			console.error('Error fetching post:', error);
@@ -55,13 +54,13 @@ const ReviewDetail = () => {
 	const loginUserLogic = async () => {
 		try {
 			const token = getToken();
-			const response = await get<DataType>(`/review/check/${postId}`, {
+			const response = await get<DataType>(`/api/review/check/${postId}`, {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
 			});
 			setLoginUser(response.data);
-			console.log(response);
+			console.log('loginLogic test', response);
 		} catch (error) {
 			console.error(error);
 		}
@@ -120,7 +119,7 @@ const ReviewDetail = () => {
 					</Contentdiv>
 				</ContentContainer>
 			</DetailContainer>
-			<CommentSection />
+			<CommentSection postId={postId} />
 		</>
 	);
 };
