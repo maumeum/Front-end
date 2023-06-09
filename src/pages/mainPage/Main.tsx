@@ -37,8 +37,8 @@ const Main = () => {
 	// 리뷰 데이터 불러오기
 	useEffect(() => {
 		const fetchData = async () => {
-			const responseData = await get<DataType>('/api/review');
-			setReviewList(responseData.data);
+			const responseData = await get<DataType>('/api/review?skip=0&limit=2');
+			setReviewList(responseData.data.reviews);
 		};
 		fetchData();
 	}, []);
@@ -71,12 +71,9 @@ const Main = () => {
 			<TopContainer>
 				<ReviewContainer>
 					{reviewList &&
-						reviewList
-							.sort(() => Math.random() - 0.5)
-							.slice(0, 2)
-							.map((item, index) => (
-								<ReviewCard data={{ ...item, index }} key={item._id} />
-							))}
+						reviewList.map((item, index) => (
+							<ReviewCard data={{ ...item, index }} key={item._id} />
+						))}
 				</ReviewContainer>
 				<IntroducePage>
 					<IntroduceTitle>

@@ -51,23 +51,6 @@ function Menu({ title }: MenuProps) {
 					</Menus>
 				</>
 			)}
-
-			{title === '관리자' && (
-				<>
-					<MenuTitle>{title}</MenuTitle>
-					<Menus>
-						<Link to='/admin/report'>
-							<p>신고 내역</p>
-						</Link>
-						<Link to='/admin/team_auth'>
-							<p>단체 인증 요청</p>
-						</Link>
-						<Link to='/admin/user_manage'>
-							<p>유저 관리</p>
-						</Link>
-					</Menus>
-				</>
-			)}
 		</>
 	);
 }
