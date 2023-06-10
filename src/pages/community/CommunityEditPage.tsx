@@ -21,30 +21,27 @@ const CommunityEditPage = () => {
 	const location = useLocation();
 	const { postId } = location.state;
 	const [post, setPost] = useState<any>([]);
-	const [datauser, setDataUser] = useState<any>('');
 	const [input, setInput] = useState('');
 	const [inputTitle, setInputTitle] = useState('');
 	const quillRef = useRef<ReactQuill>(null);
 
 	useEffect(() => {
+		const fetchPost = async () => {
+			try {
+				const token = getToken();
+				const response = await get<DataType>(`/api/community/${postId}`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				});
+				setPost(response.data.post.post);
+				console.log(response);
+			} catch (error) {
+				console.error('Error fetching post:', error);
+			}
+		};
 		fetchPost();
-	}, []);
-
-	const fetchPost = async () => {
-		try {
-			const token = getToken();
-			const response = await get<DataType>(`/api/community/${postId}`, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
-			setPost(response.data.post.post);
-			setDataUser(response.data.post.user);
-			console.log(response);
-		} catch (error) {
-			console.error('Error fetching post:', error);
-		}
-	};
+	}, [postId]);
 
 	const editPost = async () => {
 		try {
