@@ -21,6 +21,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
 	args: {
 		data: {
+			_id: '01',
 			title: '아동기초학습지도',
 			content:
 				'지구촌지역아동센터에서 초등학생 1~6학년 아이들 교육지도를 도와주실 봉사자를 모집합니다. 궁금한 사항 있으시면 언제든 연락주세요',
@@ -34,7 +35,6 @@ export const Primary: Story = {
 			teenager: true,
 			images: [imgData],
 			user_id: '1',
-			updateAt: '2023-05-31 15:00:00',
 		},
 	},
 };

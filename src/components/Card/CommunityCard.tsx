@@ -1,4 +1,4 @@
-import { CommunityListType } from '@src/types/CardType';
+import { CommunityType } from '@src/types/CardType';
 
 import {
 	CommunityContainer,
@@ -7,14 +7,14 @@ import {
 } from '@components/Card/card';
 
 interface CommunityCardProps {
-	data: CommunityListType;
+	communityData: CommunityType;
 }
 
-const CommunityCard = ({ data }: CommunityCardProps) => {
+const CommunityCard = ({ communityData }: CommunityCardProps) => {
 	return (
 		<CommunityContainer>
-			<PostType>{data.postType}</PostType>
-			<CommunityTitle>{data.title}</CommunityTitle>
+			<PostType>{communityData.postType}</PostType>
+			<CommunityTitle>{communityData.title}</CommunityTitle>
 		</CommunityContainer>
 	);
 };

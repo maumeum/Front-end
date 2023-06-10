@@ -1,15 +1,18 @@
 // Datalist Type
-export interface CommunityListType {
+export interface CommunityType {
 	_id: string;
 	user_id: {
 		nickname: string;
 	};
 	title: string;
 	postType: string;
+	createdAt: string;
 	content: string;
 }
 
-export interface ReviewListType {
+export type CommunityListType = CommunityType[];
+
+export interface ReviewType {
 	_id: string;
 	title: string;
 	content: string;
@@ -18,10 +21,13 @@ export interface ReviewListType {
 		nickname: string;
 	};
 	index: number;
+	createdAt: string;
 	images?: string[];
 }
 
-export interface VolunteerListType {
+export type ReviewListType = ReviewType[];
+
+export interface VolunteerType {
 	_id: string;
 	title: string;
 	content: string;
@@ -33,8 +39,11 @@ export interface VolunteerListType {
 	actTypeName: string;
 	teenager: boolean;
 	user_id: string;
+	createdAt: string;
 	images?: string[];
 }
+
+export type VolunteerListType = VolunteerType[];
 
 export interface TeamListType {
 	_id: number;

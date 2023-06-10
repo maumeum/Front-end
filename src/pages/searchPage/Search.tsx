@@ -21,8 +21,8 @@ import CommunityCard from '@components/Card/CommunityCard';
 const Search = () => {
 	const [query, setQuery] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
-	const [volunteerList, setVolunteerList] = useState<VolunteerListType[]>([]);
-	const [communityList, setCommunityList] = useState<CommunityListType[]>([]);
+	const [volunteerList, setVolunteerList] = useState<VolunteerListType>([]);
+	const [communityList, setCommunityList] = useState<CommunityListType>([]);
 	const navigate = useNavigate();
 
 	const handleSearch = (query: string) => {
@@ -67,13 +67,13 @@ const Search = () => {
 					<VolunteerTitle>봉사활동 검색결과</VolunteerTitle>
 					<VolunteerContainer>
 						{volunteerList.slice(0, 8).map((item) => (
-							<VolunteerCard key={item._id} data={item} />
+							<VolunteerCard key={item._id} volunteerData={item} />
 						))}
 					</VolunteerContainer>
 					<CommunityTitle>커뮤니티 검색결과</CommunityTitle>
 					<CommunityContainer>
 						{communityList.slice(0, 6).map((item) => (
-							<CommunityCard key={item._id} data={item} />
+							<CommunityCard key={item._id} communityData={item} />
 						))}
 					</CommunityContainer>
 				</>

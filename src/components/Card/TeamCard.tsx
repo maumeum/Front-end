@@ -3,7 +3,7 @@ import 'dayjs/locale/ko';
 import Swal from 'sweetalert2';
 
 import { TeamListType } from '@src/types/CardType';
-import alertData from '@src/utils/swalObject';
+import alertData from '@utils/swalObject';
 
 import {
 	TeamCardSection,
@@ -23,10 +23,10 @@ import {
 import volunteerLogo from '@assets/images/volunteerLogo.png';
 
 interface TeamCardProps {
-	data: TeamListType;
+	teamData: TeamListType;
 }
 
-const TeamCard = ({ data }: TeamCardProps) => {
+const TeamCard = ({ teamData }: TeamCardProps) => {
 	// 수락
 	const acceptHandler = () => {
 		Swal.fire(alertData.acceptTeamCard).then((result) => {
@@ -44,18 +44,20 @@ const TeamCard = ({ data }: TeamCardProps) => {
 			}
 		});
 	};
-	const date = dayjs(data.createdAt).locale('ko').format('YYYY년 MM월 DD일');
+	const date = dayjs(teamData.createdAt)
+		.locale('ko')
+		.format('YYYY년 MM월 DD일');
 	return (
 		<TeamCardSection>
 			<TeamImageContainer>
 				<TeamImage src={volunteerLogo} alt='volunteerLogo' />
 			</TeamImageContainer>
 			<TeamMainContainer>
-				<TeamName>{`[${data.category}]${data.teamName}`}</TeamName>
+				<TeamName>{`[${teamData.category}]${teamData.teamName}`}</TeamName>
 				<TeamDescContainer>
 					<DescContainer>
 						<WriteDate>{date}</WriteDate>
-						<TeamUserNickname>{data.userId.nickname}</TeamUserNickname>
+						<TeamUserNickname>{teamData.userId.nickname}</TeamUserNickname>
 					</DescContainer>
 					<TeamButtonContainer>
 						<AcceptButton onClick={acceptHandler}>수락</AcceptButton>
