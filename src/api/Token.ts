@@ -5,7 +5,7 @@ export const setToken = (token: string) => {
 
 // localStorage에 있는 토큰을 가져오는 함수
 export const getToken = () => {
-	return localStorage.getItem('userToken') || null;
+	return localStorage.getItem('userToken');
 };
 
 // localStorage 토큰 삭제 함수

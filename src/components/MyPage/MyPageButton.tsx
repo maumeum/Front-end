@@ -5,11 +5,11 @@ import { getToken } from '@api/Token';
 import { ButtonContainer, ButtonWord } from './myPage.ts';
 
 const MyPageButton = () => {
-	const { userData, initialize } = useAuthStore();
+	const { userData, getUserData } = useAuthStore();
 
 	// user 정보 불러오기
 	useEffect(() => {
-		initialize();
+		getUserData();
 	}, []);
 
 	return (

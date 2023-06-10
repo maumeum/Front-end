@@ -14,7 +14,7 @@ interface VolunteerCardProps {
 	data: VolunteerListType;
 }
 
-import imgData from '../../assets/images/volunteer1.jpg';
+import imgData from '@assets/images/volunteer1.jpg';
 
 const VolunteerCard = ({ data }: VolunteerCardProps) => {
 	return (

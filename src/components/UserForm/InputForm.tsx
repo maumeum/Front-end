@@ -64,9 +64,7 @@ const InputForm = ({
 	}: ErrorType) => {
 		switch (true) {
 			case data && validFn && !validFn(data):
-				return <CheckValue>{errorMessage.validMessage}</CheckValue>;
 			case data && validPassword && !validPassword(data):
-				return <CheckValue>{errorMessage.validMessage}</CheckValue>;
 			case data && passwordData && data !== passwordData:
 				return <CheckValue>{errorMessage.validMessage}</CheckValue>;
 			case !submit:
