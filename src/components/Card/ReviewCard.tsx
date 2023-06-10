@@ -1,4 +1,4 @@
-import { ReviewListType } from '@src/types/CardType.ts';
+import { ReviewType } from '@src/types/CardType.ts';
 import {
 	ReviewSection,
 	ImageContainer,
@@ -8,18 +8,18 @@ import {
 	ReviewTitle,
 	ReviewContent,
 } from './card.ts';
-import imgData from '@src/assets/images/volunteer2.jpg';
+import imgData from '@assets/images/volunteer2.jpg';
 
 interface ReviewCardProps {
-	data: ReviewListType;
+	reviewData: ReviewType;
 }
 
-const ReviewCard = ({ data }: ReviewCardProps) => {
-	const key = data.index;
+const ReviewCard = ({ reviewData }: ReviewCardProps) => {
+	const key = reviewData.index;
 
 	//Content 미리보기 함수
-	const previewContent = (data: ReviewListType) => {
-		const content = data.content;
+	const previewContent = (reviewData: ReviewType) => {
+		const content = reviewData.content;
 
 		// content의 길이가 35자 이상이라면 ... 처리
 		if (content.length >= 35) {
@@ -42,10 +42,14 @@ const ReviewCard = ({ data }: ReviewCardProps) => {
 				<ReviewImage src={imgData} />
 			</ImageContainer>
 			<ReviewContainer>
-				<Nickname className={colorClass(key)}>{data.user_id.nickname}</Nickname>
-				<ReviewTitle className={colorClass(key)}>{data.title}</ReviewTitle>
+				<Nickname className={colorClass(key)}>
+					{reviewData.user_id.nickname}
+				</Nickname>
+				<ReviewTitle className={colorClass(key)}>
+					{reviewData.title}
+				</ReviewTitle>
 				<ReviewContent className={colorClass(key)}>
-					{previewContent(data)}
+					{previewContent(reviewData)}
 				</ReviewContent>
 			</ReviewContainer>
 		</ReviewSection>

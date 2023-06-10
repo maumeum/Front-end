@@ -23,8 +23,8 @@ import MyProfile from './pages/myPage/MyProfile';
 import FindFriendDetail from '@src/pages/community/FindFriendDetail';
 import Withdrawal from '@pages/myPage/Withdrawal';
 import ReviewDetail from '@src/pages/reviewPage/ReviewDetail';
-import TeamAuth from '@pages/admin/TeamAuth';
-import Report from '@pages/admin/Report';
+import TeamAuth from '@src/pages/adminPage/TeamAuth';
+import Report from '@src/pages/adminPage/Report';
 import CommunityEditPage from '@src/pages/community/CommunityEditPage';
 import Error from '@pages/errorPage/Error';
 import PrivateRoute from '@utils/PrivateRoute';
@@ -49,8 +49,6 @@ function App() {
 				<Route path='/community/:postId' element={<FindFriendDetail />} />
 				<Route path='community/edit/:postId' element={<CommunityEditPage />} />
 				<Route path='/review/:postId' element={<ReviewDetail />} />
-				<Route path='/admin/team_auth' element={<TeamAuth />} />
-				<Route path='/admin/report' element={<Report />} />
 				<Route path='/community/:postId' element={<FindFriendDetail />} />
 
 				{/* 권한이 필요한 페이지들 */}
@@ -63,6 +61,8 @@ function App() {
 					<Route path='/mypage/edit' element={<UserInfoEdit />} />
 					<Route path='/mypage/profile' element={<MyProfile />} />
 					<Route path='/mypage/withdrawal' element={<Withdrawal />} />
+					<Route path='/admin/team_auth' element={<TeamAuth />} />
+					<Route path='/admin/report' element={<Report />} />
 				</Route>
 			</Routes>
 			<Footer />

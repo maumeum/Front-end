@@ -2,7 +2,7 @@ import TeamCard from '@components/Card/TeamCard';
 import SearchBar from '@components/SearchBar/SearchBar';
 import Menu from '@components/Menu/Menu.tsx';
 import { MenuBar, TopBarContainer, TopBar, TeamCardContainer } from './style';
-import teamData from '@assets/datas/teamData';
+import teamsData from '@assets/datas/teamData';
 
 const TeamAuth = () => {
 	const handleClick = (query: string) => {
@@ -18,8 +18,8 @@ const TeamAuth = () => {
 			</TopBarContainer>
 			<SearchBar onSearch={handleClick} />
 			<TeamCardContainer>
-				{teamData.map((item) => (
-					<TeamCard data={item} key={item._id} />
+				{teamsData.map((item) => (
+					<TeamCard teamData={item} key={item._id} />
 				))}
 			</TeamCardContainer>
 		</>

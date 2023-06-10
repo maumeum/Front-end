@@ -1,4 +1,4 @@
-import { VolunteerListType } from '@src/types/CardType';
+import { VolunteerType } from '@src/types/CardType';
 
 import {
 	VolunteerSection,
@@ -11,21 +11,21 @@ import {
 } from '@components/Card/card';
 
 interface VolunteerCardProps {
-	data: VolunteerListType;
+	volunteerData: VolunteerType;
 }
 
 import imgData from '@assets/images/volunteer1.jpg';
 
-const VolunteerCard = ({ data }: VolunteerCardProps) => {
+const VolunteerCard = ({ volunteerData }: VolunteerCardProps) => {
 	return (
 		<VolunteerSection>
 			<VolunteerImgContainer>
 				<VolunteerImage src={imgData} />
-				<RecruitStatus>{data.statusName}</RecruitStatus>
+				<RecruitStatus>{volunteerData.statusName}</RecruitStatus>
 			</VolunteerImgContainer>
 			<VolunteerIntroContainer>
-				<VolunteerTitle>{data.title}</VolunteerTitle>
-				<VolunteerContent>{data.centName}</VolunteerContent>
+				<VolunteerTitle>{volunteerData.title}</VolunteerTitle>
+				<VolunteerContent>{volunteerData.centName}</VolunteerContent>
 			</VolunteerIntroContainer>
 		</VolunteerSection>
 	);
