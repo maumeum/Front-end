@@ -11,9 +11,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 		<ThemeProvider theme={theme}>
 			<GlobalStyles />
 			<GlobalFont />
-			<>
-				<App />
-			</>
+			<App />
 		</ThemeProvider>
 	</React.StrictMode>,
 );
