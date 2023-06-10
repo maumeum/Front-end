@@ -9,6 +9,7 @@ import {
 	EmailButton,
 } from '@src/pages/userPage/style';
 import { post } from '@src/api/Api';
+import alertData from '@src/utils/swalObject';
 
 interface ErrorType {
 	data: string;
@@ -80,24 +81,13 @@ const InputForm = ({
 		try {
 			const userData = await post<boolean>('/api/email', { email: value });
 			if (value === '') {
-				return Swal.fire({
-					icon: 'error',
-					title: '이메일을 입력해주세요.',
-					confirmButtonColor: '#d33',
-				});
+				return Swal.fire(alertData.emptyEmail);
 			}
 			if (userData) {
-				Swal.fire({
-					title: '사용 가능한 이메일 입니다!',
-					confirmButtonColor: 'var(--button--color)',
-				});
+				Swal.fire(alertData.possibleEmail);
 			}
 		} catch (err) {
-			Swal.fire({
-				icon: 'error',
-				title: '이미 사용 중인 이메일입니다.',
-				confirmButtonColor: '#d33',
-			});
+			Swal.fire(alertData.usedEmail);
 		}
 	};
 
