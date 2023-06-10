@@ -3,6 +3,8 @@ import 'dayjs/locale/ko';
 import Swal from 'sweetalert2';
 
 import { TeamListType } from '@src/types/CardType';
+import alertData from '@src/utils/swalObject';
+
 import {
 	TeamCardSection,
 	TeamImageContainer,
@@ -27,15 +29,7 @@ interface TeamCardProps {
 const TeamCard = ({ data }: TeamCardProps) => {
 	// 수락
 	const acceptHandler = () => {
-		Swal.fire({
-			title: '수락 하시겠습니까?',
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: '예',
-			cancelButtonText: '아니오',
-		}).then((result) => {
+		Swal.fire(alertData.acceptTeamCard).then((result) => {
 			if (result.isConfirmed) {
 				Swal.fire('수락되었습니다.');
 			}
@@ -44,15 +38,7 @@ const TeamCard = ({ data }: TeamCardProps) => {
 
 	// 거부
 	const refuseHandler = () => {
-		Swal.fire({
-			title: '거부 하시겠습니까?',
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: '예',
-			cancelButtonText: '아니오',
-		}).then((result) => {
+		Swal.fire(alertData.refuseTeamCard).then((result) => {
 			if (result.isConfirmed) {
 				Swal.fire('거부되었습니다.');
 			}
