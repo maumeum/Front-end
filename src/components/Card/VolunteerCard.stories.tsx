@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
 	args: {
-		data: {
+		volunteerData: {
 			_id: '01',
 			title: '아동기초학습지도',
 			content:
