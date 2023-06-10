@@ -18,7 +18,7 @@ import {
 } from './style';
 import LargeButton from '@components/Buttons/LargeButton';
 import { validEmail } from '@utils/signUpCheck';
-import alertData from '@src/utils/swalObject';
+import alertData from '@utils/swalObject';
 import mainLogo from '@assets/icons/mainlogo.svg';
 
 const Login = () => {

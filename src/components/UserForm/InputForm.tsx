@@ -7,9 +7,9 @@ import {
 	EmailContainer,
 	EmailData,
 	EmailButton,
-} from '@src/pages/userPage/style';
-import { post } from '@src/api/Api';
-import alertData from '@src/utils/swalObject';
+} from '@pages/userPage/style';
+import { post } from '@api/Api';
+import alertData from '@utils/swalObject';
 
 interface ErrorType {
 	data: string;

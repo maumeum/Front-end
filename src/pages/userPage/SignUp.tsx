@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 
 import { post } from '@api/Api';
 import DataType from '@src/types/DataType';
-import alertData from '@src/utils/swalObject';
+import alertData from '@utils/swalObject';
 import LargeButton from '@components/Buttons/LargeButton';
 import { SignUpSection, SignUpForm } from './style';
 

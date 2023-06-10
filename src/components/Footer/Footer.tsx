@@ -10,7 +10,7 @@ import {
 	GitLink,
 } from './style';
 
-import mainLogo from '@src/assets/icons/mainlogo.svg';
+import mainLogo from '@assets/icons/mainlogo.svg';
 
 const Footer = () => {
 	const clickHandler = () => {
