@@ -19,7 +19,7 @@ import Swal from 'sweetalert2';
 import car from '@src/assets/images/car.png';
 import { VolunteerTypes } from '@src/types/myPageConstants.ts';
 
-export type Props = {
+export interface CardProps {
 	data: {
 		createdAt: string;
 		isParticipate?: boolean;
@@ -35,7 +35,7 @@ export type Props = {
 		};
 	};
 	currTab: string;
-};
+}
 
 function truncateDate(date: string) {
 	if (!date) {
@@ -55,7 +55,7 @@ function truncateCentName(name: string) {
 	}
 }
 
-function Card({ currTab, data }: Props) {
+function Card({ currTab, data }: CardProps) {
 	const { _id, title, centName, statusName, images, startDate, endDate } =
 		data.volunteer_id;
 	const [isOpen, setIsOpen] = useState(false);

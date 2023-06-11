@@ -12,10 +12,10 @@ import { getToken } from '@api/Token';
 
 const url = import.meta.env.VITE_API_URL;
 function ProfileImg() {
-	const { userData, initialize } = useAuthStore();
+	const { userData, getUserData } = useAuthStore();
 
 	useEffect(() => {
-		initialize();
+		getUserData();
 	}, []);
 
 	useEffect(() => {
@@ -62,7 +62,7 @@ function ProfileImg() {
 			//여기에 기본이미지 변경 api
 			try {
 				await patch(
-					'/api//users/original/image',
+					'/api/users/original/image',
 					{},
 					{
 						headers: {

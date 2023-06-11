@@ -15,7 +15,7 @@ import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType';
 import Swal from 'sweetalert2';
 
-type VolunProps = {
+interface VolunProps {
 	createdAt: string;
 	_id: string;
 	isParticipate: boolean;
@@ -29,7 +29,7 @@ type VolunProps = {
 		deadline: string;
 		images: string[];
 	};
-};
+}
 
 function MyVolunHistory() {
 	const [currTab, setCurrTab] = useState<TabTypes>(TabTypes.VOLUNTEER_APPLIED);

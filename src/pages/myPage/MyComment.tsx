@@ -14,14 +14,14 @@ import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import Swal from 'sweetalert2';
 
-type CommunityProps = {
+interface CommunityProps {
 	title: string;
 	content: string;
 	createdAt: string;
 	_id: string;
 	images: string | null;
 	postType: string;
-};
+}
 
 function MyComment() {
 	useEffect(() => {

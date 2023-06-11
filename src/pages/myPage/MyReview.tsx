@@ -14,12 +14,12 @@ import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType';
 
-type ReviewProps = {
+interface ReviewProps {
 	title: string;
 	content: string;
 	createdAt: string;
 	_id: string;
-};
+}
 
 function MyReview() {
 	useEffect(() => {

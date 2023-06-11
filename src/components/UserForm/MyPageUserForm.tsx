@@ -31,9 +31,9 @@ import DataType from '@src/types/DataType';
 //컴포넌트간 결합도가 너무 강해서 그런거겠죠..? 추후 어떻게 분리를 하거나 변경해야할지
 //방향성을 알고싶습니다!
 
-type MyPageUserFormProps = {
+interface MyPageUserFormProps {
 	pageType: string; //readOnly설정을 위한 props 값
-};
+}
 
 type UserInfo = {
 	email: string;

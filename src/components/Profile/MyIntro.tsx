@@ -12,10 +12,10 @@ import { getToken } from '@src/api/Token';
 import useAuthStore from '@src/store/useAuthStore.ts';
 
 function MyIntro() {
-	const { userData, initialize } = useAuthStore();
+	const { userData, getUserData } = useAuthStore();
 
 	useEffect(() => {
-		initialize();
+		getUserData();
 	}, []);
 
 	useEffect(() => {
