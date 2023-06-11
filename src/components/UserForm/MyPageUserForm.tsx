@@ -22,7 +22,7 @@ import InputForm from '@src/components/UserForm/InputForm.tsx';
 import LargeButton from '@components/Buttons/LargeButton';
 import Modal from '@components/Modal/Modal.tsx';
 import { useNavigate } from 'react-router-dom';
-import { TabTypes } from '@src/types/EnumTypes';
+import { TabTypes } from '@src/types/myPageConstants';
 import { get, patch } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType';

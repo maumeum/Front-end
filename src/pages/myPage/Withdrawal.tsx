@@ -8,7 +8,7 @@ import {
 } from '@components/MyPage/myPage.ts';
 import Tab from '@components/Tab/Tab.tsx';
 import Menu from '@components/Menu/Menu.tsx';
-import { TabTypes } from '@src/types/EnumTypes';
+import { TabTypes } from '@src/types/myPageConstants';
 import TopBar from '@components/TopBar/TopBar.tsx';
 import LargeButton from '@components/Buttons/LargeButton';
 import {
