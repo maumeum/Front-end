@@ -11,7 +11,6 @@ import Card from '@components/Card/Card.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/types/myPageConstants';
 import { get } from '@src/api/Api';
-import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType';
 import Swal from 'sweetalert2';
 

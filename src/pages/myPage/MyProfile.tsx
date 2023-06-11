@@ -12,9 +12,8 @@ import MyIntro from '@components/Profile/MyIntro.tsx';
 import ProfileImg from '@components/Profile/ProfileImg.tsx';
 
 function MyProfile() {
-	const [currImgTab] = useState<TabTypes>(TabTypes.EDIT_PROFILE);
 	const tabs_img = [TabTypes.EDIT_PROFILE];
-	const [currIntroTab] = useState<TabTypes>(TabTypes.EDIT_INTRO);
+
 	const tabs_intro = [TabTypes.EDIT_INTRO];
 
 	return (
@@ -26,12 +25,12 @@ function MyProfile() {
 
 				<Main>
 					<TabMenu>
-						<Tab currTab={currImgTab} tabs={tabs_img} />
+						<Tab tabs={tabs_img} />
 					</TabMenu>
 					<ProfileImg />
 
 					<TabMenu>
-						<Tab currTab={currIntroTab} tabs={tabs_intro} />
+						<Tab tabs={tabs_intro} />
 					</TabMenu>
 					<MyIntro />
 				</Main>

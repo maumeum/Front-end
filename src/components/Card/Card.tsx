@@ -34,7 +34,7 @@ export interface CardProps {
 			images: string[];
 		};
 	};
-	currTab: string;
+	currTab?: string;
 }
 
 function truncateDate(date: string) {

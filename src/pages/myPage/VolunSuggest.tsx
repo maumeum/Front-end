@@ -57,7 +57,6 @@ function VolunSuggest() {
 
 	const [dataList, setDataList] = useState<ResponseData[]>([]);
 	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
-	const [currTab] = useState<TabTypes>(TabTypes.VOLUNTEER_SUGGEST);
 
 	const transformData = dataList.map((data) => {
 		//Card 컴포넌트 형식에 맞게 데이터형태 변환
@@ -85,14 +84,14 @@ function VolunSuggest() {
 
 				<Main>
 					<TabMenu>
-						<Tab currTab={currTab} tabs={tabs} />
+						<Tab tabs={tabs} />
 					</TabMenu>
 					<CardBox>
 						{dataList.length === 0 && (
 							<div>내가 등록한 봉사 내역이 없습니다.</div>
 						)}
 						{transformData.map((data) => (
-							<Card key={data.volunteer_id._id} data={data} currTab={currTab} />
+							<Card key={data.volunteer_id._id} data={data} />
 						))}
 					</CardBox>
 				</Main>

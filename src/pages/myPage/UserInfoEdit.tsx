@@ -11,7 +11,6 @@ import { TabTypes } from '@src/types/myPageConstants';
 import MyPageUserForm from '@components/UserForm/MyPageUserForm';
 
 function UserInfoEdit() {
-	const [currTab] = useState<TabTypes>(TabTypes.EDIT_MYINFO);
 	const tabs = [TabTypes.EDIT_MYINFO];
 
 	return (
@@ -22,7 +21,7 @@ function UserInfoEdit() {
 
 			<Main>
 				<TabMenu>
-					<Tab currTab={currTab} tabs={tabs} />
+					<Tab tabs={tabs} />
 				</TabMenu>
 				<MyPageUserForm pageType={TabTypes.EDIT_MYINFO} />
 			</Main>

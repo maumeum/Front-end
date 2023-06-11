@@ -11,7 +11,6 @@ import MyPost from '@components/MyPost/MyPost.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/types/myPageConstants';
 import { get } from '@src/api/Api';
-import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType';
 
 interface ReviewProps {

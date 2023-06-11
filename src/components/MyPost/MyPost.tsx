@@ -8,6 +8,7 @@ import {
 	PostInfo,
 	ButtonContainer,
 } from './myPost';
+import dayjs from 'dayjs';
 
 import TruncatedDescription from '@components/MyPost/TruncatedDescription';
 import { SmallButton } from '@components/Buttons/SmallButton';
@@ -34,7 +35,7 @@ function truncateTitle(title: string) {
 }
 
 function truncateDate(createdAt: string) {
-	return createdAt.split('T')[0];
+	return dayjs(createdAt).format('YYYY-MM-DD');
 }
 
 function MyPost({ currTab, data, onRemovePost }: PostProps) {
