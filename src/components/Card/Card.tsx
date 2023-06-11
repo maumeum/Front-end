@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Modal from '@components/Modal/Modal.tsx';
 import Selector from '@components/Selector/Selector.tsx';
 import { SmallButton } from '@components/Buttons/SmallButton.ts';
+import dayjs from 'dayjs';
 import {
 	CardContainer,
 	ImgBox,
@@ -14,7 +15,6 @@ import {
 } from './card.ts';
 import { TabTypes } from '@src/types/myPageConstants.ts';
 import { post, patch } from '@src/api/Api';
-import { getToken } from '@src/api/Token';
 import Swal from 'sweetalert2';
 import car from '@src/assets/images/car.png';
 import { VolunteerTypes } from '@src/types/myPageConstants.ts';
@@ -41,7 +41,7 @@ function truncateDate(date: string) {
 	if (!date) {
 		return '';
 	}
-	return date.split('T')[0];
+	return dayjs(date).format('YYYY-MM-DD');
 }
 
 function truncateCentName(name: string) {
@@ -61,13 +61,10 @@ function Card({ currTab, data }: CardProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedStatus, setSelectedStatus] = useState<string>(statusName);
 
-	const openModal = () => {
-		setIsOpen(true);
+	const toggleModal = (onoff: boolean) => () => {
+		setIsOpen(onoff);
 	};
 
-	const closeModal = () => {
-		setIsOpen(false);
-	};
 	const handleRecruitmentStatusChange = async (selectedValue: string) => {
 		const result = await Swal.fire({
 			title: '봉사활동 상태를 변경하시겠습니까??',
@@ -150,7 +147,9 @@ function Card({ currTab, data }: CardProps) {
 						{currTab === TabTypes.VOLUNTEER_COMPLETED &&
 							statusName !== VolunteerTypes.DISCONTINUE && (
 								<ButtonContainer>
-									<SmallButton onClick={openModal}>리뷰작성</SmallButton>
+									<SmallButton onClick={toggleModal(true)}>
+										리뷰작성
+									</SmallButton>
 								</ButtonContainer>
 							)}
 						{currTab === TabTypes.VOLUNTEER_SUGGEST && (
@@ -166,7 +165,7 @@ function Card({ currTab, data }: CardProps) {
 								<SmallButton onClick={handleParticipated}>참여완료</SmallButton>
 							</ButtonContainer>
 						)}
-						<Modal isOpen={isOpen} closeModal={closeModal} id={_id} />
+						<Modal isOpen={isOpen} closeModal={toggleModal(false)} id={_id} />
 					</UserInfo>
 				</ContentBox>
 			</CardContainer>

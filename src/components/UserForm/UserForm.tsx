@@ -42,7 +42,7 @@ function UserForm({ closeModal, editMode, authMode }: UserFormProps) {
 			setter(e.target.value);
 		};
 
-	const handleClick = async (e: MouseEvent<HTMLButtonElement>) => {
+	const changePasswordHandle = async (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 
 		//본인확인요청
@@ -76,7 +76,16 @@ function UserForm({ closeModal, editMode, authMode }: UserFormProps) {
 		}
 
 		if (editMode) {
-			if (password !== checkPassword) {
+			if (password === '' || checkPassword === '') {
+				Swal.fire({
+					icon: 'error',
+					title: '비밀번호를 입력해주세요',
+					confirmButtonColor: '#d33',
+				});
+				return;
+			}
+
+			if (password !== checkPassword || !validPassword(password)) {
 				Swal.fire({
 					icon: 'error',
 					title: '비밀번호가 일치하지 않습니다.',
@@ -151,7 +160,7 @@ function UserForm({ closeModal, editMode, authMode }: UserFormProps) {
 							/>
 						</div>
 					)}
-					<LargeButton onClick={handleClick}>확인하기</LargeButton>
+					<LargeButton onClick={changePasswordHandle}>확인하기</LargeButton>
 				</InputContainer>
 			</UserFormContainer>
 		</>

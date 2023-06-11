@@ -24,15 +24,10 @@ import Modal from '@components/Modal/Modal.tsx';
 import { useNavigate } from 'react-router-dom';
 import { TabTypes } from '@src/types/myPageConstants';
 import { get, patch } from '@src/api/Api';
-import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType';
 
-// props값에 따라 조건부로 렌더링 되는 부분이 많아서 로직이 복잡해 고민입니다
-//컴포넌트간 결합도가 너무 강해서 그런거겠죠..? 추후 어떻게 분리를 하거나 변경해야할지
-//방향성을 알고싶습니다!
-
 interface MyPageUserFormProps {
-	pageType: string; //readOnly설정을 위한 props 값
+	pageType: string;
 }
 
 type UserInfo = {
@@ -76,16 +71,14 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 	const [editMode, setEditMode] = useState(false);
 	const [authMode, setAuthMode] = useState(false);
 
-	const openModal = () => {
-		setIsOpen(true);
+	const toggleModal = (onoff: boolean) => () => {
+		setIsOpen(onoff);
 	};
-	const closeModal = () => {
-		setIsOpen(false);
-	};
+
 	const changePwClickHandler = () => {
 		setEditMode(true);
 		setAuthMode(false);
-		setIsOpen(true);
+		toggleModal(true)();
 	};
 	// inputValue 함수
 	const getFormChanger =
@@ -104,12 +97,12 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 	const isButtonDisabled =
 		!isMyPage && !(isNicknameValid && isPhoneValid && isInfoChanged());
 
-	const clickHandler = async (e: MouseEvent<HTMLButtonElement>) => {
+	const UserInfoChangeHandler = async (e: MouseEvent<HTMLButtonElement>) => {
 		{
 			if (isMyPage) {
 				setEditMode(false);
 				setAuthMode(true);
-				openModal();
+				toggleModal(true)();
 				return;
 			}
 		}
@@ -184,13 +177,15 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 								비밀번호변경
 							</LargeButton>
 						)}
-						<LargeButton onClick={clickHandler} disabled={isButtonDisabled}>
+						<LargeButton
+							onClick={UserInfoChangeHandler}
+							disabled={isButtonDisabled}>
 							회원정보수정
 						</LargeButton>
 					</ButtonContainer>
 					<Modal
 						isOpen={isOpen}
-						closeModal={closeModal}
+						closeModal={toggleModal(false)}
 						user={'user'}
 						editMode={editMode}
 						authMode={authMode}

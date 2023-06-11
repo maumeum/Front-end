@@ -7,12 +7,6 @@ import LargeButton from '@components/Buttons/LargeButton';
 import TopBar from '@components/TopBar/TopBar';
 import Parser from 'html-react-parser';
 import { getToken } from '@src/api/Token';
-
-// 코치님 여기는 코드리뷰 안해주셔도 됩니다!!! 그 react-quill의 그곳입니다
-// 중간에 여기를 모르고 올려버려서 ㅠㅠ,,, 여기 코드도 같이 올라가게 되었는데
-// 이미 한번 올라간 코드라 수습이 안되어서 올리게되었습니다 (혹시 이런경우 어떻게 해야하나요?)
-//이미 stash의 타이밍을 놓쳤을때..@
-
 interface MyReviewProps {
 	closeModal: () => void;
 	id?: string;
