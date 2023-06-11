@@ -52,7 +52,7 @@ function App() {
 				<Route path='/community/:postId' element={<FindFriendDetail />} />
 
 				{/* 권한이 필요한 페이지들 */}
-				<Route element={<PrivateRoute authentication={true} />}>
+				<Route element={<PrivateRoute />}>
 					<Route path='/mypage/review' element={<MyReview />} />
 					<Route path='/mypage' element={<MyPage />} />
 					<Route path='/mypage/history' element={<MyVolunHistory />} />
