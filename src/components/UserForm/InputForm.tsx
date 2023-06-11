@@ -24,7 +24,7 @@ interface ErrorType {
 }
 
 interface InputContainerProps {
-	isMyPage?: boolean | string;
+	canModify?: boolean;
 	submit: boolean;
 	dataName: string;
 	inputType: string;
@@ -42,7 +42,7 @@ interface InputContainerProps {
 }
 
 const InputForm = ({
-	isMyPage,
+	canModify,
 	submit,
 	dataName,
 	inputType,
@@ -97,7 +97,7 @@ const InputForm = ({
 				<>
 					<DataName>{dataName}</DataName>
 					<DataInput
-						readOnly={isMyPage ? true : false}
+						readOnly={canModify ? true : false}
 						type={inputType}
 						name={name}
 						placeholder={placeholder}
@@ -119,14 +119,14 @@ const InputForm = ({
 					<DataName>{dataName}</DataName>
 					<EmailContainer className={submit && value === '' ? 'submit' : ''}>
 						<EmailData
-							readOnly={isMyPage ? true : false}
+							readOnly={canModify ? true : false}
 							type={inputType}
 							name={name}
 							placeholder={placeholder}
 							onChange={onChangeFn}
 							value={value}
 						/>
-						{!isMyPage && (
+						{!canModify && (
 							<EmailButton onClick={clickHandler}>중복 확인</EmailButton>
 						)}
 					</EmailContainer>

@@ -24,6 +24,7 @@ import Modal from '@components/Modal/Modal.tsx';
 import { useNavigate } from 'react-router-dom';
 import { TabTypes } from '@src/types/myPageConstants';
 import { get, patch } from '@src/api/Api';
+import alertData from '@utils/swalObject';
 import DataType from '@src/types/DataType';
 
 interface MyPageUserFormProps {
@@ -39,45 +40,44 @@ type UserInfo = {
 };
 
 function MyPageUserForm({ pageType }: MyPageUserFormProps) {
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const response = await get<DataType>('/api/users/info', {});
-				const { email, nickname, phone } = response.data as UserInfo;
-				setEmail(email);
-				setNickname(nickname);
-				setPhone(phone);
-				setInitialNickname(nickname);
-				setInitialPhone(phone);
-			} catch (error) {
-				console.log(error);
-			}
-		};
-
-		fetchData();
-	}, []);
 	const [initialNickname, setInitialNickname] = useState<string>('');
 	const [initialPhone, setInitialPhone] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
 	const [nickname, setNickname] = useState<string>('');
 	const [phone, setPhone] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
+	const canModify = pageType === TabTypes.MYPAGE;
 
-	const isMyPage = pageType === TabTypes.MYPAGE;
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await get<DataType>('/api/users/info', {});
+				const responseData = response.data as UserInfo;
+				const { email, nickname, phone } = responseData;
+				setEmail(email);
+				setNickname(nickname);
+				setPhone(phone);
+				setInitialNickname(nickname);
+				setInitialPhone(phone);
+			} catch (error) {
+				Swal.fire(alertData.failMessage('데이터 로딩'));
+			}
+		};
+
+		fetchData();
+	}, []);
 	const navigate = useNavigate();
 
 	//모달설정
 	const [isOpen, setIsOpen] = useState(false);
-	const [editMode, setEditMode] = useState(false);
-	const [authMode, setAuthMode] = useState(false);
+	const [isChangePasswordModal, setIsChangePasswordModal] = useState(false);
 
 	const toggleModal = (onoff: boolean) => () => {
 		setIsOpen(onoff);
 	};
 
 	const changePwClickHandler = () => {
-		setEditMode(true);
-		setAuthMode(false);
+		setIsChangePasswordModal(true);
 		toggleModal(true)();
 	};
 	// inputValue 함수
@@ -95,13 +95,12 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 	const isNicknameValid = nickname.length > 0;
 	const isPhoneValid = validPhoneNum(phone);
 	const isButtonDisabled =
-		!isMyPage && !(isNicknameValid && isPhoneValid && isInfoChanged());
+		!canModify && !(isNicknameValid && isPhoneValid && isInfoChanged());
 
 	const UserInfoChangeHandler = async (e: MouseEvent<HTMLButtonElement>) => {
 		{
-			if (isMyPage) {
-				setEditMode(false);
-				setAuthMode(true);
+			if (canModify) {
+				setIsChangePasswordModal(false);
 				toggleModal(true)();
 				return;
 			}
@@ -116,18 +115,11 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 			try {
 				await patch('/api/users/info', { nickname, phone });
 			} catch (error) {
-				Swal.fire({
-					title: '회원정보 수정에 실패했습니다',
-					icon: 'error',
-					confirmButtonColor: 'var(--button--color)',
-				});
+				Swal.fire(alertData.failMessage('회원정보 수정'));
 			}
 		}
 		if (validPhoneNum(phone) && nickname.length > 0) {
-			Swal.fire({
-				title: '회원정보가 수정되었습니다!',
-				confirmButtonColor: 'var(--button--color)',
-			});
+			Swal.fire(alertData.modifyMessage('회원정보'));
 			navigate('/mypage');
 		}
 	};
@@ -136,9 +128,9 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 		<>
 			<SignUpSection pageType={pageType}>
 				<SignUpForm>
-					{isMyPage && (
+					{canModify && (
 						<InputForm
-							isMyPage={isMyPage}
+							canModify={canModify}
 							submit={submit}
 							dataName='이메일'
 							inputType='text'
@@ -150,7 +142,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 						/>
 					)}
 					<InputForm
-						isMyPage={isMyPage}
+						canModify={canModify}
 						submit={submit}
 						dataName='닉네임'
 						inputType='text'
@@ -161,7 +153,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 					/>
 
 					<InputForm
-						isMyPage={isMyPage}
+						canModify={canModify}
 						submit={submit}
 						dataName='핸드폰 번호'
 						inputType='text'
@@ -172,7 +164,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 						validFn={validPhoneNum}
 					/>
 					<ButtonContainer>
-						{!isMyPage && (
+						{!canModify && (
 							<LargeButton onClick={changePwClickHandler}>
 								비밀번호변경
 							</LargeButton>
@@ -187,8 +179,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 						isOpen={isOpen}
 						closeModal={toggleModal(false)}
 						user={'user'}
-						editMode={editMode}
-						authMode={authMode}
+						isChangePasswordModal={isChangePasswordModal}
 					/>
 				</SignUpForm>
 			</SignUpSection>

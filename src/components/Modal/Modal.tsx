@@ -3,12 +3,12 @@ import ReactModal from 'react-modal';
 import UserForm from '@components/UserForm/UserForm.tsx';
 import { customStyles } from '@components/Modal/modal';
 import MyReview from '../MyPost/MyReview';
+
 interface ModalProps {
 	isOpen: boolean;
 	closeModal: () => void;
 	user?: string;
-	editMode?: boolean;
-	authMode?: boolean;
+	isChangePasswordModal?: boolean;
 	id?: string;
 }
 
@@ -16,8 +16,7 @@ const Modal = ({
 	isOpen,
 	closeModal,
 	user,
-	editMode,
-	authMode,
+	isChangePasswordModal,
 	id,
 }: ModalProps) => {
 	const handleClose = () => {
@@ -32,8 +31,7 @@ const Modal = ({
 			{user ? (
 				<UserForm
 					closeModal={closeModal}
-					editMode={editMode}
-					authMode={authMode}
+					isChangePasswordModal={isChangePasswordModal}
 				/>
 			) : (
 				<MyReview closeModal={closeModal} id={id} />
