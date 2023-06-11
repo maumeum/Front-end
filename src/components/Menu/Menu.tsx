@@ -21,6 +21,7 @@ const MENU_ITEMS: MenuItems = {
 		{ link: '/mypage/history', label: '나의 봉사활동 내역' },
 		{ link: '/mypage/comment', label: '나의 커뮤니티 활동' },
 		{ link: '/mypage/suggest', label: '내가 등록한 봉사' },
+		{ link: '/mypage/team_auth', label: '단체 인증하기' },
 		{ link: '/mypage/withdrawal', label: '회원탈퇴' },
 	],
 	커뮤니티: [
