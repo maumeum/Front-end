@@ -13,12 +13,12 @@ import dayjs from 'dayjs';
 import TruncatedDescription from '@components/MyPost/TruncatedDescription';
 import { SmallButton } from '@components/Buttons/SmallButton';
 import { del } from '@src/api/Api';
-import { getToken } from '@src/api/Token';
 import { TabTypes } from '@src/types/myPageConstants';
 import Swal from 'sweetalert2';
+import alertData from '@src/utils/swalObject';
 
 interface PostProps {
-	data: {
+	communityData: {
 		title: string;
 		content: string;
 		createdAt: string;
@@ -38,8 +38,8 @@ function truncateDate(createdAt: string) {
 	return dayjs(createdAt).format('YYYY-MM-DD');
 }
 
-function MyPost({ currTab, data, onRemovePost }: PostProps) {
-	const { title, content, createdAt, postType, _id } = data;
+function MyPost({ currTab, communityData, onRemovePost }: PostProps) {
+	const { title, content, createdAt, postType, _id } = communityData;
 	const [isShowMore, setIsShowMore] = useState<boolean>(false);
 	const truncatedTitle = truncateTitle(title);
 	const navigate = useNavigate();
@@ -55,43 +55,19 @@ function MyPost({ currTab, data, onRemovePost }: PostProps) {
 	const handleDeleteClick = async () => {
 		if (currTab === TabTypes.WRITTEN_REVIEW) {
 			try {
-				await del(`/api/review/users/${_id}`, {
-					headers: {
-						Authorization: `Bearer ${getToken()}`,
-					},
-				});
-				Swal.fire({
-					title: '리뷰가 삭제되었습니다',
-					icon: 'success',
-					confirmButtonColor: 'var(--button--color)',
-				});
-				onRemovePost(data._id);
+				await del(`/api/review/users/${_id}`, {});
+				Swal.fire(alertData.removeMessage('리뷰'));
+				onRemovePost(communityData._id);
 			} catch (error) {
-				Swal.fire({
-					title: '리뷰가 삭제에 실패했습니다.',
-					icon: 'success',
-					confirmButtonColor: 'var(--button--color)',
-				});
+				Swal.fire(alertData.failMessage('리뷰 삭제'));
 			}
 		} else if (currTab === TabTypes.WRITTEN_POSTS) {
 			try {
-				await del(`/api/community/${_id}`, {
-					headers: {
-						Authorization: `Bearer ${getToken()}`,
-					},
-				});
-				onRemovePost(data._id);
-				Swal.fire({
-					title: '게시글 삭제되었습니다',
-					icon: 'success',
-					confirmButtonColor: 'var(--button--color)',
-				});
+				await del(`/api/community/${_id}`, {});
+				onRemovePost(communityData._id);
+				Swal.fire(alertData.removeMessage('게시글'));
 			} catch (error) {
-				Swal.fire({
-					title: '게시글 삭제에 실패했습니다.',
-					icon: 'error',
-					confirmButtonColor: 'var(--button--color)',
-				});
+				Swal.fire(alertData.failMessage('게시글 삭제'));
 			}
 		}
 	};

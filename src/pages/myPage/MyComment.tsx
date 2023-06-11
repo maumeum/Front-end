@@ -36,7 +36,9 @@ function MyComment() {
 				const getPostData = await get<DataType>('/api/community/user', {});
 				setPostData(getPostData.data as CommunityProps[]);
 			} catch (error) {
-				Swal.fire(alertData.failMessage('데이터를 불러오는데'));
+				Swal.fire(
+					alertData.errorMessage('데이터를 불러오는데 실패하였습니다.'),
+				);
 			}
 		};
 
@@ -52,7 +54,9 @@ function MyComment() {
 				);
 				setCommentData(getCommentData.data as CommunityProps[]);
 			} catch (error) {
-				Swal.fire(alertData.failMessage('데이터를 불러오는데'));
+				Swal.fire(
+					alertData.errorMessage('데이터를 불러오는데 실패하였습니다.'),
+				);
 			}
 		};
 
@@ -89,7 +93,7 @@ function MyComment() {
 							<MyPost
 								key={data._id}
 								currTab={currTab}
-								data={data}
+								communityData={data}
 								onRemovePost={removePost}
 							/>
 						);

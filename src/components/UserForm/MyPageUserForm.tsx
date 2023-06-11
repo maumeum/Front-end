@@ -51,8 +51,8 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>('/api/users/info', {});
-				const responseData = response.data as UserInfo;
+				const getUserInfoData = await get<DataType>('/api/users/info', {});
+				const responseData = getUserInfoData.data as UserInfo;
 				const { email, nickname, phone } = responseData;
 				setEmail(email);
 				setNickname(nickname);
@@ -60,7 +60,9 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 				setInitialNickname(nickname);
 				setInitialPhone(phone);
 			} catch (error) {
-				Swal.fire(alertData.failMessage('데이터 로딩'));
+				Swal.fire(
+					alertData.errorMessage('데이터를 가져오는데 실패하였습니다.'),
+				);
 			}
 		};
 
@@ -115,11 +117,11 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 			try {
 				await patch('/api/users/info', { nickname, phone });
 			} catch (error) {
-				Swal.fire(alertData.failMessage('회원정보 수정'));
+				Swal.fire(alertData.errorMessage('회원정보 변경에 실패하였습니다.'));
 			}
 		}
 		if (validPhoneNum(phone) && nickname.length > 0) {
-			Swal.fire(alertData.modifyMessage('회원정보'));
+			Swal.fire(alertData.successMessage('회원정보가 변경되었습니다.'));
 			navigate('/mypage');
 		}
 	};

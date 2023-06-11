@@ -13,9 +13,9 @@ import Card from '@components/Card/Card.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/types/myPageConstants';
 import { get } from '@src/api/Api';
-import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType';
 import Swal from 'sweetalert2';
+import alertData from '@src/utils/swalObject';
 
 interface ResponseData {
 	_id: string;
@@ -36,29 +36,24 @@ interface ResponseData {
 }
 
 function VolunSuggest() {
+	const [suggestVolunList, setSuggestVolunList] = useState<ResponseData[]>([]);
+	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>(
+				const getSuggestedData = await get<DataType>(
 					'/api/volunteers/registerations',
 					{},
 				);
-				setDataList(response.data as ResponseData[]);
+				setSuggestVolunList(getSuggestedData.data as ResponseData[]);
 			} catch (error) {
-				Swal.fire({
-					title: '데이터를 불러오는데 실패하였습니다.',
-					icon: 'error',
-					confirmButtonColor: 'var(--button--color)',
-				});
+				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
 			}
 		};
 		fetchData();
 	}, []);
 
-	const [dataList, setDataList] = useState<ResponseData[]>([]);
-	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
-
-	const transformData = dataList.map((data) => {
+	const transformData = suggestVolunList.map((data) => {
 		//Card 컴포넌트 형식에 맞게 데이터형태 변환
 		return {
 			createdAt: data.createdAt,
@@ -87,7 +82,7 @@ function VolunSuggest() {
 						<Tab tabs={tabs} />
 					</TabMenu>
 					<CardBox>
-						{dataList.length === 0 && (
+						{suggestVolunList.length === 0 && (
 							<div>내가 등록한 봉사 내역이 없습니다.</div>
 						)}
 						{transformData.map((data) => (

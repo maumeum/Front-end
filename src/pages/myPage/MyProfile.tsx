@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
 	Container,
 	Main,
@@ -13,7 +12,6 @@ import ProfileImg from '@components/Profile/ProfileImg.tsx';
 
 function MyProfile() {
 	const tabs_img = [TabTypes.EDIT_PROFILE];
-
 	const tabs_intro = [TabTypes.EDIT_INTRO];
 
 	return (

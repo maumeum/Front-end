@@ -13,6 +13,7 @@ import { TabTypes } from '@src/types/myPageConstants';
 import { get } from '@src/api/Api';
 import DataType from '@src/types/DataType';
 import Swal from 'sweetalert2';
+import alertData from '@src/utils/swalObject';
 
 interface VolunProps {
 	createdAt: string;
@@ -38,22 +39,18 @@ function MyVolunHistory() {
 	};
 	const [appliedData, setAppliedData] = useState<VolunProps[]>([]);
 	const [completedData, setCompletedData] = useState<VolunProps[]>([]);
-	const [data, setData] = useState<VolunProps[]>([]);
+	const [volunData, setVolunData] = useState<VolunProps[]>([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>(
+				const getCompetededData = await get<DataType>(
 					'/api/applications?status=true',
 					{},
 				);
-				setAppliedData(response.data as VolunProps[]);
+				setAppliedData(getCompetededData.data as VolunProps[]);
 			} catch (error) {
-				Swal.fire({
-					title: '데이터를 불러오는데 실패하였습니다.',
-					icon: 'error',
-					confirmButtonColor: 'var(--button--color)',
-				});
+				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
 			}
 		};
 
@@ -63,13 +60,13 @@ function MyVolunHistory() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>(
+				const getAppliedData = await get<DataType>(
 					'/api/applications?status=false',
 					{},
 				);
-				setCompletedData(response.data as VolunProps[]);
+				setCompletedData(getAppliedData.data as VolunProps[]);
 			} catch (error) {
-				console.log(error);
+				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
 			}
 		};
 		fetchData();
@@ -77,8 +74,8 @@ function MyVolunHistory() {
 
 	useEffect(() => {
 		currTab === TabTypes.VOLUNTEER_APPLIED
-			? setData(appliedData)
-			: setData(completedData);
+			? setVolunData(appliedData)
+			: setVolunData(completedData);
 	}, [currTab, appliedData, completedData]);
 
 	return (
@@ -93,8 +90,10 @@ function MyVolunHistory() {
 						<Tab currTab={currTab} onClick={handleClickTab} tabs={tabs} />
 					</TabMenu>
 					<CardBox>
-						{data.length === 0 && <div>봉사 내역이 존재하지 않습니다.</div>}
-						{data.map((data) => (
+						{volunData.length === 0 && (
+							<div>봉사 내역이 존재하지 않습니다.</div>
+						)}
+						{volunData.map((data) => (
 							<Card key={data.volunteer_id._id} currTab={currTab} data={data} />
 						))}
 					</CardBox>

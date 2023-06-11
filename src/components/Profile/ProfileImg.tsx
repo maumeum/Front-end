@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 import {
 	ImgContainer,
 	ImgPreview,
@@ -8,11 +8,15 @@ import {
 import Swal from 'sweetalert2';
 import useAuthStore from '@src/store/useAuthStore.ts';
 import { patch } from '@api/Api';
-import { getToken } from '@api/Token';
+import alertData from '@src/utils/swalObject';
 
 const url = import.meta.env.VITE_API_URL;
 function ProfileImg() {
 	const { userData, getUserData } = useAuthStore();
+	const [beforeImg, setBeforeImg] = useState<string | undefined>('');
+	const [afterImg, setAfterImg] = useState<string>('');
+	const [isUpload, setIsUpload] = useState<boolean>(false);
+	const [file, setFile] = useState<File | null>(null);
 
 	useEffect(() => {
 		getUserData();
@@ -21,11 +25,6 @@ function ProfileImg() {
 	useEffect(() => {
 		setBeforeImg(userData?.image);
 	}, [userData]);
-
-	const [beforeImg, setBeforeImg] = useState<string | undefined>('');
-	const [afterImg, setAfterImg] = useState<string>('');
-	const [isUpload, setIsUpload] = useState<boolean>(false);
-	const [file, setFile] = useState<File | null>(null);
 
 	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const selectedFile = e.target.files?.[0];
@@ -49,38 +48,25 @@ function ProfileImg() {
 		setFile(null);
 	};
 
-	const handleDeleteImage = () => {
-		Swal.fire({
-			title: '기본 이미지로 변경하시겠습니까??',
-			icon: 'info',
-			showCancelButton: true,
-			confirmButtonColor: '#ffd4d4',
-			cancelButtonColor: '#afcd81',
-			confirmButtonText: '네',
-			cancelButtonText: '아니요',
-		}).then(async (result) => {
-			//여기에 기본이미지 변경 api
-			try {
-				await patch('/api/users/original/image', {});
-				Swal.fire({
-					title: '기본이미지로 변경되었습니다',
-					icon: 'success',
-					confirmButtonText: '확인',
-					confirmButtonColor: 'var(--button--color)',
-				});
-			} catch (error) {
-				console.log(error);
-			}
+	const handleDeleteImage = async () => {
+		try {
+			const result = await Swal.fire(
+				alertData.doubleCheckMessage('기본 이미지로 변경하시겠습니까?'),
+			);
 			if (result.isConfirmed) {
-				Swal.fire({
-					title: '기본이미지로 변경되었습니다!',
-					icon: 'success',
-					confirmButtonColor: 'var(--button--color)',
-				}).then(() => {
-					window.location.reload();
-				});
+				try {
+					await patch('/api/users/original/image', {});
+					Swal.fire(
+						alertData.successMessage('프로필 이미지가 변경되었습니다.'),
+					);
+				} catch (error) {
+					Swal.fire(alertData.errorMessage('이미지 변경에 실패했습니다.'));
+				}
+				window.location.reload();
 			}
-		});
+		} catch (error) {
+			Swal.fire(alertData.errorMessage('이미지 변경에 실패했습니다.'));
+		}
 	};
 
 	const handleSubmit = async (e: FormEvent) => {
@@ -89,11 +75,7 @@ function ProfileImg() {
 		if (file) {
 			formData.append('image', file);
 		} else {
-			Swal.fire({
-				title: '업로드할 이미지가 없습니다',
-				icon: 'error',
-				confirmButtonColor: 'var(--button--color)',
-			});
+			Swal.fire(alertData.errorMessage('업로드 할 이미지가 없습니다'));
 			return;
 		}
 		try {
@@ -104,21 +86,13 @@ function ProfileImg() {
 			});
 			setIsUpload(true);
 		} catch (error) {
-			Swal.fire({
-				title: '이미지 변경에 실패했습니다.',
-				icon: 'error',
-				confirmButtonColor: 'var(--button--color)',
-			});
+			Swal.fire(alertData.errorMessage('이미지 변경에 실패했습니다.'));
 			return;
 		}
-		Swal.fire({
-			title: '프로필 사진이 변경되었습니다',
-			icon: 'success',
-			confirmButtonColor: 'var(--button--color)',
-		}).then(() => {
-			window.location.reload();
-		});
+		Swal.fire(alertData.successMessage('프로필 이미지가 변경되었습니다.'));
+		window.location.reload();
 	};
+
 	return (
 		<>
 			<ImgContainer>

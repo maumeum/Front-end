@@ -43,16 +43,16 @@ function UserForm({ closeModal, isChangePasswordModal }: UserFormProps) {
 		if (!isChangePasswordModal) {
 			try {
 				await post('/api/users/auth', { password });
-				Swal.fire(alertData.confirmMessge);
+				Swal.fire(alertData.successMessage('확인되었습니다:)'));
 				navigate('/mypage/edit');
 			} catch (error) {
-				Swal.fire(alertData.wrongPwd);
+				Swal.fire(alertData.errorMessage('비밀번호를 확인해주세요:)'));
 			}
 		}
 
 		if (isChangePasswordModal) {
 			if (password === '' || checkPassword === '') {
-				Swal.fire(alertData.confirmEmptyInput('비밀번호'));
+				Swal.fire(alertData.infoMessage('비밀번호를 입력해주세요!'));
 				return;
 			}
 
@@ -64,15 +64,16 @@ function UserForm({ closeModal, isChangePasswordModal }: UserFormProps) {
 			if (validPassword(password)) {
 				try {
 					await patch('/api/users/info', { password });
-					Swal.fire({
-						title: '비밀번호가 변경되었습니다! 재로그인 해주세요:)',
-						confirmButtonColor: 'var(--button--color)',
-					});
+					Swal.fire(
+						alertData.successMessage(
+							'비밀번호가 변경되었습니다! 재로그인 해주세요:)',
+						),
+					);
 					closeModal();
 					deleteToken();
 					navigate('/login');
 				} catch (error) {
-					Swal.fire(alertData.failMessage('비밀번호 변경'));
+					Swal.fire(alertData.errorMessage('비밀번호 변경에 실패하였습니다.'));
 				}
 			}
 		}
