@@ -21,7 +21,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
 	args: {
-		data: {
+		reviewData: {
+			_id: '01',
 			title: '직장인 유기견 봉사활동 후기 6개월차',
 			content:
 				'저는 일주일에 1번씩 6개월 동안 유기견 봉사활동을 다녔던 직장인입니다. 봉사가 취미이기도 하고, 봉사활동 하고나면 남한테 도움을 준듯한 느낌이 들어 기분이 좋아지더라구요 이번 유기견 봉사활동도 잘 마칠 수 있었습니다.',
@@ -30,6 +31,7 @@ export const Primary: Story = {
 			user_id: {
 				nickname: '봉사원3',
 			},
+			createdAt: '2023-05-30 14:00:00',
 			index: 1,
 		},
 	},

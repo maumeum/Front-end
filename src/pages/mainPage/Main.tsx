@@ -30,9 +30,9 @@ import CommunityCard from '@components/Card/CommunityCard';
 import cardLogo from '@assets/icons/cardlogo.svg';
 
 const Main = () => {
-	const [reviewList, setReviewList] = useState<ReviewListType[]>([]);
-	const [communityList, setCommunityList] = useState<CommunityListType[]>([]);
-	const [volunteerList, setVolunteerList] = useState<VolunteerListType[]>([]);
+	const [reviewList, setReviewList] = useState<ReviewListType>([]);
+	const [communityList, setCommunityList] = useState<CommunityListType>([]);
+	const [volunteerList, setVolunteerList] = useState<VolunteerListType>([]);
 
 	// 리뷰 데이터 불러오기
 	useEffect(() => {
@@ -72,7 +72,7 @@ const Main = () => {
 				<ReviewContainer>
 					{reviewList &&
 						reviewList.map((item, index) => (
-							<ReviewCard data={{ ...item, index }} key={item._id} />
+							<ReviewCard reviewData={{ ...item, index }} key={item._id} />
 						))}
 				</ReviewContainer>
 				<IntroducePage>
@@ -100,7 +100,9 @@ const Main = () => {
 					volunteerList
 						.sort(() => Math.random() - 0.5)
 						.slice(0, 8)
-						.map((item) => <VolunteerCard key={item._id} data={item} />)}
+						.map((item) => (
+							<VolunteerCard key={item._id} volunteerData={item} />
+						))}
 			</VolunteerContainer>
 			<CommunityTitle>커뮤니티</CommunityTitle>
 			<CommunityContainer>
@@ -108,7 +110,9 @@ const Main = () => {
 					communityList
 						.sort(() => Math.random() - 0.5)
 						.slice(0, 6)
-						.map((item) => <CommunityCard key={item._id} data={item} />)}
+						.map((item) => (
+							<CommunityCard key={item._id} communityData={item} />
+						))}
 			</CommunityContainer>
 		</MainSection>
 	);

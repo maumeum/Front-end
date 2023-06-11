@@ -9,8 +9,8 @@ import PostList from '@components/PostList/PostList';
 import { MenuBar, TopBarContainer, ClickTopBar, PostContainer } from './style';
 
 const Report = () => {
-	const [communityList, setCommunityList] = useState<CommunityListType[]>([]);
-	const [reviewList, setReviewList] = useState<ReviewListType[]>([]);
+	const [communityList, setCommunityList] = useState<CommunityListType>([]);
+	const [reviewList, setReviewList] = useState<ReviewListType>([]);
 	const [communityNav, setCommunityNav] = useState<boolean>(true);
 	const [reviewNav, setReviewNav] = useState<boolean>(false);
 	const navigate = useNavigate();
