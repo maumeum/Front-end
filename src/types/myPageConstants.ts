@@ -9,6 +9,7 @@ export enum TabTypes {
 	COMMENTED_POSTS = '내가 댓글 단 게시글',
 	VOLUNTEER_SUGGEST = '내가 등록한 봉사',
 	WRITTEN_REVIEW = '내가 쓴 리뷰',
+	GROUP_CERTIFICATION = '단체 인증하기',
 	WITHDRAWAL = '회원탈퇴',
 }
 
