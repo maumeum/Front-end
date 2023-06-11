@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction } from 'react';
 
-type TruncatedDescriptionProps = {
+interface TruncatedDescriptionProps {
 	content: string;
 	isShowMore: boolean;
 	setIsShowMore: Dispatch<SetStateAction<boolean>>;
-};
+}
 
 function TruncatedDescription({
 	content,

@@ -13,10 +13,10 @@ import TruncatedDescription from '@components/MyPost/TruncatedDescription';
 import { SmallButton } from '@components/Buttons/SmallButton';
 import { del } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
-import { TabTypes } from '@src/utils/EnumTypes';
+import { TabTypes } from '@src/types/myPageConstants';
 import Swal from 'sweetalert2';
 
-type PostProps = {
+interface PostProps {
 	data: {
 		title: string;
 		content: string;
@@ -26,7 +26,7 @@ type PostProps = {
 	};
 	onRemovePost: (id: string) => void;
 	currTab?: string;
-};
+}
 
 function truncateTitle(title: string) {
 	const maxLength = 55;

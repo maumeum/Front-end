@@ -1,5 +1,4 @@
 export enum TabTypes {
-	// 열거형 정의
 	MYPAGE = '마이페이지',
 	EDIT_PROFILE = '프로필 사진 수정',
 	EDIT_INTRO = '내 소개 수정',

@@ -42,8 +42,6 @@ function App() {
 					element={<FindFriendWrite />}
 				/>
 				<Route path='/community/question/write' element={<QuestionWrite />} />
-				<Route path='/login' element={<Login />} />
-				<Route path='/sign_up' element={<SignUp />} />
 				<Route path='/search' element={<Search />} />
 				<Route path='/review' element={<Review />} />
 				<Route path='/community/:postId' element={<FindFriendDetail />} />
@@ -51,6 +49,11 @@ function App() {
 				<Route path='/review/:postId' element={<ReviewDetail />} />
 				<Route path='/community/:postId' element={<FindFriendDetail />} />
 
+				{/* 권한이 없어야만 접속가능 */}
+				<Route element={<PrivateRoute authentication={false} />}>
+					<Route path='/login' element={<Login />} />
+					<Route path='/sign_up' element={<SignUp />} />
+				</Route>
 				{/* 권한이 필요한 페이지들 */}
 				<Route element={<PrivateRoute authentication={true} />}>
 					<Route path='/mypage/review' element={<MyReview />} />

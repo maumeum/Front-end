@@ -13,11 +13,11 @@ import { passwordError, passwordCheckError } from '@src/utils/errorMessage.ts';
 import InputForm from '@src/components/UserForm/InputForm.tsx';
 import { getToken, deleteToken } from '@src/api/Token';
 
-type UserFormProps = {
+interface UserFormProps {
 	closeModal: () => void;
 	editMode?: boolean;
 	authMode?: boolean;
-};
+}
 
 function UserForm({ closeModal, editMode, authMode }: UserFormProps) {
 	const [password, setPassword] = useState('');

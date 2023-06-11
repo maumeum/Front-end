@@ -9,27 +9,23 @@ import {
 import Tab from '@components/Tab/Tab.tsx';
 import MyPost from '@components/MyPost/MyPost.tsx';
 import Menu from '@components/Menu/Menu.tsx';
-import { TabTypes } from '@src/utils/EnumTypes';
+import { TabTypes } from '@src/types/myPageConstants';
 import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType';
 
-type ReviewProps = {
+interface ReviewProps {
 	title: string;
 	content: string;
 	createdAt: string;
 	_id: string;
-};
+}
 
 function MyReview() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>('/api/reviews/users', {
-					headers: {
-						Authorization: `Bearer ${getToken()}`,
-					},
-				});
+				const response = await get<DataType>('/api/reviews/users', {});
 				setData(response.data as ReviewProps[]);
 			} catch (error) {
 				console.log(error);

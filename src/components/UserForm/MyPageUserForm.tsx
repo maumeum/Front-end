@@ -22,7 +22,7 @@ import InputForm from '@src/components/UserForm/InputForm.tsx';
 import LargeButton from '@components/Buttons/LargeButton';
 import Modal from '@components/Modal/Modal.tsx';
 import { useNavigate } from 'react-router-dom';
-import { TabTypes } from '@src/utils/EnumTypes';
+import { TabTypes } from '@src/types/myPageConstants';
 import { get, patch } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType';
@@ -31,9 +31,9 @@ import DataType from '@src/types/DataType';
 //컴포넌트간 결합도가 너무 강해서 그런거겠죠..? 추후 어떻게 분리를 하거나 변경해야할지
 //방향성을 알고싶습니다!
 
-type MyPageUserFormProps = {
+interface MyPageUserFormProps {
 	pageType: string; //readOnly설정을 위한 props 값
-};
+}
 
 type UserInfo = {
 	email: string;
@@ -47,11 +47,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>('/api/users/info', {
-					headers: {
-						Authorization: `Bearer ${getToken()}`,
-					},
-				});
+				const response = await get<DataType>('/api/users/info', {});
 				const { email, nickname, phone } = response.data as UserInfo;
 				setEmail(email);
 				setNickname(nickname);
@@ -125,15 +121,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 		//회원정보 수정 요청
 		{
 			try {
-				await patch(
-					'/api/users/info',
-					{ nickname, phone },
-					{
-						headers: {
-							Authorization: `Bearer ${getToken()}`,
-						},
-					},
-				);
+				await patch('/api/users/info', { nickname, phone });
 			} catch (error) {
 				Swal.fire({
 					title: '회원정보 수정에 실패했습니다',

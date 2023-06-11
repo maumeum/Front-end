@@ -9,13 +9,13 @@ import {
 import Tab from '@components/Tab/Tab.tsx';
 import Card from '@components/Card/Card.tsx';
 import Menu from '@components/Menu/Menu.tsx';
-import { TabTypes } from '@src/utils/EnumTypes';
+import { TabTypes } from '@src/types/myPageConstants';
 import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType';
 import Swal from 'sweetalert2';
 
-type VolunProps = {
+interface VolunProps {
 	createdAt: string;
 	_id: string;
 	isParticipate: boolean;
@@ -29,7 +29,7 @@ type VolunProps = {
 		deadline: string;
 		images: string[];
 	};
-};
+}
 
 function MyVolunHistory() {
 	const [currTab, setCurrTab] = useState<TabTypes>(TabTypes.VOLUNTEER_APPLIED);
@@ -44,11 +44,10 @@ function MyVolunHistory() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>('/api/applications?status=true', {
-					headers: {
-						Authorization: `Bearer ${getToken()}`,
-					},
-				});
+				const response = await get<DataType>(
+					'/api/applications?status=true',
+					{},
+				);
 				setAppliedData(response.data as VolunProps[]);
 			} catch (error) {
 				Swal.fire({
@@ -65,11 +64,10 @@ function MyVolunHistory() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>('/api/applications?status=false', {
-					headers: {
-						Authorization: `Bearer ${getToken()}`,
-					},
-				});
+				const response = await get<DataType>(
+					'/api/applications?status=false',
+					{},
+				);
 				setCompletedData(response.data as VolunProps[]);
 			} catch (error) {
 				console.log(error);

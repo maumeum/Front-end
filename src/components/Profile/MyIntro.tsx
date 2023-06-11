@@ -12,10 +12,10 @@ import { getToken } from '@src/api/Token';
 import useAuthStore from '@src/store/useAuthStore.ts';
 
 function MyIntro() {
-	const { userData, initialize } = useAuthStore();
+	const { userData, getUserData } = useAuthStore();
 
 	useEffect(() => {
-		initialize();
+		getUserData();
 	}, []);
 
 	useEffect(() => {
@@ -45,15 +45,7 @@ function MyIntro() {
 			});
 		{
 			try {
-				await patch(
-					'/api/users/introduction',
-					{ introduction: intro },
-					{
-						headers: {
-							Authorization: `Bearer ${getToken()}`,
-						},
-					},
-				);
+				await patch('/api/users/introduction', { introduction: intro });
 				Swal.fire({
 					title: '자기소개가 변경되었습니다',
 					icon: 'success',
