@@ -64,6 +64,7 @@ function App() {
 					<Route path='/admin/team_auth' element={<TeamAuth />} />
 					<Route path='/admin/report' element={<Report />} />
 				</Route>
+				<Route path='/*' element={<Error />} />
 			</Routes>
 			<Footer />
 		</Router>
