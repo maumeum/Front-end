@@ -13,7 +13,7 @@ import TruncatedDescription from '@components/MyPost/TruncatedDescription';
 import { SmallButton } from '@components/Buttons/SmallButton';
 import { del } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
-import { TabTypes } from '@src/utils/EnumTypes';
+import { TabTypes } from '@src/types/EnumTypes';
 import Swal from 'sweetalert2';
 
 type PostProps = {

@@ -12,12 +12,12 @@ import {
 	ButtonContainer,
 	SelectContainer,
 } from './card.ts';
-import { TabTypes } from '../../utils/EnumTypes.ts';
+import { TabTypes } from '../../types/EnumTypes.ts';
 import { post, patch } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import Swal from 'sweetalert2';
 import car from '@src/assets/images/car.png';
-import { VolunteerTypes } from '@src/utils/EnumTypes';
+import { VolunteerTypes } from '@src/types/EnumTypes.ts';
 
 export type Props = {
 	data: {

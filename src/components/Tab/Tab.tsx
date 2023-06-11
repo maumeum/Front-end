@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { Container } from '@components/Tab/tab.ts';
-import { TabTypes } from '@src/utils/EnumTypes';
+import { TabTypes } from '@src/types/EnumTypes';
 interface TabProps {
 	currTab: TabTypes;
 	onClick?: (tab: TabTypes) => void;
