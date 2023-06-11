@@ -46,8 +46,11 @@ const FindFriend = () => {
 		}
 	};
 
-	const handleSearch = (query: string) => {
-		// 검색기능 구현 로직 작성예정
+	const handleSearch = async (query: string) => {
+		const response = await get<DataType>(
+			`/api/community/search?keyword=${query}`,
+		);
+		setPostListData(response.data);
 		console.log('검색어:', query);
 	};
 

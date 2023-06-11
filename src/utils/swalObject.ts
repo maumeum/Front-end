@@ -48,6 +48,10 @@ const alertData = {
 		confirmButtonText: '예',
 		cancelButtonText: '아니오',
 	},
+	fillTitleContent: {
+		title: '제목과 내용을 모두 입력해주세요',
+		icon: 'warning' as SweetAlertIcon,
+	},
 };
 
 export default alertData;

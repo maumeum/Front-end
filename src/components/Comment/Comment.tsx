@@ -11,7 +11,6 @@ import {
 	Btn1,
 	Btn2,
 	CommentContainer,
-	Profile,
 	ProfileContainer,
 	UserContainer,
 	UserName,

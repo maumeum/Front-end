@@ -116,7 +116,7 @@ const FindFriendDetail = () => {
 				<ContentContainer>
 					{hasPostImage && <Image src={images} alt='content-image' />}
 					<Contentdiv>
-						<Content>{content}</Content>
+						<Content dangerouslySetInnerHTML={{ __html: content }}></Content>
 					</Contentdiv>
 				</ContentContainer>
 			</DetailContainer>

@@ -13,8 +13,8 @@ import {
 	ButtonContainer,
 } from '@src/components/WritePage/WritePageStyle';
 import 'react-quill/dist/quill.snow.css';
-
-//react-quill 태그문제 미완 코드입니다.
+import Swal from 'sweetalert2';
+import alertData from '@utils/swalObject';
 
 const CommunityEditPage = () => {
 	const navigate = useNavigate();
@@ -44,30 +44,22 @@ const CommunityEditPage = () => {
 	}, [postId]);
 
 	const editPost = async () => {
-		try {
-			const token = getToken();
-			const response = await patch<DataType>(
-				`/api/community/${postId}`,
-				{
-					title: inputTitle,
-					content: input,
-				},
-				{
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				},
-			);
-			console.log(inputTitle, input);
-			console.log('Post edited successfully:', response);
-			navigate(`/community/${postId}`);
-		} catch (error) {
-			console.error(error);
+		if (!inputTitle || !input) {
+			Swal.fire(alertData.fillTitleContent);
+			return;
 		}
+		const response = await patch<DataType>(`/api/community/${postId}`, {
+			title: inputTitle,
+			content: input,
+		});
+		navigate(`/community/${postId}`);
 	};
 
-	const { title, images, content } = post;
-	console.log(content);
+	const backPostList = () => {
+		navigate(`/community/${postId}`);
+	};
+
+	const { title } = post;
 
 	return (
 		<>
@@ -88,7 +80,7 @@ const CommunityEditPage = () => {
 					/>
 				</TextContainer>
 				<ButtonContainer>
-					<CancelButton>취소</CancelButton>
+					<CancelButton onClick={backPostList}>취소</CancelButton>
 					<SubmitButton onClick={editPost}>등록</SubmitButton>
 				</ButtonContainer>
 			</Container>
