@@ -44,11 +44,10 @@ function MyVolunHistory() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>('/api/applications?status=true', {
-					headers: {
-						Authorization: `Bearer ${getToken()}`,
-					},
-				});
+				const response = await get<DataType>(
+					'/api/applications?status=true',
+					{},
+				);
 				setAppliedData(response.data as VolunProps[]);
 			} catch (error) {
 				Swal.fire({
@@ -65,11 +64,10 @@ function MyVolunHistory() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>('/api/applications?status=false', {
-					headers: {
-						Authorization: `Bearer ${getToken()}`,
-					},
-				});
+				const response = await get<DataType>(
+					'/api/applications?status=false',
+					{},
+				);
 				setCompletedData(response.data as VolunProps[]);
 			} catch (error) {
 				console.log(error);

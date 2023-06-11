@@ -39,11 +39,10 @@ function VolunSuggest() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>('/api/volunteers/registerations', {
-					headers: {
-						Authorization: `Bearer ${getToken()}`,
-					},
-				});
+				const response = await get<DataType>(
+					'/api/volunteers/registerations',
+					{},
+				);
 				setDataList(response.data as ResponseData[]);
 			} catch (error) {
 				Swal.fire({

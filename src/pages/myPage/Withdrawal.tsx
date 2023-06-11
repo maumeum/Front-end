@@ -61,15 +61,7 @@ function Withdrawal() {
 		}).then(async (result) => {
 			if (result.isConfirmed) {
 				try {
-					await del(
-						'/api/users',
-						{ email: email, password: password },
-						{
-							headers: {
-								Authorization: `Bearer ${getToken()}`,
-							},
-						},
-					);
+					await del('/api/users', { email: email, password: password });
 				} catch (error) {
 					Swal.fire({
 						title: '이메일 혹은 비밀번호를 확인해주세요!',

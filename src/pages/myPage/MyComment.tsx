@@ -27,11 +27,7 @@ function MyComment() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>('/api/community/user', {
-					headers: {
-						Authorization: `Bearer ${getToken()}`,
-					},
-				});
+				const response = await get<DataType>('/api/community/user', {});
 
 				setPost(response.data as CommunityProps[]);
 			} catch (error) {
@@ -49,11 +45,7 @@ function MyComment() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get('/api/volunteerComments/users', {
-					headers: {
-						Authorization: `Bearer ${getToken()}`,
-					},
-				});
+				const response = await get('/api/volunteerComments/users', {});
 				setComment(response as CommunityProps[]);
 			} catch (error) {
 				Swal.fire({

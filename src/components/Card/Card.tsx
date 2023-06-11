@@ -68,9 +68,8 @@ function Card({ currTab, data }: CardProps) {
 	const closeModal = () => {
 		setIsOpen(false);
 	};
-
-	const handleRecruitmentStatusChange = (selectedValue: string) => {
-		Swal.fire({
+	const handleRecruitmentStatusChange = async (selectedValue: string) => {
+		const result = await Swal.fire({
 			title: '봉사활동 상태를 변경하시겠습니까??',
 			icon: 'info',
 			showCancelButton: true,
@@ -78,49 +77,34 @@ function Card({ currTab, data }: CardProps) {
 			cancelButtonColor: '#afcd81',
 			confirmButtonText: '네',
 			cancelButtonText: '아니요',
-		}).then(async (result) => {
-			if (result.isConfirmed) {
-				try {
-					await patch(
-						`/api/volunteers/registerations/${_id}`,
-						{ statusName: selectedValue },
-						{
-							headers: {
-								Authorization: `Bearer ${getToken()}`,
-							},
-						},
-					);
-					setSelectedStatus(selectedValue);
-				} catch (error) {
-					Swal.fire({
-						title: '모집상태 변경에 실패하였습니다 :(',
-						icon: 'error',
-						confirmButtonColor: 'var(--button--color)',
-					});
-				}
-				Swal.fire({
-					title: `${selectedValue} (으)로 상태가 변경되었습니다`,
-					icon: 'success',
+		});
+
+		if (result.isConfirmed) {
+			try {
+				await patch(`/api/volunteers/registerations/${_id}`, {
+					statusName: selectedValue,
+				});
+				setSelectedStatus(selectedValue);
+			} catch (error) {
+				await Swal.fire({
+					title: '모집상태 변경에 실패하였습니다 :(',
+					icon: 'error',
 					confirmButtonColor: 'var(--button--color)',
-				}).then(() => {
-					window.location.reload();
 				});
 			}
-		});
+			await Swal.fire({
+				title: `${selectedValue} (으)로 상태가 변경되었습니다`,
+				icon: 'success',
+				confirmButtonColor: 'var(--button--color)',
+			});
+			window.location.reload();
+		}
 	};
 
 	const handleParticipated = async () => {
 		try {
-			await post(
-				`/api/review/users/participation/${_id}`,
-				{},
-				{
-					headers: {
-						Authorization: `Bearer ${getToken()}`,
-					},
-				},
-			);
-			Swal.fire({
+			await post(`/api/review/users/participation/${_id}`, {});
+			const result = await Swal.fire({
 				title: '참여하신 활동이 맞으십니까?',
 				text: '커뮤니티 경험 향상을 위해 거짓 정보는 지양해주세요!',
 				icon: 'info',
@@ -129,13 +113,13 @@ function Card({ currTab, data }: CardProps) {
 				cancelButtonColor: '#afcd81',
 				confirmButtonText: '네',
 				cancelButtonText: '아니요',
-			}).then((result) => {
-				if (result.isConfirmed) {
-					Swal.fire('완료된 봉사로 변경되었습니다!', 'success');
-				}
 			});
+
+			if (result.isConfirmed) {
+				await Swal.fire('완료된 봉사로 변경되었습니다!', 'success');
+			}
 		} catch (error) {
-			Swal.fire({
+			await Swal.fire({
 				title: '활동이 시작되지 않은 봉사입니다.',
 				icon: 'success',
 				confirmButtonColor: 'var(--button--color)',

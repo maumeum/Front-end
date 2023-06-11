@@ -25,11 +25,7 @@ function MyReview() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>('/api/reviews/users', {
-					headers: {
-						Authorization: `Bearer ${getToken()}`,
-					},
-				});
+				const response = await get<DataType>('/api/reviews/users', {});
 				setData(response.data as ReviewProps[]);
 			} catch (error) {
 				console.log(error);

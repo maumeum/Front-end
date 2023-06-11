@@ -61,15 +61,7 @@ function ProfileImg() {
 		}).then(async (result) => {
 			//여기에 기본이미지 변경 api
 			try {
-				await patch(
-					'/api/users/original/image',
-					{},
-					{
-						headers: {
-							Authorization: `Bearer ${getToken()}`,
-						},
-					},
-				);
+				await patch('/api/users/original/image', {});
 				Swal.fire({
 					title: '기본이미지로 변경되었습니다',
 					icon: 'success',
@@ -108,7 +100,6 @@ function ProfileImg() {
 			await patch('/api/users/image', formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
-					Authorization: `Bearer ${getToken()}`,
 				},
 			});
 			setIsUpload(true);

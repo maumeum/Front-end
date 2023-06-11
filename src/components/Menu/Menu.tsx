@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { MenuTitle, Menus } from './Menu.ts';
+import { MenuTitle, Menus } from '@components/Menu/Menu';
 
 type MenuProps = {
 	title: keyof MenuItems;

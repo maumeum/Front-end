@@ -47,11 +47,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>('/api/users/info', {
-					headers: {
-						Authorization: `Bearer ${getToken()}`,
-					},
-				});
+				const response = await get<DataType>('/api/users/info', {});
 				const { email, nickname, phone } = response.data as UserInfo;
 				setEmail(email);
 				setNickname(nickname);
@@ -125,15 +121,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 		//회원정보 수정 요청
 		{
 			try {
-				await patch(
-					'/api/users/info',
-					{ nickname, phone },
-					{
-						headers: {
-							Authorization: `Bearer ${getToken()}`,
-						},
-					},
-				);
+				await patch('/api/users/info', { nickname, phone });
 			} catch (error) {
 				Swal.fire({
 					title: '회원정보 수정에 실패했습니다',
