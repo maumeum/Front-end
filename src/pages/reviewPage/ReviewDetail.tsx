@@ -32,42 +32,22 @@ const ReviewDetail = () => {
 	const [datauser, setDataUser] = useState<any>('');
 
 	useEffect(() => {
-		fetchPost();
-		loginUserLogic();
-	}, []);
-
-	const fetchPost = async () => {
-		try {
-			const token = getToken();
-			const response = await get<DataType>(`/api/review/detail/${postId}`, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
+		const fetchPost = async () => {
+			const response = await get<DataType>(`/api/review/detail/${postId}`);
 			setPost(response.data);
 			setDataUser(response.data.user_id);
 			console.log(response.data);
-			// console.log(response.data.content);
-			//setDataUser(response.data);
-		} catch (error) {
-			console.error('Error fetching post:', error);
-		}
-	};
+		};
+		fetchPost();
+	}, []);
 
-	const loginUserLogic = async () => {
-		try {
-			const token = getToken();
-			const response = await get<DataType>(`/api/review/check/${postId}`, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
+	useEffect(() => {
+		const loginUserLogic = async () => {
+			const response = await get<DataType>(`/api/review/check/${postId}`);
 			setLoginUser(response.data);
-			console.log('loginLogic test', response);
-		} catch (error) {
-			console.error(error);
-		}
-	};
+		};
+		loginUserLogic();
+	}, []);
 
 	const handleEdit = () => {
 		navigate(`/community/findfriend/edit/${postId}`);

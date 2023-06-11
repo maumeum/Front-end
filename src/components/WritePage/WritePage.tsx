@@ -45,7 +45,7 @@ const WritePage = ({ onSave, onCancel }: WritePageProps) => {
 		if (typeof parsedContent === 'string') {
 			return parsedContent;
 		}
-		if (parsedContent && parsedContent.props && parsedContent.props.children) {
+		if (parsedContent?.props?.children) {
 			return extractTextFromParsedContent(parsedContent.props.children);
 		}
 		return '';

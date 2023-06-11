@@ -9,7 +9,6 @@ import {
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { get } from '@src/api/Api';
-import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType.ts';
 
 type PostData = {
@@ -22,22 +21,14 @@ const reviewPage = () => {
 	const [postListData, setPostListData] = useState<PostData[]>([]);
 
 	useEffect(() => {
+		const fetchPostList = async () => {
+			const response = await get<DataType>('/api/review?skip=0&limit=10');
+			setPostListData(response.data.reviews);
+			console.log(response);
+		};
 		fetchPostList();
 	}, []);
-	const fetchPostList = async () => {
-		try {
-			const token = getToken();
-			const response = await get<DataType>('/api/review', {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
-			setPostListData(response.data);
-			console.log(response);
-		} catch (error) {
-			console.error('Error fetching post list:', error);
-		}
-	};
+
 	const navigateDetail = (postId: string) => {
 		navigate(`/review/${postId}`);
 	};
