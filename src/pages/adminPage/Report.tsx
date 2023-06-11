@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { get } from '@api/Api';
-import { CommunityListType, ReviewListType } from '@src/types/CardType';
-import DataType from '@src/types/DataType';
+import { CommunityListType, ReviewListType } from '@src/types/cardType';
+import DataType from '@src/types/dataType';
 import Menu from '@components/Menu/Menu.tsx';
 import PostList from '@components/PostList/PostList';
 import { MenuBar, TopBarContainer, ClickTopBar, PostContainer } from './style';

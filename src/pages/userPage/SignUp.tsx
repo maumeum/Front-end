@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-import { post } from '@api/Api';
-import DataType from '@src/types/DataType';
+import { post } from '@api/api';
+import DataType from '@src/types/dataType';
 import alertData from '@utils/swalObject';
 import LargeButton from '@components/Buttons/LargeButton';
 import { SignUpSection, SignUpForm } from './style';

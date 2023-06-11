@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import Swal from 'sweetalert2';
 
-import { TeamListType } from '@src/types/CardType';
+import { TeamListType } from '@src/types/cardType';
 import alertData from '@utils/swalObject';
 
 import {
