@@ -39,7 +39,7 @@ function Withdrawal() {
 			setter(e.target.value);
 		};
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		if (email === '' || password === '') {
 			Swal.fire({
 				title: '이메일 또는 비밀번호를 확인해주세요',
@@ -50,7 +50,7 @@ function Withdrawal() {
 			return;
 		}
 		setSubmit(true);
-		Swal.fire({
+		const result = await Swal.fire({
 			title: '정말 탈퇴하시겠습니까?',
 			icon: 'info',
 			showCancelButton: true,
@@ -58,30 +58,31 @@ function Withdrawal() {
 			cancelButtonColor: '#afcd81',
 			confirmButtonText: '네',
 			cancelButtonText: '아니요',
-		}).then(async (result) => {
-			if (result.isConfirmed) {
-				try {
-					await del('/api/users', { email: email, password: password });
-				} catch (error) {
-					Swal.fire({
-						title: '이메일 혹은 비밀번호를 확인해주세요!',
-						icon: 'info',
-						confirmButtonColor: 'var(--button--color)',
-					});
-					return;
-				}
-
-				deleteToken();
-				navigate('/');
-
-				Swal.fire(
-					'탈퇴되었습니다.',
-					'다음에 다시 만날 날을 기대합니다!👋🏻',
-					'success',
-				);
-			}
 		});
+
+		if (result.isConfirmed) {
+			try {
+				await del('/api/users', { email: email, password: password });
+			} catch (error) {
+				Swal.fire({
+					title: '이메일 혹은 비밀번호를 확인해주세요!',
+					icon: 'info',
+					confirmButtonColor: 'var(--button--color)',
+				});
+				return;
+			}
+
+			deleteToken();
+			navigate('/');
+
+			Swal.fire(
+				'탈퇴되었습니다.',
+				'다음에 다시 만날 날을 기대합니다!👋🏻',
+				'success',
+			);
+		}
 	};
+
 	return (
 		<Container>
 			<MenuBar>
