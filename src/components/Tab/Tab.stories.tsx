@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Tab from './Tab.tsx';
-import { TabTypes } from '@components/Tab/TabTypes.ts';
+import { TabTypes } from '@src/types/myPageConstants';
 
 const meta: Meta<typeof Tab> = {
 	title: 'Components/Tab',

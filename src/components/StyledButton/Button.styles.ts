@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export interface ButtonProps {
-	primary: boolean;
+	colorType: 'green' | 'white' | 'pink' | 'gray';
 	size: 'small' | 'medium' | 'large';
 	backgroundColor?: string;
 	round?: boolean;
@@ -16,19 +16,61 @@ export const Button = styled.button<ButtonProps>`
 	cursor: pointer;
 
 	${(props) =>
-		props.primary &&
+		props.colorType === 'green' &&
 		css`
 			background-color: ${({ theme }) => theme.colors.green200};
 			color: ${({ theme }) => theme.colors.background};
+
+			&:hover {
+				background-color: ${({ theme }) => theme.colors.green100};
+			}
+
+			&:active {
+				background-color: ${({ theme }) => theme.colors.green300};
+			}
 		`}
 
 	${(props) =>
-		!props.primary &&
+		props.colorType === 'white' &&
 		css`
 			background-color: ${({ theme }) => theme.colors.background};
 			color: ${({ theme }) => theme.colors.text};
 			border: 1px solid theme.color.gray300;
 			box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
+
+			&:active {
+				background-color: ${({ theme }) => theme.colors.gray100};
+			}
+		`}
+
+	${(props) =>
+		props.colorType === 'pink' &&
+		css`
+			background-color: ${({ theme }) => theme.colors.pink200};
+			color: ${({ theme }) => theme.colors.text};
+
+			&:hover {
+				background-color: ${({ theme }) => theme.colors.pink100};
+			}
+
+			&:active {
+				background-color: ${({ theme }) => theme.colors.pink300};
+			}
+		`}
+
+${(props) =>
+		props.colorType === 'gray' &&
+		css`
+			background-color: ${({ theme }) => theme.colors.gray300};
+			color: ${({ theme }) => theme.colors.text};
+
+			&:hover {
+				background-color: ${({ theme }) => theme.colors.gray200};
+			}
+
+			&:active {
+				background-color: ${({ theme }) => theme.colors.gray400};
+			}
 		`}
 
 	${(props) =>
@@ -40,14 +82,15 @@ export const Button = styled.button<ButtonProps>`
   ${(props) =>
 		props.size === 'small' &&
 		css`
-			height: 4.4rem;
+			width: 11.5rem;
+			height: 4.5rem;
 		`}
 
 	${(props) =>
 		props.size === 'medium' &&
 		css`
-			width: 11.5rem;
-			height: 4.5rem;
+			width: 20rem;
+			height: 5rem;
 		`}
 
   ${(props) =>
