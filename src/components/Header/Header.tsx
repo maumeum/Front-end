@@ -25,7 +25,7 @@ const Header = () => {
 
 	// 토큰 유무
 	useEffect(() => {
-		if (getToken() && getToken() !== null) {
+		if (getToken()) {
 			setCheckToken(true);
 		}
 	}, []);

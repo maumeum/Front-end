@@ -18,6 +18,7 @@ import {
 } from './style';
 import LargeButton from '@components/Buttons/LargeButton';
 import { validEmail } from '@utils/signUpCheck';
+import alertData from '@utils/swalObject';
 import mainLogo from '@assets/icons/mainlogo.svg';
 
 const Login = () => {
@@ -62,11 +63,7 @@ const Login = () => {
 			navigate('/');
 			window.location.reload();
 		} catch (err) {
-			Swal.fire({
-				icon: 'error',
-				title: '이메일 또는 비밀번호가 일치하지 않습니다.',
-				confirmButtonColor: '#d33',
-			}).then(() => {
+			Swal.fire(alertData.wrongUserData).then(() => {
 				window.location.reload();
 			});
 		}

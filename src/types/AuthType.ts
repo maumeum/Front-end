@@ -2,8 +2,7 @@ import UserType from './UserType';
 
 interface AuthType {
 	userData: UserType | null;
-	setUserData: (userData: UserType) => void;
-	initialize: () => void;
+	getUserData: () => void;
 }
 
 export default AuthType;

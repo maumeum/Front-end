@@ -10,7 +10,7 @@ import {
 	GitLink,
 } from './style';
 
-import mainLogo from '@src/assets/icons/mainlogo.svg';
+import mainLogo from '@assets/icons/mainlogo.svg';
 
 const Footer = () => {
 	const clickHandler = () => {
@@ -29,15 +29,13 @@ const Footer = () => {
 						마음이음에서 흔적을 남겨보세요
 					</Slogan>
 					<MemberList>
-						{members.map(
-							(member: { name: string; link: string }, index: number) => {
-								return (
-									<Member key={index}>
-										<GitLink href={member.link}>{member.name}</GitLink>
-									</Member>
-								);
-							},
-						)}
+						{members.map((member: { name: string; link: string }) => {
+							return (
+								<Member key={member.link}>
+									<GitLink href={member.link}>{member.name}</GitLink>
+								</Member>
+							);
+						})}
 					</MemberList>
 				</SloganContainer>
 			</IntroContainer>

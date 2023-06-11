@@ -1,16 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
 const apiURL = import.meta.env.VITE_API_URL;
-const apiClient = axios.create({});
-
-const request = async <T>(config: AxiosRequestConfig): Promise<T> => {
-	try {
-		const response = await apiClient.request<T>(config);
-		return response.data;
-	} catch (err) {
-		throw new Error('API 요청에 실패했습니다.');
-	}
-};
 
 // axios.get
 export const get = async <T>(
@@ -18,26 +8,27 @@ export const get = async <T>(
 	config?: AxiosRequestConfig,
 ): Promise<T> => {
 	const fullURL = apiURL + url;
-	return request<T>({
-		url: fullURL,
-		method: 'GET',
-		...config,
-	});
+	try {
+		const response = await axios.get<T>(fullURL, config);
+		return response.data;
+	} catch (err) {
+		throw new Error('API 요청에 실패했습니다.');
+	}
 };
 
+// axios.post
 export const post = async <T>(
 	url: string,
 	data?: any,
 	config?: AxiosRequestConfig,
 ): Promise<T> => {
 	const fullURL = apiURL + url;
-	const requestOptions: AxiosRequestConfig = {
-		url: fullURL,
-		method: 'POST',
-		...(data && { data }), // Conditionally include 'data' if it exists
-		...config,
-	};
-	return request<T>(requestOptions);
+	try {
+		const response = await axios.post<T>(fullURL, data, config);
+		return response.data;
+	} catch (err) {
+		throw new Error('API 요청에 실패했습니다.');
+	}
 };
 
 // axios.patch
@@ -45,27 +36,24 @@ export const patch = async <T>(
 	url: string,
 	data?: any,
 	config?: AxiosRequestConfig,
-): Promise<T> => {
+): Promise<void> => {
 	const fullURL = apiURL + url;
-	return request<T>({
-		url: fullURL,
-		method: 'PATCH',
-		data,
-		...config,
-	});
+	try {
+		await axios.patch<T>(fullURL, data, config);
+	} catch (err) {
+		throw new Error('API 요청에 실패했습니다.');
+	}
 };
 
-//axios delete
+// axios.delete
 export const del = async <T>(
 	url: string,
-	data?: any,
 	config?: AxiosRequestConfig,
-): Promise<T> => {
+): Promise<void> => {
 	const fullURL = apiURL + url;
-	return request<T>({
-		url: fullURL,
-		method: 'DELETE',
-		...(data && { data }),
-		...config,
-	});
+	try {
+		await axios.delete<T>(fullURL, config);
+	} catch (err) {
+		throw new Error('API 요청에 실패했습니다.');
+	}
 };

@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 
 import { post } from '@api/Api';
 import DataType from '@src/types/DataType';
+import alertData from '@utils/swalObject';
 import LargeButton from '@components/Buttons/LargeButton';
 import { SignUpSection, SignUpForm } from './style';
 
@@ -47,11 +48,7 @@ const SignUp = () => {
 
 		// 비밀번호 일치여부
 		if (password !== checkPassword) {
-			Swal.fire({
-				icon: 'error',
-				title: '비밀번호가 일치하지 않습니다.',
-				confirmButtonColor: '#d33',
-			});
+			Swal.fire(alertData.wrongPwd);
 		} else if (
 			validEmail(email) &&
 			validPassword(password) &&
@@ -65,11 +62,7 @@ const SignUp = () => {
 				phone: phoneNum,
 			});
 			navigate('/');
-			Swal.fire({
-				title: '마음이음에 오신 것을 환영합니다!',
-				text: '로그인을 해주세요.',
-				confirmButtonColor: 'var(--button--color)',
-			});
+			Swal.fire(alertData.successSignUp);
 		}
 	};
 
