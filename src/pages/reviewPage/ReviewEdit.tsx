@@ -16,7 +16,7 @@ import {
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
 
-const CommunityEditPage = () => {
+const ReviewEdit = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { postId } = location.state;
@@ -28,7 +28,7 @@ const CommunityEditPage = () => {
 		const fetchPost = async () => {
 			try {
 				const token = getToken();
-				const response = await get<DataType>(`/api/community/${postId}`, {
+				const response = await get<DataType>(`/api/review/detail/${postId}`, {
 					headers: {
 						Authorization: `Bearer ${token}`,
 					},
@@ -56,15 +56,15 @@ const CommunityEditPage = () => {
 			Swal.fire(alertData.fillTitleContent);
 			return;
 		}
-		const response = await patch<DataType>(`/api/community/${postId}`, {
+		const response = await patch<DataType>(`/api/review/users/${postId}`, {
 			title: inputTitle,
 			content: inputContent,
 		});
-		navigate(`/community/${postId}`);
+		navigate(`/review/${postId}`);
 	};
 
 	const backPostList = () => {
-		navigate(`/community/${postId}`);
+		navigate(`/review/${postId}`);
 	};
 
 	const { title, content } = post;
@@ -95,4 +95,4 @@ const CommunityEditPage = () => {
 	);
 };
 
-export default CommunityEditPage;
+export default ReviewEdit;

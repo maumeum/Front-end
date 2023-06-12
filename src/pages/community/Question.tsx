@@ -45,7 +45,7 @@ const Question = () => {
 
 	const handleSearch = async (query: string) => {
 		const response = await get<DataType>(
-			`/api/community/search?keyword=${query}`,
+			`/api/community/search?keyword=${query}&posttype=qna`,
 		);
 		setPostListData(response.data);
 		console.log('검색어:', query);

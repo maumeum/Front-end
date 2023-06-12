@@ -26,6 +26,7 @@ import ReviewDetail from '@src/pages/reviewPage/ReviewDetail';
 import TeamAuth from '@src/pages/adminPage/TeamAuth';
 import Report from '@src/pages/adminPage/Report';
 import CommunityEditPage from '@src/pages/community/CommunityEditPage';
+import ReviewEdit from '@src/pages/reviewPage/ReviewEdit';
 import Error from '@pages/errorPage/Error';
 import PrivateRoute from '@utils/PrivateRoute';
 
@@ -46,6 +47,7 @@ function App() {
 				<Route path='/review' element={<Review />} />
 				<Route path='/community/:postId' element={<FindFriendDetail />} />
 				<Route path='community/edit/:postId' element={<CommunityEditPage />} />
+				<Route path='review/edit/:postId' element={<ReviewEdit />} />
 				<Route path='/review/:postId' element={<ReviewDetail />} />
 				<Route path='/community/:postId' element={<FindFriendDetail />} />
 

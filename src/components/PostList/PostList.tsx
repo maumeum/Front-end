@@ -16,8 +16,7 @@ const PostList = ({ postTitle, postContents, onClick }: PostListProps) => {
 			<PostListLine />
 			<PostListContainer onClick={onClick}>
 				<PostTitle>{postTitle}</PostTitle>
-				<PostContents
-					dangerouslySetInnerHTML={{ __html: postContents }}></PostContents>
+				<PostContents>{postContents}</PostContents>
 			</PostListContainer>
 		</>
 	);

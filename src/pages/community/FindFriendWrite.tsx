@@ -2,7 +2,6 @@ import { useState } from 'react';
 import WritePage from '@components/WritePage/WritePage';
 import { post } from '@src/api/api';
 import { getToken } from '@src/api/Token';
-import parse from 'html-react-parser';
 import { useNavigate } from 'react-router-dom';
 
 const FindFriendWrite = () => {
@@ -24,7 +23,7 @@ const FindFriendWrite = () => {
 			'/api/community/create',
 			{
 				title: inputTitle,
-				content: parse(content as string),
+				content: content,
 				postType: 'findfriend',
 			},
 			{
