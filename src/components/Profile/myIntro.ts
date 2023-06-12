@@ -12,6 +12,12 @@ export const IntroContainer = styled.div`
 	flex-direction: column;
 	align-items: flex-end;
 	border: none;
+
+	textarea {
+		/* width: 95%; */
+		margin: 1rem auto;
+		padding: 16px 18px;
+	}
 `;
 
 export const IntroBox = styled.textarea`
@@ -19,7 +25,7 @@ export const IntroBox = styled.textarea`
 	min-height: 35rem;
 	display: block;
 	border: 1px solid #ccc;
-	border-radius: 10%;
+	border-radius: 3%;
 	padding: 3rem;
 	margin-right: 1rem;
 

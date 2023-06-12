@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
-import { get } from '@api/api';
+import { get } from '@src/api/api';
 import {
 	CommunityListType,
 	VolunteerListType,

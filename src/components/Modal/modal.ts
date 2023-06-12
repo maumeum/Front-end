@@ -14,6 +14,7 @@ export const customStyles = {
 		margin: 'auto',
 		transform: 'translate(-50%, -50%)',
 		width: '73rem',
+		maxHeight: '70vh',
 	},
 };
 

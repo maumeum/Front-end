@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { TabTypes, VolunteerTypes } from '@src/types/myPageConstants';
 
 interface CardProps {
-	currTab: string;
+	currTab?: string;
 	statusName: string;
 }
 

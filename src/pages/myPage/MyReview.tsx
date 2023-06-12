@@ -10,9 +10,10 @@ import Tab from '@components/Tab/Tab.tsx';
 import MyPost from '@components/MyPost/MyPost.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/types/myPageConstants';
-import { get } from '@src/api/Api';
-import { getToken } from '@src/api/Token';
-import DataType from '@src/types/DataType';
+import { get } from '@src/api/api';
+import DataType from '@src/types/dataType';
+import Swal from 'sweetalert2';
+import alertData from '@src/utils/swalObject';
 
 interface ReviewProps {
 	title: string;
@@ -22,25 +23,26 @@ interface ReviewProps {
 }
 
 function MyReview() {
+	const tabs = [TabTypes.WRITTEN_REVIEW];
+	const [currTab] = useState<TabTypes>(TabTypes.WRITTEN_REVIEW);
+	const [userReviewData, setUserReviewData] = useState<ReviewProps[]>([]);
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>('/api/reviews/users', {});
-				setData(response.data as ReviewProps[]);
+				const getUserReview = await get<DataType>('/api/reviews/users', {});
+				setUserReviewData(getUserReview.data as ReviewProps[]);
 			} catch (error) {
-				console.log(error);
+				Swal.fire(
+					alertData.errorMessage('데이터를 불러오는데 실패하였습니다.'),
+				);
 			}
 		};
 
 		fetchData();
 	}, []);
 
-	const tabs = [TabTypes.WRITTEN_REVIEW];
-	const [currTab] = useState<TabTypes>(TabTypes.WRITTEN_REVIEW);
-	const [data, setData] = useState<ReviewProps[]>([]);
-
 	const removePost = (postId: string) => {
-		setData(data.filter((post) => post._id !== postId));
+		setUserReviewData(userReviewData.filter((post) => post._id !== postId));
 	};
 
 	return (
@@ -54,12 +56,12 @@ function MyReview() {
 					<TabMenu>
 						<Tab currTab={currTab} tabs={tabs} />
 					</TabMenu>
-					{data.length === 0 && <div>작성된 리뷰가 없습니다.</div>}
-					{data.map((data) => {
+					{userReviewData.length === 0 && <div>작성된 리뷰가 없습니다.</div>}
+					{userReviewData.map((data) => {
 						return (
 							<MyPost
 								key={data._id}
-								data={data}
+								communityData={data}
 								currTab={currTab}
 								onRemovePost={removePost}
 							/>

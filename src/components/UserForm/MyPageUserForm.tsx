@@ -23,16 +23,12 @@ import LargeButton from '@components/Buttons/LargeButton';
 import Modal from '@components/Modal/Modal.tsx';
 import { useNavigate } from 'react-router-dom';
 import { TabTypes } from '@src/types/myPageConstants';
-import { get, patch } from '@src/api/Api';
-import { getToken } from '@src/api/Token';
-import DataType from '@src/types/DataType';
-
-// props값에 따라 조건부로 렌더링 되는 부분이 많아서 로직이 복잡해 고민입니다
-//컴포넌트간 결합도가 너무 강해서 그런거겠죠..? 추후 어떻게 분리를 하거나 변경해야할지
-//방향성을 알고싶습니다!
+import { get, patch } from '@src/api/api';
+import alertData from '@utils/swalObject';
+import DataType from '@src/types/dataType';
 
 interface MyPageUserFormProps {
-	pageType: string; //readOnly설정을 위한 props 값
+	pageType: string;
 }
 
 type UserInfo = {
@@ -44,48 +40,47 @@ type UserInfo = {
 };
 
 function MyPageUserForm({ pageType }: MyPageUserFormProps) {
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const response = await get<DataType>('/api/users/info', {});
-				const { email, nickname, phone } = response.data as UserInfo;
-				setEmail(email);
-				setNickname(nickname);
-				setPhone(phone);
-				setInitialNickname(nickname);
-				setInitialPhone(phone);
-			} catch (error) {
-				console.log(error);
-			}
-		};
-
-		fetchData();
-	}, []);
 	const [initialNickname, setInitialNickname] = useState<string>('');
 	const [initialPhone, setInitialPhone] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
 	const [nickname, setNickname] = useState<string>('');
 	const [phone, setPhone] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
+	const canModify = pageType === TabTypes.MYPAGE;
 
-	const isMyPage = pageType === TabTypes.MYPAGE;
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const getUserInfoData = await get<DataType>('/api/users/info', {});
+				const responseData = getUserInfoData.data as UserInfo;
+				const { email, nickname, phone } = responseData;
+				setEmail(email);
+				setNickname(nickname);
+				setPhone(phone);
+				setInitialNickname(nickname);
+				setInitialPhone(phone);
+			} catch (error) {
+				Swal.fire(
+					alertData.errorMessage('데이터를 가져오는데 실패하였습니다.'),
+				);
+			}
+		};
+
+		fetchData();
+	}, []);
 	const navigate = useNavigate();
 
 	//모달설정
 	const [isOpen, setIsOpen] = useState(false);
-	const [editMode, setEditMode] = useState(false);
-	const [authMode, setAuthMode] = useState(false);
+	const [isChangePasswordModal, setIsChangePasswordModal] = useState(false);
 
-	const openModal = () => {
-		setIsOpen(true);
+	const toggleModal = (onoff: boolean) => () => {
+		setIsOpen(onoff);
 	};
-	const closeModal = () => {
-		setIsOpen(false);
-	};
+
 	const changePwClickHandler = () => {
-		setEditMode(true);
-		setAuthMode(false);
-		setIsOpen(true);
+		setIsChangePasswordModal(true);
+		toggleModal(true)();
 	};
 	// inputValue 함수
 	const getFormChanger =
@@ -102,14 +97,13 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 	const isNicknameValid = nickname.length > 0;
 	const isPhoneValid = validPhoneNum(phone);
 	const isButtonDisabled =
-		!isMyPage && !(isNicknameValid && isPhoneValid && isInfoChanged());
+		!canModify && !(isNicknameValid && isPhoneValid && isInfoChanged());
 
-	const clickHandler = async (e: MouseEvent<HTMLButtonElement>) => {
+	const UserInfoChangeHandler = async (e: MouseEvent<HTMLButtonElement>) => {
 		{
-			if (isMyPage) {
-				setEditMode(false);
-				setAuthMode(true);
-				openModal();
+			if (canModify) {
+				setIsChangePasswordModal(false);
+				toggleModal(true)();
 				return;
 			}
 		}
@@ -123,18 +117,11 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 			try {
 				await patch('/api/users/info', { nickname, phone });
 			} catch (error) {
-				Swal.fire({
-					title: '회원정보 수정에 실패했습니다',
-					icon: 'error',
-					confirmButtonColor: 'var(--button--color)',
-				});
+				Swal.fire(alertData.errorMessage('회원정보 변경에 실패하였습니다.'));
 			}
 		}
 		if (validPhoneNum(phone) && nickname.length > 0) {
-			Swal.fire({
-				title: '회원정보가 수정되었습니다!',
-				confirmButtonColor: 'var(--button--color)',
-			});
+			Swal.fire(alertData.successMessage('회원정보가 변경되었습니다.'));
 			navigate('/mypage');
 		}
 	};
@@ -143,9 +130,9 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 		<>
 			<SignUpSection pageType={pageType}>
 				<SignUpForm>
-					{isMyPage && (
+					{canModify && (
 						<InputForm
-							isMyPage={isMyPage}
+							canModify={canModify}
 							submit={submit}
 							dataName='이메일'
 							inputType='text'
@@ -157,7 +144,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 						/>
 					)}
 					<InputForm
-						isMyPage={isMyPage}
+						canModify={canModify}
 						submit={submit}
 						dataName='닉네임'
 						inputType='text'
@@ -168,7 +155,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 					/>
 
 					<InputForm
-						isMyPage={isMyPage}
+						canModify={canModify}
 						submit={submit}
 						dataName='핸드폰 번호'
 						inputType='text'
@@ -179,21 +166,22 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 						validFn={validPhoneNum}
 					/>
 					<ButtonContainer>
-						{!isMyPage && (
+						{!canModify && (
 							<LargeButton onClick={changePwClickHandler}>
 								비밀번호변경
 							</LargeButton>
 						)}
-						<LargeButton onClick={clickHandler} disabled={isButtonDisabled}>
+						<LargeButton
+							onClick={UserInfoChangeHandler}
+							disabled={isButtonDisabled}>
 							회원정보수정
 						</LargeButton>
 					</ButtonContainer>
 					<Modal
 						isOpen={isOpen}
-						closeModal={closeModal}
+						closeModal={toggleModal(false)}
 						user={'user'}
-						editMode={editMode}
-						authMode={authMode}
+						isChangePasswordModal={isChangePasswordModal}
 					/>
 				</SignUpForm>
 			</SignUpSection>
