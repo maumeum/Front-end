@@ -53,7 +53,6 @@ function VolunSuggest() {
 					{},
 				);
 				setSuggestVolunList(getSuggestedData.data as ResponseData[]);
-				console.log(suggestVolunList);
 			} catch (error) {
 				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
 			}
