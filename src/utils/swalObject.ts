@@ -80,6 +80,11 @@ const alertData = {
 		confirmButtonText: '네',
 		cancelButtonText: '아니요',
 	}),
+	waitTeamCert: {
+		title: '제출이 완료되었습니다.',
+		text: '관리자의 확인 후 승인 여부가 2~3일 내에 메일로 발송됩니다.',
+		confirmButtonColor: 'var(--button--color)',
+	},
 };
 
 export default alertData;

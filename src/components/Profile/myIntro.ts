@@ -52,3 +52,14 @@ export const FormBtn = styled.button`
 export const CheckLength = styled.div`
 	display: block;
 `;
+
+export const ImageLabel = styled.label`
+	display: flex;
+	align-items: center;
+	margin-bottom: 2rem;
+	font-size: 2rem;
+`;
+
+export const ImageInput = styled.input`
+	cursor: pointer;
+`;
