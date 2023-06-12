@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { get, del } from '@src/api/api.ts';
+import { get, del } from '@src/api/api';
 import { getToken } from '@src/api/Token';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
@@ -20,11 +20,11 @@ import {
 	Content,
 } from './style.ts';
 import CommentSection from '@src/components/Comment/Comment.tsx';
-import DataType from '@src/types/DataType.ts';
+import DataType from '@src/types/dataType.ts';
 
-const FindFriendDetail = () => {
+const QuestionDetail = () => {
 	const navigate = useNavigate();
-	const { postId } = useParams();
+	const { postId } = useParams() as { postId: string };
 	const [post, setPost] = useState<any>([]);
 	const [datauser, setDataUser] = useState<any>('');
 	const [loginUser, setLoginUser] = useState(false);
@@ -113,9 +113,9 @@ const FindFriendDetail = () => {
 					</Contentdiv>
 				</ContentContainer>
 			</DetailContainer>
-			<CommentSection />
+			<CommentSection postId={postId} />
 		</>
 	);
 };
 
-export default FindFriendDetail;
+export default QuestionDetail;

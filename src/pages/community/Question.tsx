@@ -8,9 +8,9 @@ import { NumberWriteContainer, PageContainer } from './style.ts';
 import PostList from '@components/PostList/PostList.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { MenuBar } from '@components/MyPage/myPage.ts';
-import { get } from '@src/api/api.ts';
+import { get } from '@src/api/api';
 import { getToken } from '@src/api/Token';
-import DataType from '@src/types/DataType.ts';
+import DataType from '@src/types/dataType.ts';
 
 type PostData = {
 	_id: string;
@@ -43,8 +43,11 @@ const Question = () => {
 		}
 	};
 
-	const handleSearch = (query: string) => {
-		// 검색기능 구현 로직 작성예정
+	const handleSearch = async (query: string) => {
+		const response = await get<DataType>(
+			`/api/community/search?keyword=${query}&posttype=qna`,
+		);
+		setPostListData(response.data);
 		console.log('검색어:', query);
 	};
 

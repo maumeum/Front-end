@@ -97,7 +97,7 @@ function VolunSuggest() {
 							<Card key={data.volunteer_id._id} data={data} currTab={currTab} />
 						))}
 					</CardBox>
-					<MyReview closeModal={toggleModal(false)} />
+					{/* <MyReview closeModal={toggleModal(false)} /> */}
 				</Main>
 			</Container>
 		</>
