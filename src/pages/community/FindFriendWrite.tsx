@@ -6,11 +6,23 @@ import { useNavigate } from 'react-router-dom';
 
 const FindFriendWrite = () => {
 	const navigate = useNavigate();
+	const [selectedImage, setSelectedImage] = useState<File[]>([]);
 	const [postData, setPostData] = useState({
 		title: '',
 		content: '',
 		postType: 'findfriend',
 	});
+
+	const imageHandler = () => {
+		const input = document.createElement('input');
+		input.setAttribute('type', 'file');
+		input.setAttribute('accept', 'image/*');
+		input.onchange = (e: any) => {
+			const file = e.target.files[0];
+			setSelectedImage(file);
+		};
+		input.click();
+	};
 
 	const onSavePost = async (inputTitle: string, content: string) => {
 		setPostData({
@@ -19,19 +31,19 @@ const FindFriendWrite = () => {
 			postType: 'findfriend',
 		});
 		const token = getToken();
-		await post(
-			'/api/community/create',
-			{
-				title: inputTitle,
-				content: content,
-				postType: 'findfriend',
+		const formData = new FormData();
+		formData.append('title', inputTitle);
+		formData.append('content', content);
+		formData.append('postType', 'findfriend');
+		if (selectedImage) {
+			formData.append('image', selectedImage);
+		}
+		await post('/api/community/create', formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+				Authorization: `Bearer ${token}`,
 			},
-			{
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			},
-		);
+		});
 		navigate('/community/findfriend');
 	};
 
@@ -46,7 +58,11 @@ const FindFriendWrite = () => {
 
 	return (
 		<>
-			<WritePage onSave={onSavePost} onCancel={onCancelPost} />
+			<WritePage
+				onSave={onSavePost}
+				onCancel={onCancelPost}
+				ImageHandler={imageHandler}
+			/>
 		</>
 	);
 };

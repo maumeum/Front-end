@@ -77,6 +77,7 @@ const ReviewDetail = () => {
 		.locale('ko')
 		.format('YYYY년 MM월 DD일 HH:mm:ss');
 
+	console.log('이미지', images);
 	return (
 		<>
 			<DetailContainer>
@@ -95,7 +96,17 @@ const ReviewDetail = () => {
 				</Header>
 				<Line></Line>
 				<ContentContainer>
-					{hasPostImage && <Image src={images} alt='content-image' />}
+					{hasPostImage && (
+						<div>
+							{images.map((image: any, index: any) => (
+								<Image
+									key={index}
+									src={`http://localhost:5002/${image}`}
+									alt='content-image'
+								/>
+							))}
+						</div>
+					)}
 					<Contentdiv>
 						<Content>{content}</Content>
 					</Contentdiv>
