@@ -2,18 +2,18 @@ import { useState, ChangeEvent } from 'react';
 import { IntroContainer, IntroBox } from '@components/Profile/myIntro';
 import { InputConatiner } from '@components/Profile/profileImg';
 import { BtnConatiner, TitleInput } from '@components/Modal/modal';
-import { post } from '@src/api/api';
+import { post } from '@api/api';
 import LargeButton from '@components/Buttons/LargeButton';
 import TopBar from '@components/TopBar/TopBar';
 import Swal from 'sweetalert2';
-import alertData from '@src/utils/swalObject';
+import alertData from '@utils/swalObject';
 import DataType from '@src/types/dataType';
 interface MyReviewProps {
 	closeModal: () => void;
 	id?: string;
 }
 
-function MyReview({ closeModal, id }: MyReviewProps) {
+function MyReview({ closeModal }: MyReviewProps) {
 	const [title, setTitle] = useState<string>('');
 	const [content, setContent] = useState<string>('');
 	const [files, setFiles] = useState<File[]>([]);

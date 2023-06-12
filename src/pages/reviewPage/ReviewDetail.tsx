@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { get, del } from '@src/api/api';
-import { getToken } from '@src/api/token';
+import { get, del } from '@api/api';
+import { getToken } from '@api/token';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import {
@@ -19,8 +19,8 @@ import {
 	Contentdiv,
 	Content,
 	BtnDelete,
-} from '@src/pages/community/style.ts';
-import CommentSection from '@src/components/Comment/Comment.tsx';
+} from '@src/pages/community/style';
+import CommentSection from '@src/components/Comment/Comment';
 import DataType from '@src/types/dataType';
 
 const ReviewDetail = () => {

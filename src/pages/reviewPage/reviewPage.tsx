@@ -1,15 +1,15 @@
-import TopBar from '../../components/TopBar/TopBar.tsx';
-import SearchBar from '../../components/SearchBar/SearchBar.tsx';
-import TotalPostNumber from '../../components/TotalPostNumber/TotalPostNumber.tsx';
-import PostList from '../../components/PostList/PostList.tsx';
+import TopBar from '@components/TopBar/TopBar.tsx';
+import SearchBar from '@components/SearchBar/SearchBar.tsx';
+import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
+import PostList from '@components/PostList/PostList.tsx';
 import {
 	NumberWriteContainer,
 	ReviewPageContainer,
-} from '../community/style.ts';
+} from '@src/pages/community/style';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { get } from '@src/api/api';
-import DataType from '@src/types/dataType.ts';
+import DataType from '@src/types/dataType';
 
 type PostData = {
 	_id: string;

@@ -11,10 +11,9 @@ import MyPost from '@components/MyPost/MyPost.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import DataType from '@src/types/dataType';
 import { TabTypes } from '@src/types/myPageConstants';
-import { get } from '@src/api/api';
+import { get } from '@api/api';
 import Swal from 'sweetalert2';
 import alertData from '@src/utils/swalObject';
-import { Link } from 'react-router-dom';
 
 interface CommunityProps {
 	title: string;

@@ -12,7 +12,7 @@ function TruncatedDescription({
 	setIsShowMore,
 }: TruncatedDescriptionProps) {
 	const textLimit = 160;
-	const shortComment = content.slice(0, textLimit) + ' ...';
+	const shortComment = `${content.slice(0, textLimit)}...`;
 	const isLongComment = content.length > textLimit;
 	const viewShort = isLongComment && !isShowMore;
 

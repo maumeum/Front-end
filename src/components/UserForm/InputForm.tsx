@@ -8,7 +8,7 @@ import {
 	EmailData,
 	EmailButton,
 } from '@pages/userPage/style';
-import { post } from '@src/api/api';
+import { post } from '@api/api';
 import alertData from '@utils/swalObject';
 import { InputErrorType } from '@src/types/errorType';
 import InputContainerProps from '@src/types/inputType';

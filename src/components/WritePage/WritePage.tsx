@@ -25,11 +25,6 @@ const WritePage = ({ onSave, onCancel }: WritePageProps) => {
 	const [inputTitle, setInputTitle] = useState('');
 	const [selectedImage, setSelectedImage] = useState<File[]>([]);
 
-	// const onClickHandler = () => {
-	// 	const textContent = content;
-	// 	onSave(inputTitle, textContent);
-	// 	clearContent();
-	// };
 	const onClickHandler = () => {
 		onSave(inputTitle, content, selectedImage);
 		clearContent();

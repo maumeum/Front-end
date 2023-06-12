@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ImageLabel, ImageInput } from './myIntro';
+import { ImageLabel, ImageInput } from '@components/Profile/myIntro';
 
 interface ImageData {
 	setFile: (file: File | null) => void;

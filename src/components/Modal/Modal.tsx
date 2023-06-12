@@ -2,7 +2,7 @@ import ReactModal from 'react-modal';
 
 import UserForm from '@components/UserForm/UserForm.tsx';
 import { customStyles } from '@components/Modal/modal';
-import MyReview from '../MyPost/MyReview';
+import MyReview from '@components/MyPost/MyReview';
 
 interface ModalProps {
 	isOpen: boolean;

@@ -20,7 +20,7 @@ import {
 	EditCommentArea,
 } from './CommentStyle';
 import DataType from '@src/types/dataType';
-import { get, post, patch, del } from '@src/api/api';
+import { get, post, patch, del } from '@api/api';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 
