@@ -22,7 +22,8 @@ const Search = () => {
 	const [query, setQuery] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
 	const [volunteerList, setVolunteerList] = useState<VolunteerListType>([]);
-	const [communityList, setCommunityList] = useState<CommunityListType>([]);
+	const [findFriendList, setFindFriendList] = useState<CommunityListType>([]);
+	const [qnaList, setQnaList] = useState<CommunityListType>([]);
 	const navigate = useNavigate();
 
 	const handleSearch = (query: string) => {
@@ -38,26 +39,39 @@ const Search = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const responseData = await get<DataType>(
-				`/api/volunteers/search/?keyword=${query}`,
+				`/api/volunteers/search?keyword=${query}`,
 			);
 			setVolunteerList(responseData.data);
 		};
 		fetchData();
 	}, [query]);
 
-	// 커뮤니티 조회
+	// 동행 커뮤니티 조회
 	useEffect(() => {
 		const fetchData = async () => {
 			const responseData = await get<DataType>(
-				`/api/community/search?keyword=${query}`,
+				`/api/community/search?keyword=${query}&posttype=findfriend`,
 			);
-			setCommunityList(responseData.data);
+			setFindFriendList(responseData.data);
+		};
+		fetchData();
+	}, [query]);
+
+	// 질문 커뮤니티 조회
+	useEffect(() => {
+		const fetchData = async () => {
+			const responseData = await get<DataType>(
+				`/api/community/search?keyword=${query}&posttype=qna`,
+			);
+			setQnaList(responseData.data);
 		};
 		fetchData();
 	}, [query]);
 
 	const validSearch =
-		query !== '' && volunteerList.length !== 0 && communityList.length !== 0;
+		(query !== '' && volunteerList.length !== 0) ||
+		(query !== '' && findFriendList.length !== 0) ||
+		(query !== '' && qnaList.length !== 0);
 
 	return (
 		<SearchSection>
@@ -72,8 +86,19 @@ const Search = () => {
 					</VolunteerContainer>
 					<CommunityTitle>커뮤니티 검색결과</CommunityTitle>
 					<CommunityContainer>
-						{communityList.slice(0, 6).map((item) => (
-							<CommunityCard key={item._id} communityData={item} />
+						{findFriendList.slice(0, 3).map((item) => (
+							<CommunityCard
+								key={item._id}
+								communityData={item}
+								onClick={() => navigate(`/community/${item._id}`)}
+							/>
+						))}
+						{qnaList.slice(0, 3).map((item) => (
+							<CommunityCard
+								key={item._id}
+								communityData={item}
+								onClick={() => navigate(`/community/${item._id}`)}
+							/>
 						))}
 					</CommunityContainer>
 				</>

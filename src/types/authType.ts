@@ -1,8 +1,12 @@
 import UserType from '@src/types/userType';
 
-interface AuthType {
+export interface AuthType {
 	userData: UserType | null;
 	getUserData: () => void;
 }
 
-export default AuthType;
+export interface SubmitType {
+	isSubmit: boolean;
+	setIsSubmit: () => void;
+	resetSubmit: () => void;
+}

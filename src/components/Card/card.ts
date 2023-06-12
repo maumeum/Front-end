@@ -165,7 +165,9 @@ export const ReviewSection = styled.div`
 `;
 
 export const ImageContainer = styled.div`
+	width: 32%;
 	height: 100%;
+	overflow: hidden;
 `;
 
 export const ReviewImage = styled.img`

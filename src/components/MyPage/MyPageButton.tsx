@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import useAuthStore from '@src/store/useAuthStore';
-import { getToken } from '@api/Token';
+import { getToken } from '@api/token';
 import { ButtonContainer, ButtonWord } from './myPage.ts';
 
 const MyPageButton = () => {

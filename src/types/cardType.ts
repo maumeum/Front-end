@@ -22,7 +22,7 @@ export interface ReviewType {
 	};
 	index: number;
 	createdAt: string;
-	images?: string[];
+	images: string[];
 }
 
 export type ReviewListType = ReviewType[];
