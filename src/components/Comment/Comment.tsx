@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import { getToken } from '@src/api/Token';
 import {
 	Container,
@@ -11,16 +9,20 @@ import {
 	Btn1,
 	Btn2,
 	CommentContainer,
-	Profile,
 	ProfileContainer,
 	UserContainer,
 	UserName,
 	Date,
 	Contents,
 	CommentHolder,
+	CommentArea,
+	CommentLength,
+	EditCommentArea,
 } from './CommentStyle';
-import DataType from '@src/types/DataType';
-import { get, post } from '@src/api/Api';
+import DataType from '@src/types/dataType';
+import { get, post, patch, del } from '@src/api/api';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
 
 type CommentProps = {
 	postId: string;
@@ -29,6 +31,8 @@ type CommentProps = {
 const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 	const [inputArea, setInputArea] = useState('');
 	const [value, setValue] = useState<any>([]);
+	const [editingCommentId, setEditingCommentId] = useState('');
+	const [editedComment, setEditedComment] = useState('');
 
 	useEffect(() => {
 		getComments();
@@ -49,8 +53,11 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 		}
 	};
 
-	const handleCommentChange = (value: string) => {
-		setInputArea(value);
+	const handleCommentChange = (event: any) => {
+		const text = event.target.value;
+		if (text.length <= 50) {
+			setInputArea(text);
+		}
 	};
 
 	const handleCommentSubmit = async (
@@ -82,6 +89,55 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 		}
 	};
 
+	const handleCancelSubmit = () => {
+		setInputArea('');
+	};
+
+	const handelEditingComment = (comment_id: string) => {
+		const comment = value.find((comment: any) => comment._id === comment_id);
+		if (comment) {
+			setEditingCommentId(comment_id);
+			setEditedComment(comment.content);
+		}
+	};
+
+	//구현중
+	const handleEditComment = async (comment_id: string) => {
+		if (!editedComment) {
+			alert('내용을 입력해주세요');
+			return;
+		}
+		const token = getToken();
+		const response = await patch<DataType>(
+			`/api/postComments/${comment_id}`,
+			{
+				content: editedComment,
+			},
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			},
+		);
+		setEditingCommentId('');
+		setEditedComment('');
+		getComments();
+	};
+
+	const handleDeleteComment = async (comment_id: string) => {
+		const token = getToken();
+		const response = await del<DataType>(
+			`/api/postComments/${comment_id}`,
+
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			},
+		);
+		getComments();
+	};
+
 	return (
 		<Container>
 			<Title>
@@ -89,9 +145,14 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 				<Comment>댓글 작성</Comment>
 			</Title>
 
-			<ReactQuill value={inputArea} onChange={handleCommentChange} />
+			<CommentArea
+				value={inputArea}
+				onChange={handleCommentChange}
+				maxLength={50}
+			/>
+			<CommentLength>{inputArea.length}/50</CommentLength>
 			<BtnContainer>
-				<Btn1>취소</Btn1>
+				<Btn1 onClick={handleCancelSubmit}>취소</Btn1>
 				<Btn2 onClick={handleCommentSubmit}>등록</Btn2>
 			</BtnContainer>
 
@@ -106,18 +167,44 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 				value.map((comment: any) => (
 					<CommentContainer key={comment._id}>
 						<ProfileContainer>
-							{/* <Profile src={} alt='user-profile' /> */}
 							<UserContainer>
 								<UserName>{comment.user_id.nickname}</UserName>
-								<Date>{comment.createdAt}</Date>
+								<Date>
+									{dayjs(comment.createdAt)
+										.locale('ko')
+										.format('YYYY년 MM월 DD일 HH:mm:ss')}
+								</Date>
 							</UserContainer>
 						</ProfileContainer>
-						<Contents
-							dangerouslySetInnerHTML={{ __html: comment.content }}></Contents>
-						<BtnContainer>
-							<Btn1>수정</Btn1>
-							<Btn2>삭제</Btn2>
-						</BtnContainer>
+						{editingCommentId === comment._id ? (
+							// 수정 중인 댓글 표시
+							<>
+								<EditCommentArea
+									value={editedComment}
+									onChange={(e) => setEditedComment(e.target.value)}
+									maxLength={50}
+								/>
+								<BtnContainer>
+									<Btn1 onClick={() => handleCancelSubmit()}>취소</Btn1>
+									<Btn2 onClick={() => handleEditComment(comment._id)}>
+										저장
+									</Btn2>
+								</BtnContainer>
+							</>
+						) : (
+							// 수정 중이 아닌 댓글 표시
+							<>
+								<Contents>{comment.content}</Contents>
+								<BtnContainer>
+									<Btn1 onClick={() => handelEditingComment(comment._id)}>
+										수정
+									</Btn1>
+									<Btn2 onClick={() => handleDeleteComment(comment._id)}>
+										삭제
+									</Btn2>
+								</BtnContainer>
+							</>
+						)}
 					</CommentContainer>
 				))
 			)}

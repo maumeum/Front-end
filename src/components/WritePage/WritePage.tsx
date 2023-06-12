@@ -1,5 +1,4 @@
-import { useRef, useState } from 'react';
-import ReactQuill from 'react-quill';
+import { useState } from 'react';
 import {
 	TextContainer,
 	Container,
@@ -7,10 +6,9 @@ import {
 	CancelButton,
 	SubmitButton,
 	ButtonContainer,
+	ContentInput,
+	TextLength,
 } from '../WritePage/WritePageStyle';
-import 'react-quill/dist/quill.snow.css';
-import { quillModule } from '../Modal/quillModule';
-import parse from 'html-react-parser';
 
 type WritePageProps = {
 	onSave: (inputTitle: string, textContent: string) => void;
@@ -18,15 +16,20 @@ type WritePageProps = {
 };
 
 const WritePage = ({ onSave, onCancel }: WritePageProps) => {
-	const quillRef = useRef<ReactQuill>(null);
 	const [content, setContent] = useState('');
 	const [inputTitle, setInputTitle] = useState('');
 
 	const onClickHandler = () => {
-		const parsedContent = parse(content);
-		const textContent = extractTextFromParsedContent(parsedContent);
+		const textContent = content;
 		onSave(inputTitle, textContent);
 		clearContent();
+	};
+
+	const handelInputChange = (event: any) => {
+		const text = event.target.value;
+		if (text.length <= 2000) {
+			setContent(text);
+		}
 	};
 
 	const deleteContent = () => {
@@ -37,18 +40,6 @@ const WritePage = ({ onSave, onCancel }: WritePageProps) => {
 	const clearContent = () => {
 		setInputTitle('');
 		setContent('');
-		if (quillRef.current) {
-			quillRef.current.getEditor().setText('');
-		}
-	};
-	const extractTextFromParsedContent = (parsedContent: any): string => {
-		if (typeof parsedContent === 'string') {
-			return parsedContent;
-		}
-		if (parsedContent?.props?.children) {
-			return extractTextFromParsedContent(parsedContent.props.children);
-		}
-		return '';
 	};
 
 	return (
@@ -60,16 +51,14 @@ const WritePage = ({ onSave, onCancel }: WritePageProps) => {
 					onChange={(e) => setInputTitle(e.target.value)}
 				/>
 				<TextContainer>
-					<ReactQuill
-						style={{ width: '112rem', height: '90rem', margin: '0 auto' }}
+					<ContentInput
 						placeholder='내용입력'
-						theme='snow'
-						ref={quillRef}
 						value={content}
-						onChange={setContent}
-						modules={quillModule}
+						onChange={handelInputChange}
+						maxLength={2000}
 					/>
 				</TextContainer>
+				<TextLength>{content.length}/2000</TextLength>
 				<ButtonContainer>
 					<CancelButton onClick={deleteContent}>취소</CancelButton>
 					<SubmitButton onClick={onClickHandler}>등록</SubmitButton>

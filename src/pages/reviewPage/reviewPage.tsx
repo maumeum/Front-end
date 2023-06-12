@@ -8,8 +8,8 @@ import {
 } from '../community/style.ts';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { get } from '@src/api/Api';
-import DataType from '@src/types/DataType.ts';
+import { get } from '@src/api/api';
+import DataType from '@src/types/dataType.ts';
 
 type PostData = {
 	_id: string;
@@ -24,7 +24,6 @@ const reviewPage = () => {
 		const fetchPostList = async () => {
 			const response = await get<DataType>('/api/review?skip=0&limit=10');
 			setPostListData(response.data.reviews);
-			console.log(response);
 		};
 		fetchPostList();
 	}, []);
@@ -32,9 +31,10 @@ const reviewPage = () => {
 	const navigateDetail = (postId: string) => {
 		navigate(`/review/${postId}`);
 	};
-	const handleSearch = (query: string) => {
-		//검색기능 구현 로직 작성예정
-		console.log('검색어:', query);
+
+	const handleSearch = async (query: string) => {
+		const response = await get<DataType>(`/api/review/search?keyword=${query}`);
+		setPostListData(response.data);
 	};
 
 	return (

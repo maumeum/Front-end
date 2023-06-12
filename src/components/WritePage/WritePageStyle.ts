@@ -17,7 +17,21 @@ export const TitleInput = styled.input`
 	font-weight: 600;
 	color: #a7a7a7;
 `;
+export const ContentInput = styled.textarea`
+	width: 112rem;
+	margin: 0 auto;
+	height: 100rem;
+	border: 1px solid gray;
+	font-size: 2.5rem;
+	padding: 2rem;
+`;
 export const TextContainer = styled.div`
+	margin-bottom: 10rem;
+`;
+export const TextLength = styled.p`
+	margin-left: auto;
+	font-size: 2rem;
+	margin-top: -9rem;
 	margin-bottom: 10rem;
 `;
 export const ButtonContainer = styled.div`

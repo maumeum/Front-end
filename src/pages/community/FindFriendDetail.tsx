@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { get, del } from '@src/api/Api';
+import { get, del } from '@src/api/api';
 import { getToken } from '@src/api/Token';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
@@ -21,7 +21,7 @@ import {
 	BtnDelete,
 } from './style.ts';
 import CommentSection from '@src/components/Comment/Comment.tsx';
-import DataType from '@src/types/DataType.ts';
+import DataType from '@src/types/dataType.ts';
 
 const FindFriendDetail = () => {
 	const navigate = useNavigate();
@@ -31,40 +31,41 @@ const FindFriendDetail = () => {
 	const [loginUser, setLoginUser] = useState(false);
 
 	useEffect(() => {
+		const fetchPost = async () => {
+			try {
+				const token = getToken();
+				const response = await get<DataType>(`/api/community/${postId}`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				});
+				setPost(response.data.post.post);
+				setDataUser(response.data.post.user);
+				console.log(response);
+			} catch (error) {
+				console.error('Error fetching post:', error);
+			}
+		};
 		fetchPost();
-		loginUserLogic();
 	}, []);
 
-	const fetchPost = async () => {
-		try {
-			const token = getToken();
-			const response = await get<DataType>(`/api/community/${postId}`, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
-			setPost(response.data.post.post);
-			setDataUser(response.data.post.user);
-			console.log(response);
-		} catch (error) {
-			console.error('Error fetching post:', error);
-		}
-	};
-
-	const loginUserLogic = async () => {
-		try {
-			const token = getToken();
-			const response = await get<DataType>(`/api/community/check/${postId}`, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
-			setLoginUser(response.data);
-			console.log(response);
-		} catch (error) {
-			console.error('Error fetching post:', error);
-		}
-	};
+	useEffect(() => {
+		const loginUserLogic = async () => {
+			try {
+				const token = getToken();
+				const response = await get<DataType>(`/api/community/check/${postId}`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				});
+				setLoginUser(response.data);
+				console.log(response);
+			} catch (error) {
+				console.error('Error fetching post:', error);
+			}
+		};
+		loginUserLogic();
+	}, []);
 
 	const handleEdit = () => {
 		navigate(`/community/edit/${postId}`, {
@@ -116,7 +117,7 @@ const FindFriendDetail = () => {
 				<ContentContainer>
 					{hasPostImage && <Image src={images} alt='content-image' />}
 					<Contentdiv>
-						<Content>{content}</Content>
+						<Content dangerouslySetInnerHTML={{ __html: content }}></Content>
 					</Contentdiv>
 				</ContentContainer>
 			</DetailContainer>

@@ -11,6 +11,18 @@ export const Title = styled.div`
 	margin-bottom: 5.9rem;
 	margin-top: 15rem;
 `;
+export const CommentArea = styled.textarea`
+	width: 112rem;
+	padding: 2rem;
+`;
+export const EditCommentArea = styled.textarea`
+	width: 105rem;
+	padding: 2rem;
+`;
+export const CommentLength = styled.p`
+	font-size: 2rem;
+	margin-left: 106rem;
+`;
 export const Box = styled.div`
 	width: 0.8rem;
 	height: 2.5rem;
