@@ -13,18 +13,14 @@ const FindFriendWrite = () => {
 		postType: 'findfriend',
 	});
 
-	const onSavePost = (inputTitle: string, content: string) => {
+	const onSavePost = async (inputTitle: string, content: string) => {
 		setPostData({
 			title: inputTitle,
 			content: content,
 			postType: 'findfriend',
 		});
-		console.log('Saved Post:', inputTitle, content);
-
 		const token = getToken();
-		console.log(token);
-		// API 호출을 수행하는 부분
-		post(
+		await post(
 			'/api/community/create',
 			{
 				title: inputTitle,

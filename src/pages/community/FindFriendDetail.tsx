@@ -31,40 +31,41 @@ const FindFriendDetail = () => {
 	const [loginUser, setLoginUser] = useState(false);
 
 	useEffect(() => {
+		const fetchPost = async () => {
+			try {
+				const token = getToken();
+				const response = await get<DataType>(`/api/community/${postId}`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				});
+				setPost(response.data.post.post);
+				setDataUser(response.data.post.user);
+				console.log(response);
+			} catch (error) {
+				console.error('Error fetching post:', error);
+			}
+		};
 		fetchPost();
-		loginUserLogic();
 	}, []);
 
-	const fetchPost = async () => {
-		try {
-			const token = getToken();
-			const response = await get<DataType>(`/api/community/${postId}`, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
-			setPost(response.data.post.post);
-			setDataUser(response.data.post.user);
-			console.log(response);
-		} catch (error) {
-			console.error('Error fetching post:', error);
-		}
-	};
-
-	const loginUserLogic = async () => {
-		try {
-			const token = getToken();
-			const response = await get<DataType>(`/api/community/check/${postId}`, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
-			setLoginUser(response.data);
-			console.log(response);
-		} catch (error) {
-			console.error('Error fetching post:', error);
-		}
-	};
+	useEffect(() => {
+		const loginUserLogic = async () => {
+			try {
+				const token = getToken();
+				const response = await get<DataType>(`/api/community/check/${postId}`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				});
+				setLoginUser(response.data);
+				console.log(response);
+			} catch (error) {
+				console.error('Error fetching post:', error);
+			}
+		};
+		loginUserLogic();
+	}, []);
 
 	const handleEdit = () => {
 		navigate(`/community/edit/${postId}`, {

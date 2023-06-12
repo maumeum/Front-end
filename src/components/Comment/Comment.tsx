@@ -19,7 +19,9 @@ import {
 	CommentHolder,
 } from './CommentStyle';
 import DataType from '@src/types/DataType';
-import { get, post } from '@src/api/Api';
+import { get, post, patch, del } from '@src/api/Api';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
 
 type CommentProps = {
 	postId: string;
@@ -81,6 +83,44 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 		}
 	};
 
+	const handleCancelSubmit = () => {
+		setInputArea('');
+	};
+
+	//구현중
+	const handleEditComment = async (comment_id: string) => {
+		if (!inputArea) {
+			alert('내용을 입력해주세요');
+			return;
+		}
+		const token = getToken();
+		const response = await patch<DataType>(
+			`/api/postComments/${comment_id}`,
+			{
+				content: inputArea,
+			},
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			},
+		);
+	};
+
+	const handleDeleteComment = async (comment_id: string) => {
+		const token = getToken();
+		const response = await del<DataType>(
+			`/api/postComments/${comment_id}`,
+
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			},
+		);
+		getComments();
+	};
+
 	return (
 		<Container>
 			<Title>
@@ -90,7 +130,7 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 
 			<ReactQuill value={inputArea} onChange={handleCommentChange} />
 			<BtnContainer>
-				<Btn1>취소</Btn1>
+				<Btn1 onClick={handleCancelSubmit}>취소</Btn1>
 				<Btn2 onClick={handleCommentSubmit}>등록</Btn2>
 			</BtnContainer>
 
@@ -108,14 +148,18 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 							{/* <Profile src={} alt='user-profile' /> */}
 							<UserContainer>
 								<UserName>{comment.user_id.nickname}</UserName>
-								<Date>{comment.createdAt}</Date>
+								<Date>
+									{dayjs(comment.createdAt)
+										.locale('ko')
+										.format('YYYY년 MM월 DD일 HH:mm:ss')}
+								</Date>
 							</UserContainer>
 						</ProfileContainer>
 						<Contents
 							dangerouslySetInnerHTML={{ __html: comment.content }}></Contents>
 						<BtnContainer>
-							<Btn1>수정</Btn1>
-							<Btn2>삭제</Btn2>
+							<Btn1 onClick={() => handleEditComment(comment._id)}>수정</Btn1>
+							<Btn2 onClick={() => handleDeleteComment(comment._id)}>삭제</Btn2>
 						</BtnContainer>
 					</CommentContainer>
 				))

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 interface BarProps {
-	modal: string;
+	modal: string | undefined;
 }
 
 export const TopBarBox = styled.div<BarProps>`

@@ -37,6 +37,32 @@ const reviewPage = () => {
 		console.log('검색어:', query);
 	};
 
+	// return (
+	// 	<>
+	// 		<ReviewPageContainer>
+	// 			<TopBar title='봉사후기 게시판' text='생생한 봉사후기를 공유해요' />
+	// 			<SearchBar onSearch={handleSearch} />
+	// 			<NumberWriteContainer>
+	// 				<TotalPostNumber totalPosts={postListData.length} />
+	// 			</NumberWriteContainer>
+	// 			{postListData &&
+	// 				postListData.map((postData) => (
+	// 					<PostList
+	// 						key={postData._id}
+	// 						postTitle={
+	// 							postData.title.slice(0, 50) +
+	// 							(postData.title.length > 50 ? '...' : '')
+	// 						}
+	// 						postContents={
+	// 							postData.content.slice(0, 50) +
+	// 							(postData.content.length > 50 ? '...' : '')
+	// 						}
+	// 						onClick={() => navigateDetail(postData._id)}
+	// 					/>
+	// 				))}
+	// 		</ReviewPageContainer>
+	// 	</>
+	// );
 	return (
 		<>
 			<ReviewPageContainer>
@@ -49,14 +75,8 @@ const reviewPage = () => {
 					postListData.map((postData) => (
 						<PostList
 							key={postData._id}
-							postTitle={
-								postData.title.slice(0, 50) +
-								(postData.title.length > 50 ? '...' : '')
-							}
-							postContents={
-								postData.content.slice(0, 50) +
-								(postData.content.length > 50 ? '...' : '')
-							}
+							postTitle={postData.title}
+							postContents={postData.content}
 							onClick={() => navigateDetail(postData._id)}
 						/>
 					))}
