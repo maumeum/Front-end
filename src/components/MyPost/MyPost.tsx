@@ -11,8 +11,8 @@ import {
 
 import TruncatedDescription from '@components/MyPost/TruncatedDescription';
 import { SmallButton } from '@components/Buttons/SmallButton';
-import { del } from '@src/api/Api';
-import { getToken } from '@src/api/Token';
+import { del } from '@api/api';
+import { getToken } from '@api/token';
 import { TabTypes } from '@src/types/myPageConstants';
 import Swal from 'sweetalert2';
 
