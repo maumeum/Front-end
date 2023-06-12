@@ -7,8 +7,8 @@ import {
 } from '@components/Profile/profileImg';
 import Swal from 'sweetalert2';
 import useAuthStore from '@src/store/useAuthStore.ts';
-import { patch } from '@src/api/api';
-import alertData from '@src/utils/swalObject';
+import { patch } from '@api/api';
+import alertData from '@utils/swalObject';
 
 const url = import.meta.env.VITE_API_URL;
 function ProfileImg() {

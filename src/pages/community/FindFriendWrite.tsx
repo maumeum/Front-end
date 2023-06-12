@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import WritePage from '@components/WritePage/WritePage';
-import { post } from '@src/api/api';
-import { getToken } from '@src/api/Token';
+import { post } from '@api/api';
+import { getToken } from '@api/token';
 import { useNavigate } from 'react-router-dom';
 
 const FindFriendWrite = () => {
 	const navigate = useNavigate();
-	const [postData, setPostData] = useState({
+	const [_, setPostData] = useState({
 		title: '',
 		content: '',
 		postType: 'findfriend',

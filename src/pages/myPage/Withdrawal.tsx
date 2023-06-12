@@ -19,9 +19,9 @@ import { validEmail, validPassword } from '@src/utils/signUpCheck.ts';
 import { emailError, passwordError } from '@src/utils/errorMessage.ts';
 import InputForm from '@src/components/UserForm/InputForm.tsx';
 import Swal from 'sweetalert2';
-import { del } from '@src/api/api';
-import { deleteToken } from '@src/api/Token';
-import alertData from '@src/utils/swalObject';
+import { del } from '@api/api';
+import { deleteToken } from '@api/token';
+import alertData from '@utils/swalObject';
 
 function Withdrawal() {
 	const [email, setEmail] = useState<string>('');

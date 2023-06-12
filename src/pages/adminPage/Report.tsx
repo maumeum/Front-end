@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { get } from '@src/api/api';
+import { get } from '@api/api';
 import { CommunityListType, ReviewListType } from '@src/types/cardType';
 import DataType from '@src/types/dataType';
 import Menu from '@components/Menu/Menu.tsx';

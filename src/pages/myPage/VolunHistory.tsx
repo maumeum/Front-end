@@ -10,10 +10,10 @@ import Tab from '@components/Tab/Tab.tsx';
 import Card from '@components/Card/Card.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/types/myPageConstants';
-import { get } from '@src/api/api';
+import { get } from '@api/api';
 import DataType from '@src/types/dataType';
 import Swal from 'sweetalert2';
-import alertData from '@src/utils/swalObject';
+import alertData from '@utils/swalObject';
 
 interface VolunProps {
 	createdAt: string;
