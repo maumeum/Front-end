@@ -90,9 +90,7 @@ function MyVolunHistory() {
 						<Tab currTab={currTab} onClick={handleClickTab} tabs={tabs} />
 					</TabMenu>
 					<CardBox>
-						{volunData.length === 0 && (
-							<div>봉사 내역이 존재하지 않습니다.</div>
-						)}
+						{volunData.length === 0 && <h2>봉사 내역이 존재하지 않습니다.</h2>}
 						{volunData.map((data) => (
 							<Card key={data.volunteer_id._id} currTab={currTab} data={data} />
 						))}

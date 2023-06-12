@@ -91,7 +91,7 @@ function VolunSuggest() {
 					</TabMenu>
 					<CardBox>
 						{suggestVolunList.length === 0 && (
-							<div>내가 등록한 봉사 내역이 없습니다.</div>
+							<h2>내가 등록한 봉사 내역이 없습니다.</h2>
 						)}
 						{transformData.map((data) => (
 							<Card key={data.volunteer_id._id} data={data} currTab={currTab} />

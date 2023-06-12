@@ -4,6 +4,7 @@ import {
 	Main,
 	MenuBar,
 	TabMenu,
+	StyledLink,
 } from '@components/MyPage/myPage.ts';
 import Tab from '@components/Tab/Tab.tsx';
 import MyPost from '@components/MyPost/MyPost.tsx';
@@ -51,7 +52,6 @@ function MyComment() {
 			try {
 				const getCommentData = await get<DataType>(
 					'/api/volunteerComments/users',
-					{},
 				);
 				setCommentData(getCommentData.data as CommunityProps[]);
 			} catch (error) {
@@ -88,10 +88,10 @@ function MyComment() {
 					<TabMenu>
 						<Tab currTab={currTab} onClick={handleClickTab} tabs={tabs} />
 					</TabMenu>
-					{selecteddata.length === 0 && <p>나의 활동내역이 없습니다</p>}
+					{selecteddata.length === 0 && <h2>나의 활동내역이 없습니다</h2>}
 					{selecteddata.map((data) => {
 						return (
-							<Link
+							<StyledLink
 								to={`/community/${data._id}`}
 								key={`commenutyLink${data._id}`}
 								style={{ textDecoration: 'none' }}>
@@ -101,7 +101,7 @@ function MyComment() {
 									communityData={data}
 									onRemovePost={removePost}
 								/>
-							</Link>
+							</StyledLink>
 						);
 					})}
 				</Main>
