@@ -6,20 +6,13 @@ import { useNavigate } from 'react-router-dom';
 
 const QuestionWrite = () => {
 	const navigate = useNavigate();
-	const [setPostData] = useState({
+	const [_, setPostData] = useState({
 		title: '',
 		content: '',
 		postType: 'qna',
 	});
 
 	const onSavePost = (inputTitle: string, content: string) => {
-		setPostData({
-			title: inputTitle,
-			content: content,
-			postType: 'qna',
-		});
-		console.log('Saved question Post:', inputTitle, content);
-
 		const token = getToken();
 		console.log(token);
 		// API 호출을 수행하는 부분
