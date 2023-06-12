@@ -27,7 +27,7 @@ interface ResponseData {
 	deadline: string;
 	startDate: string;
 	endDate: string;
-	images: string;
+	images: string[];
 	register_user_id: {
 		nickname: string;
 		image: string;
@@ -40,10 +40,10 @@ function VolunSuggest() {
 	const [suggestVolunList, setSuggestVolunList] = useState<ResponseData[]>([]);
 	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
 	const currTab = tabs[0];
-	// const [isOpen, setIsOpen] = useState(false);
-	// const toggleModal = (onoff: boolean) => () => {
-	// 	setIsOpen(onoff);
-	// };
+	const [isOpen, setIsOpen] = useState(false);
+	const toggleModal = (onoff: boolean) => () => {
+		setIsOpen(onoff);
+	};
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -53,6 +53,7 @@ function VolunSuggest() {
 					{},
 				);
 				setSuggestVolunList(getSuggestedData.data as ResponseData[]);
+				console.log(suggestVolunList);
 			} catch (error) {
 				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
 			}
@@ -62,7 +63,6 @@ function VolunSuggest() {
 
 	const transformData = suggestVolunList.map((data) => {
 		//Card 컴포넌트 형식에 맞게 데이터형태 변환
-
 		return {
 			createdAt: data.createdAt,
 			volunteer_id: {
@@ -97,7 +97,7 @@ function VolunSuggest() {
 							<Card key={data.volunteer_id._id} data={data} currTab={currTab} />
 						))}
 					</CardBox>
-					{/* <MyReview closeModal={toggleModal(false)} /> */}
+					<MyReview closeModal={toggleModal(false)} />
 				</Main>
 			</Container>
 		</>

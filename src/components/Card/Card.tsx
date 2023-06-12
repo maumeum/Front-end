@@ -16,7 +16,7 @@ import {
 import { TabTypes } from '@src/types/myPageConstants.ts';
 import { post, patch } from '@src/api/api.ts';
 import Swal from 'sweetalert2';
-import car from '@src/assets/images/car.png';
+import defaultImage from '@src/assets/images/volunteer1.jpg';
 import { VolunteerTypes } from '@src/types/myPageConstants.ts';
 
 export interface CardProps {
@@ -31,7 +31,7 @@ export interface CardProps {
 			centName: string;
 			statusName: string;
 			deadline: string;
-			images: string;
+			images: string[];
 		};
 	};
 	currTab?: string;
@@ -61,6 +61,7 @@ function splitStatusName(statusName: string) {
 		: statusName;
 }
 const url = import.meta.env.VITE_API_URL;
+
 function Card({ currTab, data }: CardProps) {
 	const { _id, title, centName, statusName, images, startDate, endDate } =
 		data.volunteer_id;
@@ -134,7 +135,11 @@ function Card({ currTab, data }: CardProps) {
 		<>
 			<CardContainer currTab={currTab} statusName={statusName}>
 				<ImgBox>
-					<img src={`${url}/${images}`} alt='유저프로필' />
+					{images.length > 0 ? (
+						<img src={`${url}/${images[0]}`} alt='게시글 대표이미지' />
+					) : (
+						<img src={defaultImage} alt='게시글 기본이미지'></img>
+					)}
 					<Badge currTab={currTab} statusName={selectedStatus}>
 						<p
 							dangerouslySetInnerHTML={{
@@ -152,7 +157,7 @@ function Card({ currTab, data }: CardProps) {
 					</VolunInfo>
 					{/* 컴포넌트 분리 시급... */}
 					<UserInfo>
-						<img src={`${url}/${images}`} alt='작성자 프로필사진' />
+						<img src={`${url}/${images[0]}`} alt='작성자 프로필사진' />
 						<p>{truncateCentName(centName)}</p>
 						{currTab === TabTypes.VOLUNTEER_COMPLETED &&
 							statusName !== VolunteerTypes.DISCONTINUE && (

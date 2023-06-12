@@ -16,7 +16,7 @@ interface MyReviewProps {
 function MyReview({ closeModal, id }: MyReviewProps) {
 	const [title, setTitle] = useState<string>('');
 	const [content, setContent] = useState<string>('');
-	const [file, setFile] = useState<File | null>(null);
+	const [files, setFiles] = useState<File[]>([]);
 
 	const handleContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		setContent(e.target.value);
@@ -27,9 +27,9 @@ function MyReview({ closeModal, id }: MyReviewProps) {
 	};
 
 	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const selectedFile = e.target.files?.[0];
-		if (selectedFile) {
-			setFile(selectedFile);
+		const chosenFiles = e.target.files;
+		if (chosenFiles) {
+			setFiles((prevFiles) => [...prevFiles, ...Array.from(chosenFiles)]);
 		}
 	};
 
@@ -44,15 +44,14 @@ function MyReview({ closeModal, id }: MyReviewProps) {
 		}
 
 		const formData = new FormData();
-		console.log('전송중');
-		console.log('아이디 ' + volunteer_id);
+
 		if (volunteer_id) {
 			formData.append('volunteer_id', volunteer_id);
 		}
 		formData.append('title', title);
 		formData.append('content', content);
-		if (file) {
-			formData.append('images', file);
+		for (let i = 0; i < files.length; i++) {
+			formData.append('images', files[i]);
 		}
 
 		for (const [key, value] of formData.entries()) {
@@ -98,6 +97,7 @@ function MyReview({ closeModal, id }: MyReviewProps) {
 					type='file'
 					accept='image/*'
 					name='image'
+					multiple
 					onChange={handleImageChange}
 				/>
 			</InputConatiner>

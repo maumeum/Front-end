@@ -9,7 +9,6 @@ import {
 import Tab from '@components/Tab/Tab.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/types/myPageConstants';
-import TopBar from '@components/TopBar/TopBar.tsx';
 import LargeButton from '@components/Buttons/LargeButton';
 import {
 	SignUpForm,
@@ -51,8 +50,9 @@ function Withdrawal() {
 
 		if (result.isConfirmed) {
 			try {
-				await del('/api/users', { email: email, password: password });
+				await del('/api/users', { data: { email: email, password: password } });
 			} catch (error) {
+				console.log(error);
 				Swal.fire(
 					alertData.infoMessage('이메일 또는 비밀번호를 확인해주세요.'),
 				);

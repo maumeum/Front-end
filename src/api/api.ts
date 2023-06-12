@@ -48,12 +48,11 @@ export const patch = async <T>(
 // axios.delete
 export const del = async <T>(
 	url: string,
-	data?: any,
 	config?: AxiosRequestConfig,
 ): Promise<void> => {
 	const fullURL = apiURL + url;
 	try {
-		await api.delete<T>(fullURL, data, config);
+		await api.delete<T>(fullURL, config);
 	} catch (err) {
 		throw new Error('API 요청에 실패했습니다.');
 	}
