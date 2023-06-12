@@ -8,11 +8,12 @@ import {
 
 interface CommunityCardProps {
 	communityData: CommunityType;
+	onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
-const CommunityCard = ({ communityData }: CommunityCardProps) => {
+const CommunityCard = ({ communityData, onClick }: CommunityCardProps) => {
 	return (
-		<CommunityContainer>
+		<CommunityContainer onClick={onClick}>
 			<PostType>{communityData.postType}</PostType>
 			<CommunityTitle>{communityData.title}</CommunityTitle>
 		</CommunityContainer>
