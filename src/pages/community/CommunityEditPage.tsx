@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getToken } from '@src/api/Token';
+import { getToken } from '@api/token';
 import DataType from '@src/types/dataType.ts';
-import { get, patch } from '@src/api/api';
+import { get, patch } from '@api/api';
 import {
 	TextContainer,
 	Container,

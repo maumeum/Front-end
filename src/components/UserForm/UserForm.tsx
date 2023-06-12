@@ -8,11 +8,11 @@ import {
 import LargeButton from '@components/Buttons/LargeButton';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
-import { post, patch } from '@src/api/api';
-import { validPassword } from '@src/utils/signUpCheck.ts';
-import { passwordError, passwordCheckError } from '@src/utils/errorMessage.ts';
+import { post, patch } from '@api/api';
+import { validPassword } from '@utils/signUpCheck.ts';
+import { passwordError, passwordCheckError } from '@utils/errorMessage.ts';
 import InputForm from '@src/components/UserForm/InputForm.tsx';
-import { deleteToken } from '@src/api/Token';
+import { deleteToken } from '@api/token';
 
 interface UserFormProps {
 	closeModal: () => void;

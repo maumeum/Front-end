@@ -12,10 +12,10 @@ import dayjs from 'dayjs';
 
 import TruncatedDescription from '@components/MyPost/TruncatedDescription';
 import { SmallButton } from '@components/Buttons/SmallButton';
-import { del } from '@src/api/api';
+import { del } from '@api/api';
 import { TabTypes } from '@src/types/myPageConstants';
 import Swal from 'sweetalert2';
-import alertData from '@src/utils/swalObject';
+import alertData from '@utils/swalObject';
 
 interface PostProps {
 	communityData: {

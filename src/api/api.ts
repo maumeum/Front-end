@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import api from '@src/api/axiosInstance';
+import api from '@api/axiosInstance';
 const apiURL = import.meta.env.VITE_API_URL;
 
 // axios.get

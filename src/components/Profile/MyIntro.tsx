@@ -7,9 +7,9 @@ import {
 	FormContainer,
 } from '@components/Profile/myIntro.ts';
 import Swal from 'sweetalert2';
-import { patch } from '@src/api/api';
+import { patch } from '@api/api';
 import useAuthStore from '@src/store/useAuthStore.ts';
-import alertData from '@src/utils/swalObject';
+import alertData from '@utils/swalObject';
 
 function MyIntro() {
 	const { userData, getUserData } = useAuthStore();

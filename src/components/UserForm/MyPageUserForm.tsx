@@ -11,19 +11,19 @@ import {
 	SignUpForm,
 	ButtonContainer,
 } from '@pages/userPage/style';
-import { validEmail, validPhoneNum } from '@src/utils/signUpCheck.ts';
+import { validEmail, validPhoneNum } from '@utils/signUpCheck.ts';
 import {
 	emailError,
 	nicknameError,
 	phoneNumError,
-} from '@src/utils/errorMessage.ts';
+} from '@utils/errorMessage.ts';
 import Swal from 'sweetalert2';
-import InputForm from '@src/components/UserForm/InputForm.tsx';
+import InputForm from '@components/UserForm/InputForm.tsx';
 import LargeButton from '@components/Buttons/LargeButton';
 import Modal from '@components/Modal/Modal.tsx';
 import { useNavigate } from 'react-router-dom';
 import { TabTypes } from '@src/types/myPageConstants';
-import { get, patch } from '@src/api/api';
+import { get, patch } from '@api/api';
 import alertData from '@utils/swalObject';
 import DataType from '@src/types/dataType';
 

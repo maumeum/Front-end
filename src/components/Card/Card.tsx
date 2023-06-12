@@ -14,7 +14,7 @@ import {
 	SelectContainer,
 } from './card.ts';
 import { TabTypes } from '@src/types/myPageConstants.ts';
-import { post, patch } from '@src/api/api.ts';
+import { post, patch } from '@api/api';
 import Swal from 'sweetalert2';
 import defaultImage from '@src/assets/images/volunteer1.jpg';
 import { VolunteerTypes } from '@src/types/myPageConstants.ts';

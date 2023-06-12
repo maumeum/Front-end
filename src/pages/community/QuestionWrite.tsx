@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import WritePage from '../../components/WritePage/WritePage';
-import { post } from '@src/api/api';
-import { getToken } from '@src/api/Token';
+import WritePage from '@components/WritePage/WritePage';
+import { post } from '@api/api';
+import { getToken } from '@api/token';
 import { useNavigate } from 'react-router-dom';
 
 const QuestionWrite = () => {
 	const navigate = useNavigate();
-	const [postData, setPostData] = useState({
+	const [setPostData] = useState({
 		title: '',
 		content: '',
 		postType: 'qna',

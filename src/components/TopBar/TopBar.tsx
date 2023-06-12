@@ -1,4 +1,9 @@
-import { TopBarBox, Title, SubText, TextContainer } from './TopBarstyle';
+import {
+	TopBarBox,
+	Title,
+	SubText,
+	TextContainer,
+} from '@components/TopBar/TopBarstyle';
 
 type TopBarProps = {
 	text: string;

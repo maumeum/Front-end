@@ -8,7 +8,7 @@ import {
 	ButtonContainer,
 	ContentInput,
 	TextLength,
-} from '../WritePage/WritePageStyle';
+} from '@components/WritePage/WritePageStyle';
 
 type WritePageProps = {
 	onSave: (inputTitle: string, textContent: string) => void;
