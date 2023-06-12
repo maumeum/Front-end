@@ -7,8 +7,8 @@ import {
 	FormContainer,
 } from '@components/Profile/myIntro.ts';
 import Swal from 'sweetalert2';
-import { patch } from '@src/api/Api';
-import { getToken } from '@src/api/Token';
+import { patch } from '@api/api';
+import { getToken } from '@api/token';
 import useAuthStore from '@src/store/useAuthStore.ts';
 
 function MyIntro() {

@@ -14,7 +14,7 @@ import {
 } from './card.ts';
 import { TabTypes } from '@src/types/myPageConstants.ts';
 import { post, patch } from '@src/api/Api';
-import { getToken } from '@src/api/Token';
+import { getToken } from '@api/token';
 import Swal from 'sweetalert2';
 import car from '@src/assets/images/car.png';
 import { VolunteerTypes } from '@src/types/myPageConstants.ts';

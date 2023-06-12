@@ -2,11 +2,11 @@ import { useState, useMemo, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { BtnConatiner, TitleInput } from '@components/Modal/modal';
-import { post } from '@src/api/Api';
+import { post } from '@api/api';
 import LargeButton from '@components/Buttons/LargeButton';
 import TopBar from '@components/TopBar/TopBar';
 import Parser from 'html-react-parser';
-import { getToken } from '@src/api/Token';
+import { getToken } from '@api/token';
 
 // 코치님 여기는 코드리뷰 안해주셔도 됩니다!!! 그 react-quill의 그곳입니다
 // 중간에 여기를 모르고 올려버려서 ㅠㅠ,,, 여기 코드도 같이 올라가게 되었는데
