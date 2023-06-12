@@ -8,13 +8,8 @@ import { NumberWriteContainer, PageContainer } from './style.ts';
 import PostList from '@components/PostList/PostList.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { MenuBar } from '@components/MyPage/myPage.ts';
-<<<<<<< HEAD
-import { get } from '@src/api/api';
-import { getToken } from '@src/api/token';
-=======
 import { get } from '@api/api';
 import { getToken } from '@api/token';
->>>>>>> e676406f7123bc3182ec5a4c7f9c9ede0e870e25
 import DataType from '@src/types/dataType.ts';
 
 type PostData = {

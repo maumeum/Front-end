@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const FindFriendWrite = () => {
 	const navigate = useNavigate();
+	const [selectedImage, setSelectedImage] = useState<File[]>([]);
 	const [_, setPostData] = useState({
 		title: '',
 		content: '',
