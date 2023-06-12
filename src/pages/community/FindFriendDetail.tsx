@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { get, del } from '@api/api';
+import { get, del, patch } from '@api/api';
 import { getToken } from '@api/token';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
@@ -19,6 +19,7 @@ import {
 	Contentdiv,
 	Content,
 	BtnDelete,
+	BtnReport,
 } from './style.ts';
 import CommentSection from '@src/components/Comment/Comment.tsx';
 import DataType from '@src/types/dataType.ts';
@@ -47,6 +48,7 @@ const FindFriendDetail = () => {
 			}
 		};
 		fetchPost();
+		window.scrollTo(0, 0);
 	}, []);
 
 	useEffect(() => {
@@ -70,6 +72,15 @@ const FindFriendDetail = () => {
 	const handleEdit = () => {
 		navigate(`/community/edit/${postId}`, {
 			state: { postId },
+		});
+	};
+
+	const handleReport = async () => {
+		const token = getToken();
+		await patch<DataType>(`/api/community/reports/${postId}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
 		});
 	};
 
@@ -111,13 +122,26 @@ const FindFriendDetail = () => {
 						{loginUser && (
 							<BtnDelete onClick={handleDelete}>삭제하기</BtnDelete>
 						)}
+						{!loginUser && (
+							<BtnReport onClick={handleReport}>신고하기</BtnReport>
+						)}
 					</SubContainer>
 				</Header>
 				<Line></Line>
 				<ContentContainer>
-					{hasPostImage && <Image src={images} alt='content-image' />}
+					{hasPostImage && (
+						<div>
+							{images.map((image: any, index: any) => (
+								<Image
+									key={index}
+									src={`http://localhost:5002/${image}`}
+									alt='content-image'
+								/>
+							))}
+						</div>
+					)}
 					<Contentdiv>
-						<Content dangerouslySetInnerHTML={{ __html: content }}></Content>
+						<Content>{content}</Content>
 					</Contentdiv>
 				</ContentContainer>
 			</DetailContainer>
