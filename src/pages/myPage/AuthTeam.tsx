@@ -1,13 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-import {
-	Container,
-	Main,
-	MenuBar,
-	TabMenu,
-} from '@components/MyPage/myPage.ts';
+import { Container, Main, MenuBar } from '@components/MyPage/myPage.ts';
 import Menu from '@components/Menu/Menu.tsx';
 import InputForm from '@components/UserForm/InputForm';
 import TextAreaForm from '@components/UserForm/TextAreaForm';
@@ -19,6 +14,7 @@ import { validPhoneNum } from '@utils/signUpCheck.ts';
 import DataType from '@src/types/dataType';
 import TopBar from '@components/TopBar/TopBar.tsx';
 import { post } from '@api/api';
+import useSummitStore from '@src/store/useSummitStore';
 import {
 	teamNameError,
 	introduceError,
@@ -39,7 +35,13 @@ const AuthTeam = () => {
 	const [phoneNum, setPhoneNum] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
 
+	const { isSubmit, setIsSubmit } = useSummitStore();
 	const navigate = useNavigate();
+
+	//제출 여부 확인
+	useEffect(() => {
+		setIsSubmit();
+	}, []);
 
 	// inputValue 함수
 	const getFormChanger =
@@ -158,7 +160,11 @@ const AuthTeam = () => {
 						onChangeFn={getFormChanger(setLocation)}
 						errorMessage={locationError}
 					/>
-					<LargeButton onClick={clickHandler}>제출하기</LargeButton>
+					<LargeButton
+						onClick={clickHandler}
+						disabled={isSubmit ? true : false}>
+						제출하기
+					</LargeButton>
 				</TeamForm>
 			</Main>
 		</Container>
