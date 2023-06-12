@@ -117,4 +117,5 @@ export const BtnReport = styled.button`
 	width: 13rem;
 	margin-top: 2rem;
 	cursor: pointer;
+	font-size: 2.5rem;
 `;

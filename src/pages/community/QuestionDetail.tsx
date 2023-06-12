@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { get, del } from '@api/api';
+import { get, del, patch } from '@api/api';
 import { getToken } from '@api/token';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
@@ -46,6 +46,7 @@ const QuestionDetail = () => {
 			}
 		};
 		fetchPost();
+		window.scrollTo(0, 0);
 	}, []);
 
 	useEffect(() => {
@@ -90,8 +91,13 @@ const QuestionDetail = () => {
 		return <div>Loading...</div>;
 	}
 
-	const handleReport = () => {
-		console.log('신고하기');
+	const handleReport = async () => {
+		const token = getToken();
+		await patch<DataType>(`/api/community/reports/${postId}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
 	};
 	const { title, createdAt, images, content } = post;
 	const hasPostImage = !!images;
