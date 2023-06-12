@@ -8,7 +8,7 @@ import {
 } from '@components/MyPage/myPage.ts';
 import Tab from '@components/Tab/Tab.tsx';
 import Menu from '@components/Menu/Menu.tsx';
-import { TabTypes } from '@src/utils/EnumTypes';
+import { TabTypes } from '@src/types/myPageConstants';
 import TopBar from '@components/TopBar/TopBar.tsx';
 import LargeButton from '@components/Buttons/LargeButton';
 import {
@@ -61,15 +61,7 @@ function Withdrawal() {
 		}).then(async (result) => {
 			if (result.isConfirmed) {
 				try {
-					await del(
-						'/api/users',
-						{ email: email, password: password },
-						{
-							headers: {
-								Authorization: `Bearer ${getToken()}`,
-							},
-						},
-					);
+					await del('/api/users', { email: email, password: password });
 				} catch (error) {
 					Swal.fire({
 						title: '이메일 혹은 비밀번호를 확인해주세요!',

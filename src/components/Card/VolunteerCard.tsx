@@ -1,4 +1,4 @@
-import { VolunteerType } from '@src/types/CardType';
+import { VolunteerType } from '@src/types/cardType';
 
 import {
 	VolunteerSection,

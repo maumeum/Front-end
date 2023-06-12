@@ -18,8 +18,8 @@ import {
 	Contents,
 	CommentHolder,
 } from './CommentStyle';
-import DataType from '@src/types/DataType';
-import { get, post, patch, del } from '@src/api/Api';
+import DataType from '@src/types/dataType';
+import { get, post, patch, del } from '@src/api/api';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 

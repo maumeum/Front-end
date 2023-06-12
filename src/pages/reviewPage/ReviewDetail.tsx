@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { get, del } from '@src/api/Api';
+import { get, del } from '@src/api/api';
 import { getToken } from '@src/api/Token';
 import Parser from 'html-react-parser';
 import dayjs from 'dayjs';
@@ -22,7 +22,7 @@ import {
 	BtnDelete,
 } from '@src/pages/community/style.ts';
 import CommentSection from '@src/components/Comment/Comment.tsx';
-import DataType from '@src/types/DataType';
+import DataType from '@src/types/dataType';
 
 const ReviewDetail = () => {
 	const navigate = useNavigate();

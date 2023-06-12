@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { get, del } from '@src/api/Api';
+import { get, del } from '@src/api/api';
 import { getToken } from '@src/api/Token';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
@@ -21,7 +21,7 @@ import {
 	BtnDelete,
 } from './style.ts';
 import CommentSection from '@src/components/Comment/Comment.tsx';
-import DataType from '@src/types/DataType.ts';
+import DataType from '@src/types/dataType.ts';
 
 const FindFriendDetail = () => {
 	const navigate = useNavigate();

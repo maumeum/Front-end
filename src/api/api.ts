@@ -1,5 +1,5 @@
-import axios, { AxiosRequestConfig } from 'axios';
-
+import { AxiosRequestConfig } from 'axios';
+import api from '@src/api/axiosInstance';
 const apiURL = import.meta.env.VITE_API_URL;
 
 // axios.get
@@ -9,7 +9,7 @@ export const get = async <T>(
 ): Promise<T> => {
 	const fullURL = apiURL + url;
 	try {
-		const response = await axios.get<T>(fullURL, config);
+		const response = await api.get<T>(fullURL, config);
 		return response.data;
 	} catch (err) {
 		throw new Error('API 요청에 실패했습니다.');
@@ -24,7 +24,7 @@ export const post = async <T>(
 ): Promise<T> => {
 	const fullURL = apiURL + url;
 	try {
-		const response = await axios.post<T>(fullURL, data, config);
+		const response = await api.post<T>(fullURL, data, config);
 		return response.data;
 	} catch (err) {
 		throw new Error('API 요청에 실패했습니다.');
@@ -39,7 +39,7 @@ export const patch = async <T>(
 ): Promise<void> => {
 	const fullURL = apiURL + url;
 	try {
-		await axios.patch<T>(fullURL, data, config);
+		await api.patch<T>(fullURL, data, config);
 	} catch (err) {
 		throw new Error('API 요청에 실패했습니다.');
 	}
@@ -52,7 +52,7 @@ export const del = async <T>(
 ): Promise<void> => {
 	const fullURL = apiURL + url;
 	try {
-		await axios.delete<T>(fullURL, config);
+		await api.delete<T>(fullURL, config);
 	} catch (err) {
 		throw new Error('API 요청에 실패했습니다.');
 	}

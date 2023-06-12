@@ -7,7 +7,7 @@ import {
 } from '@components/MyPage/myPage.ts';
 import Tab from '@components/Tab/Tab.tsx';
 import Menu from '@components/Menu/Menu.tsx';
-import { TabTypes } from '@src/utils/EnumTypes';
+import { TabTypes } from '@src/types/myPageConstants';
 import MyIntro from '@components/Profile/MyIntro.tsx';
 import ProfileImg from '@components/Profile/ProfileImg.tsx';
 

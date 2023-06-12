@@ -11,7 +11,7 @@ import car from '@src/assets/images/car.png';
 import Tab from '@components/Tab/Tab.tsx';
 import Card from '@components/Card/Card.tsx';
 import Menu from '@components/Menu/Menu.tsx';
-import { TabTypes } from '@src/utils/EnumTypes';
+import { TabTypes } from '@src/types/myPageConstants';
 import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType';
@@ -39,11 +39,10 @@ function VolunSuggest() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>('/api/volunteers/registerations', {
-					headers: {
-						Authorization: `Bearer ${getToken()}`,
-					},
-				});
+				const response = await get<DataType>(
+					'/api/volunteers/registerations',
+					{},
+				);
 				setDataList(response.data as ResponseData[]);
 			} catch (error) {
 				Swal.fire({

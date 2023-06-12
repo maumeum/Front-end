@@ -9,29 +9,25 @@ import Tab from '@components/Tab/Tab.tsx';
 import MyPost from '@components/MyPost/MyPost.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import DataType from '@src/types/DataType';
-import { TabTypes } from '@src/utils/EnumTypes';
+import { TabTypes } from '@src/types/myPageConstants';
 import { get } from '@src/api/Api';
 import { getToken } from '@src/api/Token';
 import Swal from 'sweetalert2';
 
-type CommunityProps = {
+interface CommunityProps {
 	title: string;
 	content: string;
 	createdAt: string;
 	_id: string;
 	images: string | null;
 	postType: string;
-};
+}
 
 function MyComment() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>('/api/community/user', {
-					headers: {
-						Authorization: `Bearer ${getToken()}`,
-					},
-				});
+				const response = await get<DataType>('/api/community/user', {});
 
 				setPost(response.data as CommunityProps[]);
 			} catch (error) {
@@ -49,11 +45,7 @@ function MyComment() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get('/api/volunteerComments/users', {
-					headers: {
-						Authorization: `Bearer ${getToken()}`,
-					},
-				});
+				const response = await get('/api/volunteerComments/users', {});
 				setComment(response as CommunityProps[]);
 			} catch (error) {
 				Swal.fire({

@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 
-import { get } from '@api/Api';
+import { get } from '@api/api';
 import {
 	CommunityListType,
 	VolunteerListType,
 	ReviewListType,
-} from '@src/types/CardType';
-import DataType from '@src/types/DataType';
+} from '@src/types/cardType';
+import DataType from '@src/types/dataType';
 import {
 	MainSection,
 	TopSlogan,

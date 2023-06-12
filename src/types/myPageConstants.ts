@@ -1,5 +1,4 @@
 export enum TabTypes {
-	// 열거형 정의
 	MYPAGE = '마이페이지',
 	EDIT_PROFILE = '프로필 사진 수정',
 	EDIT_INTRO = '내 소개 수정',
@@ -10,6 +9,7 @@ export enum TabTypes {
 	COMMENTED_POSTS = '내가 댓글 단 게시글',
 	VOLUNTEER_SUGGEST = '내가 등록한 봉사',
 	WRITTEN_REVIEW = '내가 쓴 리뷰',
+	GROUP_CERTIFICATION = '단체 인증하기',
 	WITHDRAWAL = '회원탈퇴',
 }
 

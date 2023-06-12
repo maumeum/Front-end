@@ -13,10 +13,10 @@ import { getToken } from '@src/api/Token';
 // 이미 한번 올라간 코드라 수습이 안되어서 올리게되었습니다 (혹시 이런경우 어떻게 해야하나요?)
 //이미 stash의 타이밍을 놓쳤을때..@
 
-type MyReviewProps = {
+interface MyReviewProps {
 	closeModal: () => void;
 	id?: string;
-};
+}
 
 export interface EditorContentChanged {
 	html: string;

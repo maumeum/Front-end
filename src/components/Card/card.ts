@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { TabTypes, VolunteerTypes } from '@src/utils/EnumTypes';
+import { TabTypes, VolunteerTypes } from '@src/types/myPageConstants';
 
 interface CardProps {
 	currTab: string;
