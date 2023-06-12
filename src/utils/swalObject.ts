@@ -52,6 +52,11 @@ const alertData = {
 		title: '제목과 내용을 모두 입력해주세요',
 		icon: 'warning' as SweetAlertIcon,
 	},
+	waitTeamCert: {
+		title: '제출이 완료되었습니다.',
+		text: '관리자의 확인 후 승인 여부가 2~3일 내에 메일로 발송됩니다.',
+		confirmButtonColor: 'var(--button--color)',
+	},
 };
 
 export default alertData;

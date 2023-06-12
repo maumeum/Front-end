@@ -34,4 +34,5 @@ export const SubText = styled.p`
 	font-size: 1.6rem;
 	color: #666666;
 	margin-top: -2rem;
+	margin-bottom: 2rem;
 `;
