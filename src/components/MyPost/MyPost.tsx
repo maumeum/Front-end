@@ -56,18 +56,18 @@ function MyPost({ currTab, communityData, onRemovePost }: PostProps) {
 		if (currTab === TabTypes.WRITTEN_REVIEW) {
 			try {
 				await del(`/api/review/users/${_id}`, {});
-				Swal.fire(alertData.removeMessage('리뷰'));
+				Swal.fire(alertData.successMessage('리뷰가 삭제되었습니다.'));
 				onRemovePost(communityData._id);
 			} catch (error) {
-				Swal.fire(alertData.failMessage('리뷰 삭제'));
+				Swal.fire(alertData.errorMessage('리뷰 삭제에 실패했습니다.'));
 			}
 		} else if (currTab === TabTypes.WRITTEN_POSTS) {
 			try {
 				await del(`/api/community/${_id}`, {});
 				onRemovePost(communityData._id);
-				Swal.fire(alertData.removeMessage('게시글'));
+				Swal.fire(alertData.successMessage('게시글이 삭제되었습니다.'));
 			} catch (error) {
-				Swal.fire(alertData.failMessage('게시글 삭제'));
+				Swal.fire(alertData.errorMessage('게시글 삭제에 실패했습니다.'));
 			}
 		}
 	};

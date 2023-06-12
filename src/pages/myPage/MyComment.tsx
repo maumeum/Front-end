@@ -13,6 +13,7 @@ import { TabTypes } from '@src/types/myPageConstants';
 import { get } from '@src/api/api';
 import Swal from 'sweetalert2';
 import alertData from '@src/utils/swalObject';
+import { Link } from 'react-router-dom';
 
 interface CommunityProps {
 	title: string;
@@ -90,12 +91,17 @@ function MyComment() {
 					{selecteddata.length === 0 && <p>나의 활동내역이 없습니다</p>}
 					{selecteddata.map((data) => {
 						return (
-							<MyPost
-								key={data._id}
-								currTab={currTab}
-								communityData={data}
-								onRemovePost={removePost}
-							/>
+							<Link
+								to={`/community/${data._id}`}
+								key={`commenutyLink${data._id}`}
+								style={{ textDecoration: 'none' }}>
+								<MyPost
+									key={data._id}
+									currTab={currTab}
+									communityData={data}
+									onRemovePost={removePost}
+								/>
+							</Link>
 						);
 					})}
 				</Main>

@@ -7,6 +7,7 @@ import {
 	CardBox,
 } from '@components/MyPage/myPage.ts';
 import car from '@src/assets/images/car.png';
+import MyReview from '@src/components/MyPost/MyReview';
 
 import Tab from '@components/Tab/Tab.tsx';
 import Card from '@components/Card/Card.tsx';
@@ -16,7 +17,6 @@ import { get } from '@src/api/api';
 import DataType from '@src/types/dataType';
 import Swal from 'sweetalert2';
 import alertData from '@src/utils/swalObject';
-import MyReview from '@components/MyPost/MyReview.tsx';
 
 interface ResponseData {
 	_id: string;
@@ -39,6 +39,12 @@ interface ResponseData {
 function VolunSuggest() {
 	const [suggestVolunList, setSuggestVolunList] = useState<ResponseData[]>([]);
 	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
+	const currTab = tabs[0];
+	// const [isOpen, setIsOpen] = useState(false);
+	// const toggleModal = (onoff: boolean) => () => {
+	// 	setIsOpen(onoff);
+	// };
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -87,10 +93,10 @@ function VolunSuggest() {
 							<div>내가 등록한 봉사 내역이 없습니다.</div>
 						)}
 						{transformData.map((data) => (
-							<Card key={data.volunteer_id._id} data={data} />
+							<Card key={data.volunteer_id._id} data={data} currTab={currTab} />
 						))}
 					</CardBox>
-					<MyReview />
+					{/* <MyReview closeModal={toggleModal(false)} /> */}
 				</Main>
 			</Container>
 		</>

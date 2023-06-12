@@ -77,11 +77,6 @@ function Withdrawal() {
 				</TabMenu>
 				<WithdrawalContainer>
 					<WithdrawalSection>
-						<TopBar
-							title='회원탈퇴'
-							text='계정을 삭제하시려면 아래 정보를 입력하세요'
-							modal={'modal'}
-						/>
 						<SignUpForm>
 							<InputForm
 								submit={submit}

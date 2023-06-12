@@ -55,6 +55,12 @@ function truncateCentName(name: string) {
 	}
 }
 
+function splitStatusName(statusName: string) {
+	return statusName.length === 4
+		? `${statusName.slice(0, 2)}<br />${statusName.slice(2)}`
+		: statusName;
+}
+
 function Card({ currTab, data }: CardProps) {
 	const { _id, title, centName, statusName, images, startDate, endDate } =
 		data.volunteer_id;
@@ -130,7 +136,11 @@ function Card({ currTab, data }: CardProps) {
 				<ImgBox>
 					<img src={car} alt='유저프로필' />
 					<Badge currTab={currTab} statusName={selectedStatus}>
-						<p>{statusName}</p>
+						<p
+							dangerouslySetInnerHTML={{
+								__html: splitStatusName(selectedStatus),
+							}}
+						/>
 					</Badge>
 				</ImgBox>
 				<ContentBox>
