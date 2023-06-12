@@ -31,7 +31,7 @@ export interface CardProps {
 			centName: string;
 			statusName: string;
 			deadline: string;
-			images: string[];
+			images: string;
 		};
 	};
 	currTab?: string;
@@ -60,7 +60,7 @@ function splitStatusName(statusName: string) {
 		? `${statusName.slice(0, 2)}<br />${statusName.slice(2)}`
 		: statusName;
 }
-
+const url = import.meta.env.VITE_API_URL;
 function Card({ currTab, data }: CardProps) {
 	const { _id, title, centName, statusName, images, startDate, endDate } =
 		data.volunteer_id;
@@ -134,7 +134,7 @@ function Card({ currTab, data }: CardProps) {
 		<>
 			<CardContainer currTab={currTab} statusName={statusName}>
 				<ImgBox>
-					<img src={car} alt='유저프로필' />
+					<img src={`${url}/${images}`} alt='유저프로필' />
 					<Badge currTab={currTab} statusName={selectedStatus}>
 						<p
 							dangerouslySetInnerHTML={{
@@ -152,7 +152,7 @@ function Card({ currTab, data }: CardProps) {
 					</VolunInfo>
 					{/* 컴포넌트 분리 시급... */}
 					<UserInfo>
-						<img src={car} alt='작성자 프로필사진' />
+						<img src={`${url}/${images}`} alt='작성자 프로필사진' />
 						<p>{truncateCentName(centName)}</p>
 						{currTab === TabTypes.VOLUNTEER_COMPLETED &&
 							statusName !== VolunteerTypes.DISCONTINUE && (

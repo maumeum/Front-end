@@ -27,7 +27,7 @@ interface ResponseData {
 	deadline: string;
 	startDate: string;
 	endDate: string;
-	image: string;
+	images: string;
 	register_user_id: {
 		nickname: string;
 		image: string;
@@ -62,6 +62,7 @@ function VolunSuggest() {
 
 	const transformData = suggestVolunList.map((data) => {
 		//Card 컴포넌트 형식에 맞게 데이터형태 변환
+
 		return {
 			createdAt: data.createdAt,
 			volunteer_id: {
@@ -72,7 +73,7 @@ function VolunSuggest() {
 				centName: data.centName,
 				statusName: data.statusName,
 				deadline: data.deadline,
-				images: [car],
+				images: data.images,
 			},
 		};
 	});
