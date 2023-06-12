@@ -25,7 +25,6 @@ const colors = {
 };
 
 const radius = {
-	// em 또는 rem으로 변경?
 	s1: '4px',
 	s2: '8px',
 	s3: '12px',
