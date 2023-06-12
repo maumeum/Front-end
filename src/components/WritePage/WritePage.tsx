@@ -8,36 +8,20 @@ import {
 	ButtonContainer,
 	ContentInput,
 	TextLength,
-	ImageArea,
 } from '../WritePage/WritePageStyle';
 
 type WritePageProps = {
-	onSave: (
-		inputTitle: string,
-		textContent: string,
-		selectedImage: File[],
-	) => void;
+	onSave: (inputTitle: string, textContent: string) => void;
 	onCancel: () => void;
 };
 
 const WritePage = ({ onSave, onCancel }: WritePageProps) => {
 	const [content, setContent] = useState('');
 	const [inputTitle, setInputTitle] = useState('');
-	const [selectedImage, setSelectedImage] = useState<File[]>([]);
 
 	const onClickHandler = () => {
-		onSave(inputTitle, content, selectedImage);
+		onSave(inputTitle, content);
 		clearContent();
-	};
-
-	const handelImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const chosenFiles = e.target.files;
-		if (chosenFiles) {
-			setSelectedImage((prevFiles) => [
-				...prevFiles,
-				...Array.from(chosenFiles),
-			]);
-		}
 	};
 
 	const handelInputContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -80,17 +64,6 @@ const WritePage = ({ onSave, onCancel }: WritePageProps) => {
 				</TextContainer>
 				<TextLength>{content.length}/2000</TextLength>
 
-				<ImageArea>
-					이미지업로드
-					<input
-						id='fileInput'
-						type='file'
-						accept='image/*'
-						name='image'
-						multiple
-						onChange={handelImageChange}
-					/>
-				</ImageArea>
 				<ButtonContainer>
 					<CancelButton onClick={deleteContent}>취소</CancelButton>
 					<SubmitButton onClick={onClickHandler}>등록</SubmitButton>

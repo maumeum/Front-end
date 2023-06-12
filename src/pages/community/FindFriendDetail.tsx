@@ -19,6 +19,7 @@ import {
 	Contentdiv,
 	Content,
 	BtnDelete,
+	BtnReport,
 } from './style.ts';
 import CommentSection from '@src/components/Comment/Comment.tsx';
 import DataType from '@src/types/dataType.ts';
@@ -73,6 +74,9 @@ const FindFriendDetail = () => {
 		});
 	};
 
+	const handleReport = () => {
+		console.log('신고하기');
+	};
 	const handleDelete = async () => {
 		try {
 			const token = getToken();
@@ -111,13 +115,26 @@ const FindFriendDetail = () => {
 						{loginUser && (
 							<BtnDelete onClick={handleDelete}>삭제하기</BtnDelete>
 						)}
+						{!loginUser && (
+							<BtnReport onClick={handleReport}>신고하기</BtnReport>
+						)}
 					</SubContainer>
 				</Header>
 				<Line></Line>
 				<ContentContainer>
-					{hasPostImage && <Image src={images} alt='content-image' />}
+					{hasPostImage && (
+						<div>
+							{images.map((image: any, index: any) => (
+								<Image
+									key={index}
+									src={`http://localhost:5002/${image}`}
+									alt='content-image'
+								/>
+							))}
+						</div>
+					)}
 					<Contentdiv>
-						<Content dangerouslySetInnerHTML={{ __html: content }}></Content>
+						<Content>{content}</Content>
 					</Contentdiv>
 				</ContentContainer>
 			</DetailContainer>

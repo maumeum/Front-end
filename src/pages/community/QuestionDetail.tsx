@@ -18,6 +18,7 @@ import {
 	Image,
 	Contentdiv,
 	Content,
+	BtnReport,
 } from './style.ts';
 import CommentSection from '@src/components/Comment/Comment.tsx';
 import DataType from '@src/types/dataType.ts';
@@ -30,41 +31,45 @@ const QuestionDetail = () => {
 	const [loginUser, setLoginUser] = useState(false);
 
 	useEffect(() => {
+		const fetchPost = async () => {
+			try {
+				const token = getToken();
+				const response = await get<DataType>(`/api/community/${postId}`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				});
+				setPost(response.data.post.post);
+				setDataUser(response.data.post);
+			} catch (error) {
+				console.error('Error fetching post:', error);
+			}
+		};
 		fetchPost();
+	}, []);
+
+	useEffect(() => {
+		const loginUserLogic = async () => {
+			try {
+				const token = getToken();
+				const response = await get<DataType>(`/api/community/check/${postId}`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				});
+				setLoginUser(response.data);
+				console.log(response);
+			} catch (error) {
+				console.error('Error fetching post:', error);
+			}
+		};
 		loginUserLogic();
 	}, []);
 
-	const fetchPost = async () => {
-		try {
-			const token = getToken();
-			const response = await get<DataType>(`/api/community/${postId}`, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
-			setPost(response.data.post.post);
-			setDataUser(response.data.post);
-		} catch (error) {
-			console.error('Error fetching post:', error);
-		}
-	};
-	const loginUserLogic = async () => {
-		try {
-			const token = getToken();
-			const response = await get<DataType>(`/api/community/check/${postId}`, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
-			setLoginUser(response.data);
-			console.log(response);
-		} catch (error) {
-			console.error('Error fetching post:', error);
-		}
-	};
-
 	const handleEdit = () => {
-		navigate(`/community/question/edit/${postId}`);
+		navigate(`/community/question/edit/${postId}`, {
+			state: { postId },
+		});
 	};
 
 	const handleDelete = async () => {
@@ -85,6 +90,9 @@ const QuestionDetail = () => {
 		return <div>Loading...</div>;
 	}
 
+	const handleReport = () => {
+		console.log('신고하기');
+	};
 	const { title, createdAt, images, content } = post;
 	const hasPostImage = !!images;
 	const formattedDate = dayjs(createdAt)
@@ -103,11 +111,24 @@ const QuestionDetail = () => {
 						</InfoBox>
 						{loginUser && <Btn onClick={handleEdit}>수정하기</Btn>}
 						{loginUser && <Btn onClick={handleDelete}>삭제하기</Btn>}
+						{!loginUser && (
+							<BtnReport onClick={handleReport}>신고하기</BtnReport>
+						)}
 					</SubContainer>
 				</Header>
 				<Line></Line>
 				<ContentContainer>
-					{hasPostImage && <Image src={images} alt='content-image' />}
+					{hasPostImage && (
+						<div>
+							{images.map((image: any, index: any) => (
+								<Image
+									key={index}
+									src={`http://localhost:5002/${image}`}
+									alt='content-image'
+								/>
+							))}
+						</div>
+					)}
 					<Contentdiv>
 						<Content>{content}</Content>
 					</Contentdiv>

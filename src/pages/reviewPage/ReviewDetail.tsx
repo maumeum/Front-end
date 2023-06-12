@@ -19,6 +19,7 @@ import {
 	Contentdiv,
 	Content,
 	BtnDelete,
+	BtnReport,
 } from '@src/pages/community/style';
 import CommentSection from '@src/components/Comment/Comment';
 import DataType from '@src/types/dataType';
@@ -70,6 +71,10 @@ const ReviewDetail = () => {
 		}
 	};
 
+	const handleReport = () => {
+		console.log('신고하기');
+	};
+
 	const { title, createdAt, images, content } = post;
 	const hasPostImage = !!images;
 
@@ -91,6 +96,9 @@ const ReviewDetail = () => {
 						{loginUser && <Btn onClick={handleEdit}>수정하기</Btn>}
 						{loginUser && (
 							<BtnDelete onClick={handleDelete}>삭제하기</BtnDelete>
+						)}
+						{!loginUser && (
+							<BtnReport onClick={handleReport}>신고하기</BtnReport>
 						)}
 					</SubContainer>
 				</Header>

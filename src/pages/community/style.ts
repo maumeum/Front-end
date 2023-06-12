@@ -81,3 +81,40 @@ export const Content = styled.div`
 	font-size: 2.4rem;
 	line-height: 5rem;
 `;
+export const Container = styled.div`
+	display: block;
+	position: relative;
+	width: 112rem;
+	margin: 0 auto;
+`;
+export const ImageArea = styled.label`
+	display: inline-block;
+	padding: 8px 16px;
+	text-align: center;
+	background-color: var(--color--footer);
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	width: 20rem;
+	font-size: 2rem;
+	position: absolute;
+	top: 90%;
+
+	input {
+		opacity: 0;
+		position: absolute;
+		top: 0;
+		left: 0;
+		cursor: pointer;
+	}
+`;
+export const BtnReport = styled.button`
+	background-color: #f87474;
+	border-radius: 3.3rem;
+	border: none;
+	height: 6.6rem;
+	width: 13rem;
+	margin-top: 2rem;
+	cursor: pointer;
+`;
