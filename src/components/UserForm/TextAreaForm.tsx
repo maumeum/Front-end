@@ -4,7 +4,7 @@ import { InputErrorType } from '@src/types/errorType.ts';
 import InputContainerProps from '@src/types/inputType.ts';
 
 const TextAreaForm = ({
-	isMyPage,
+	canModify,
 	submit,
 	placeholder,
 	value,
@@ -32,7 +32,7 @@ const TextAreaForm = ({
 	return (
 		<>
 			<DataText
-				readOnly={isMyPage ? true : false}
+				readOnly={canModify ? true : false}
 				placeholder={placeholder}
 				className={submit ? 'submit' : ''}
 				onChange={onChangeFn}

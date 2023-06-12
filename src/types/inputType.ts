@@ -1,5 +1,5 @@
 interface InputContainerProps {
-	isMyPage?: boolean | string;
+	canModify?: boolean;
 	submit: boolean;
 	dataName?: string;
 	inputType?: string;

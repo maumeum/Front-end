@@ -6,16 +6,17 @@ import {
 	TabMenu,
 	CardBox,
 } from '@components/MyPage/myPage.ts';
-import car from '@src/assets/images/car.png';
+
+// import MyReview from '@src/components/MyPost/MyReview';
 
 import Tab from '@components/Tab/Tab.tsx';
 import Card from '@components/Card/Card.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/types/myPageConstants';
-import { get } from '@src/api/Api';
-import { getToken } from '@src/api/Token';
-import DataType from '@src/types/DataType';
+import { get } from '@src/api/api';
+import DataType from '@src/types/dataType';
 import Swal from 'sweetalert2';
+import alertData from '@src/utils/swalObject';
 
 interface ResponseData {
 	_id: string;
@@ -26,7 +27,7 @@ interface ResponseData {
 	deadline: string;
 	startDate: string;
 	endDate: string;
-	image: string;
+	images: string[];
 	register_user_id: {
 		nickname: string;
 		image: string;
@@ -36,30 +37,31 @@ interface ResponseData {
 }
 
 function VolunSuggest() {
+	const [suggestVolunList, setSuggestVolunList] = useState<ResponseData[]>([]);
+	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
+	const currTab = tabs[0];
+	// const [isOpen, setIsOpen] = useState(false);
+	// const toggleModal = (onoff: boolean) => () => {
+	// 	setIsOpen(onoff);
+	// };
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await get<DataType>(
+				const getSuggestedData = await get<DataType>(
 					'/api/volunteers/registerations',
 					{},
 				);
-				setDataList(response.data as ResponseData[]);
+				setSuggestVolunList(getSuggestedData.data as ResponseData[]);
+				console.log(suggestVolunList);
 			} catch (error) {
-				Swal.fire({
-					title: '데이터를 불러오는데 실패하였습니다.',
-					icon: 'error',
-					confirmButtonColor: 'var(--button--color)',
-				});
+				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
 			}
 		};
 		fetchData();
 	}, []);
 
-	const [dataList, setDataList] = useState<ResponseData[]>([]);
-	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
-	const [currTab] = useState<TabTypes>(TabTypes.VOLUNTEER_SUGGEST);
-
-	const transformData = dataList.map((data) => {
+	const transformData = suggestVolunList.map((data) => {
 		//Card 컴포넌트 형식에 맞게 데이터형태 변환
 		return {
 			createdAt: data.createdAt,
@@ -71,7 +73,7 @@ function VolunSuggest() {
 				centName: data.centName,
 				statusName: data.statusName,
 				deadline: data.deadline,
-				images: [car],
+				images: data.images,
 			},
 		};
 	});
@@ -85,16 +87,17 @@ function VolunSuggest() {
 
 				<Main>
 					<TabMenu>
-						<Tab currTab={currTab} tabs={tabs} />
+						<Tab tabs={tabs} />
 					</TabMenu>
 					<CardBox>
-						{dataList.length === 0 && (
-							<div>내가 등록한 봉사 내역이 없습니다.</div>
+						{suggestVolunList.length === 0 && (
+							<h2>내가 등록한 봉사 내역이 없습니다.</h2>
 						)}
 						{transformData.map((data) => (
 							<Card key={data.volunteer_id._id} data={data} currTab={currTab} />
 						))}
 					</CardBox>
+					{/* <MyReview closeModal={toggleModal(false)} /> */}
 				</Main>
 			</Container>
 		</>

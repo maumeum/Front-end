@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Modal from '@components/Modal/Modal.tsx';
 import Selector from '@components/Selector/Selector.tsx';
 import { SmallButton } from '@components/Buttons/SmallButton.ts';
+import dayjs from 'dayjs';
 import {
 	CardContainer,
 	ImgBox,
@@ -13,10 +14,9 @@ import {
 	SelectContainer,
 } from './card.ts';
 import { TabTypes } from '@src/types/myPageConstants.ts';
-import { post, patch } from '@src/api/Api';
-import { getToken } from '@src/api/Token';
+import { post, patch } from '@src/api/api.ts';
 import Swal from 'sweetalert2';
-import car from '@src/assets/images/car.png';
+import defaultImage from '@src/assets/images/volunteer1.jpg';
 import { VolunteerTypes } from '@src/types/myPageConstants.ts';
 
 export interface CardProps {
@@ -34,14 +34,14 @@ export interface CardProps {
 			images: string[];
 		};
 	};
-	currTab: string;
+	currTab?: string;
 }
 
 function truncateDate(date: string) {
 	if (!date) {
 		return '';
 	}
-	return date.split('T')[0];
+	return dayjs(date).format('YYYY-MM-DD');
 }
 
 function truncateCentName(name: string) {
@@ -55,19 +55,23 @@ function truncateCentName(name: string) {
 	}
 }
 
+function splitStatusName(statusName: string) {
+	return statusName.length === 4
+		? `${statusName.slice(0, 2)}<br />${statusName.slice(2)}`
+		: statusName;
+}
+const url = import.meta.env.VITE_API_URL;
+
 function Card({ currTab, data }: CardProps) {
 	const { _id, title, centName, statusName, images, startDate, endDate } =
 		data.volunteer_id;
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedStatus, setSelectedStatus] = useState<string>(statusName);
 
-	const openModal = () => {
-		setIsOpen(true);
+	const toggleModal = (onoff: boolean) => () => {
+		setIsOpen(onoff);
 	};
 
-	const closeModal = () => {
-		setIsOpen(false);
-	};
 	const handleRecruitmentStatusChange = async (selectedValue: string) => {
 		const result = await Swal.fire({
 			title: '봉사활동 상태를 변경하시겠습니까??',
@@ -131,9 +135,17 @@ function Card({ currTab, data }: CardProps) {
 		<>
 			<CardContainer currTab={currTab} statusName={statusName}>
 				<ImgBox>
-					<img src={car} alt='유저프로필' />
+					{images.length > 0 ? (
+						<img src={`${url}/${images[0]}`} alt='게시글 대표이미지' />
+					) : (
+						<img src={defaultImage} alt='게시글 기본이미지'></img>
+					)}
 					<Badge currTab={currTab} statusName={selectedStatus}>
-						<p>{statusName}</p>
+						<p
+							dangerouslySetInnerHTML={{
+								__html: splitStatusName(selectedStatus),
+							}}
+						/>
 					</Badge>
 				</ImgBox>
 				<ContentBox>
@@ -145,12 +157,14 @@ function Card({ currTab, data }: CardProps) {
 					</VolunInfo>
 					{/* 컴포넌트 분리 시급... */}
 					<UserInfo>
-						<img src={car} alt='작성자 프로필사진' />
+						<img src={`${url}/${images[0]}`} alt='작성자 프로필사진' />
 						<p>{truncateCentName(centName)}</p>
 						{currTab === TabTypes.VOLUNTEER_COMPLETED &&
 							statusName !== VolunteerTypes.DISCONTINUE && (
 								<ButtonContainer>
-									<SmallButton onClick={openModal}>리뷰작성</SmallButton>
+									<SmallButton onClick={toggleModal(true)}>
+										리뷰작성
+									</SmallButton>
 								</ButtonContainer>
 							)}
 						{currTab === TabTypes.VOLUNTEER_SUGGEST && (
@@ -166,7 +180,7 @@ function Card({ currTab, data }: CardProps) {
 								<SmallButton onClick={handleParticipated}>참여완료</SmallButton>
 							</ButtonContainer>
 						)}
-						<Modal isOpen={isOpen} closeModal={closeModal} id={_id} />
+						<Modal isOpen={isOpen} closeModal={toggleModal(false)} id={_id} />
 					</UserInfo>
 				</ContentBox>
 			</CardContainer>

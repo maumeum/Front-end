@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 
-import { get } from '@api/api';
+import { get } from '@src/api/api';
 import {
 	CommunityListType,
 	VolunteerListType,
@@ -33,6 +34,7 @@ const Main = () => {
 	const [reviewList, setReviewList] = useState<ReviewListType>([]);
 	const [communityList, setCommunityList] = useState<CommunityListType>([]);
 	const [volunteerList, setVolunteerList] = useState<VolunteerListType>([]);
+	const navigate = useNavigate();
 
 	// 리뷰 데이터 불러오기
 	useEffect(() => {
@@ -72,7 +74,11 @@ const Main = () => {
 				<ReviewContainer>
 					{reviewList &&
 						reviewList.map((item, index) => (
-							<ReviewCard reviewData={{ ...item, index }} key={item._id} />
+							<ReviewCard
+								reviewData={{ ...item, index }}
+								key={item._id}
+								onClick={() => navigate(`/review/${item._id}`)}
+							/>
 						))}
 				</ReviewContainer>
 				<IntroducePage>
@@ -111,7 +117,13 @@ const Main = () => {
 						.sort(() => Math.random() - 0.5)
 						.slice(0, 6)
 						.map((item) => (
-							<CommunityCard key={item._id} communityData={item} />
+							<CommunityCard
+								key={item._id}
+								communityData={item}
+								onClick={() => {
+									navigate(`/community/${item._id}`);
+								}}
+							/>
 						))}
 			</CommunityContainer>
 		</MainSection>

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
 	display: flex;
@@ -35,7 +35,7 @@ export const CardBox = styled.div`
 
 // my-page 버튼
 
-export const ButtonContainer = styled(NavLink)`
+export const ButtonContainer = styled(Link)`
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -50,5 +50,10 @@ export const ButtonContainer = styled(NavLink)`
 
 export const ButtonWord = styled.p`
 	margin: 0;
+	color: black;
+`;
+
+export const StyledLink = styled(Link)`
+	text-decoration: none;
 	color: black;
 `;

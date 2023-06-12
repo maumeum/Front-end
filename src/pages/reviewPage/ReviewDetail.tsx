@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { get, del } from '@src/api/api';
-import { getToken } from '@src/api/Token';
+import { getToken } from '@src/api/token';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import {
@@ -70,7 +70,7 @@ const ReviewDetail = () => {
 		}
 	};
 
-	const { title, _id, createdAt, images, content } = post;
+	const { title, createdAt, images, content } = post;
 	const hasPostImage = !!images;
 
 	const formattedDate = dayjs(createdAt)

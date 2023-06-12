@@ -12,10 +12,12 @@ import imgData from '@assets/images/volunteer2.jpg';
 
 interface ReviewCardProps {
 	reviewData: ReviewType;
+	onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
-const ReviewCard = ({ reviewData }: ReviewCardProps) => {
+const ReviewCard = ({ reviewData, onClick }: ReviewCardProps) => {
 	const key = reviewData.index;
+	const reviewImg = `http://localhost:5002/${reviewData.images[0]}`;
 
 	//Content 미리보기 함수
 	const previewContent = (reviewData: ReviewType) => {
@@ -37,9 +39,9 @@ const ReviewCard = ({ reviewData }: ReviewCardProps) => {
 	};
 
 	return (
-		<ReviewSection className={colorClass(key)}>
+		<ReviewSection className={colorClass(key)} onClick={onClick}>
 			<ImageContainer>
-				<ReviewImage src={imgData} />
+				<ReviewImage src={reviewImg.length !== 0 ? reviewImg : imgData} />
 			</ImageContainer>
 			<ReviewContainer>
 				<Nickname className={colorClass(key)}>

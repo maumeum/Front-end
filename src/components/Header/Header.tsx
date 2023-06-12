@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getToken, deleteToken } from '@src/api/Token';
+import { getToken, deleteToken } from '@api/token';
 import MyPageButton from '../MyPage/MyPageButton';
 import {
 	HeaderSection,

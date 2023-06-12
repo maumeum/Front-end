@@ -48,6 +48,38 @@ const alertData = {
 		confirmButtonText: '예',
 		cancelButtonText: '아니오',
 	},
+	confirmMessge: {
+		title: '확인되었습니다',
+		icon: 'success' as SweetAlertIcon,
+		confirmButtonColor: 'var(--button--color)',
+	},
+	successMessage: (title: string) => ({
+		title: `${title}`,
+		icon: 'success' as SweetAlertIcon,
+		confirmButtonText: '확인',
+		confirmButtonColor: 'var(--button--color)',
+	}),
+	errorMessage: (title: string) => ({
+		title: `${title}`,
+		icon: 'error' as SweetAlertIcon,
+		confirmButtonText: '확인',
+		confirmButtonColor: 'var(--button--color)',
+	}),
+	infoMessage: (title: string) => ({
+		title: `${title}`,
+		icon: 'info' as SweetAlertIcon,
+		confirmButtonText: '확인',
+		confirmButtonColor: 'var(--button--color)',
+	}),
+	doubleCheckMessage: (title: string) => ({
+		title: `${title}`,
+		icon: 'info' as SweetAlertIcon,
+		showCancelButton: true,
+		confirmButtonColor: '#ffd4d4',
+		cancelButtonColor: '#afcd81',
+		confirmButtonText: '네',
+		cancelButtonText: '아니요',
+	}),
 	fillTitleContent: {
 		title: '제목과 내용을 모두 입력해주세요',
 		icon: 'warning' as SweetAlertIcon,

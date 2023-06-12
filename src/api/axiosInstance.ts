@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { getToken } from '@src/api/Token'; // 토큰 관련 함수를 가져옵니다.
+import { getToken } from '@api/token'; // 토큰 관련 함수를 가져옵니다.
 
 const apiURL = import.meta.env.VITE_API_URL;
 const api: AxiosInstance = axios.create({

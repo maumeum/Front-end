@@ -9,7 +9,6 @@ import {
 import Tab from '@components/Tab/Tab.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/types/myPageConstants';
-import TopBar from '@components/TopBar/TopBar.tsx';
 import LargeButton from '@components/Buttons/LargeButton';
 import {
 	SignUpForm,
@@ -20,14 +19,14 @@ import { validEmail, validPassword } from '@src/utils/signUpCheck.ts';
 import { emailError, passwordError } from '@src/utils/errorMessage.ts';
 import InputForm from '@src/components/UserForm/InputForm.tsx';
 import Swal from 'sweetalert2';
-import { del } from '@src/api/Api';
-import { getToken, deleteToken } from '@src/api/Token';
+import { del } from '@src/api/api';
+import { deleteToken } from '@src/api/Token';
+import alertData from '@src/utils/swalObject';
 
 function Withdrawal() {
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
-	const [currTab] = useState<TabTypes>(TabTypes.WITHDRAWAL);
 	const tabs = [TabTypes.WITHDRAWAL];
 	const navigate = useNavigate();
 
@@ -39,49 +38,34 @@ function Withdrawal() {
 			setter(e.target.value);
 		};
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		if (email === '' || password === '') {
-			Swal.fire({
-				title: '이메일 또는 비밀번호를 확인해주세요',
-				icon: 'error',
-				confirmButtonText: '확인',
-				confirmButtonColor: '#afcd81',
-			});
+			Swal.fire(alertData.infoMessage('이메일 또는 비밀번호를 확인해주세요.'));
 			return;
 		}
 		setSubmit(true);
-		Swal.fire({
-			title: '정말 탈퇴하시겠습니까?',
-			icon: 'info',
-			showCancelButton: true,
-			confirmButtonColor: '#ffd4d4',
-			cancelButtonColor: '#afcd81',
-			confirmButtonText: '네',
-			cancelButtonText: '아니요',
-		}).then(async (result) => {
-			if (result.isConfirmed) {
-				try {
-					await del('/api/users', { email: email, password: password });
-				} catch (error) {
-					Swal.fire({
-						title: '이메일 혹은 비밀번호를 확인해주세요!',
-						icon: 'info',
-						confirmButtonColor: 'var(--button--color)',
-					});
-					return;
-				}
+		const result = await Swal.fire(
+			alertData.doubleCheckMessage('정말 탈퇴하시겠습니까?'),
+		);
 
-				deleteToken();
-				navigate('/');
-
+		if (result.isConfirmed) {
+			try {
+				await del('/api/users', { data: { email: email, password: password } });
+			} catch (error) {
+				console.log(error);
 				Swal.fire(
-					'탈퇴되었습니다.',
-					'다음에 다시 만날 날을 기대합니다!👋🏻',
-					'success',
+					alertData.infoMessage('이메일 또는 비밀번호를 확인해주세요.'),
 				);
+				return;
 			}
-		});
+			deleteToken();
+			navigate('/');
+			Swal.fire(
+				alertData.successMessage('다음에 다시 만날 날을 기대합니다!👋🏻'),
+			);
+		}
 	};
+
 	return (
 		<Container>
 			<MenuBar>
@@ -89,15 +73,10 @@ function Withdrawal() {
 			</MenuBar>
 			<Main>
 				<TabMenu>
-					<Tab currTab={currTab} tabs={tabs} />
+					<Tab tabs={tabs} />
 				</TabMenu>
 				<WithdrawalContainer>
 					<WithdrawalSection>
-						<TopBar
-							title='회원탈퇴'
-							text='계정을 삭제하시려면 아래 정보를 입력하세요'
-							modal={'modal'}
-						/>
 						<SignUpForm>
 							<InputForm
 								submit={submit}

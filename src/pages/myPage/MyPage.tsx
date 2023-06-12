@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
 	Container,
 	Main,
@@ -11,7 +10,6 @@ import { TabTypes } from '@src/types/myPageConstants';
 import MyPageUserForm from '@components/UserForm/MyPageUserForm';
 
 function MyPage() {
-	const [currTab] = useState<TabTypes>(TabTypes.MYPAGE);
 	const tabs = [TabTypes.MYPAGE];
 
 	return (
@@ -21,7 +19,7 @@ function MyPage() {
 			</MenuBar>
 			<Main>
 				<TabMenu>
-					<Tab currTab={currTab} tabs={tabs} />
+					<Tab tabs={tabs} />
 				</TabMenu>
 				<MyPageUserForm pageType={TabTypes.MYPAGE} />
 			</Main>

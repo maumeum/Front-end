@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 import { post } from '@api/api';
-import { setToken } from '@api/Token';
+import { setToken } from '@api/token';
 import DataType from '@src/types/dataType';
 import {
 	LoginSection,

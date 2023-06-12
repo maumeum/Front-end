@@ -9,7 +9,7 @@ import PostList from '@components/PostList/PostList.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { MenuBar } from '@components/MyPage/myPage.ts';
 import { get } from '@src/api/api';
-import { getToken } from '@src/api/Token';
+import { getToken } from '@src/api/token';
 import DataType from '@src/types/dataType.ts';
 
 type PostData = {

@@ -8,13 +8,13 @@ import {
 	EmailData,
 	EmailButton,
 } from '@pages/userPage/style';
-import { post } from '@api/api';
+import { post } from '@src/api/api';
 import alertData from '@utils/swalObject';
 import { InputErrorType } from '@src/types/errorType';
 import InputContainerProps from '@src/types/inputType';
 
 const InputForm = ({
-	isMyPage,
+	canModify,
 	submit,
 	dataName,
 	inputType,
@@ -69,7 +69,7 @@ const InputForm = ({
 				<>
 					{dataName && <DataName>{dataName}</DataName>}
 					<DataInput
-						readOnly={isMyPage ? true : false}
+						readOnly={canModify ? true : false}
 						type={inputType}
 						name={name}
 						placeholder={placeholder}
@@ -91,14 +91,14 @@ const InputForm = ({
 					<DataName>{dataName}</DataName>
 					<EmailContainer className={submit && value === '' ? 'submit' : ''}>
 						<EmailData
-							readOnly={isMyPage ? true : false}
+							readOnly={canModify ? true : false}
 							type={inputType}
 							name={name}
 							placeholder={placeholder}
 							onChange={onChangeFn}
 							value={value}
 						/>
-						{!isMyPage && (
+						{!canModify && (
 							<EmailButton onClick={clickHandler}>중복 확인</EmailButton>
 						)}
 					</EmailContainer>

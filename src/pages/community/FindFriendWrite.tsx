@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import WritePage from '@components/WritePage/WritePage';
 import { post } from '@src/api/api';
-import { getToken } from '@src/api/Token';
+import { getToken } from '@src/api/token';
 import { useNavigate } from 'react-router-dom';
 
 const FindFriendWrite = () => {
@@ -12,17 +12,6 @@ const FindFriendWrite = () => {
 		content: '',
 		postType: 'findfriend',
 	});
-
-	const imageHandler = () => {
-		const input = document.createElement('input');
-		input.setAttribute('type', 'file');
-		input.setAttribute('accept', 'image/*');
-		input.onchange = (e: any) => {
-			const file = e.target.files[0];
-			setSelectedImage(file);
-		};
-		input.click();
-	};
 
 	const onSavePost = async (inputTitle: string, content: string) => {
 		setPostData({
@@ -35,9 +24,7 @@ const FindFriendWrite = () => {
 		formData.append('title', inputTitle);
 		formData.append('content', content);
 		formData.append('postType', 'findfriend');
-		if (selectedImage) {
-			formData.append('image', selectedImage);
-		}
+
 		await post('/api/community/create', formData, {
 			headers: {
 				'Content-Type': 'multipart/form-data',
@@ -58,11 +45,7 @@ const FindFriendWrite = () => {
 
 	return (
 		<>
-			<WritePage
-				onSave={onSavePost}
-				onCancel={onCancelPost}
-				ImageHandler={imageHandler}
-			/>
+			<WritePage onSave={onSavePost} onCancel={onCancelPost} />
 		</>
 	);
 };

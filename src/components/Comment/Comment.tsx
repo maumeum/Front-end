@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getToken } from '@src/api/Token';
+import { getToken } from '@src/api/token';
 import {
 	Container,
 	Box,
@@ -101,14 +101,13 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 		}
 	};
 
-	//구현중
 	const handleEditComment = async (comment_id: string) => {
 		if (!editedComment) {
 			alert('내용을 입력해주세요');
 			return;
 		}
 		const token = getToken();
-		const response = await patch<DataType>(
+		await patch<DataType>(
 			`/api/postComments/${comment_id}`,
 			{
 				content: editedComment,
@@ -126,7 +125,7 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 
 	const handleDeleteComment = async (comment_id: string) => {
 		const token = getToken();
-		const response = await del<DataType>(
+		await del<DataType>(
 			`/api/postComments/${comment_id}`,
 
 			{

@@ -12,38 +12,49 @@ import {
 } from '../WritePage/WritePageStyle';
 
 type WritePageProps = {
-	onSave: (inputTitle: string, textContent: string) => void;
+	onSave: (
+		inputTitle: string,
+		textContent: string,
+		selectedImage: File[],
+	) => void;
 	onCancel: () => void;
-	ImageHandler: () => void;
 };
 
-const WritePage = ({ onSave, onCancel, ImageHandler }: WritePageProps) => {
+const WritePage = ({ onSave, onCancel }: WritePageProps) => {
 	const [content, setContent] = useState('');
 	const [inputTitle, setInputTitle] = useState('');
 	const [selectedImage, setSelectedImage] = useState<File[]>([]);
 
+	// const onClickHandler = () => {
+	// 	const textContent = content;
+	// 	onSave(inputTitle, textContent);
+	// 	clearContent();
+	// };
 	const onClickHandler = () => {
-		const textContent = content;
-		onSave(inputTitle, textContent);
+		onSave(inputTitle, content, selectedImage);
 		clearContent();
 	};
 
-	const imageHandler = () => {
-		const input = document.createElement('input');
-		input.setAttribute('type', 'file');
-		input.setAttribute('accept', 'image/*');
-		input.onchange = (e: any) => {
-			const file = e.target.files[0];
-			setSelectedImage(file);
-		};
-		input.click();
+	const handelImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const chosenFiles = e.target.files;
+		if (chosenFiles) {
+			setSelectedImage((prevFiles) => [
+				...prevFiles,
+				...Array.from(chosenFiles),
+			]);
+		}
 	};
 
-	const handelInputChange = (event: any) => {
-		const text = event.target.value;
+	const handelInputContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		const text = e.target.value;
 		if (text.length <= 2000) {
 			setContent(text);
 		}
+	};
+
+	const handleInputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const text = e.target.value;
+		setInputTitle(text);
 	};
 
 	const deleteContent = () => {
@@ -62,20 +73,28 @@ const WritePage = ({ onSave, onCancel, ImageHandler }: WritePageProps) => {
 				<TitleInput
 					placeholder='제목을 입력해주세요'
 					value={inputTitle}
-					onChange={(e) => setInputTitle(e.target.value)}
+					onChange={handleInputTitle}
 				/>
 				<TextContainer>
 					<ContentInput
 						placeholder='내용입력'
 						value={content}
-						onChange={handelInputChange}
+						onChange={handelInputContent}
 						maxLength={2000}
 					/>
 				</TextContainer>
 				<TextLength>{content.length}/2000</TextLength>
-				<ImageArea onClick={imageHandler}>
-					이미지 업로드{' '}
-					{selectedImage.length > 0 && `(${selectedImage.length})`}
+
+				<ImageArea>
+					이미지업로드
+					<input
+						id='fileInput'
+						type='file'
+						accept='image/*'
+						name='image'
+						multiple
+						onChange={handelImageChange}
+					/>
 				</ImageArea>
 				<ButtonContainer>
 					<CancelButton onClick={deleteContent}>취소</CancelButton>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getToken } from '@src/api/Token';
+import { getToken } from '@src/api/token';
 import DataType from '@src/types/dataType.ts';
 import { get, patch } from '@src/api/api';
 import {
@@ -56,7 +56,7 @@ const CommunityEditPage = () => {
 			Swal.fire(alertData.fillTitleContent);
 			return;
 		}
-		const response = await patch<DataType>(`/api/community/${postId}`, {
+		await patch<DataType>(`/api/community/${postId}`, {
 			title: inputTitle,
 			content: inputContent,
 		});

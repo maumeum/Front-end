@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { TabTypes, VolunteerTypes } from '@src/types/myPageConstants';
 
 interface CardProps {
-	currTab: string;
+	currTab?: string;
 	statusName: string;
 }
 
@@ -165,7 +165,9 @@ export const ReviewSection = styled.div`
 `;
 
 export const ImageContainer = styled.div`
+	width: 32%;
 	height: 100%;
+	overflow: hidden;
 `;
 
 export const ReviewImage = styled.img`

@@ -56,12 +56,24 @@ export const SubmitButton = styled.button`
 	border-radius: 1.2rem;
 	cursor: pointer;
 `;
-export const ImageArea = styled.button`
-	width: 20rem;
-	height: 5.5rem;
-	background-color: #a7a7a7;
+export const ImageArea = styled.label`
+	display: inline-block;
+	padding: 8px 16px;
+	text-align: center;
+	background-color: var(--color--footer);
+	color: black;
 	border: none;
+	border-radius: 4px;
 	cursor: pointer;
+	width: 20rem;
+	font-size: 2rem;
 	margin-top: -10rem;
-	color: white;
+
+	input {
+		opacity: 0;
+		position: absolute;
+		top: 0;
+		left: 0;
+		cursor: pointer;
+	}
 `;

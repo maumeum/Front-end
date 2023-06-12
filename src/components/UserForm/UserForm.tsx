@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent, ChangeEvent } from 'react';
+import React, { useState, MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TopBar from '../TopBar/TopBar';
 import {
@@ -7,33 +7,27 @@ import {
 } from '@components/UserForm/userForm';
 import LargeButton from '@components/Buttons/LargeButton';
 import Swal from 'sweetalert2';
-import { post, patch } from '@src/api/Api';
+import alertData from '@utils/swalObject';
+import { post, patch } from '@src/api/api';
 import { validPassword } from '@src/utils/signUpCheck.ts';
 import { passwordError, passwordCheckError } from '@src/utils/errorMessage.ts';
 import InputForm from '@src/components/UserForm/InputForm.tsx';
-import { getToken, deleteToken } from '@src/api/Token';
+import { deleteToken } from '@src/api/Token';
 
 interface UserFormProps {
 	closeModal: () => void;
-	editMode?: boolean;
-	authMode?: boolean;
+	isChangePasswordModal?: boolean;
 }
 
-function UserForm({ closeModal, editMode, authMode }: UserFormProps) {
+function UserForm({ closeModal, isChangePasswordModal }: UserFormProps) {
 	const [password, setPassword] = useState('');
 	const [checkPassword, setCheckPassword] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
 	const navigate = useNavigate();
-	const modalTitle = editMode
-		? '비밀번호 변경'
-		: authMode
-		? '유저 정보 확인'
-		: '';
-	const modalText = editMode
+	const modalTitle = isChangePasswordModal ? '비밀번호 변경' : '유저 정보 확인';
+	const modalText = isChangePasswordModal
 		? '변경할 새로운 비밀번호를 입력해주세요:)'
-		: authMode
-		? '본인확인을 위해 비밀번호를 입력해주세요:)'
-		: '';
+		: '본인확인을 위해 비밀번호를 입력해주세요:)';
 
 	const getFormChanger =
 		(setter: React.Dispatch<React.SetStateAction<string>>) =>
@@ -42,75 +36,44 @@ function UserForm({ closeModal, editMode, authMode }: UserFormProps) {
 			setter(e.target.value);
 		};
 
-	const handleClick = async (e: MouseEvent<HTMLButtonElement>) => {
+	const changePasswordHandle = async (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 
 		//본인확인요청
-		if (authMode) {
+		if (!isChangePasswordModal) {
 			try {
-				await post(
-					'/api/users/auth',
-					{ password },
-					{
-						headers: {
-							Authorization: `Bearer ${getToken()}`,
-						},
-					},
-				);
-				Swal.fire({
-					title: '확인되었습니다:)',
-					icon: 'success',
-					confirmButtonColor: '#afcd81',
-					confirmButtonText: '확인',
-				});
-				//회원정보 수정하는 컴포넌트
+				await post('/api/users/auth', { password });
+				Swal.fire(alertData.successMessage('확인되었습니다:)'));
 				navigate('/mypage/edit');
 			} catch (error) {
-				Swal.fire({
-					title: '비밀번호가 일치하지 않습니다',
-					icon: 'error',
-					confirmButtonColor: '#afcd81',
-					confirmButtonText: '확인',
-				});
+				Swal.fire(alertData.errorMessage('비밀번호를 확인해주세요:)'));
 			}
 		}
 
-		if (editMode) {
-			if (password !== checkPassword) {
-				Swal.fire({
-					icon: 'error',
-					title: '비밀번호가 일치하지 않습니다.',
-					confirmButtonColor: '#d33',
-				});
+		if (isChangePasswordModal) {
+			if (password === '' || checkPassword === '') {
+				Swal.fire(alertData.infoMessage('비밀번호를 입력해주세요!'));
+				return;
+			}
+
+			if (password !== checkPassword || !validPassword(password)) {
+				Swal.fire(alertData.wrongPwd);
 				return;
 			}
 
 			if (validPassword(password)) {
 				try {
-					await patch(
-						'/api/users/info',
-						{ password },
-						{
-							headers: {
-								Authorization: `Bearer ${getToken()}`,
-							},
-						},
+					await patch('/api/users/info', { password });
+					Swal.fire(
+						alertData.successMessage(
+							'비밀번호가 변경되었습니다! 재로그인 해주세요:)',
+						),
 					);
-					Swal.fire({
-						title: '비밀번호가 변경되었습니다! 재로그인 해주세요:)',
-						confirmButtonColor: 'var(--button--color)',
-					});
 					closeModal();
 					deleteToken();
 					navigate('/login');
 				} catch (error) {
-					Swal.fire({
-						//이런식으로 alert를 통해 유저에게 실패정보를 주는 경우에는
-						//백엔드쪽에서 넘어오는 에러에 따라 유저에게 다양한 alert를 띄워주어야할까요?
-						title: '비밀번호를 확인해주세요!',
-						icon: 'error',
-						confirmButtonColor: 'var(--button--color)',
-					});
+					Swal.fire(alertData.errorMessage('비밀번호 변경에 실패하였습니다.'));
 				}
 			}
 		}
@@ -136,7 +99,7 @@ function UserForm({ closeModal, editMode, authMode }: UserFormProps) {
 						/>
 					</div>
 
-					{editMode && (
+					{isChangePasswordModal && (
 						<div>
 							<InputForm
 								submit={submit}
@@ -151,7 +114,7 @@ function UserForm({ closeModal, editMode, authMode }: UserFormProps) {
 							/>
 						</div>
 					)}
-					<LargeButton onClick={handleClick}>확인하기</LargeButton>
+					<LargeButton onClick={changePasswordHandle}>확인하기</LargeButton>
 				</InputContainer>
 			</UserFormContainer>
 		</>
