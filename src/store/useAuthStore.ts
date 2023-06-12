@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { getToken } from '@api/Token';
+import { getToken } from '@api/token';
 import { get } from '@src/api/api';
 
 import AuthType from '@src/types/authType';

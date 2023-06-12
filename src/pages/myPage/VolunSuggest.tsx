@@ -6,8 +6,8 @@ import {
 	TabMenu,
 	CardBox,
 } from '@components/MyPage/myPage.ts';
-import car from '@src/assets/images/car.png';
-import MyReview from '@src/components/MyPost/MyReview';
+
+// import MyReview from '@src/components/MyPost/MyReview';
 
 import Tab from '@components/Tab/Tab.tsx';
 import Card from '@components/Card/Card.tsx';
@@ -40,10 +40,10 @@ function VolunSuggest() {
 	const [suggestVolunList, setSuggestVolunList] = useState<ResponseData[]>([]);
 	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
 	const currTab = tabs[0];
-	const [isOpen, setIsOpen] = useState(false);
-	const toggleModal = (onoff: boolean) => () => {
-		setIsOpen(onoff);
-	};
+	// const [isOpen, setIsOpen] = useState(false);
+	// const toggleModal = (onoff: boolean) => () => {
+	// 	setIsOpen(onoff);
+	// };
 
 	useEffect(() => {
 		const fetchData = async () => {

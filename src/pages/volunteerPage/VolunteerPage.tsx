@@ -9,8 +9,8 @@ import {
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { get } from '@src/api/api.ts';
-import { getToken } from '@src/api/Token';
-import DataType from '@src/types/DataType.ts';
+import { getToken } from '@src/api/token.ts';
+import DataType from '@src/types/dataType.ts';
 
 type PostData = {
 	_id: string;

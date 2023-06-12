@@ -26,7 +26,7 @@ type Story = StoryObj<typeof meta>;
 export const Review: Story = {
 	args: {
 		currTab: '내가 쓴 리뷰',
-		data: {
+		communityData: {
 			title:
 				'한강 플로깅 같이 하실분 구합니다~ 카카오톡 오픈채팅방으로 들어오세요',
 			content:
@@ -41,7 +41,7 @@ export const Review: Story = {
 export const Post: Story = {
 	args: {
 		currTab: '내가 쓴 게시글',
-		data: {
+		communityData: {
 			title:
 				'한강 플로깅 같이 하실분 구합니다~ 카카오톡 오픈채팅방으로 들어오세요',
 			content:

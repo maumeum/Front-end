@@ -25,7 +25,7 @@ import { useNavigate } from 'react-router-dom';
 import { TabTypes } from '@src/types/myPageConstants';
 import { get, patch } from '@src/api/api';
 import alertData from '@utils/swalObject';
-import DataType from '@src/types/DataType';
+import DataType from '@src/types/dataType';
 
 interface MyPageUserFormProps {
 	pageType: string;

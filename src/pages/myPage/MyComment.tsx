@@ -8,7 +8,7 @@ import {
 import Tab from '@components/Tab/Tab.tsx';
 import MyPost from '@components/MyPost/MyPost.tsx';
 import Menu from '@components/Menu/Menu.tsx';
-import DataType from '@src/types/DataType';
+import DataType from '@src/types/dataType';
 import { TabTypes } from '@src/types/myPageConstants';
 import { get } from '@src/api/api';
 import Swal from 'sweetalert2';
