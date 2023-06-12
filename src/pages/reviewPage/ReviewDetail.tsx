@@ -70,7 +70,7 @@ const ReviewDetail = () => {
 		}
 	};
 
-	const { title, _id, createdAt, images, content } = post;
+	const { title, createdAt, images, content } = post;
 	const hasPostImage = !!images;
 
 	const formattedDate = dayjs(createdAt)

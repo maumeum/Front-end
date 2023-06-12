@@ -56,7 +56,7 @@ const CommunityEditPage = () => {
 			Swal.fire(alertData.fillTitleContent);
 			return;
 		}
-		const response = await patch<DataType>(`/api/community/${postId}`, {
+		await patch<DataType>(`/api/community/${postId}`, {
 			title: inputTitle,
 			content: inputContent,
 		});

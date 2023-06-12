@@ -56,7 +56,7 @@ const ReviewEdit = () => {
 			Swal.fire(alertData.fillTitleContent);
 			return;
 		}
-		const response = await patch<DataType>(`/api/review/users/${postId}`, {
+		await patch<DataType>(`/api/review/users/${postId}`, {
 			title: inputTitle,
 			content: inputContent,
 		});

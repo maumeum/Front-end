@@ -13,7 +13,7 @@ interface MyReviewProps {
 	id?: string;
 }
 
-function MyReview({ closeModal, id }: MyReviewProps) {
+function MyReview({ closeModal }: MyReviewProps) {
 	const [title, setTitle] = useState<string>('');
 	const [content, setContent] = useState<string>('');
 	const [files, setFiles] = useState<File[]>([]);
