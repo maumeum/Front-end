@@ -8,38 +8,10 @@ import {
 	EmailData,
 	EmailButton,
 } from '@pages/userPage/style';
-import { post } from '@api/Api';
+import { post } from '@api/api';
 import alertData from '@utils/swalObject';
-
-interface ErrorType {
-	data: string;
-	submit: boolean;
-	errorMessage: {
-		existMessage: string;
-		validMessage?: string;
-	};
-	passwordData?: string;
-	validFn?: (data: string) => boolean | null;
-	validPassword?: (password: string) => boolean | undefined;
-}
-
-interface InputContainerProps {
-	canModify?: boolean;
-	submit: boolean;
-	dataName: string;
-	inputType: string;
-	name: string;
-	placeholder?: string;
-	value: string;
-	onChangeFn: any;
-	errorMessage: {
-		existMessage: string;
-		validMessage?: string;
-	};
-	validFn?: (data: string) => boolean | null;
-	passwordData?: string;
-	validPassword?: (password: string) => boolean | undefined;
-}
+import { InputErrorType } from '@src/types/errorType';
+import InputContainerProps from '@src/types/inputType';
 
 const InputForm = ({
 	canModify,
@@ -62,7 +34,7 @@ const InputForm = ({
 		passwordData,
 		validFn,
 		validPassword,
-	}: ErrorType) => {
+	}: InputErrorType) => {
 		switch (true) {
 			case data && validFn && !validFn(data):
 			case data && validPassword && !validPassword(data):
@@ -95,7 +67,7 @@ const InputForm = ({
 		<InputContainer>
 			{name !== 'email' ? (
 				<>
-					<DataName>{dataName}</DataName>
+					{dataName && <DataName>{dataName}</DataName>}
 					<DataInput
 						readOnly={canModify ? true : false}
 						type={inputType}

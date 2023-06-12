@@ -1,4 +1,4 @@
-import { CommunityType } from '@src/types/CardType';
+import { CommunityType } from '@src/types/cardType';
 
 import {
 	CommunityContainer,

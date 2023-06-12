@@ -8,18 +8,23 @@ interface StyledButtonProps extends ButtonProps {
 
 export const StyledButton: React.FC<StyledButtonProps> = ({
 	label = '버튼',
-	primary = true,
+	colorType = 'green',
 	size = 'small',
 	round = false,
 	backgroundColor,
 }) => {
-	const mode = primary ? 'button--primary' : 'button--outline';
+	const mode = round ? 'button--round' : 'button--square';
 	return (
 		<Button
 			type='button'
-			className={['button', `button--${size}`, mode].join(' ')}
+			className={[
+				'button',
+				`button--${size}`,
+				`button--${colorType}`,
+				mode,
+			].join(' ')}
 			style={{ backgroundColor }}
-			primary={primary}
+			colorType={colorType}
 			size={size}
 			round={round}>
 			{label}

@@ -63,7 +63,14 @@ const Header = () => {
 					<MainLogo src={mainLogo} alt='mainLogo' />
 				</LogoContainer>
 				<NavContainer>
-					<NavCategory to='/'>봉사모집하기</NavCategory>
+					<NavCategory
+						to='/volunteers'
+						className={click === 'volunteers' ? 'volunteers' : ''}
+						onClick={() => {
+							setClick(() => 'volunteers');
+						}}>
+						같이봉사해요
+					</NavCategory>
 					<NavCategory
 						to='/community/findfriend'
 						className={click === 'community' ? 'community' : ''}
