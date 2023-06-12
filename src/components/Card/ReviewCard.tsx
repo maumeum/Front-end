@@ -1,4 +1,4 @@
-import { ReviewType } from '@src/types/CardType.ts';
+import { ReviewType } from '@src/types/cardType.ts';
 import {
 	ReviewSection,
 	ImageContainer,

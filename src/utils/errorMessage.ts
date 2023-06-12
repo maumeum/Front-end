@@ -21,3 +21,19 @@ export const phoneNumError = {
 	existMessage: '핸드폰 번호를 입력해주세요.',
 	validMessage: '핸드폰번호는 숫자만 입력할 수 있습니다.',
 };
+
+export const teamNameError = {
+	existMessage: '팀명을 입력해주세요.',
+};
+
+export const introduceError = {
+	existMessage: '팀 소개를 입력해주세요.',
+};
+
+export const briefHistoryError = {
+	existMessage: '주요 활동과 목적을 입력해주세요.',
+};
+
+export const locationError = {
+	existMessage: '주소를 입력해주세요.',
+};
