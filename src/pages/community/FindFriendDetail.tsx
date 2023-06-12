@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { get, del } from '@src/api/Api';
+import { get, del } from '@src/api/api.ts';
 import { getToken } from '@src/api/Token';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';

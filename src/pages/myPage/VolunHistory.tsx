@@ -10,7 +10,7 @@ import Tab from '@components/Tab/Tab.tsx';
 import Card from '@components/Card/Card.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/types/myPageConstants';
-import { get } from '@src/api/Api';
+import { get } from '@src/api/api';
 import DataType from '@src/types/DataType';
 import Swal from 'sweetalert2';
 import alertData from '@src/utils/swalObject';

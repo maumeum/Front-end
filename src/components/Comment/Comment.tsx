@@ -20,7 +20,7 @@ import {
 	CommentHolder,
 } from './CommentStyle';
 import DataType from '@src/types/DataType';
-import { get, post } from '@src/api/Api';
+import { get, post } from '@src/api/api';
 
 type CommentProps = {
 	postId: string;

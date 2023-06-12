@@ -8,7 +8,7 @@ import {
 } from '../community/style.ts';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { get } from '@src/api/Api';
+import { get } from '@src/api/api.ts';
 import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType.ts';
 

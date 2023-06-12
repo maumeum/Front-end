@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { getToken } from '@api/Token';
-import { get } from '@api/api';
+import { get } from '@src/api/api';
 
 import AuthType from '@src/types/authType';
 import DataType from '@src/types/dataType';

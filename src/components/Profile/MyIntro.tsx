@@ -7,7 +7,7 @@ import {
 	FormContainer,
 } from '@components/Profile/myIntro.ts';
 import Swal from 'sweetalert2';
-import { patch } from '@src/api/Api';
+import { patch } from '@src/api/api';
 import useAuthStore from '@src/store/useAuthStore.ts';
 import alertData from '@src/utils/swalObject';
 
@@ -25,7 +25,7 @@ function MyIntro() {
 		setIntro(userData?.introduction);
 	}, [userData]);
 
-	const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+	const handleIntroChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		const inputLength = e.target.value.length;
 
 		if (inputLength <= 200) {
@@ -38,7 +38,7 @@ function MyIntro() {
 		setIntroLength(inputLength);
 	};
 
-	const handleClick = async (e: MouseEvent<HTMLButtonElement>) => {
+	const handleSaveClick = async (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		if (isOver) {
 			Swal.fire(alertData.errorMessage('200자가 초과되었습니다.'));
@@ -60,11 +60,11 @@ function MyIntro() {
 				<IntroContainer>
 					<IntroBox
 						placeholder='최대 200자 까지 가능합니다'
-						onChange={handleChange}
+						onChange={handleIntroChange}
 						value={intro}
 					/>
 					<CheckLength>{`${introLength} / 200`}</CheckLength>
-					<FormBtn onClick={handleClick}>저장하기</FormBtn>
+					<FormBtn onClick={handleSaveClick}>저장하기</FormBtn>
 				</IntroContainer>
 			</FormContainer>
 		</>

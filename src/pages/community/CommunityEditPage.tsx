@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getToken } from '@src/api/Token';
 import DataType from '@src/types/DataType.ts';
-import { get, patch } from '@src/api/Api';
+import { get, patch } from '@src/api/api';
 import ReactQuill from 'react-quill';
 import {
 	TextContainer,

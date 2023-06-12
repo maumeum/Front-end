@@ -12,10 +12,11 @@ import Tab from '@components/Tab/Tab.tsx';
 import Card from '@components/Card/Card.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/types/myPageConstants';
-import { get } from '@src/api/Api';
-import DataType from '@src/types/DataType';
+import { get } from '@src/api/api';
+import DataType from '@src/types/dataType';
 import Swal from 'sweetalert2';
 import alertData from '@src/utils/swalObject';
+import MyReview from '@components/MyPost/MyReview.tsx';
 
 interface ResponseData {
 	_id: string;
@@ -89,6 +90,7 @@ function VolunSuggest() {
 							<Card key={data.volunteer_id._id} data={data} />
 						))}
 					</CardBox>
+					<MyReview />
 				</Main>
 			</Container>
 		</>

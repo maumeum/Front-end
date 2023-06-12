@@ -23,7 +23,7 @@ import LargeButton from '@components/Buttons/LargeButton';
 import Modal from '@components/Modal/Modal.tsx';
 import { useNavigate } from 'react-router-dom';
 import { TabTypes } from '@src/types/myPageConstants';
-import { get, patch } from '@src/api/Api';
+import { get, patch } from '@src/api/api';
 import alertData from '@utils/swalObject';
 import DataType from '@src/types/DataType';
 

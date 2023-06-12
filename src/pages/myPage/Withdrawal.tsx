@@ -20,7 +20,7 @@ import { validEmail, validPassword } from '@src/utils/signUpCheck.ts';
 import { emailError, passwordError } from '@src/utils/errorMessage.ts';
 import InputForm from '@src/components/UserForm/InputForm.tsx';
 import Swal from 'sweetalert2';
-import { del } from '@src/api/Api';
+import { del } from '@src/api/api';
 import { deleteToken } from '@src/api/Token';
 import alertData from '@src/utils/swalObject';
 
