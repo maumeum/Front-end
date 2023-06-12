@@ -27,6 +27,7 @@ import TeamAuth from '@src/pages/adminPage/TeamAuth';
 import Report from '@src/pages/adminPage/Report';
 import CommunityEditPage from '@src/pages/community/CommunityEditPage';
 import Error from '@pages/errorPage/Error';
+import AuthTeam from '@pages/myPage/AuthTeam';
 import PrivateRoute from '@utils/PrivateRoute';
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
 					<Route path='/mypage/comment' element={<MyComment />} />
 					<Route path='/mypage/edit' element={<UserInfoEdit />} />
 					<Route path='/mypage/profile' element={<MyProfile />} />
+					<Route path='/mypage/team_auth' element={<AuthTeam />} />
 					<Route path='/mypage/withdrawal' element={<Withdrawal />} />
 					<Route path='/admin/team_auth' element={<TeamAuth />} />
 					<Route path='/admin/report' element={<Report />} />
