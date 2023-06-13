@@ -28,6 +28,9 @@ import useAuthStore from '@src/store/useAuthStore';
 type CommentProps = {
 	postId: string;
 };
+type UserType = {
+	uuid: string;
+};
 
 const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 	const [inputArea, setInputArea] = useState('');
@@ -213,19 +216,19 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 								<Contents>{comment.content}</Contents>
 								<BtnContainer>
 									{String(comment.user_id.uuid) ===
-										String(userData !== null && userData.uuid) && (
+										String((userData as unknown as UserType)?.uuid) && (
 										<Btn1 onClick={() => handelEditingComment(comment._id)}>
 											수정
 										</Btn1>
 									)}
 									{String(comment.user_id.uuid) ===
-										String(userData !== null && userData.uuid) && (
+										String((userData as unknown as UserType)?.uuid) && (
 										<Btn2 onClick={() => handleDeleteComment(comment._id)}>
 											삭제
 										</Btn2>
 									)}
 									{String(comment.user_id.uuid) !==
-										String(userData !== null && userData.uuid) &&
+										String((userData as unknown as UserType)?.uuid) &&
 										userData !== null &&
 										userData.role !== 'admin' && (
 											<BtnReport onClick={() => handleReport(comment._id)}>

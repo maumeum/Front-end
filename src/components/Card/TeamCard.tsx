@@ -1,9 +1,8 @@
+import { useState } from 'react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import Swal from 'sweetalert2';
 
-import { TeamListType } from '@src/types/cardType';
-import alertData from '@utils/swalObject';
+import { TeamType } from '@src/types/cardType';
 
 import {
 	TeamCardSection,
@@ -12,57 +11,32 @@ import {
 	TeamMainContainer,
 	TeamName,
 	TeamDescContainer,
-	DescContainer,
 	WriteDate,
 	TeamUserNickname,
-	TeamButtonContainer,
-	AcceptButton,
-	RefuseButton,
 } from './card';
-
-import volunteerLogo from '@assets/images/volunteerLogo.png';
+import teamData from '@src/assets/datas/teamData';
 
 interface TeamCardProps {
-	teamData: TeamListType;
+	teamData: TeamType;
+	onClick: () => void;
 }
 
-const TeamCard = ({ teamData }: TeamCardProps) => {
-	// 수락
-	const acceptHandler = () => {
-		Swal.fire(alertData.acceptTeamCard).then((result) => {
-			if (result.isConfirmed) {
-				Swal.fire('수락되었습니다.');
-			}
-		});
-	};
+const TeamCard = ({ teamData, onClick }: TeamCardProps) => {
+	const image = `http://localhost:5002/${teamData.image}`;
 
-	// 거부
-	const refuseHandler = () => {
-		Swal.fire(alertData.refuseTeamCard).then((result) => {
-			if (result.isConfirmed) {
-				Swal.fire('거부되었습니다.');
-			}
-		});
-	};
 	const date = dayjs(teamData.createdAt)
 		.locale('ko')
 		.format('YYYY년 MM월 DD일');
 	return (
-		<TeamCardSection>
+		<TeamCardSection onClick={onClick}>
 			<TeamImageContainer>
-				<TeamImage src={volunteerLogo} alt='volunteerLogo' />
+				<TeamImage src={image} alt='volunteerLogo' />
 			</TeamImageContainer>
 			<TeamMainContainer>
-				<TeamName>{`[${teamData.category}]${teamData.teamName}`}</TeamName>
+				<TeamName>{`[${teamData.category}] ${teamData.teamName}`}</TeamName>
 				<TeamDescContainer>
-					<DescContainer>
-						<WriteDate>{date}</WriteDate>
-						<TeamUserNickname>{teamData.userId.nickname}</TeamUserNickname>
-					</DescContainer>
-					<TeamButtonContainer>
-						<AcceptButton onClick={acceptHandler}>수락</AcceptButton>
-						<RefuseButton onClick={refuseHandler}>거부</RefuseButton>
-					</TeamButtonContainer>
+					<WriteDate>{date}</WriteDate>
+					<TeamUserNickname>{teamData.user_id.nickname}</TeamUserNickname>
 				</TeamDescContainer>
 			</TeamMainContainer>
 		</TeamCardSection>
