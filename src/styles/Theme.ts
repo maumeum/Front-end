@@ -4,6 +4,7 @@ const colors = {
 	background: '#FFFFFF', // 하얀색
 	error: '#EB5757', // 붉은색
 	text: '#202020', // 검은색
+	highlight: '#FF5A72', // 다홍색
 
 	yellowGreen100: '#C8DDA4', // 연두색
 
