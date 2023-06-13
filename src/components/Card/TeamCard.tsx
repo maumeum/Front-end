@@ -2,7 +2,6 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 
 import { TeamType } from '@src/types/cardType';
-
 import {
 	TeamCardSection,
 	TeamImageContainer,
@@ -19,8 +18,10 @@ interface TeamCardProps {
 	onClick: () => void;
 }
 
+const apiURL = import.meta.env.VITE_API_URL;
+
 const TeamCard = ({ teamData, onClick }: TeamCardProps) => {
-	const image = `http://localhost:5002/${teamData.image}`;
+	const image = `${apiURL}/${teamData.image}`;
 
 	const date = dayjs(teamData.createdAt)
 		.locale('ko')

@@ -26,6 +26,8 @@ import useAuthStore from '@src/store/useAuthStore.ts';
 import Swal from 'sweetalert2';
 import alertData from '@src/utils/swalObject.ts';
 
+const apiURL = import.meta.env.VITE_API_URL;
+
 const QuestionDetail = () => {
 	const navigate = useNavigate();
 	const { postId } = useParams() as { postId: string };
@@ -148,7 +150,7 @@ const QuestionDetail = () => {
 							{images.map((image: any, index: any) => (
 								<Image
 									key={index}
-									src={`http://localhost:5002/${image}`}
+									src={`${apiURL}/${image}`}
 									alt='content-image'
 								/>
 							))}
