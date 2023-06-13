@@ -16,8 +16,10 @@ import {
 import { TabTypes } from '@src/types/myPageConstants.ts';
 import { post, patch } from '@api/api';
 import Swal from 'sweetalert2';
+import alertData from '@src/utils/swalObject.ts';
 import defaultImage from '@src/assets/images/volunteer1.jpg';
 import { VolunteerTypes } from '@src/types/myPageConstants.ts';
+import check from '@assets/icons/authentication.svg';
 
 export interface CardProps {
 	data: {
@@ -67,21 +69,17 @@ function Card({ currTab, data }: CardProps) {
 		data.volunteer_id;
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedStatus, setSelectedStatus] = useState<string>(statusName);
+	const [selectedParticipationStatus, setSelectedParticipationStatus] =
+		useState<string>(statusName);
 
 	const toggleModal = (onoff: boolean) => () => {
 		setIsOpen(onoff);
 	};
 
 	const handleRecruitmentStatusChange = async (selectedValue: string) => {
-		const result = await Swal.fire({
-			title: '봉사활동 상태를 변경하시겠습니까??',
-			icon: 'info',
-			showCancelButton: true,
-			confirmButtonColor: '#ffd4d4',
-			cancelButtonColor: '#afcd81',
-			confirmButtonText: '네',
-			cancelButtonText: '아니요',
-		});
+		const result = await Swal.fire(
+			alertData.doubleCheckMessage('봉사활동 상태를 변경하시겠습니까??'),
+		);
 
 		if (result.isConfirmed) {
 			try {
@@ -90,44 +88,45 @@ function Card({ currTab, data }: CardProps) {
 				});
 				setSelectedStatus(selectedValue);
 			} catch (error) {
-				await Swal.fire({
-					title: '모집상태 변경에 실패하였습니다 :(',
-					icon: 'error',
-					confirmButtonColor: 'var(--button--color)',
-				});
+				await Swal.fire(
+					alertData.errorMessage('모집상태 변경에 실패하였습니다 :('),
+				);
 			}
-			await Swal.fire({
-				title: `${selectedValue} (으)로 상태가 변경되었습니다`,
-				icon: 'success',
-				confirmButtonColor: 'var(--button--color)',
-			});
+			await Swal.fire(
+				alertData.successMessage(
+					`${selectedValue} (으)로 상태가 변경되었습니다`,
+				),
+			);
 			window.location.reload();
 		}
 	};
 
-	const handleParticipated = async () => {
+	const handleParticipationStatusChange = async (value: string) => {
 		try {
-			await post(`/api/review/users/participation/${_id}`, {});
-			const result = await Swal.fire({
-				title: '참여하신 활동이 맞으십니까?',
-				text: '커뮤니티 경험 향상을 위해 거짓 정보는 지양해주세요!',
-				icon: 'info',
-				showCancelButton: true,
-				confirmButtonColor: '#ffd4d4',
-				cancelButtonColor: '#afcd81',
-				confirmButtonText: '네',
-				cancelButtonText: '아니요',
-			});
+			// value가 'participated'일 때 로직
+			if (value === '참여완료') {
+				await post(`/api/review/users/participation/${_id}`, {});
+				const result = await Swal.fire({
+					title: '참여하신 활동이 맞으십니까?',
+					text: '커뮤니티 경험 향상을 위해 거짓 정보는 지양해주세요!',
+					icon: 'info',
+					showCancelButton: true,
+					confirmButtonColor: '#ffd4d4',
+					cancelButtonColor: '#afcd81',
+					confirmButtonText: '네',
+					cancelButtonText: '아니요',
+				});
 
-			if (result.isConfirmed) {
-				await Swal.fire('완료된 봉사로 변경되었습니다!', 'success');
+				if (result.isConfirmed) {
+					await Swal.fire('완료된 봉사로 변경되었습니다!', 'success');
+				}
+			} else if (value === '참여취소') {
+				// value가 'canceled'일 때 로직 추가
 			}
 		} catch (error) {
-			await Swal.fire({
-				title: '활동이 시작되지 않은 봉사입니다.',
-				icon: 'success',
-				confirmButtonColor: 'var(--button--color)',
-			});
+			await Swal.fire(
+				alertData.errorMessage('활동이 시작되지 않은 봉사입니다.'),
+			);
 		}
 	};
 
@@ -159,6 +158,7 @@ function Card({ currTab, data }: CardProps) {
 					<UserInfo>
 						<img src={`${url}/${images[0]}`} alt='작성자 프로필사진' />
 						<p>{truncateCentName(centName)}</p>
+						<img className='verifyMark' src={check} alt='인증마크' />
 						{currTab === TabTypes.VOLUNTEER_COMPLETED &&
 							statusName !== VolunteerTypes.DISCONTINUE && (
 								<ButtonContainer>
@@ -172,13 +172,25 @@ function Card({ currTab, data }: CardProps) {
 								<Selector
 									value={selectedStatus}
 									onChange={handleRecruitmentStatusChange}
+									options={[
+										{ value: '모집중', label: '모집중' },
+										{ value: '모집완료', label: '모집완료' },
+										{ value: '모집중단', label: '모집중단' },
+									]}
 								/>
 							</SelectContainer>
 						)}
 						{currTab === TabTypes.VOLUNTEER_APPLIED && (
-							<ButtonContainer>
-								<SmallButton onClick={handleParticipated}>참여완료</SmallButton>
-							</ButtonContainer>
+							<SelectContainer>
+								<Selector
+									value={selectedParticipationStatus}
+									onChange={handleParticipationStatusChange}
+									options={[
+										{ value: '참여완료', label: '참여완료' },
+										{ value: '참여취소', label: '참여취소' },
+									]}
+								/>
+							</SelectContainer>
 						)}
 						<Modal isOpen={isOpen} closeModal={toggleModal(false)} id={_id} />
 					</UserInfo>

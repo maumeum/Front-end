@@ -60,9 +60,14 @@ export const UserInfo = styled.div`
 	position: relative;
 
 	img {
-		width: 3.5rem;
-		height: 3.5rem;
+		width: 3.8rem;
+		height: 3.8rem;
 		border-radius: 50%;
+	}
+
+	img.verifyMark {
+		width: 15px;
+		height: 15px;
 	}
 
 	p {

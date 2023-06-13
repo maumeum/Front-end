@@ -112,6 +112,12 @@ export const SignUpForm = styled.div`
 	flex-direction: column;
 	align-items: center;
 	padding-top: 4.3rem;
+	position: relative;
+	img {
+		position: absolute;
+		left: 11.3rem;
+		top: 15.2rem;
+	}
 `;
 
 export const InputContainer = styled.div`
