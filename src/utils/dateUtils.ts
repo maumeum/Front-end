@@ -29,7 +29,7 @@ export function remainingDaysCulcurator(
 	const isCurrentYearLeap = isLeapYear(currentYear);
 	const isDeadlineYearLeap = isLeapYear(deadlineYear);
 
-	const timeDiff = deadlineDateObj.getTime() - currentDateObj.getTime();
+	const timeDiff = currentDateObj.getTime() - deadlineDateObj.getTime();
 	let remainingDays = Math.ceil(timeDiff / oneDay);
 
 	if (isCurrentYearLeap && currentDateObj.getMonth() < 1) {
