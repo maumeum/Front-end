@@ -26,6 +26,7 @@ import { TabTypes } from '@src/types/myPageConstants';
 import { get, patch } from '@api/api';
 import alertData from '@utils/swalObject';
 import DataType from '@src/types/dataType';
+import check from '@assets/icons/authentication.svg';
 
 interface MyPageUserFormProps {
 	pageType: string;
@@ -53,6 +54,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 			try {
 				const getUserInfoData = await get<DataType>('/api/users/info', {});
 				const responseData = getUserInfoData.data as UserInfo;
+				console.log(responseData);
 				const { email, nickname, phone } = responseData;
 				setEmail(email);
 				setNickname(nickname);
@@ -143,6 +145,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 							validFn={validEmail}
 						/>
 					)}
+					<img src={check} alt='인증유저' />
 					<InputForm
 						canModify={canModify}
 						submit={submit}
