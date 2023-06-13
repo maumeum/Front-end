@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { get, del, patch } from '@api/api';
 import { getToken } from '@api/token';
-import dayjs from 'dayjs';
-import 'dayjs/locale/ko';
+import { dateFormatter } from '@src/utils/dateUtils';
 import {
 	DetailContainer,
 	Header,
@@ -23,6 +22,7 @@ import {
 } from '@src/pages/community/style';
 import CommentSection from '@src/components/Comment/Comment';
 import DataType from '@src/types/dataType';
+import useAuthStore from '@src/store/useAuthStore.ts';
 
 const ReviewDetail = () => {
 	const navigate = useNavigate();
@@ -30,6 +30,7 @@ const ReviewDetail = () => {
 	const [post, setPost] = useState<any>([]);
 	const [loginUser, setLoginUser] = useState(false);
 	const [datauser, setDataUser] = useState<any>('');
+	const { userData, getUserData } = useAuthStore();
 
 	useEffect(() => {
 		const fetchPost = async () => {
@@ -48,6 +49,10 @@ const ReviewDetail = () => {
 			setLoginUser(response.data);
 		};
 		loginUserLogic();
+	}, []);
+
+	useEffect(() => {
+		getUserData();
 	}, []);
 
 	const handleEdit = () => {
@@ -84,9 +89,11 @@ const ReviewDetail = () => {
 	const { title, createdAt, images, content } = post;
 	const hasPostImage = !!images;
 
-	const formattedDate = dayjs(createdAt)
-		.locale('ko')
-		.format('YYYY년 MM월 DD일 HH:mm:ss');
+	const formattedDate = dateFormatter(
+		createdAt,
+		'YYYY년 MM월 DD일 HH:mm:ss',
+		'ko',
+	);
 
 	console.log('이미지', images);
 	return (
@@ -100,10 +107,11 @@ const ReviewDetail = () => {
 							<Date>작성일 : {formattedDate}</Date>
 						</InfoBox>
 						{loginUser && <Btn onClick={handleEdit}>수정하기</Btn>}
-						{loginUser && (
+						{(loginUser ||
+							(userData !== null && userData.role === 'admin')) && (
 							<BtnDelete onClick={handleDelete}>삭제하기</BtnDelete>
 						)}
-						{!loginUser && (
+						{!loginUser && userData !== null && userData.role !== 'admin' && (
 							<BtnReport onClick={handleReport}>신고하기</BtnReport>
 						)}
 					</SubContainer>
