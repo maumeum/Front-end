@@ -30,6 +30,9 @@ import ReviewEdit from '@src/pages/reviewPage/ReviewEdit';
 import Error from '@pages/errorPage/Error';
 import AuthTeam from '@pages/myPage/AuthTeam';
 import PrivateRoute from '@utils/PrivateRoute';
+// '같이 봉사해요' 게시판 관련:
+import VolunteerOngoing from '@pages/volunteerPage/VolunteerOngoingPage';
+import VolunteerWrite from '@src/pages/volunteerPage/VolunteerWrite';
 
 function App() {
 	return (
@@ -37,6 +40,9 @@ function App() {
 			<Header />
 			<Routes>
 				<Route path='/' element={<Main />} />
+				<Route path='/volunteers' element={<VolunteerOngoing />} />
+				<Route path='/volunteers/edit' element={<VolunteerWrite />} />
+
 				<Route path='/community/findfriend' element={<FindFriend />} />
 				<Route path='/community/question' element={<Question />} />
 				<Route
