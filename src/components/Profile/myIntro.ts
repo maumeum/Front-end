@@ -56,8 +56,9 @@ export const CheckLength = styled.div`
 export const ImageLabel = styled.label`
 	display: flex;
 	align-items: center;
-	margin-bottom: 2rem;
+	margin-bottom: 3rem;
 	font-size: 2rem;
+	color: #888888;
 `;
 
 export const ImageInput = styled.input`

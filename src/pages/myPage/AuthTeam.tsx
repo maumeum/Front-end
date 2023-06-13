@@ -2,17 +2,23 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-import { Container, Main, MenuBar } from '@components/MyPage/myPage.ts';
+import {
+	Container,
+	Main,
+	MenuBar,
+	TabMenu,
+} from '@components/MyPage/myPage.ts';
 import Menu from '@components/Menu/Menu.tsx';
 import InputForm from '@components/UserForm/InputForm';
 import TextAreaForm from '@components/UserForm/TextAreaForm';
 import Calendar from '@components/Calendar/Component';
 import LargeButton from '@components/Buttons/LargeButton';
 import UploadTeamImg from '@components/Profile/TeamImg';
+import Tab from '@components/Tab/Tab.tsx';
 import alertData from '@utils/swalObject';
 import { validPhoneNum } from '@utils/signUpCheck.ts';
 import DataType from '@src/types/dataType';
-import TopBar from '@components/TopBar/TopBar.tsx';
+import { TabTypes } from '@src/types/myPageConstants';
 import { post } from '@api/api';
 import useSummitStore from '@src/store/useSummitStore';
 import {
@@ -22,7 +28,15 @@ import {
 	phoneNumError,
 	locationError,
 } from '@src/utils/errorMessage';
-import { TeamForm, Title, TeamType, TeamTypeRadio } from './style';
+import {
+	TeamForm,
+	TopTitle,
+	Title,
+	TeamType,
+	TeamTypeRadio,
+	MainContainer,
+	ButtonContainer,
+} from './style';
 
 const AuthTeam = () => {
 	const [category, setCategory] = useState<string>('');
@@ -35,6 +49,7 @@ const AuthTeam = () => {
 	const [phoneNum, setPhoneNum] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
 
+	const tabs = [TabTypes.GROUP_CERTIFICATION];
 	const { isSubmit, setIsSubmit } = useSummitStore();
 	const navigate = useNavigate();
 
@@ -82,89 +97,91 @@ const AuthTeam = () => {
 				<Menu title={'마이페이지'} />
 			</MenuBar>
 			<Main>
-				<TopBar
-					title='단체 인증하기'
-					text='나의 봉사단체를 인증받고 게시글 올려보기'
-					modal={'modal'}
-				/>
+				<TabMenu>
+					<Tab tabs={tabs} />
+				</TabMenu>
 				<TeamForm>
-					<Title>팀 유형</Title>
-					<TeamType>
-						<TeamTypeRadio
-							type='radio'
-							name='category'
-							value='기관'
-							onChange={getFormChanger(setCategory)}
+					<MainContainer>
+						<TopTitle>팀 유형</TopTitle>
+						<TeamType>
+							<TeamTypeRadio
+								type='radio'
+								name='category'
+								value='기관'
+								onChange={getFormChanger(setCategory)}
+							/>
+							기관
+						</TeamType>
+						<TeamType>
+							<TeamTypeRadio
+								type='radio'
+								name='category'
+								value='개인/동아리'
+								onChange={getFormChanger(setCategory)}
+							/>
+							개인/동아리
+						</TeamType>
+						<Title>프로젝트 팀명</Title>
+						<InputForm
+							submit={submit}
+							inputType='text'
+							name='teamName'
+							placeholder='프로젝트 팀명을 입력해주세요.'
+							value={teamName}
+							onChangeFn={getFormChanger(setTeamName)}
+							errorMessage={teamNameError}
 						/>
-						기관
-					</TeamType>
-					<TeamType>
-						<TeamTypeRadio
-							type='radio'
-							name='category'
-							value='개인/동아리'
-							onChange={getFormChanger(setCategory)}
+						<Title>대표 이미지 등록</Title>
+						<UploadTeamImg setFile={setFile} />
+						<Title>설립일</Title>
+						<Calendar selectedDate={date} setSelectedDate={setDate} />
+						<Title>프로젝트 팀 소개</Title>
+						<TextAreaForm
+							submit={submit}
+							name='introduction'
+							placeholder='프로젝트 팀 소개 문구를 1~3줄로 적어주세요.'
+							value={introduction}
+							onChangeFn={getFormChanger(setIntroduction)}
+							errorMessage={introduceError}
 						/>
-						개인/동아리
-					</TeamType>
-					<Title>프로젝트 팀명</Title>
-					<InputForm
-						submit={submit}
-						inputType='text'
-						name='teamName'
-						placeholder='프로젝트 팀명을 입력해주세요.'
-						value={teamName}
-						onChangeFn={getFormChanger(setTeamName)}
-						errorMessage={teamNameError}
-					/>
-					<Title>대표 이미지 등록</Title>
-					<UploadTeamImg setFile={setFile} />
-					<Title>설립일</Title>
-					<Calendar selectedDate={date} setSelectedDate={setDate} />
-					<Title>프로젝트 팀 소개</Title>
-					<TextAreaForm
-						submit={submit}
-						name='introduction'
-						placeholder='프로젝트 팀 소개 문구를 1~3줄로 적어주세요.'
-						value={introduction}
-						onChangeFn={getFormChanger(setIntroduction)}
-						errorMessage={introduceError}
-					/>
-					<Title>주요 활동과 목적</Title>
-					<TextAreaForm
-						submit={submit}
-						name='briefHistory'
-						placeholder='프로젝트 팀이 기존에 진행하고 있는 활동의 분야, 목적, 내용을 상세히 작성해주세요.'
-						value={briefHistory}
-						onChangeFn={getFormChanger(setBriefHistory)}
-						errorMessage={briefHistoryError}
-					/>
-					<Title>전화번호</Title>
-					<InputForm
-						submit={submit}
-						inputType='text'
-						name='phoneNum'
-						placeholder='전화번호를 입력해주세요.'
-						value={phoneNum}
-						onChangeFn={getFormChanger(setPhoneNum)}
-						errorMessage={phoneNumError}
-						validFn={validPhoneNum}
-					/>
-					<Title>소재지 주소</Title>
-					<InputForm
-						submit={submit}
-						inputType='text'
-						name='location'
-						placeholder='소재지 주소를 입력해주세요.'
-						value={location}
-						onChangeFn={getFormChanger(setLocation)}
-						errorMessage={locationError}
-					/>
-					<LargeButton
-						onClick={clickHandler}
-						disabled={isSubmit ? true : false}>
-						제출하기
-					</LargeButton>
+						<Title>주요 활동과 목적</Title>
+						<TextAreaForm
+							submit={submit}
+							name='briefHistory'
+							placeholder='프로젝트 팀이 기존에 진행하고 있는 활동의 분야, 목적, 내용을 상세히 작성해주세요.'
+							value={briefHistory}
+							onChangeFn={getFormChanger(setBriefHistory)}
+							errorMessage={briefHistoryError}
+						/>
+						<Title>전화번호</Title>
+						<InputForm
+							submit={submit}
+							inputType='text'
+							name='phoneNum'
+							placeholder='전화번호를 입력해주세요.'
+							value={phoneNum}
+							onChangeFn={getFormChanger(setPhoneNum)}
+							errorMessage={phoneNumError}
+							validFn={validPhoneNum}
+						/>
+						<Title>소재지 주소</Title>
+						<InputForm
+							submit={submit}
+							inputType='text'
+							name='location'
+							placeholder='소재지 주소를 입력해주세요.'
+							value={location}
+							onChangeFn={getFormChanger(setLocation)}
+							errorMessage={locationError}
+						/>
+					</MainContainer>
+					<ButtonContainer>
+						<LargeButton
+							onClick={clickHandler}
+							disabled={isSubmit ? true : false}>
+							제출하기
+						</LargeButton>
+					</ButtonContainer>
 				</TeamForm>
 			</Main>
 		</Container>
