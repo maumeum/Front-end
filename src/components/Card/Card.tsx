@@ -75,6 +75,17 @@ function Card({ currTab, data }: CardProps) {
 	const [selectedParticipationStatus, setSelectedParticipationStatus] =
 		useState<string>('');
 
+	useEffect(() => {
+		const checkEndDate = () => {
+			const checkDate = new Date(endDate);
+			const now = new Date();
+			if (checkDate < now) {
+				setSelectedStatus('모집완료');
+			}
+		};
+		checkEndDate();
+	}, [endDate]);
+
 	const toggleModal = (onoff: boolean) => () => {
 		setIsOpen(onoff);
 	};
@@ -106,8 +117,7 @@ function Card({ currTab, data }: CardProps) {
 
 	const handleParticipationStatusChange = async (selectedValue: string) => {
 		setSelectedParticipationStatus(selectedValue);
-		console.log(selectedParticipationStatus);
-		console.log(selectedValue);
+
 		try {
 			if (selectedValue === 'complete') {
 				const result = await Swal.fire(
