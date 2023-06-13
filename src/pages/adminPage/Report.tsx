@@ -13,6 +13,7 @@ const Report = () => {
 	const [reviewList, setReviewList] = useState<ReviewListType>([]);
 	const [communityNav, setCommunityNav] = useState<boolean>(true);
 	const [reviewNav, setReviewNav] = useState<boolean>(false);
+	const [isModified, setIsModified] = useState<boolean>(false);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -23,7 +24,12 @@ const Report = () => {
 			setCommunityList(responseData.data.posts);
 		};
 		fetchData();
-	}, []);
+		if (isModified) {
+			fetchData();
+			setIsModified(false);
+			window.scrollTo(0, 0);
+		}
+	}, [isModified]);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -31,8 +37,12 @@ const Report = () => {
 			setReviewList(responseData.data.reviews);
 		};
 		fetchData();
-		window.scrollTo(0, 0);
-	}, []);
+		if (isModified) {
+			fetchData();
+			setIsModified(false);
+			window.scrollTo(0, 0);
+		}
+	}, [isModified]);
 
 	// 세부 글 클릭
 	const postClick = (postId: string) => {
@@ -90,6 +100,10 @@ const Report = () => {
 									(postData.content.length > 50 ? '...' : '')
 								}
 								onClick={() => postClick(postData._id)}
+								postId={postData._id}
+								postType={postData.postType}
+								setIsModified={setIsModified}
+								isReported={postData.isReported}
 							/>
 						))}
 				{reviewList &&
@@ -110,6 +124,10 @@ const Report = () => {
 									(postData.content.length > 50 ? '...' : '')
 								}
 								onClick={() => reviewClick(postData._id)}
+								postId={postData._id}
+								volunteerId={postData.volunteer_id}
+								setIsModified={setIsModified}
+								isReported={postData.isReported}
 							/>
 						))}
 			</PostContainer>

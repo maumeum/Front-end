@@ -1,9 +1,11 @@
 import styled, { css } from 'styled-components';
 import { TabTypes, VolunteerTypes } from '@src/types/myPageConstants';
+import { hexToRgba } from '@utils/styleUtils.ts';
 
-interface CardProps {
+export interface CardProps {
 	currTab?: string;
 	statusName: string;
+	applyCount?: string;
 }
 
 export const CardContainer = styled.div<CardProps>`
@@ -319,4 +321,71 @@ export const RefuseButton = styled.button`
 	background-color: #ffd4d4;
 	font-size: 1.2rem;
 	cursor: pointer;
+`;
+
+export const VolunteerBadge = styled(Badge)`
+	background: ${hexToRgba('#FF5A72', 0.8)};
+
+	${({ statusName }) =>
+		(statusName === VolunteerTypes.COMPLETED ||
+			statusName === VolunteerTypes.DISCONTINUE) &&
+		css`
+			background: ${hexToRgba('#202020', 0.8)};
+		`}
+`;
+
+export const Label = styled.div`
+	background: ${hexToRgba('#202020', 0.8)};
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	height: 3rem;
+	width: 16rem;
+	left: 0.2;
+	bottom: 0;
+	border-radius: ${({ theme }) => theme.radius.s1};
+
+	img {
+		margin-left: 0.5rem;
+		width: 2rem;
+		height: 2rem;
+	}
+
+	p {
+		text-align: left;
+		margin-left: 1rem;
+		color: ${({ theme }) => theme.colors.background};
+		font-size: ${({ theme }) => theme.typography.size.subparagraph};
+		word-break: normal;
+	}
+`;
+
+export const TitleInfo = styled.h2`
+	font-size: ${({ theme }) => theme.typography.size.subtitle};
+	line-height: 120%;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	color: ${({ theme }) => theme.colors.text};
+`;
+
+export const InfoBox = styled.div`
+	font-size: 0.875rem;
+	line-height: 1.5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	b {
+		text-align: right;
+		margin-left: 0.5rem;
+		font-size: ${({ theme }) => theme.typography.size.default};
+		font-weight: ${({ theme }) => theme.typography.weight.bold};
+		color: ${({ theme }) => theme.colors.highlight};
+	}
+`;
+
+export const VolunteerUserInfo = styled(UserInfo)`
+	margin-top: 0;
+	margin-right: 0.5rem;
 `;
