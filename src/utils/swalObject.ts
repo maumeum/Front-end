@@ -80,6 +80,17 @@ const alertData = {
 		confirmButtonText: '네',
 		cancelButtonText: '아니요',
 	}),
+
+	doubleCheckTitkeMsg: (title: string, text: string) => ({
+		title: `${title}`,
+		text: `${text}`,
+		icon: 'info' as SweetAlertIcon,
+		showCancelButton: true,
+		confirmButtonColor: '#ffd4d4',
+		cancelButtonColor: '#afcd81',
+		confirmButtonText: '네',
+		cancelButtonText: '아니요',
+	}),
 	fillTitleContent: {
 		title: '제목과 내용을 모두 입력해주세요',
 		icon: 'warning' as SweetAlertIcon,

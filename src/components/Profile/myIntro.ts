@@ -21,7 +21,7 @@ export const IntroContainer = styled.div`
 `;
 
 export const IntroBox = styled.textarea`
-	width: 55rem;
+	width: 66.5rem;
 	min-height: 35rem;
 	display: block;
 	border: 1px solid #ccc;
