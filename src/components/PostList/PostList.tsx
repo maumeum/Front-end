@@ -23,6 +23,7 @@ type PostListProps = {
 	postType?: string;
 	volunteerId?: string;
 	setIsModified?: Dispatch<SetStateAction<boolean>>;
+	isReported?: boolean;
 };
 const PostList = ({
 	postTitle,
@@ -32,11 +33,14 @@ const PostList = ({
 	postType,
 	volunteerId,
 	setIsModified,
+	isReported,
 }: PostListProps) => {
 	const { userData, getUserData } = useAuthStore();
 	useEffect(() => {
 		getUserData();
 	}, []);
+
+	const isAdmin = isReported && userData !== null && userData.role === 'admin';
 
 	const AcceptClick = () => {
 		Swal.fire(alertData.AcceptReported).then((result) => {
@@ -86,7 +90,7 @@ const PostList = ({
 						<PostContents>{postContents}</PostContents>
 					</PostBox>
 				</PostListContainer>
-				{userData !== null && userData.role === 'admin' && (
+				{isAdmin && (
 					<>
 						<AcceptButtons onClick={AcceptClick}>수락</AcceptButtons>
 						<PostButtons onClick={CancelClick}>취소</PostButtons>
