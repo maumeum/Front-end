@@ -29,6 +29,7 @@ export const Primary: Story = {
 			postType: '동행구해요',
 			content: '',
 			createdAt: '2023-05-30 14:00:00',
+			isReported: false,
 		},
 	},
 };

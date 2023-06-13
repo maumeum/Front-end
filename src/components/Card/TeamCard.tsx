@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 
@@ -14,7 +13,6 @@ import {
 	WriteDate,
 	TeamUserNickname,
 } from './card';
-import teamData from '@src/assets/datas/teamData';
 
 interface TeamCardProps {
 	teamData: TeamType;

@@ -8,7 +8,7 @@ export interface CommunityType {
 	postType: string;
 	createdAt: string;
 	content: string;
-	isReported: string;
+	isReported: boolean;
 }
 
 export type CommunityListType = CommunityType[];
@@ -24,7 +24,7 @@ export interface ReviewType {
 	index: number;
 	createdAt: string;
 	images: string[];
-	isReported: string;
+	isReported: boolean;
 }
 
 export type ReviewListType = ReviewType[];
