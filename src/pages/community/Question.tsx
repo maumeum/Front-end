@@ -28,14 +28,17 @@ const Question = () => {
 	const fetchPostList = async () => {
 		try {
 			const token = getToken();
-			const response = await get<DataType>('/api/community/category/qna', {
-				headers: {
-					Authorization: `Bearer ${token}`,
+			const response = await get<DataType>(
+				'/api/community/category/qna?skip=0&limit=10',
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+					params: {
+						postType: 'qna',
+					},
 				},
-				params: {
-					postType: 'qna',
-				},
-			});
+			);
 			setPostListData(response.data);
 			console.log(response);
 		} catch (error) {

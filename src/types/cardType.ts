@@ -8,6 +8,7 @@ export interface CommunityType {
 	postType: string;
 	createdAt: string;
 	content: string;
+	isReported: string;
 }
 
 export type CommunityListType = CommunityType[];
@@ -23,6 +24,7 @@ export interface ReviewType {
 	index: number;
 	createdAt: string;
 	images: string[];
+	isReported: string;
 }
 
 export type ReviewListType = ReviewType[];
@@ -45,7 +47,7 @@ export interface VolunteerType {
 
 export type VolunteerListType = VolunteerType[];
 
-export interface TeamListType {
+export interface TeamType {
 	_id: number;
 	category: string;
 	teamName: string;
@@ -55,3 +57,5 @@ export interface TeamListType {
 	createdAt: string;
 	image?: string;
 }
+
+export type TeamListType = TeamType[];

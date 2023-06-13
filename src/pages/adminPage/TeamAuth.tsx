@@ -1,10 +1,25 @@
+import { useEffect, useState } from 'react';
+
+import { get } from '@api/api';
 import TeamCard from '@components/Card/TeamCard';
 import SearchBar from '@components/SearchBar/SearchBar';
 import Menu from '@components/Menu/Menu.tsx';
+import { TeamListType } from '@src/types/cardType';
+import DataType from '@src/types/dataType';
 import { MenuBar, TopBarContainer, TopBar, TeamCardContainer } from './style';
-import teamsData from '@assets/datas/teamData';
 
 const TeamAuth = () => {
+	const [teamList, setTeamList] = useState<TeamListType>([]);
+
+	// teamList 불러오기
+	useEffect(() => {
+		const fetchData = async () => {
+			const responseData = await get<DataType>('/api/team/auth', {});
+			setTeamList(responseData.data);
+		};
+		fetchData();
+		window.scrollTo(0, 0);
+	});
 	const handleClick = (query: string) => {
 		console.log(query);
 	};
@@ -18,9 +33,8 @@ const TeamAuth = () => {
 			</TopBarContainer>
 			<SearchBar onSearch={handleClick} />
 			<TeamCardContainer>
-				{teamsData.map((item) => (
-					<TeamCard teamData={item} key={item._id} />
-				))}
+				{teamList &&
+					teamList.map((item) => <TeamCard teamData={item} key={item._id} />)}
 			</TeamCardContainer>
 		</>
 	);

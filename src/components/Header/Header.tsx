@@ -33,6 +33,7 @@ const Header = () => {
 	// 로그인 버튼을 클릭하여 로그인 화면으로 이동
 	const loginHandler = () => {
 		navigate('/login');
+		window.scrollTo(0, 0);
 		setClick(() => 'home');
 	};
 
@@ -53,6 +54,7 @@ const Header = () => {
 	// search 로고를 클릭하여 검색 화면으로 이동
 	const searchHandler = () => {
 		navigate('/search');
+		window.scrollTo(0, 0);
 		setClick(() => 'home');
 	};
 
@@ -68,6 +70,7 @@ const Header = () => {
 						className={click === 'volunteers' ? 'volunteers' : ''}
 						onClick={() => {
 							setClick(() => 'volunteers');
+							window.scrollTo(0, 0);
 						}}>
 						같이봉사해요
 					</NavCategory>
@@ -76,6 +79,7 @@ const Header = () => {
 						className={click === 'community' ? 'community' : ''}
 						onClick={() => {
 							setClick(() => 'community');
+							window.scrollTo(0, 0);
 						}}>
 						커뮤니티
 					</NavCategory>
@@ -84,6 +88,7 @@ const Header = () => {
 						className={click === 'review' ? 'review' : ''}
 						onClick={() => {
 							setClick(() => 'review');
+							window.scrollTo(0, 0);
 						}}>
 						봉사후기
 					</NavCategory>

@@ -29,7 +29,7 @@ const FindFriend = () => {
 		try {
 			const token = getToken();
 			const response = await get<DataType>(
-				'/api/community/category/findfriend',
+				'/api/community/category/findfriend?skip=0&limit=10',
 				{
 					headers: {
 						Authorization: `Bearer ${token}`,

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { CommunityType } from '@src/types/cardType';
 
 import {
@@ -12,9 +13,18 @@ interface CommunityCardProps {
 }
 
 const CommunityCard = ({ communityData, onClick }: CommunityCardProps) => {
+	const [postType, setPostType] = useState<string>('');
+	useEffect(() => {
+		if (communityData.postType === 'qna') {
+			setPostType('궁금해요');
+		} else {
+			setPostType('동행 구해요');
+		}
+	}, []);
+
 	return (
 		<CommunityContainer onClick={onClick}>
-			<PostType>{communityData.postType}</PostType>
+			<PostType>{postType}</PostType>
 			<CommunityTitle>{communityData.title}</CommunityTitle>
 		</CommunityContainer>
 	);
