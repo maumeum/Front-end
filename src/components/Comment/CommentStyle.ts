@@ -45,6 +45,7 @@ export const Btn1 = styled.button`
 	border-radius: 2.2rem;
 	border: none;
 	cursor: pointer;
+	font-size: 2rem;
 `;
 export const Btn2 = styled.button`
 	background-color: #ffd4d4;
@@ -53,6 +54,7 @@ export const Btn2 = styled.button`
 	border-radius: 2.2rem;
 	border: none;
 	cursor: pointer;
+	font-size: 2rem;
 `;
 export const CommentContainer = styled.div`
 	border: 1px solid #e2e8f0;

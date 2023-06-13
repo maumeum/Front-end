@@ -34,6 +34,7 @@ export const TextLength = styled.p`
 	margin-top: -9rem;
 	margin-bottom: 10rem;
 `;
+
 export const ButtonContainer = styled.div`
 	display: flex;
 	gap: 1rem;
@@ -54,4 +55,25 @@ export const SubmitButton = styled.button`
 	border: none;
 	border-radius: 1.2rem;
 	cursor: pointer;
+`;
+export const ImageArea = styled.label`
+	display: inline-block;
+	padding: 8px 16px;
+	text-align: center;
+	background-color: var(--color--footer);
+	color: black;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	width: 20rem;
+	font-size: 2rem;
+	margin-top: -10rem;
+
+	input {
+		opacity: 0;
+		position: absolute;
+		top: 0;
+		left: 0;
+		cursor: pointer;
+	}
 `;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { get, del } from '@api/api';
+import { get, del, patch } from '@api/api';
 import { getToken } from '@api/token';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
@@ -19,6 +19,7 @@ import {
 	Contentdiv,
 	Content,
 	BtnDelete,
+	BtnReport,
 } from '@src/pages/community/style';
 import CommentSection from '@src/components/Comment/Comment';
 import DataType from '@src/types/dataType';
@@ -38,6 +39,7 @@ const ReviewDetail = () => {
 			console.log(response.data);
 		};
 		fetchPost();
+		window.scrollTo(0, 0);
 	}, []);
 
 	useEffect(() => {
@@ -70,6 +72,15 @@ const ReviewDetail = () => {
 		}
 	};
 
+	const handleReport = async () => {
+		const token = getToken();
+		await patch<DataType>(`/api/review/users/reports/${postId}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+	};
+
 	const { title, createdAt, images, content } = post;
 	const hasPostImage = !!images;
 
@@ -77,6 +88,7 @@ const ReviewDetail = () => {
 		.locale('ko')
 		.format('YYYY년 MM월 DD일 HH:mm:ss');
 
+	console.log('이미지', images);
 	return (
 		<>
 			<DetailContainer>
@@ -91,11 +103,24 @@ const ReviewDetail = () => {
 						{loginUser && (
 							<BtnDelete onClick={handleDelete}>삭제하기</BtnDelete>
 						)}
+						{!loginUser && (
+							<BtnReport onClick={handleReport}>신고하기</BtnReport>
+						)}
 					</SubContainer>
 				</Header>
 				<Line></Line>
 				<ContentContainer>
-					{hasPostImage && <Image src={images} alt='content-image' />}
+					{hasPostImage && (
+						<div>
+							{images.map((image: any, index: any) => (
+								<Image
+									key={index}
+									src={`http://localhost:5002/${image}`}
+									alt='content-image'
+								/>
+							))}
+						</div>
+					)}
 					<Contentdiv>
 						<Content>{content}</Content>
 					</Contentdiv>

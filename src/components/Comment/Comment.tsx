@@ -101,7 +101,6 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 		}
 	};
 
-	//구현중
 	const handleEditComment = async (comment_id: string) => {
 		if (!editedComment) {
 			alert('내용을 입력해주세요');
