@@ -30,12 +30,14 @@ interface TeamModalProps {
 	teamData: TeamType;
 }
 
+const apiURL = import.meta.env.VITE_API_URL;
+
 const TeamModal = ({ isOpen, closeModal, teamData }: TeamModalProps) => {
 	const handleClose = () => {
 		closeModal();
 	};
 
-	const image = `http://localhost:5002/${teamData.image}`;
+	const image = `${apiURL}/${teamData.image}`;
 	const date = dayjs(teamData.establishmentDate)
 		.locale('ko')
 		.format('YYYY년 MM월 DD일');

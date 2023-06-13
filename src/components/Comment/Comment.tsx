@@ -24,6 +24,8 @@ import DataType from '@src/types/dataType';
 import { get, post, patch, del } from '@api/api';
 import { dateFormatter } from '@src/utils/dateUtils';
 import useAuthStore from '@src/store/useAuthStore';
+import Swal from 'sweetalert2';
+import alertData from '@utils/swalObject';
 
 type CommentProps = {
 	postId: string;
@@ -64,7 +66,7 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 
 	const handleCommentChange = (event: any) => {
 		const text = event.target.value;
-		if (text.length <= 50) {
+		if (text.length <= 200) {
 			setInputArea(text);
 		}
 	};
@@ -153,6 +155,7 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 				Authorization: `Bearer ${token}`,
 			},
 		});
+		Swal.fire(alertData.ReportCompleted);
 	};
 
 	return (
@@ -165,9 +168,9 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 			<CommentArea
 				value={inputArea}
 				onChange={handleCommentChange}
-				maxLength={50}
+				maxLength={200}
 			/>
-			<CommentLength>{inputArea.length}/50</CommentLength>
+			<CommentLength>{inputArea.length}/200</CommentLength>
 			<BtnContainer>
 				<Btn1 onClick={handleCancelSubmit}>취소</Btn1>
 				<Btn2 onClick={handleCommentSubmit}>등록</Btn2>
@@ -201,7 +204,7 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 								<EditCommentArea
 									value={editedComment}
 									onChange={(e) => setEditedComment(e.target.value)}
-									maxLength={50}
+									maxLength={200}
 								/>
 								<BtnContainer>
 									<Btn1 onClick={() => handleCancelSubmit()}>취소</Btn1>

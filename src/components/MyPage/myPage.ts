@@ -6,10 +6,12 @@ export const Container = styled.div`
 	position: relative;
 	margin: 0;
 	padding: 0;
+	min-height: 100rem;
 `;
 
 export const MenuBar = styled.div`
 	width: 10%;
+	min-width: 15.7rem;
 	border-radius: 5px;
 	margin: 15.5rem 0 0 10rem;
 	top: 9.8rem;

@@ -23,6 +23,10 @@ import {
 import CommentSection from '@src/components/Comment/Comment.tsx';
 import DataType from '@src/types/dataType.ts';
 import useAuthStore from '@src/store/useAuthStore.ts';
+import Swal from 'sweetalert2';
+import alertData from '@src/utils/swalObject.ts';
+
+const apiURL = import.meta.env.VITE_API_URL;
 
 const FindFriendDetail = () => {
 	const navigate = useNavigate();
@@ -88,6 +92,7 @@ const FindFriendDetail = () => {
 				Authorization: `Bearer ${token}`,
 			},
 		});
+		Swal.fire(alertData.ReportCompleted);
 	};
 
 	const handleDelete = async () => {
@@ -148,7 +153,7 @@ const FindFriendDetail = () => {
 							{images.map((image: any, index: any) => (
 								<Image
 									key={index}
-									src={`http://localhost:5002/${image}`}
+									src={`${apiURL}/${image}`}
 									alt='content-image'
 								/>
 							))}

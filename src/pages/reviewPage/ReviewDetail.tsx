@@ -23,6 +23,10 @@ import {
 import CommentSection from '@src/components/Comment/Comment';
 import DataType from '@src/types/dataType';
 import useAuthStore from '@src/store/useAuthStore.ts';
+import Swal from 'sweetalert2';
+import alertData from '@src/utils/swalObject';
+
+const apiURL = import.meta.env.VITE_API_URL;
 
 const ReviewDetail = () => {
 	const navigate = useNavigate();
@@ -84,6 +88,7 @@ const ReviewDetail = () => {
 				Authorization: `Bearer ${token}`,
 			},
 		});
+		Swal.fire(alertData.ReportCompleted);
 	};
 
 	const { title, createdAt, images, content } = post;
@@ -128,7 +133,7 @@ const ReviewDetail = () => {
 							{images.map((image: any, index: any) => (
 								<Image
 									key={index}
-									src={`http://localhost:5002/${image}`}
+									src={`${apiURL}/${image}`}
 									alt='content-image'
 								/>
 							))}

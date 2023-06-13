@@ -43,6 +43,9 @@ export const Ongoing: Story = {
 			team: {
 				teamName: '데일리플러깅',
 			},
+			content: '안녕하세요',
+			centName: '엘리스봉사단',
+			user_id: '648682815370d42f67c12006',
 		},
 	},
 };
@@ -70,6 +73,9 @@ export const Complete: Story = {
 			team: {
 				teamName: '데일리플러깅',
 			},
+			content: '안녕하세요',
+			centName: '엘리스봉사단',
+			user_id: '648682815370d42f67c12006',
 		},
 	},
 };
@@ -97,6 +103,9 @@ export const Close: Story = {
 			team: {
 				teamName: '데일리플러깅',
 			},
+			content: '안녕하세요',
+			centName: '엘리스봉사단',
+			user_id: '648682815370d42f67c12006',
 		},
 	},
 };

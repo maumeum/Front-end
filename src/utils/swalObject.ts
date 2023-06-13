@@ -80,14 +80,47 @@ const alertData = {
 		confirmButtonText: '네',
 		cancelButtonText: '아니요',
 	}),
+
+	doubleCheckTitkeMsg: (title: string, text: string) => ({
+		title: `${title}`,
+		text: `${text}`,
+		icon: 'info' as SweetAlertIcon,
+		showCancelButton: true,
+		confirmButtonColor: '#ffd4d4',
+		cancelButtonColor: '#afcd81',
+		confirmButtonText: '네',
+		cancelButtonText: '아니요',
+	}),
 	fillTitleContent: {
 		title: '제목과 내용을 모두 입력해주세요',
 		icon: 'warning' as SweetAlertIcon,
+	},
+	ReportCompleted: {
+		title: '신고가 완료되었습니다',
+		icon: 'info' as SweetAlertIcon,
 	},
 	waitTeamCert: {
 		title: '제출이 완료되었습니다.',
 		text: '관리자의 확인 후 승인 여부가 2~3일 내에 메일로 발송됩니다.',
 		confirmButtonColor: 'var(--button--color)',
+	},
+	AcceptReported: {
+		title: '승인 하시겠습니까?',
+		icon: 'warning' as SweetAlertIcon,
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: '예',
+		cancelButtonText: '아니오',
+	},
+	cancelReported: {
+		title: '취소 하시겠습니까?',
+		icon: 'warning' as SweetAlertIcon,
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: '예',
+		cancelButtonText: '아니오',
 	},
 };
 

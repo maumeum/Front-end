@@ -23,6 +23,10 @@ import {
 import CommentSection from '@src/components/Comment/Comment.tsx';
 import DataType from '@src/types/dataType.ts';
 import useAuthStore from '@src/store/useAuthStore.ts';
+import Swal from 'sweetalert2';
+import alertData from '@src/utils/swalObject.ts';
+
+const apiURL = import.meta.env.VITE_API_URL;
 
 const QuestionDetail = () => {
 	const navigate = useNavigate();
@@ -104,6 +108,7 @@ const QuestionDetail = () => {
 				Authorization: `Bearer ${token}`,
 			},
 		});
+		Swal.fire(alertData.ReportCompleted);
 	};
 	const { title, createdAt, images, content } = post;
 	const hasPostImage = !!images;
@@ -145,7 +150,7 @@ const QuestionDetail = () => {
 							{images.map((image: any, index: any) => (
 								<Image
 									key={index}
-									src={`http://localhost:5002/${image}`}
+									src={`${apiURL}/${image}`}
 									alt='content-image'
 								/>
 							))}
