@@ -49,9 +49,9 @@ const Main = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const responseData = await get<DataType>(
-				'/api/volunteers?skip=0&limit=8',
+				'/api/volunteers?skip=0&limit=8&status=true',
 			);
-			setVolunteerList(responseData.data.volunteerList);
+			setVolunteerList(responseData.data.volunteerStatus);
 		};
 		fetchData();
 	}, []);
