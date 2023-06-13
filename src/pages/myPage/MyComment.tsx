@@ -63,6 +63,8 @@ function MyComment() {
 		fetchData();
 	}, []);
 
+	console.log(commentData);
+
 	useEffect(() => {
 		currTab === TabTypes.WRITTEN_POSTS
 			? setSelectedData(postData)

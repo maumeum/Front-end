@@ -13,11 +13,12 @@ interface MyReviewProps {
 	id?: string;
 }
 
-function MyReview({ closeModal }: MyReviewProps) {
+function MyReview({ closeModal, id }: MyReviewProps) {
 	const [title, setTitle] = useState<string>('');
 	const [content, setContent] = useState<string>('');
 	const [files, setFiles] = useState<File[]>([]);
-
+	const volunteer_id = id;
+	console.log(id);
 	const handleContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		setContent(e.target.value);
 	};
@@ -33,7 +34,6 @@ function MyReview({ closeModal }: MyReviewProps) {
 		}
 	};
 
-	const volunteer_id = '6486926bfb85ee94f870a034';
 	const handleSubmit = async () => {
 		if (title === '') {
 			Swal.fire(alertData.errorMessage('제목을 입력해주세요!'));
