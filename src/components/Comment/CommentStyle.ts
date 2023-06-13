@@ -92,3 +92,13 @@ export const Contents = styled.p`
 export const CommentHolder = styled.p`
 	font-size: 2rem;
 `;
+export const BtnReport = styled.button`
+	background-color: #f87474;
+	border-radius: 3.3rem;
+	border: none;
+	height: 6rem;
+	width: 9rem;
+	margin-top: 2rem;
+	cursor: pointer;
+	font-size: 2rem;
+`;
