@@ -103,6 +103,7 @@ const Report = () => {
 								postId={postData._id}
 								postType={postData.postType}
 								setIsModified={setIsModified}
+								isReported={postData.isReported}
 							/>
 						))}
 				{reviewList &&
@@ -126,6 +127,7 @@ const Report = () => {
 								postId={postData._id}
 								volunteerId={postData.volunteer_id}
 								setIsModified={setIsModified}
+								isReported={postData.isReported}
 							/>
 						))}
 			</PostContainer>
