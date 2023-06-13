@@ -18,15 +18,18 @@ export const TopSlogan = styled.h2`
 export const TopContainer = styled.div`
 	display: flex;
 	flex: 1;
+	width: 112rem;
 	justify-content: space-between;
 	margin: 0 40rem;
 `;
 
-export const ReviewContainer = styled.div``;
+export const ReviewContainer = styled.div`
+	width: 70%;
+`;
 
 export const IntroducePage = styled.div`
 	margin: 4rem 0 4rem 4.5rem;
-	width: 36rem;
+	width: 30%;
 	height: 54rem;
 	background-color: ${({ theme }) => theme.colors.background};
 	border: none;
@@ -37,8 +40,8 @@ export const IntroducePage = styled.div`
 
 export const IntroduceTitle = styled.div`
 	display: flex;
-	justify-content: space-between;
-	width: 36rem;
+	flex-direction: column;
+	width: 100%;
 	height: 25rem;
 	background-color: var(--color--footer);
 	border: none;
@@ -53,9 +56,9 @@ export const MainTitle = styled.h2`
 `;
 
 export const IntroImg = styled.img`
-	margin: 1.5rem 2.5rem auto 0;
-	width: 5.5rem;
-	height: 7.5rem;
+	align-self: end;
+	margin: auto 1rem 5rem auto;
+	width: 60%;
 `;
 
 export const IntroduceDesc = styled.div`
@@ -77,7 +80,7 @@ export const Desc = styled.p`
 `;
 
 export const MidSlogan = styled.h2`
-	margin: 12rem 40rem 0;
+	margin: 5rem 40rem 0;
 	width: 50rem;
 	font-size: 3rem;
 	font-weight: 900;
