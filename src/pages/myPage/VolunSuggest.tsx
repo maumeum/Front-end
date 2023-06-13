@@ -41,10 +41,6 @@ function VolunSuggest() {
 	const [suggestVolunList, setSuggestVolunList] = useState<ResponseData[]>([]);
 	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
 	const currTab = tabs[0];
-	const [isOpen, setIsOpen] = useState(false);
-	const toggleModal = (onoff: boolean) => () => {
-		setIsOpen(onoff);
-	};
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -53,7 +49,10 @@ function VolunSuggest() {
 					'/api/volunteers/registerations',
 					{},
 				);
-				setSuggestVolunList(getSuggestedData.data as ResponseData[]);
+				console.log(getSuggestedData);
+				setSuggestVolunList(
+					getSuggestedData.data.registerationVolunteers as ResponseData[],
+				);
 			} catch (error) {
 				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
 			}
@@ -103,7 +102,6 @@ function VolunSuggest() {
 							<Card key={data.volunteer_id._id} data={data} currTab={currTab} />
 						))}
 					</CardBox>
-					<MyReview closeModal={toggleModal(false)} />
 				</Main>
 			</Container>
 		</>

@@ -173,7 +173,7 @@ const AuthTeam = () => {
 							<TeamTypeRadio
 								type='radio'
 								name='category'
-								value='개인/동아리'
+								value={'개인/동아리'}
 								onChange={getFormChanger(setCategory)}
 							/>
 							개인/동아리
@@ -233,15 +233,11 @@ const AuthTeam = () => {
 						/>
 					</MainContainer>
 					<ButtonContainer>
-						{isSubmit ? ( //음 수정하기로 하는게 맞는지 한번 물어보기
-							<LargeButton onClick={clickHandler}>수정하기</LargeButton>
-						) : (
-							<LargeButton
-								onClick={clickHandler}
-								disabled={isSubmit ? true : false}>
-								제출하기
-							</LargeButton>
-						)}
+						<LargeButton
+							onClick={clickHandler}
+							disabled={isSubmit ? true : false}>
+							제출하기
+						</LargeButton>
 					</ButtonContainer>
 				</TeamForm>
 			</Main>

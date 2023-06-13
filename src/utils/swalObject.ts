@@ -71,7 +71,17 @@ const alertData = {
 		confirmButtonText: '확인',
 		confirmButtonColor: 'var(--button--color)',
 	}),
-	doubleCheckMessage: (title: string, text?: string) => ({
+	doubleCheckMessage: (title: string) => ({
+		title: `${title}`,
+		icon: 'info' as SweetAlertIcon,
+		showCancelButton: true,
+		confirmButtonColor: '#ffd4d4',
+		cancelButtonColor: '#afcd81',
+		confirmButtonText: '네',
+		cancelButtonText: '아니요',
+	}),
+
+	doubleCheckTitkeMsg: (title: string, text: string) => ({
 		title: `${title}`,
 		text: `${text}`,
 		icon: 'info' as SweetAlertIcon,

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from '@components/Modal/Modal.tsx';
 import Selector from '@components/Selector/Selector.tsx';
 import { SmallButton } from '@components/Buttons/SmallButton.ts';
@@ -13,25 +13,31 @@ import {
 	ButtonContainer,
 	SelectContainer,
 } from './card.ts';
+import {
+	truncateDate,
+	truncateCentName,
+	splitStatusName,
+} from '@utils/truncateDataFns';
 import { TabTypes } from '@src/types/myPageConstants.ts';
-import { post, patch } from '@api/api';
+import { post, patch, del } from '@api/api';
 import Swal from 'sweetalert2';
 import alertData from '@src/utils/swalObject.ts';
 import defaultImage from '@src/assets/images/volunteer1.jpg';
 import { VolunteerTypes } from '@src/types/myPageConstants.ts';
 import check from '@assets/icons/authentication.svg';
 
+interface RegisterUserId {
+	nickname: string;
+	image: string;
+	authorization: boolean;
+}
+
 export interface CardProps {
 	data: {
-		// register_user_id: string[];
 		createdAt: string;
 		isParticipate?: boolean;
-
-		register_user_id?: {
-			nickname: string;
-			image: string;
-			authorization: boolean;
-		};
+		_id: string;
+		register_user_id?: RegisterUserId;
 
 		volunteer_id: {
 			startDate: string;
@@ -42,50 +48,32 @@ export interface CardProps {
 			statusName: string;
 			deadline: string;
 			images: string[];
+			register_user_id?: RegisterUserId; // 여기에 새로 정의한 타입 추가
 		};
 	};
 	currTab?: string;
 }
 
-function truncateDate(date: string) {
-	if (!date) {
-		return '';
-	}
-	return dayjs(date).format('YYYY-MM-DD');
-}
-
-function truncateCentName(name: string) {
-	if (!name) {
-		return '';
-	}
-	if (name.length > 10) {
-		return `${name.slice(0, 10)}...`;
-	} else {
-		return name;
-	}
-}
-
-function splitStatusName(statusName: string) {
-	return statusName.length === 4
-		? `${statusName.slice(0, 2)}<br />${statusName.slice(2)}`
-		: statusName;
-}
 const url = import.meta.env.VITE_API_URL;
 
 function Card({ currTab, data }: CardProps) {
+	//userInfo, cardProps(이름 시멘틱하게) 데이터 따로 받아오기
 	const { _id, title, statusName, images, startDate, endDate } =
 		data.volunteer_id;
+	const { _id: volunId } = data;
+	const isActiveUser = data.volunteer_id.register_user_id;
 	const {
 		nickname = '',
 		image = '',
-		authorization = false,
-	} = data.register_user_id || {};
+		authorization,
+	} = (isActiveUser
+		? data.volunteer_id.register_user_id
+		: data.register_user_id) || {};
 
-	console.log(data); // 취소기능추가하면 지워라
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedStatus, setSelectedStatus] = useState<string>(statusName);
 	const [selectedParticipationStatus, setSelectedParticipationStatus] =
-		useState<string>(statusName);
+		useState<string>('');
 
 	const toggleModal = (onoff: boolean) => () => {
 		setIsOpen(onoff);
@@ -98,6 +86,7 @@ function Card({ currTab, data }: CardProps) {
 
 		if (result.isConfirmed) {
 			try {
+				console.log(_id);
 				await patch(`/api/volunteers/registerations/${_id}`, {
 					statusName: selectedValue,
 				});
@@ -112,32 +101,40 @@ function Card({ currTab, data }: CardProps) {
 					`${selectedValue} (으)로 상태가 변경되었습니다`,
 				),
 			);
-			window.location.reload();
 		}
 	};
 
-	const handleParticipationStatusChange = async (value: string) => {
+	const handleParticipationStatusChange = async (selectedValue: string) => {
+		setSelectedParticipationStatus(selectedValue);
+		console.log(selectedParticipationStatus);
+		console.log(selectedValue);
 		try {
-			if (value === '참여완료') {
-				await post(`/api/review/users/participation/${_id}`, {});
-				const result = await Swal.fire({
-					title: '참여하신 활동이 맞으십니까?',
-					text: '커뮤니티 경험 향상을 위해 거짓 정보는 지양해주세요!',
-					icon: 'info',
-					showCancelButton: true,
-					confirmButtonColor: '#ffd4d4',
-					cancelButtonColor: '#afcd81',
-					confirmButtonText: '네',
-					cancelButtonText: '아니요',
-				});
-
+			if (selectedValue === 'complete') {
+				const result = await Swal.fire(
+					alertData.doubleCheckTitkeMsg(
+						'참여하신 활동이 맞으십니까?',
+						'커뮤니티 경험 향상을 위해 거짓 정보는 지양해주세요!',
+					),
+				);
 				if (result.isConfirmed) {
+					await post(`/api/review/users/participation/${_id}`, {});
 					await Swal.fire('완료된 봉사로 변경되었습니다!', 'success');
 				}
-			} else if (value === '참여취소') {
-				// value가 'canceled'일 때 로직 추가
+			} else if (selectedValue === 'cancel') {
+				await del(`/api/applications/${volunId}`, {
+					data: { volunteer_id: _id },
+				});
+				const result = await Swal.fire(
+					alertData.doubleCheckMessage('봉사활동을 취소하시겠습니까?'),
+				);
+				if (result.isConfirmed) {
+					await Swal.fire(
+						alertData.successMessage('봉사활동이 취소되었습니다'),
+					);
+				}
 			}
 		} catch (error) {
+			console.log('오류 발생', error);
 			await Swal.fire(
 				alertData.errorMessage('활동이 시작되지 않은 봉사입니다.'),
 			);
@@ -168,7 +165,7 @@ function Card({ currTab, data }: CardProps) {
 							endDate,
 						)}`}</p>
 					</VolunInfo>
-					{/* 컴포넌트 분리 시급... */}
+
 					<UserInfo>
 						<img src={`${url}/${image}`} alt='작성자 프로필사진' />
 						<p>{truncateCentName(nickname)}</p>
@@ -204,8 +201,9 @@ function Card({ currTab, data }: CardProps) {
 									value={selectedParticipationStatus}
 									onChange={handleParticipationStatusChange}
 									options={[
-										{ value: '참여완료', label: '참여완료' },
-										{ value: '참여취소', label: '참여취소' },
+										{ value: '상태변경', label: '상태변경' },
+										{ value: 'complete', label: '참여완료' },
+										{ value: 'cancel', label: '신청취소' },
 									]}
 								/>
 							</SelectContainer>
