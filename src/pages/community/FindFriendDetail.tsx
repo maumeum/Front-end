@@ -23,6 +23,8 @@ import {
 import CommentSection from '@src/components/Comment/Comment.tsx';
 import DataType from '@src/types/dataType.ts';
 import useAuthStore from '@src/store/useAuthStore.ts';
+import Swal from 'sweetalert2';
+import alertData from '@src/utils/swalObject.ts';
 
 const FindFriendDetail = () => {
 	const navigate = useNavigate();
@@ -88,6 +90,7 @@ const FindFriendDetail = () => {
 				Authorization: `Bearer ${token}`,
 			},
 		});
+		Swal.fire(alertData.ReportCompleted);
 	};
 
 	const handleDelete = async () => {
