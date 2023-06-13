@@ -4,6 +4,7 @@ export const TeamCardContainer = styled.div`
 	margin: 8rem 46rem;
 	display: grid;
 	min-width: 102.4rem;
+	min-height: 80rem;
 	grid-template-columns: repeat(3, 1fr);
 	column-gap: 4rem;
 `;
@@ -44,4 +45,5 @@ export const MenuBar = styled.div`
 
 export const PostContainer = styled.div`
 	margin: 6.4rem auto;
+	min-height: 80rem;
 `;

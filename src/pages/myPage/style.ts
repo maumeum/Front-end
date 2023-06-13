@@ -1,7 +1,16 @@
 import styled from 'styled-components';
 
 export const TeamForm = styled.form`
-	margin: 0 0 7rem 7rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 7rem;
+	width: 112rem;
+`;
+
+export const TopTitle = styled.h2`
+	margin: 2rem auto 2.5rem;
+	font-size: 2.8rem;
 `;
 
 export const Title = styled.h2`
@@ -17,4 +26,12 @@ export const TeamTypeRadio = styled.input`
 	margin-right: 1.5rem;
 	width: 1.8rem;
 	height: 1.8rem;
+`;
+
+export const MainContainer = styled.div``;
+
+export const ButtonContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	margin-top: 3rem;
 `;

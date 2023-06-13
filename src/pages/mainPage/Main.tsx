@@ -48,8 +48,10 @@ const Main = () => {
 	// 봉사활동 데이터 불러오기
 	useEffect(() => {
 		const fetchData = async () => {
-			const responseData = await get<DataType>('/api/volunteers');
-			setVolunteerList(responseData.data);
+			const responseData = await get<DataType>(
+				'/api/volunteers?skip=0&limit=8',
+			);
+			setVolunteerList(responseData.data.volunteerList);
 		};
 		fetchData();
 	}, []);
@@ -57,10 +59,11 @@ const Main = () => {
 	// 커뮤니티 데이터 불러오기
 	useEffect(() => {
 		const fetchData = async () => {
-			const responseData = await get<DataType>('/api/community');
-			setCommunityList(responseData.data);
+			const responseData = await get<DataType>('/api/community?skip=0&limit=6');
+			setCommunityList(responseData.data.posts);
 		};
 		fetchData();
+		window.scrollTo(0, 0);
 	}, []);
 
 	return (
@@ -103,28 +106,22 @@ const Main = () => {
 			<MidSlogan>시간을 나눠 마음 채우기</MidSlogan>
 			<VolunteerContainer>
 				{volunteerList &&
-					volunteerList
-						.sort(() => Math.random() - 0.5)
-						.slice(0, 8)
-						.map((item) => (
-							<VolunteerCard key={item._id} volunteerData={item} />
-						))}
+					volunteerList.map((item) => (
+						<VolunteerCard key={item._id} volunteerData={item} />
+					))}
 			</VolunteerContainer>
 			<CommunityTitle>커뮤니티</CommunityTitle>
 			<CommunityContainer>
 				{communityList &&
-					communityList
-						.sort(() => Math.random() - 0.5)
-						.slice(0, 6)
-						.map((item) => (
-							<CommunityCard
-								key={item._id}
-								communityData={item}
-								onClick={() => {
-									navigate(`/community/${item._id}`);
-								}}
-							/>
-						))}
+					communityList.map((item) => (
+						<CommunityCard
+							key={item._id}
+							communityData={item}
+							onClick={() => {
+								navigate(`/community/${item._id}`);
+							}}
+						/>
+					))}
 			</CommunityContainer>
 		</MainSection>
 	);
