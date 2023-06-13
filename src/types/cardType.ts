@@ -51,11 +51,18 @@ export interface TeamType {
 	_id: number;
 	category: string;
 	teamName: string;
-	userId: {
+	establishmentDate: string;
+	introduction: string;
+	briefHistory: string;
+	location: string;
+	phone: string;
+	user_id: {
+		_id: string;
 		nickname: string;
 	};
 	createdAt: string;
 	image?: string;
+	isSubmit: boolean;
 }
 
 export type TeamListType = TeamType[];
