@@ -70,6 +70,7 @@ function MyReview({ closeModal, id }: MyReviewProps) {
 		} catch (error) {
 			console.log(error);
 		}
+		Swal.fire(alertData.successMessage('리뷰가 성공적으로 등록되었습니다:)'));
 	};
 
 	return (

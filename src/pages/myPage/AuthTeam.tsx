@@ -78,6 +78,9 @@ const AuthTeam = () => {
 	}, []);
 
 	useEffect(() => {
+		//isSunbmit true => 데이터 불러오고, 안내문 나옴
+		//이렇게 되면 값이 없으면 오류가나나? -> 오류가 남
+		//제출이 한번되고 나면 이 값이 변하면 안될거같음...혹은 다른 기준점이 필요
 		const fetchTeamInfo = async () => {
 			try {
 				const getTeamInfo = await get<DataType>('/api/team/auth');
@@ -104,9 +107,7 @@ const AuthTeam = () => {
 				console.error('Error fetching team info:', error);
 			}
 		};
-
 		if (isSubmit) {
-			//제출버튼이 눌린경우에만 데이터를 받아옴
 			fetchTeamInfo();
 		}
 	}, [isSubmit]);
@@ -154,11 +155,12 @@ const AuthTeam = () => {
 				</TabMenu>
 				<TeamForm>
 					<MainContainer>
-						<WaitMessage>
-							{isSubmit && (
+						{isSubmit && (
+							<WaitMessage>
 								<h1>현재 관리자가 검토중입니다. 조금만 기다려주세요:)</h1>
-							)}
-						</WaitMessage>
+							</WaitMessage>
+						)}
+
 						<TopTitle>팀 유형</TopTitle>
 						<TeamType>
 							<TeamTypeRadio
