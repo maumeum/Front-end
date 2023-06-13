@@ -56,6 +56,7 @@ const FindFriendDetail = () => {
 		getUserData();
 	}, []);
 
+	console.log('getuserData', userData);
 	useEffect(() => {
 		const loginUserLogic = async () => {
 			try {
@@ -115,6 +116,11 @@ const FindFriendDetail = () => {
 		'ko',
 	);
 
+	let formattedContent = [];
+	if (content) {
+		formattedContent = content.split('\n');
+	}
+
 	return (
 		<>
 			<DetailContainer>
@@ -149,7 +155,11 @@ const FindFriendDetail = () => {
 						</div>
 					)}
 					<Contentdiv>
-						<Content>{content}</Content>
+						<Content>
+							{formattedContent.map((item: string, index: number) => (
+								<p key={index}>{item}</p>
+							))}
+						</Content>
 					</Contentdiv>
 				</ContentContainer>
 			</DetailContainer>

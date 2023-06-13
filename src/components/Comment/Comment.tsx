@@ -18,14 +18,18 @@ import {
 	CommentArea,
 	CommentLength,
 	EditCommentArea,
+	BtnReport,
 } from './CommentStyle';
 import DataType from '@src/types/dataType';
 import { get, post, patch, del } from '@api/api';
-import dayjs from 'dayjs';
-import 'dayjs/locale/ko';
+import { dateFormatter } from '@src/utils/dateUtils';
+import useAuthStore from '@src/store/useAuthStore';
 
 type CommentProps = {
 	postId: string;
+};
+type UserType = {
+	uuid: string;
 };
 
 const CommentSection: React.FC<CommentProps> = ({ postId }) => {
@@ -33,9 +37,14 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 	const [value, setValue] = useState<any>([]);
 	const [editingCommentId, setEditingCommentId] = useState('');
 	const [editedComment, setEditedComment] = useState('');
+	const { userData, getUserData } = useAuthStore();
 
 	useEffect(() => {
 		getComments();
+	}, []);
+
+	useEffect(() => {
+		getUserData();
 	}, []);
 
 	const getComments = async () => {
@@ -136,7 +145,15 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 		);
 		getComments();
 	};
-	console.log('여기다', value);
+
+	const handleReport = async (comment_id: string) => {
+		const token = getToken();
+		await patch<DataType>(`/api/postComments/reports/${comment_id}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+	};
 
 	return (
 		<Container>
@@ -160,7 +177,7 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 				<Box></Box>
 				<Comment>댓글 목록</Comment>
 			</Title>
-			{value.length === 0 ? (
+			{!value || value.length === 0 ? (
 				<CommentHolder>등록된 댓글이 없습니다.</CommentHolder>
 			) : (
 				value &&
@@ -170,9 +187,11 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 							<UserContainer>
 								<UserName>{comment.user_id.nickname}</UserName>
 								<Date>
-									{dayjs(comment.createdAt)
-										.locale('ko')
-										.format('YYYY년 MM월 DD일 HH:mm:ss')}
+									{dateFormatter(
+										comment.createdAt,
+										'YYYY년 MM월 DD일 HH:mm:ss',
+										'ko',
+									)}
 								</Date>
 							</UserContainer>
 						</ProfileContainer>
@@ -196,12 +215,31 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 							<>
 								<Contents>{comment.content}</Contents>
 								<BtnContainer>
-									<Btn1 onClick={() => handelEditingComment(comment._id)}>
-										수정
-									</Btn1>
-									<Btn2 onClick={() => handleDeleteComment(comment._id)}>
-										삭제
-									</Btn2>
+									{String(comment.user_id.uuid) ===
+										String((userData as unknown as UserType)?.uuid) && (
+										<Btn1 onClick={() => handelEditingComment(comment._id)}>
+											수정
+										</Btn1>
+									)}
+									{String(comment.user_id.uuid) ===
+										String((userData as unknown as UserType)?.uuid) && (
+										<Btn2 onClick={() => handleDeleteComment(comment._id)}>
+											삭제
+										</Btn2>
+									)}
+									{String(comment.user_id.uuid) !==
+										String((userData as unknown as UserType)?.uuid) &&
+										userData !== null &&
+										userData.role !== 'admin' && (
+											<BtnReport onClick={() => handleReport(comment._id)}>
+												신고
+											</BtnReport>
+										)}
+									{userData !== null && userData.role === 'admin' && (
+										<Btn2 onClick={() => handleDeleteComment(comment._id)}>
+											삭제
+										</Btn2>
+									)}
 								</BtnContainer>
 							</>
 						)}

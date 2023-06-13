@@ -113,6 +113,11 @@ const QuestionDetail = () => {
 		'ko',
 	);
 
+	let formattedContent = [];
+	if (content) {
+		formattedContent = content.split('\n');
+	}
+
 	return (
 		<>
 			<DetailContainer>
@@ -147,7 +152,11 @@ const QuestionDetail = () => {
 						</div>
 					)}
 					<Contentdiv>
-						<Content>{content}</Content>
+						<Content>
+							{formattedContent.map((item: string, index: number) => (
+								<p key={index}>{item}</p>
+							))}
+						</Content>
 					</Contentdiv>
 				</ContentContainer>
 			</DetailContainer>
