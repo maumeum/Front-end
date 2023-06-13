@@ -94,7 +94,7 @@ const Header = () => {
 					</NavCategory>
 				</NavContainer>
 				<UtilContainer>
-					<MyPageButton />
+					<MyPageButton setClick={setClick} />
 					{!checkToken ? (
 						<LoginButton onClick={loginHandler}>로그인</LoginButton>
 					) : (

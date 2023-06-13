@@ -250,7 +250,8 @@ export const VolunteerContent = styled.p`
 
 export const TeamCardSection = styled.div`
 	margin-bottom: 6rem;
-	width: 31rem;
+	width: 30rem;
+	height: 40rem;
 	background-color: #ffffff;
 	filter: drop-shadow(0 2px 10px rgb(0, 0, 0, 10%));
 	border-radius: 12px;
@@ -259,14 +260,13 @@ export const TeamCardSection = styled.div`
 `;
 
 export const TeamImageContainer = styled.div`
-	margin-bottom: 0;
+	margin: 2.5rem;
+	overflow: hidden;
 `;
 
 export const TeamImage = styled.img`
-	margin: 2.5rem;
-	width: 80%;
+	width: 100%;
 	aspect-ratio: 1;
-	overflow: hidden;
 `;
 
 export const TeamMainContainer = styled.div`
@@ -284,10 +284,6 @@ export const TeamDescContainer = styled.div`
 	align-items: center;
 `;
 
-export const DescContainer = styled.div`
-	text-align: start;
-`;
-
 export const WriteDate = styled.p`
 	font-size: 1.2rem;
 	color: #d3d3d3;
@@ -299,7 +295,9 @@ export const TeamUserNickname = styled.p`
 `;
 
 export const TeamButtonContainer = styled.div`
+	margin-bottom: 3rem;
 	display: flex;
+	justify-content: center;
 `;
 
 export const AcceptButton = styled.button`
