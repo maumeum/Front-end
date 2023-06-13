@@ -46,7 +46,7 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 					Authorization: `Bearer ${token}`,
 				},
 			});
-			setValue(response.data);
+			setValue(response.data.postCommentList);
 			console.log(response.data);
 		} catch (error) {
 			console.error('Error fetching post:', error);
@@ -136,6 +136,7 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 		);
 		getComments();
 	};
+	console.log('여기다', value);
 
 	return (
 		<Container>
