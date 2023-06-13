@@ -28,7 +28,7 @@ import {
 import VolunteerCard from '@components/Card/VolunteerCard';
 import ReviewCard from '@components/Card/ReviewCard';
 import CommunityCard from '@components/Card/CommunityCard';
-import cardLogo from '@assets/icons/cardlogo.svg';
+import CardImage from '@assets/images/cardImage.png';
 
 const Main = () => {
 	const [reviewList, setReviewList] = useState<ReviewListType>([]);
@@ -90,7 +90,7 @@ const Main = () => {
 							세상에 행복을 나누러
 							<br />한 번 같이 걸어가보실래요?
 						</MainTitle>
-						<IntroImg src={cardLogo} alt='cardLogo' />
+						<IntroImg src={CardImage} alt='cardLogo' />
 					</IntroduceTitle>
 					<IntroduceDesc>
 						<Title>동행을 추구합니다.</Title>

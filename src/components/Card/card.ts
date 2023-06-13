@@ -160,7 +160,7 @@ export const CommunityTitle = styled.p`
 export const ReviewSection = styled.div`
 	display: flex;
 	margin: 4rem 0;
-	width: 70rem;
+	width: 100%;
 	height: 25rem;
 	background-color: ${(props) =>
 		props.className === 'one' ? '#daebb7' : '#FFFFFF'};
