@@ -18,14 +18,20 @@ import {
 	CommentArea,
 	CommentLength,
 	EditCommentArea,
+	BtnReport,
 } from './CommentStyle';
 import DataType from '@src/types/dataType';
 import { get, post, patch, del } from '@api/api';
-import dayjs from 'dayjs';
-import 'dayjs/locale/ko';
+import { dateFormatter } from '@src/utils/dateUtils';
+import useAuthStore from '@src/store/useAuthStore';
+import Swal from 'sweetalert2';
+import alertData from '@utils/swalObject';
 
 type CommentProps = {
 	postId: string;
+};
+type UserType = {
+	uuid: string;
 };
 
 const CommentSection: React.FC<CommentProps> = ({ postId }) => {
@@ -33,9 +39,14 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 	const [value, setValue] = useState<any>([]);
 	const [editingCommentId, setEditingCommentId] = useState('');
 	const [editedComment, setEditedComment] = useState('');
+	const { userData, getUserData } = useAuthStore();
 
 	useEffect(() => {
 		getComments();
+	}, []);
+
+	useEffect(() => {
+		getUserData();
 	}, []);
 
 	const getComments = async () => {
@@ -46,7 +57,7 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 					Authorization: `Bearer ${token}`,
 				},
 			});
-			setValue(response.data);
+			setValue(response.data.postCommentList);
 			console.log(response.data);
 		} catch (error) {
 			console.error('Error fetching post:', error);
@@ -55,7 +66,7 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 
 	const handleCommentChange = (event: any) => {
 		const text = event.target.value;
-		if (text.length <= 50) {
+		if (text.length <= 200) {
 			setInputArea(text);
 		}
 	};
@@ -137,6 +148,16 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 		getComments();
 	};
 
+	const handleReport = async (comment_id: string) => {
+		const token = getToken();
+		await patch<DataType>(`/api/postComments/reports/${comment_id}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+		Swal.fire(alertData.ReportCompleted);
+	};
+
 	return (
 		<Container>
 			<Title>
@@ -147,9 +168,9 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 			<CommentArea
 				value={inputArea}
 				onChange={handleCommentChange}
-				maxLength={50}
+				maxLength={200}
 			/>
-			<CommentLength>{inputArea.length}/50</CommentLength>
+			<CommentLength>{inputArea.length}/200</CommentLength>
 			<BtnContainer>
 				<Btn1 onClick={handleCancelSubmit}>취소</Btn1>
 				<Btn2 onClick={handleCommentSubmit}>등록</Btn2>
@@ -159,7 +180,7 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 				<Box></Box>
 				<Comment>댓글 목록</Comment>
 			</Title>
-			{value.length === 0 ? (
+			{!value || value.length === 0 ? (
 				<CommentHolder>등록된 댓글이 없습니다.</CommentHolder>
 			) : (
 				value &&
@@ -169,9 +190,11 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 							<UserContainer>
 								<UserName>{comment.user_id.nickname}</UserName>
 								<Date>
-									{dayjs(comment.createdAt)
-										.locale('ko')
-										.format('YYYY년 MM월 DD일 HH:mm:ss')}
+									{dateFormatter(
+										comment.createdAt,
+										'YYYY년 MM월 DD일 HH:mm:ss',
+										'ko',
+									)}
 								</Date>
 							</UserContainer>
 						</ProfileContainer>
@@ -181,7 +204,7 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 								<EditCommentArea
 									value={editedComment}
 									onChange={(e) => setEditedComment(e.target.value)}
-									maxLength={50}
+									maxLength={200}
 								/>
 								<BtnContainer>
 									<Btn1 onClick={() => handleCancelSubmit()}>취소</Btn1>
@@ -195,12 +218,31 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 							<>
 								<Contents>{comment.content}</Contents>
 								<BtnContainer>
-									<Btn1 onClick={() => handelEditingComment(comment._id)}>
-										수정
-									</Btn1>
-									<Btn2 onClick={() => handleDeleteComment(comment._id)}>
-										삭제
-									</Btn2>
+									{String(comment.user_id.uuid) ===
+										String((userData as unknown as UserType)?.uuid) && (
+										<Btn1 onClick={() => handelEditingComment(comment._id)}>
+											수정
+										</Btn1>
+									)}
+									{String(comment.user_id.uuid) ===
+										String((userData as unknown as UserType)?.uuid) && (
+										<Btn2 onClick={() => handleDeleteComment(comment._id)}>
+											삭제
+										</Btn2>
+									)}
+									{String(comment.user_id.uuid) !==
+										String((userData as unknown as UserType)?.uuid) &&
+										userData !== null &&
+										userData.role !== 'admin' && (
+											<BtnReport onClick={() => handleReport(comment._id)}>
+												신고
+											</BtnReport>
+										)}
+									{userData !== null && userData.role === 'admin' && (
+										<Btn2 onClick={() => handleDeleteComment(comment._id)}>
+											삭제
+										</Btn2>
+									)}
 								</BtnContainer>
 							</>
 						)}

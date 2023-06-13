@@ -28,6 +28,10 @@ export default defineConfig({
 				find: '@utils',
 				replacement: resolve(__dirname, 'src/utils'),
 			},
+			{
+				find: '@types',
+				replacement: resolve(__dirname, 'src/types'),
+			},
 		],
 	},
 	server: {

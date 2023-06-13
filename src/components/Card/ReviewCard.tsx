@@ -15,9 +15,11 @@ interface ReviewCardProps {
 	onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
+const apiURL = import.meta.env.VITE_API_URL;
+
 const ReviewCard = ({ reviewData, onClick }: ReviewCardProps) => {
 	const key = reviewData.index;
-	const reviewImg = `http://localhost:5002/${reviewData.images[0]}`;
+	const reviewImg = `${apiURL}/${reviewData.images[0]}`;
 
 	//Content 미리보기 함수
 	const previewContent = (reviewData: ReviewType) => {

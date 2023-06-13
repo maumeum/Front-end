@@ -13,31 +13,44 @@ const Report = () => {
 	const [reviewList, setReviewList] = useState<ReviewListType>([]);
 	const [communityNav, setCommunityNav] = useState<boolean>(true);
 	const [reviewNav, setReviewNav] = useState<boolean>(false);
+	const [isModified, setIsModified] = useState<boolean>(false);
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const responseData = await get<DataType>('/api/community');
-			setCommunityList(responseData.data);
+			const responseData = await get<DataType>(
+				'/api/community?skip=0&limit=10',
+			);
+			setCommunityList(responseData.data.posts);
 		};
 		fetchData();
-	}, []);
+		if (isModified) {
+			fetchData();
+			setIsModified(false);
+			window.scrollTo(0, 0);
+		}
+	}, [isModified]);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const responseData = await get<DataType>('/api/review?limit=0&skip=10');
+			const responseData = await get<DataType>('/api/review?skip=0&limit=10');
 			setReviewList(responseData.data.reviews);
 		};
 		fetchData();
-	}, []);
+		if (isModified) {
+			fetchData();
+			setIsModified(false);
+			window.scrollTo(0, 0);
+		}
+	}, [isModified]);
 
 	// 세부 글 클릭
 	const postClick = (postId: string) => {
 		navigate(`/community/${postId}`);
 	};
 
-	const reviewClick = () => {
-		navigate('/admin/report');
+	const reviewClick = (postId: string) => {
+		navigate(`/review/${postId}`);
 	};
 
 	// 상단 nav바 클릭
@@ -71,36 +84,52 @@ const Report = () => {
 			<PostContainer>
 				{communityList &&
 					communityNav &&
-					communityList.map((postData) => (
-						<PostList
-							key={postData._id}
-							postTitle={
-								postData.title.slice(0, 50) +
-								(postData.title.length > 50 ? '...' : '')
-							}
-							postContents={
-								postData.content.slice(0, 50) +
-								(postData.content.length > 50 ? '...' : '')
-							}
-							onClick={() => postClick(postData._id)}
-						/>
-					))}
+					communityList
+						.filter((item) => {
+							return item.isReported;
+						})
+						.map((postData) => (
+							<PostList
+								key={postData._id}
+								postTitle={
+									postData.title.slice(0, 50) +
+									(postData.title.length > 50 ? '...' : '')
+								}
+								postContents={
+									postData.content.slice(0, 50) +
+									(postData.content.length > 50 ? '...' : '')
+								}
+								onClick={() => postClick(postData._id)}
+								postId={postData._id}
+								postType={postData.postType}
+								setIsModified={setIsModified}
+								isReported={postData.isReported}
+							/>
+						))}
 				{reviewList &&
 					reviewNav &&
-					reviewList.map((postData) => (
-						<PostList
-							key={postData._id}
-							postTitle={
-								postData.title.slice(0, 50) +
-								(postData.title.length > 50 ? '...' : '')
-							}
-							postContents={
-								postData.content.slice(0, 50) +
-								(postData.content.length > 50 ? '...' : '')
-							}
-							onClick={() => reviewClick()}
-						/>
-					))}
+					reviewList
+						.filter((item) => {
+							return item.isReported;
+						})
+						.map((postData) => (
+							<PostList
+								key={postData._id}
+								postTitle={
+									postData.title.slice(0, 50) +
+									(postData.title.length > 50 ? '...' : '')
+								}
+								postContents={
+									postData.content.slice(0, 50) +
+									(postData.content.length > 50 ? '...' : '')
+								}
+								onClick={() => reviewClick(postData._id)}
+								postId={postData._id}
+								volunteerId={postData.volunteer_id}
+								setIsModified={setIsModified}
+								isReported={postData.isReported}
+							/>
+						))}
 			</PostContainer>
 		</>
 	);

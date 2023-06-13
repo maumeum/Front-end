@@ -32,6 +32,7 @@ export const Primary: Story = {
 				nickname: '봉사원3',
 			},
 			createdAt: '2023-05-30 14:00:00',
+			isReported: false,
 			index: 1,
 		},
 	},
