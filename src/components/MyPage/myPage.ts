@@ -35,7 +35,7 @@ export const CardBox = styled.div`
 
 // my-page 버튼
 
-export const ButtonContainer = styled(Link)`
+export const ButtonContainer = styled.button`
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -43,9 +43,11 @@ export const ButtonContainer = styled(Link)`
 	aspect-ratio: 2;
 	border-radius: 1.7rem;
 	border: 1px solid rgb(204, 204, 204);
+	background-color: #ffffff;
 	box-sizing: border-box;
 	font-size: 1.2rem;
 	text-decoration: none;
+	cursor: pointer;
 `;
 
 export const ButtonWord = styled.p`
