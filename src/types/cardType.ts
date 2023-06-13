@@ -32,15 +32,15 @@ export type ReviewListType = ReviewType[];
 export interface VolunteerType {
 	_id: string;
 	title: string;
-	content: string;
-	centName: string;
+	content?: string;
+	centName?: string;
 	statusName: string;
 	deadline: string;
 	applyCount: number;
 	registerCount: number;
 	actTypeName: string;
 	teenager: boolean;
-	user_id: string;
+	user_id?: string;
 	createdAt: string;
 	images?: string[];
 }
