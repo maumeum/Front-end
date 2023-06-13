@@ -74,6 +74,7 @@ function Card({ currTab, data }: CardProps) {
 	const [selectedStatus, setSelectedStatus] = useState<string>(statusName);
 	const [selectedParticipationStatus, setSelectedParticipationStatus] =
 		useState<string>('');
+	const [isPastEndDate, setIsPastEndDate] = useState(false);
 
 	useEffect(() => {
 		const checkEndDate = () => {
@@ -81,6 +82,7 @@ function Card({ currTab, data }: CardProps) {
 			const now = new Date();
 			if (checkDate < now) {
 				setSelectedStatus('모집완료');
+				setIsPastEndDate(true);
 			}
 		};
 		checkEndDate();
@@ -197,6 +199,7 @@ function Card({ currTab, data }: CardProps) {
 								<Selector
 									value={selectedStatus}
 									onChange={handleRecruitmentStatusChange}
+									disabled={isPastEndDate}
 									options={[
 										{ value: '모집중', label: '모집중' },
 										{ value: '모집완료', label: '모집완료' },

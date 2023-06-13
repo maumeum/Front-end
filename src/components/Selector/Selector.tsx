@@ -5,9 +5,10 @@ interface SelectorProps {
 	value: string;
 	onChange: (selectedValue: string) => void;
 	options: Array<{ value: string; label: string }>;
+	disabled?: boolean;
 }
 
-function Selector({ value, onChange, options }: SelectorProps) {
+function Selector({ value, onChange, options, disabled }: SelectorProps) {
 	const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		const selectedValue = event.target.value;
 
@@ -17,7 +18,7 @@ function Selector({ value, onChange, options }: SelectorProps) {
 	};
 
 	return (
-		<SelectColor onChange={handleChange} value={value}>
+		<SelectColor onChange={handleChange} value={value} disabled={disabled}>
 			{options.map((option, idx) => (
 				<OptionColor key={`option.value${idx}`} value={option.value}>
 					{option.label}
