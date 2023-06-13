@@ -23,8 +23,16 @@ import check from '@assets/icons/authentication.svg';
 
 export interface CardProps {
 	data: {
+		// register_user_id: string[];
 		createdAt: string;
 		isParticipate?: boolean;
+
+		register_user_id?: {
+			nickname: string;
+			image: string;
+			authorization: boolean;
+		};
+
 		volunteer_id: {
 			startDate: string;
 			endDate: string;
@@ -65,8 +73,15 @@ function splitStatusName(statusName: string) {
 const url = import.meta.env.VITE_API_URL;
 
 function Card({ currTab, data }: CardProps) {
-	const { _id, title, centName, statusName, images, startDate, endDate } =
+	const { _id, title, statusName, images, startDate, endDate } =
 		data.volunteer_id;
+	const {
+		nickname = '',
+		image = '',
+		authorization = false,
+	} = data.register_user_id || {};
+
+	console.log(data); // 취소기능추가하면 지워라
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedStatus, setSelectedStatus] = useState<string>(statusName);
 	const [selectedParticipationStatus, setSelectedParticipationStatus] =
@@ -103,7 +118,6 @@ function Card({ currTab, data }: CardProps) {
 
 	const handleParticipationStatusChange = async (value: string) => {
 		try {
-			// value가 'participated'일 때 로직
 			if (value === '참여완료') {
 				await post(`/api/review/users/participation/${_id}`, {});
 				const result = await Swal.fire({
@@ -156,9 +170,13 @@ function Card({ currTab, data }: CardProps) {
 					</VolunInfo>
 					{/* 컴포넌트 분리 시급... */}
 					<UserInfo>
-						<img src={`${url}/${images[0]}`} alt='작성자 프로필사진' />
-						<p>{truncateCentName(centName)}</p>
-						<img className='verifyMark' src={check} alt='인증마크' />
+						<img src={`${url}/${image}`} alt='작성자 프로필사진' />
+						<p>{truncateCentName(nickname)}</p>
+
+						{authorization && (
+							<img className='verifyMark' src={check} alt='인증마크' />
+						)}
+
 						{currTab === TabTypes.VOLUNTEER_COMPLETED &&
 							statusName !== VolunteerTypes.DISCONTINUE && (
 								<ButtonContainer>

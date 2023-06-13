@@ -35,3 +35,10 @@ export const ButtonContainer = styled.div`
 	justify-content: center;
 	margin-top: 3rem;
 `;
+
+export const WaitMessage = styled.div`
+	margin-bottom: 5rem;
+	padding: 2rem;
+	border-radius: 5%;
+	background-color: #ffffe8;
+`;

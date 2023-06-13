@@ -7,7 +7,7 @@ import {
 	CardBox,
 } from '@components/MyPage/myPage.ts';
 
-// import MyReview from '@src/components/MyPost/MyReview';
+import MyReview from '@src/components/MyPost/MyReview';
 
 import Tab from '@components/Tab/Tab.tsx';
 import Card from '@components/Card/Card.tsx';
@@ -32,6 +32,7 @@ interface ResponseData {
 		nickname: string;
 		image: string;
 		introduction: string;
+		authorization: boolean;
 	};
 	updatedAt: string;
 }
@@ -40,10 +41,10 @@ function VolunSuggest() {
 	const [suggestVolunList, setSuggestVolunList] = useState<ResponseData[]>([]);
 	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
 	const currTab = tabs[0];
-	// const [isOpen, setIsOpen] = useState(false);
-	// const toggleModal = (onoff: boolean) => () => {
-	// 	setIsOpen(onoff);
-	// };
+	const [isOpen, setIsOpen] = useState(false);
+	const toggleModal = (onoff: boolean) => () => {
+		setIsOpen(onoff);
+	};
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -74,6 +75,12 @@ function VolunSuggest() {
 				deadline: data.deadline,
 				images: data.images,
 			},
+			register_user_id: {
+				nickname: data.register_user_id.nickname,
+				image: data.register_user_id.image,
+				introduction: data.register_user_id.introduction,
+				authorization: data.register_user_id.authorization,
+			},
 		};
 	});
 
@@ -96,7 +103,7 @@ function VolunSuggest() {
 							<Card key={data.volunteer_id._id} data={data} currTab={currTab} />
 						))}
 					</CardBox>
-					{/* <MyReview closeModal={toggleModal(false)} /> */}
+					<MyReview closeModal={toggleModal(false)} />
 				</Main>
 			</Container>
 		</>

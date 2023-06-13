@@ -19,7 +19,7 @@ import alertData from '@utils/swalObject';
 import { validPhoneNum } from '@utils/signUpCheck.ts';
 import DataType from '@src/types/dataType';
 import { TabTypes } from '@src/types/myPageConstants';
-import { post } from '@api/api';
+import { post, get } from '@api/api';
 import useSummitStore from '@src/store/useSummitStore';
 import {
 	teamNameError,
@@ -36,7 +36,23 @@ import {
 	TeamTypeRadio,
 	MainContainer,
 	ButtonContainer,
+	WaitMessage,
 } from './style';
+
+interface TeamInfo {
+	_id: string;
+	user_id: string;
+	category: string;
+	teamName: string;
+	introduction: string;
+	briefHistory: string;
+	establishmentDate: string;
+	phone: string;
+	location: string;
+	image: string;
+	isSubmit: boolean;
+	createdAt: string;
+}
 
 const AuthTeam = () => {
 	const [category, setCategory] = useState<string>('');
@@ -48,6 +64,8 @@ const AuthTeam = () => {
 	const [location, setLocation] = useState<string>('');
 	const [phoneNum, setPhoneNum] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
+	const [beforeImg, setBeforeImg] = useState<string>('');
+	const [isEditMode, setIsEditMode] = useState<boolean>(false); //수정모드
 
 	const tabs = [TabTypes.GROUP_CERTIFICATION];
 	const { isSubmit, setIsSubmit } = useSummitStore();
@@ -56,7 +74,42 @@ const AuthTeam = () => {
 	//제출 여부 확인
 	useEffect(() => {
 		setIsSubmit();
+		isSubmit && setIsEditMode(true);
 	}, []);
+
+	useEffect(() => {
+		const fetchTeamInfo = async () => {
+			try {
+				const getTeamInfo = await get<DataType>('/api/team/auth');
+				const getTeamInfoData = getTeamInfo.data as TeamInfo;
+				const {
+					category,
+					teamName,
+					introduction,
+					briefHistory,
+					establishmentDate,
+					phone,
+					location,
+					image,
+				} = getTeamInfoData;
+				setCategory(category);
+				setTeamName(teamName);
+				setBriefHistory(briefHistory);
+				setIntroduction(introduction);
+				setDate(new Date(establishmentDate));
+				setPhoneNum(phone);
+				setLocation(location);
+				setBeforeImg(image);
+			} catch (error) {
+				console.error('Error fetching team info:', error);
+			}
+		};
+
+		if (isSubmit) {
+			//제출버튼이 눌린경우에만 데이터를 받아옴
+			fetchTeamInfo();
+		}
+	}, [isSubmit]);
 
 	// inputValue 함수
 	const getFormChanger =
@@ -85,7 +138,6 @@ const AuthTeam = () => {
 		if (file) {
 			formData.append('image', file);
 		}
-
 		await post<DataType>('/api/team/auth', formData, {});
 		navigate('/mypage');
 		Swal.fire(alertData.waitTeamCert);
@@ -102,6 +154,11 @@ const AuthTeam = () => {
 				</TabMenu>
 				<TeamForm>
 					<MainContainer>
+						<WaitMessage>
+							{isSubmit && (
+								<h1>현재 관리자가 검토중입니다. 조금만 기다려주세요:)</h1>
+							)}
+						</WaitMessage>
 						<TopTitle>팀 유형</TopTitle>
 						<TeamType>
 							<TeamTypeRadio
@@ -176,11 +233,15 @@ const AuthTeam = () => {
 						/>
 					</MainContainer>
 					<ButtonContainer>
-						<LargeButton
-							onClick={clickHandler}
-							disabled={isSubmit ? true : false}>
-							제출하기
-						</LargeButton>
+						{isSubmit ? ( //음 수정하기로 하는게 맞는지 한번 물어보기
+							<LargeButton onClick={clickHandler}>수정하기</LargeButton>
+						) : (
+							<LargeButton
+								onClick={clickHandler}
+								disabled={isSubmit ? true : false}>
+								제출하기
+							</LargeButton>
+						)}
 					</ButtonContainer>
 				</TeamForm>
 			</Main>
