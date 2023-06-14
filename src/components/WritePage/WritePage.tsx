@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import WritePageProps from './WritePageProps';
 import {
 	TextContainer,
 	Container,
@@ -10,11 +11,6 @@ import {
 	ContentInput,
 	TextLength,
 } from '../WritePage/WritePageStyle';
-
-type WritePageProps = {
-	onSave: (inputTitle: string, textContent: string) => void;
-	onCancel: () => void;
-};
 
 const WritePage = ({ onSave, onCancel }: WritePageProps) => {
 	const [content, setContent] = useState('');
