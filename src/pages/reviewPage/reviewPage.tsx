@@ -1,4 +1,3 @@
-import TopBar from '@components/TopBar/TopBar.tsx';
 import SearchBar from '@components/SearchBar/SearchBar.tsx';
 import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
 import PostList from '@components/PostList/PostList.tsx';
@@ -11,7 +10,19 @@ import { useNavigate } from 'react-router-dom';
 import { get } from '@src/api/api';
 import DataType from '@src/types/dataType';
 import throttle from '@utils/throttle.ts';
-
+import {
+	MainContainer,
+	Descript,
+	MiddleContainer,
+	FirstCircle,
+	ImgCircle,
+	Image,
+	SecondCircle,
+	ImgCircle2,
+	Image2,
+} from '@src/pages/reviewPage/ReviewStyle';
+import volunteer from '@assets/images/volunteer.jpeg';
+import volunteers from '@assets/images/volunteers.jpeg';
 type PostData = {
 	_id: string;
 	title: string;
@@ -73,7 +84,23 @@ const reviewPage = () => {
 	return (
 		<>
 			<ReviewPageContainer>
-				<TopBar title='봉사후기 게시판' text='생생한 봉사후기를 공유해요' />
+				<MainContainer>
+					<p>마음이음,</p>
+					<p>무엇이 다른가요?</p>
+					<Descript>
+						실제 봉사자들이 남긴 생생한 후기로 만들어가는 공간입니다
+					</Descript>
+				</MainContainer>
+				<MiddleContainer>
+					<FirstCircle></FirstCircle>
+					<ImgCircle>
+						<Image src={volunteer} alt='volunteer' />
+					</ImgCircle>
+					<SecondCircle></SecondCircle>
+					<ImgCircle2>
+						<Image2 src={volunteers} alt='volunteer' />
+					</ImgCircle2>
+				</MiddleContainer>
 				<SearchBar onSearch={handleSearch} />
 				<NumberWriteContainer>
 					<TotalPostNumber totalPosts={postListData.length} />
