@@ -9,7 +9,6 @@ import PostList from '@components/PostList/PostList.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { MenuBar } from '@components/MyPage/myPage.ts';
 import { get } from '@api/api';
-import { getToken } from '@api/token';
 import DataType from '@src/types/dataType.ts';
 
 type PostData = {
@@ -19,38 +18,20 @@ type PostData = {
 };
 const FindFriend = () => {
 	const navigate = useNavigate();
-	const obsRef = useRef(null);
-	const [page, setPage] = useState(1);
-	const [load, setLoad] = useState(false); //로딩스피너
-	const preventRef = useRef(true); //옵저버 중복실행방지
-	const endRef = useRef(false); //모든 글 로드 확인
 	const [postListData, setPostListData] = useState<PostData[]>([]);
-
-	//옵저버 생성하기
-	useEffect(() => {
-		const observer = new IntersectionObserver(obsHandler, { threshold: 0.5 });
-		if (obsRef.current) observer.observe(obsRef.current);
-		return () => {
-			observer.disconnect();
-		};
-	}, []);
 
 	useEffect(() => {
 		const fetchPostList = async () => {
 			try {
-				const token = getToken();
 				const response = await get<DataType>(
 					'/api/community/category/findfriend?skip=0&limit=10',
 					{
-						headers: {
-							Authorization: `Bearer ${token}`,
-						},
 						params: {
-							postType: 'findfriend',
+							postType: 'qna',
 						},
 					},
 				);
-				setPostListData(response.data);
+				setPostListData(response.data.categoryPost);
 				console.log(response);
 			} catch (error) {
 				console.error('Error fetching post list:', error);
@@ -58,14 +39,6 @@ const FindFriend = () => {
 		};
 		fetchPostList();
 	}, []);
-
-	const obsHandler = (entries: any) => {
-		const target = entries[0];
-		if (!endRef.current && target.isIntersecting && preventRef.current) {
-			preventRef.current = false;
-			setPage((prev) => prev + 1);
-		}
-	};
 
 	const handleSearch = async (query: string) => {
 		const response = await get<DataType>(
@@ -91,10 +64,11 @@ const FindFriend = () => {
 				<TopBar title='동행 구해요' text='같이 봉사할 친구를 모집해요' />
 				<SearchBar onSearch={handleSearch} />
 				<NumberWriteContainer>
-					<TotalPostNumber totalPosts={postListData.length} />
+					<TotalPostNumber totalPosts={postListData && postListData.length} />
 					<WriteButton toNavigate={navigateWrite} />
 				</NumberWriteContainer>
-				{postListData &&
+				{postListData !== null &&
+					postListData.length > 0 &&
 					postListData.map((postData) => (
 						<PostList
 							key={postData._id}
