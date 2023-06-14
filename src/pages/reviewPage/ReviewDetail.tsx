@@ -19,6 +19,8 @@ import {
 	Content,
 	BtnDelete,
 	BtnReport,
+	NameBox,
+	NanoId,
 } from '@src/pages/community/style';
 import DataType from '@src/types/dataType';
 import useAuthStore from '@src/store/useAuthStore.ts';
@@ -40,7 +42,6 @@ const ReviewDetail = () => {
 			const response = await get<DataType>(`/api/review/detail/${postId}`);
 			setPost(response.data);
 			setDataUser(response.data.user_id);
-			console.log(response.data);
 		};
 		fetchPost();
 		window.scrollTo(0, 0);
@@ -59,7 +60,9 @@ const ReviewDetail = () => {
 	}, []);
 
 	const handleEdit = () => {
-		navigate(`/community/findfriend/edit/${postId}`);
+		navigate(`/review/edit/${postId}`, {
+			state: { postId },
+		});
 	};
 
 	if (!post) {
@@ -104,7 +107,6 @@ const ReviewDetail = () => {
 		formattedContent = content.split('\n');
 	}
 
-	console.log('이미지', images);
 	return (
 		<>
 			<DetailContainer>
@@ -112,7 +114,10 @@ const ReviewDetail = () => {
 					<Title>{title}</Title>
 					<SubContainer>
 						<InfoBox>
-							<UserName>{datauser.nickname}</UserName>
+							<NameBox>
+								<UserName>{datauser.nickname}</UserName>
+								<NanoId> #{datauser.nanoid}</NanoId>
+							</NameBox>
 							<Date>작성일 : {formattedDate}</Date>
 						</InfoBox>
 						{loginUser && <Btn onClick={handleEdit}>수정하기</Btn>}

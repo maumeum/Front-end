@@ -92,6 +92,7 @@ export const DetailContainer = styled.div`
 	margin: 0 auto;
 	margin-top: 15rem;
 	min-height: 80rem;
+	margin-bottom: 30rem;
 `;
 export const Header = styled.header`
 	margin: 0 auto;
@@ -106,9 +107,19 @@ export const SubContainer = styled.div`
 	justify-content: space-between;
 `;
 export const InfoBox = styled.div``;
+export const NameBox = styled.div`
+	display: flex;
+`;
 export const UserName = styled.p`
 	font-size: 2.4rem;
+	margin-right: 1rem;
 `;
+export const NanoId = styled.p`
+	font-size: 1.8rem;
+	margin-top: 3rem;
+	color: #aaaaaa;
+`;
+
 export const Date = styled.p`
 	color: #989898;
 	font-size: 2rem;

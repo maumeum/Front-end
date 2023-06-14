@@ -19,6 +19,8 @@ import {
 	Content,
 	BtnDelete,
 	BtnReport,
+	NanoId,
+	NameBox,
 } from './style.ts';
 import CommentSection from '@src/components/Comment/Comment.tsx';
 import DataType from '@src/types/dataType.ts';
@@ -46,8 +48,7 @@ const FindFriendDetail = () => {
 					},
 				});
 				setPost(response.data.post.post);
-				setDataUser(response.data.post.user);
-				console.log(response);
+				setDataUser(response.data.post.post.user_id);
 			} catch (error) {
 				console.error('Error fetching post:', error);
 			}
@@ -60,7 +61,6 @@ const FindFriendDetail = () => {
 		getUserData();
 	}, []);
 
-	console.log('getuserData', userData);
 	useEffect(() => {
 		const loginUserLogic = async () => {
 			try {
@@ -71,7 +71,6 @@ const FindFriendDetail = () => {
 					},
 				});
 				setLoginUser(response.data);
-				console.log(response);
 			} catch (error) {
 				console.error('Error fetching post:', error);
 			}
@@ -133,7 +132,10 @@ const FindFriendDetail = () => {
 					<Title>{title}</Title>
 					<SubContainer>
 						<InfoBox>
-							<UserName>{datauser}</UserName>
+							<NameBox>
+								<UserName>{datauser.nickname}</UserName>
+								<NanoId> #{datauser.nanoid}</NanoId>
+							</NameBox>
 							<Date>작성일 : {formattedDate}</Date>
 						</InfoBox>
 						{loginUser && <Btn onClick={handleEdit}>수정하기</Btn>}

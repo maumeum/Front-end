@@ -57,7 +57,6 @@ const FindFriendWrite = () => {
 			content: '',
 			postType: 'findfriend',
 		});
-		console.log('Cancelled Post');
 	};
 
 	return (

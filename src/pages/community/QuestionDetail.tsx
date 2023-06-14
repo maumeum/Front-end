@@ -19,6 +19,8 @@ import {
 	Content,
 	BtnReport,
 	BtnDelete,
+	NameBox,
+	NanoId,
 } from './style.ts';
 import CommentSection from '@src/components/Comment/Comment.tsx';
 import DataType from '@src/types/dataType.ts';
@@ -130,7 +132,10 @@ const QuestionDetail = () => {
 					<Title>{title}</Title>
 					<SubContainer>
 						<InfoBox>
-							<UserName>{datauser}</UserName>
+							<NameBox>
+								<UserName>{datauser.nickname}</UserName>
+								<NanoId> #{datauser.nanoid}</NanoId>
+							</NameBox>
 							<Date>작성일 : {formattedDate}</Date>
 						</InfoBox>
 						{loginUser && <Btn onClick={handleEdit}>수정하기</Btn>}

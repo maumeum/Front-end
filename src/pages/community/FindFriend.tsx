@@ -85,7 +85,6 @@ const FindFriend = () => {
 			`/api/community/search?keyword=${query}&posttype=findfriend`,
 		);
 		setPostListData(response.data);
-		console.log('검색어:', query);
 	};
 
 	const navigateWrite = () => {
