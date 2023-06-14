@@ -12,6 +12,7 @@ import {
 	ButtonContainer,
 	ContentInput,
 	TextLength,
+	ImageArea,
 } from '@src/components/WritePage/WritePageStyle';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
@@ -23,6 +24,7 @@ const CommunityEditPage = () => {
 	const [post, setPost] = useState<any>([]);
 	const [inputContent, setInputContent] = useState('');
 	const [inputTitle, setInputTitle] = useState('');
+	const [selectedImage, setSelectedImage] = useState<File[]>([]);
 
 	useEffect(() => {
 		const fetchPost = async () => {
@@ -51,14 +53,38 @@ const CommunityEditPage = () => {
 		}
 	};
 
+	const handelImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const chosenFiles = e.target.files;
+		if (chosenFiles) {
+			setSelectedImage((prevFiles) => [
+				...prevFiles,
+				...Array.from(chosenFiles),
+			]);
+		}
+	};
+
 	const editPost = async () => {
 		if (!inputTitle || !inputContent) {
 			Swal.fire(alertData.fillTitleContent);
 			return;
 		}
-		await patch<DataType>(`/api/community/${postId}`, {
-			title: inputTitle,
-			content: inputContent,
+
+		const formData = new FormData();
+		formData.append('title', inputTitle);
+		formData.append('content', inputContent);
+		formData.append('postType', 'findfriend');
+		if (selectedImage) {
+			for (let i = 0; i < selectedImage.length; i++) {
+				formData.append('images', selectedImage[i]);
+			}
+		}
+		for (const [key, value] of formData.entries()) {
+			console.log(`${key}: ${value}`);
+		}
+		await patch<DataType>(`/api/community/${postId}`, formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
 		});
 		navigate(`/community/${postId}`);
 	};
@@ -90,6 +116,17 @@ const CommunityEditPage = () => {
 					<CancelButton onClick={backPostList}>취소</CancelButton>
 					<SubmitButton onClick={editPost}>등록</SubmitButton>
 				</ButtonContainer>
+				<ImageArea>
+					이미지업로드
+					<input
+						id='fileInput'
+						type='file'
+						accept='image/*'
+						name='image'
+						multiple
+						onChange={handelImageChange}
+					/>
+				</ImageArea>
 			</Container>
 		</>
 	);
