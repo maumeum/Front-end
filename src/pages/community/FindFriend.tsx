@@ -1,15 +1,27 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import TopBar from '@components/TopBar/TopBar.tsx';
 import SearchBar from '@components/SearchBar/SearchBar.tsx';
 import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
 import WriteButton from '@components/Buttons/WriteButton/WriteButton.tsx';
-import { NumberWriteContainer, PageContainer } from './style.ts';
+import {
+	NumberWriteContainer,
+	PageContainer,
+	MainContainer,
+	FFImageArea,
+	MainTitle,
+	Subtitle,
+	TextArea,
+	MenuBar,
+	MiddleContainer,
+	BigText,
+	Sub,
+	FfHighLight,
+} from './style.ts';
 import PostList from '@components/PostList/PostList.tsx';
 import Menu from '@components/Menu/Menu.tsx';
-import { MenuBar } from '@components/MyPage/myPage.ts';
 import { get } from '@api/api';
 import DataType from '@src/types/dataType.ts';
+import findfriendImage from '@assets/images/findfriendImage.png';
 import throttle from '@utils/throttle.ts';
 
 type PostData = {
@@ -90,12 +102,36 @@ const FindFriend = () => {
 
 	return (
 		<>
-			<MenuBar>
-				<Menu title={'커뮤니티'} />
-			</MenuBar>
 			<PageContainer>
-				<TopBar title='동행 구해요' text='같이 봉사할 친구를 모집해요' />
+				<MainContainer>
+					<TextArea>
+						<MainTitle>마음이음</MainTitle>
+						<Subtitle>
+							마음이음은 동행을 추구합니다.
+							<br />
+							함께 봉사하는 이들을 위한 커뮤니티에서 소중한 경험을 공유하고
+							마음을 이어보세요!
+						</Subtitle>
+					</TextArea>
+
+					<FFImageArea src={findfriendImage} alt='findfriend-image' />
+				</MainContainer>
+
+				<MiddleContainer>
+					<BigText>동행구해요!</BigText>
+					<Sub>
+						<p>마음이 통하는 친구들과 아름다운 마음을 이어나가요</p>
+						<p>
+							<FfHighLight>제목에 봉사활동의 정보</FfHighLight>를 포함하면 더욱
+							많은 댓글을 받을 수 있어요
+						</p>
+					</Sub>
+				</MiddleContainer>
+				<MenuBar>
+					<Menu title={'커뮤니티'} />
+				</MenuBar>
 				<SearchBar onSearch={handleSearch} />
+
 				<NumberWriteContainer>
 					<TotalPostNumber totalPosts={postListData && postListData.length} />
 					<WriteButton toNavigate={navigateWrite} />
