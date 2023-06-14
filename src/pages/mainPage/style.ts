@@ -11,6 +11,7 @@ export const TopSlogan = styled.h2`
 	margin: 0 40rem;
 	padding-top: 6rem;
 	width: 30rem;
+	min-height: 8rem;
 	font-size: 2.6rem;
 	font-weight: 700;
 `;
@@ -87,6 +88,7 @@ export const Desc = styled.p`
 export const MidSlogan = styled.h2`
 	margin: 5rem 40rem 0;
 	width: 50rem;
+	min-height: 8rem;
 	font-size: 3rem;
 	font-weight: 900;
 `;
