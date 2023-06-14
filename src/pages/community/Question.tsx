@@ -9,7 +9,6 @@ import PostList from '@components/PostList/PostList.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { MenuBar } from '@components/MyPage/myPage';
 import { get } from '@api/api';
-import { getToken } from '@api/token';
 import DataType from '@src/types/dataType.ts';
 
 type PostData = {
@@ -22,29 +21,19 @@ const Question = () => {
 	const [postListData, setPostListData] = useState<PostData[]>([]);
 
 	useEffect(() => {
-		fetchPostList();
-	}, []);
-
-	const fetchPostList = async () => {
-		try {
-			const token = getToken();
+		const fetchPostList = async () => {
 			const response = await get<DataType>(
 				'/api/community/category/qna?skip=0&limit=10',
 				{
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
 					params: {
 						postType: 'qna',
 					},
 				},
 			);
-			setPostListData(response.data);
-			console.log(response);
-		} catch (error) {
-			console.error('Error fetching post list:', error);
-		}
-	};
+			setPostListData(response.data.categoryPost);
+		};
+		fetchPostList();
+	});
 
 	const handleSearch = async (query: string) => {
 		const response = await get<DataType>(

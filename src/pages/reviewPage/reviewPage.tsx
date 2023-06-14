@@ -24,6 +24,7 @@ const reviewPage = () => {
 		const fetchPostList = async () => {
 			const response = await get<DataType>('/api/review?skip=0&limit=10');
 			setPostListData(response.data.reviews);
+			console.log('리뷰', response);
 		};
 		fetchPostList();
 	}, []);

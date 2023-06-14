@@ -1,6 +1,6 @@
 import { Text, TotalNumber } from './style';
 type TotalPostNumberProps = {
-	totalPosts: number;
+	totalPosts: any;
 };
 
 const TotalPostNumber = ({ totalPosts }: TotalPostNumberProps) => {
