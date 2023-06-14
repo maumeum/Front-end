@@ -1,4 +1,4 @@
-interface UserType {
+export interface UserType {
 	_id: string;
 	email: string;
 	nickname: string;
@@ -6,6 +6,8 @@ interface UserType {
 	image: string;
 	introduction: string;
 	role: string;
+	nanoid: string;
+	authorization: boolean;
 }
 
-export default UserType;
+export type UserListType = UserType[];
