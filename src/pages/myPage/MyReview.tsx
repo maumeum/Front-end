@@ -14,6 +14,7 @@ import { get } from '@api/api';
 import DataType from '@src/types/dataType';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
+import NoData from '@components/NoData/NoData.tsx';
 
 interface ReviewProps {
 	title: string;
@@ -63,7 +64,7 @@ function MyReview() {
 					<TabMenu>
 						<Tab currTab={currTab} tabs={tabs} />
 					</TabMenu>
-					{userReviewData.length === 0 && <div>작성된 리뷰가 없습니다.</div>}
+					{userReviewData.length === 0 && <NoData category='리뷰' />}
 					{userReviewData.map((data) => {
 						return (
 							<MyPost
