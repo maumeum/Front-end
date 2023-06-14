@@ -65,6 +65,7 @@ const Main = () => {
 		const fetchData = async () => {
 			const responseData = await get<DataType>('/api/community?skip=0&limit=3');
 			setCommunityList(responseData.data.posts);
+			console.log('main', responseData);
 		};
 		fetchData();
 		window.scrollTo(0, 0);

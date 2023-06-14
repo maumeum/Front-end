@@ -26,8 +26,8 @@ const ReviewCard = ({ reviewData, onClick }: ReviewCardProps) => {
 		const content = reviewData.content;
 
 		// content의 길이가 35자 이상이라면 ... 처리
-		if (content.length >= 35) {
-			return `${content.slice(0, 34)}...`;
+		if (content.length >= 60) {
+			return `${content.slice(0, 59)}...`;
 		}
 		return content;
 	};

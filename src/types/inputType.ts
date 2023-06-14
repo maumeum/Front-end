@@ -3,6 +3,7 @@ interface InputContainerProps {
 	submit: boolean;
 	dataName?: string;
 	inputType?: string;
+	maxlength?: number;
 	name: string;
 	placeholder?: string;
 	value: string;

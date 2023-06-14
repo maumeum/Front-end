@@ -20,6 +20,7 @@ const InputForm = ({
 	inputType,
 	name,
 	placeholder,
+	maxlength,
 	value,
 	onChangeFn,
 	errorMessage,
@@ -73,6 +74,7 @@ const InputForm = ({
 						type={inputType}
 						name={name}
 						placeholder={placeholder}
+						maxLength={maxlength ? maxlength : 30}
 						className={submit ? 'submit' : ''}
 						onChange={onChangeFn}
 						value={value}

@@ -189,11 +189,11 @@ export const ReviewSection = styled.div`
 	height: 25rem;
 	background-color: ${(props) =>
 		props.className === 'one'
-			? '#202020'
+			? '#ffffe8'
 			: props.className === 'three'
 			? '#daebb7'
 			: '#FFFFFF'};
-	color: ${(props) => (props.className !== 'one' ? '#202020' : '#FFFFFF')};
+	color: ${({ theme }) => theme.colors.text};
 	border: none;
 	border-radius: 12px;
 	word-break: keep-all;
@@ -223,18 +223,26 @@ export const ReviewContainer = styled.div`
 `;
 
 export const ReviewTitle = styled.h2`
+	min-height: 20%;
 	font-size: 2rem;
 `;
 
 export const Nickname = styled.p`
 	margin-top: 0;
-	font-size: 1.4rem;
-	color: ${(props) => (props.className !== 'one' ? '#202020' : '#999999')};
+	padding: 0.5rem 1rem;
+	font-size: 1.2rem;
+	text-align: center;
+	width: fit-content;
+	min-width: 15%;
+	border-radius: 12px;
+	background-color: ${(props) =>
+		props.className === 'three' ? '#ffffe8' : '#dde7f6'};
+	color: ${(props) => (props.className === 'three' ? '#202020' : '#202020')};
 `;
 
 export const ReviewContent = styled.p`
 	font-size: 1.4rem;
-	color: ${(props) => (props.className !== 'one' ? '#202020' : '#999999')};
+	color: ${({ theme }) => theme.colors.text};
 `;
 
 // volunteer card

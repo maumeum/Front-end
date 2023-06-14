@@ -1,16 +1,28 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import TopBar from '@components/TopBar/TopBar.tsx';
 import SearchBar from '@components/SearchBar/SearchBar.tsx';
 import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
 import WriteButton from '@components/Buttons/WriteButton/WriteButton.tsx';
-import { NumberWriteContainer, PageContainer } from './style.ts';
+import {
+	NumberWriteContainer,
+	PageContainer,
+	MainContainer,
+	FFImageArea,
+	MainTitle,
+	Subtitle,
+	TextArea,
+	MenuBar,
+	MiddleContainer,
+	BigText,
+	Sub,
+	FfHighLight,
+} from './style.ts';
 import PostList from '@components/PostList/PostList.tsx';
 import Menu from '@components/Menu/Menu.tsx';
-import { MenuBar } from '@components/MyPage/myPage.ts';
 import { get } from '@api/api';
-import { getToken } from '@api/token';
 import DataType from '@src/types/dataType.ts';
+import findfriendImage from '@assets/images/findfriendImage.png';
+import throttle from '@utils/throttle.ts';
 
 type PostData = {
 	_id: string;
@@ -19,53 +31,59 @@ type PostData = {
 };
 const FindFriend = () => {
 	const navigate = useNavigate();
-	const obsRef = useRef(null);
-	const [page, setPage] = useState(1);
-	const [load, setLoad] = useState(false); //로딩스피너
-	const preventRef = useRef(true); //옵저버 중복실행방지
-	const endRef = useRef(false); //모든 글 로드 확인
 	const [postListData, setPostListData] = useState<PostData[]>([]);
+	const [isLoad, setLoad] = useState<boolean>(false);
 
-	//옵저버 생성하기
-	useEffect(() => {
-		const observer = new IntersectionObserver(obsHandler, { threshold: 0.5 });
-		if (obsRef.current) observer.observe(obsRef.current);
-		return () => {
-			observer.disconnect();
-		};
-	}, []);
-
+	// 처음 데이터 불러오기
 	useEffect(() => {
 		const fetchPostList = async () => {
 			try {
-				const token = getToken();
 				const response = await get<DataType>(
 					'/api/community/category/findfriend?skip=0&limit=10',
-					{
-						headers: {
-							Authorization: `Bearer ${token}`,
-						},
-						params: {
-							postType: 'findfriend',
-						},
-					},
+					{},
 				);
-				setPostListData(response.data);
-				console.log(response);
+				setPostListData(response.data.categoryPost);
+				setLoad(response.data.hasMore);
 			} catch (error) {
 				console.error('Error fetching post list:', error);
 			}
 		};
+
 		fetchPostList();
 	}, []);
 
-	const obsHandler = (entries: any) => {
-		const target = entries[0];
-		if (!endRef.current && target.isIntersecting && preventRef.current) {
-			preventRef.current = false;
-			setPage((prev) => prev + 1);
+	// 데이터 불러오기
+	const loadMoreData = async () => {
+		try {
+			if (!isLoad) {
+				console.log(postListData.length);
+				const response = await get<DataType>(
+					`/api/community/category/findfriend?skip=${postListData.length}&limit=10`,
+					{},
+				);
+				const newPostListData = response.data.categoryPost;
+				setPostListData((prevData) => [...prevData, ...newPostListData]);
+				setLoad(response.data.hasMore);
+			}
+		} catch (error) {
+			console.error('Error loading more data:', error);
 		}
 	};
+
+	// 무한 스크롤
+	useEffect(() => {
+		if (postListData.length > 0) {
+			const handleScroll = throttle(() => {
+				const { scrollTop, offsetHeight } = document.documentElement;
+				if (offsetHeight - window.innerHeight - scrollTop < 200) {
+					loadMoreData();
+				}
+			});
+
+			window.addEventListener('scroll', handleScroll);
+			return () => window.removeEventListener('scroll', handleScroll);
+		}
+	}, [postListData]);
 
 	const handleSearch = async (query: string) => {
 		const response = await get<DataType>(
@@ -84,17 +102,42 @@ const FindFriend = () => {
 
 	return (
 		<>
-			<MenuBar>
-				<Menu title={'커뮤니티'} />
-			</MenuBar>
 			<PageContainer>
-				<TopBar title='동행 구해요' text='같이 봉사할 친구를 모집해요' />
+				<MainContainer>
+					<TextArea>
+						<MainTitle>마음이음</MainTitle>
+						<Subtitle>
+							마음이음은 동행을 추구합니다.
+							<br />
+							함께 봉사하는 이들을 위한 커뮤니티에서 소중한 경험을 공유하고
+							마음을 이어보세요!
+						</Subtitle>
+					</TextArea>
+
+					<FFImageArea src={findfriendImage} alt='findfriend-image' />
+				</MainContainer>
+
+				<MiddleContainer>
+					<BigText>동행구해요!</BigText>
+					<Sub>
+						<p>마음이 통하는 친구들과 아름다운 마음을 이어나가요</p>
+						<p>
+							<FfHighLight>제목에 봉사활동의 정보</FfHighLight>를 포함하면 더욱
+							많은 댓글을 받을 수 있어요
+						</p>
+					</Sub>
+				</MiddleContainer>
+				<MenuBar>
+					<Menu title={'커뮤니티'} />
+				</MenuBar>
 				<SearchBar onSearch={handleSearch} />
+
 				<NumberWriteContainer>
-					<TotalPostNumber totalPosts={postListData.length} />
+					<TotalPostNumber totalPosts={postListData && postListData.length} />
 					<WriteButton toNavigate={navigateWrite} />
 				</NumberWriteContainer>
-				{postListData &&
+				{postListData !== null &&
+					postListData.length > 0 &&
 					postListData.map((postData) => (
 						<PostList
 							key={postData._id}
