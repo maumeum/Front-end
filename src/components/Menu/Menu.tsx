@@ -11,7 +11,7 @@ type MenuItem = {
 };
 
 type MenuItems = {
-	[key in '마이페이지' | '커뮤니티' | '관리자']: MenuItem[];
+	[key in '마이페이지' | '커뮤니티' | '관리자' | '같이봉사해요']: MenuItem[];
 };
 const MENU_ITEMS: MenuItems = {
 	마이페이지: [
@@ -33,6 +33,7 @@ const MENU_ITEMS: MenuItems = {
 		{ link: '/admin/team_auth', label: '단체 인증 요청' },
 		{ link: '/admin/user_manage', label: '유저 관리' },
 	],
+	같이봉사해요: [{ link: '/volunteers', label: '모집 중인 활동' }],
 };
 
 function Menu({ title }: MenuProps) {

@@ -14,6 +14,8 @@ import { TabTypes } from '@src/types/myPageConstants';
 import { get } from '@api/api';
 import Swal from 'sweetalert2';
 import alertData from '@src/utils/swalObject';
+import { getToken } from '@api/token';
+const token = getToken();
 
 interface CommunityProps {
 	title: string;
@@ -49,10 +51,13 @@ function MyComment() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const getCommentData = await get<DataType>(
-					'/api/volunteerComments/users',
-				);
+				const getCommentData = await get<DataType>('/api/postComments/users', {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				});
 				setCommentData(getCommentData.data as CommunityProps[]);
+				console.log(getCommentData);
 			} catch (error) {
 				Swal.fire(
 					alertData.errorMessage('데이터를 불러오는데 실패하였습니다.'),

@@ -43,7 +43,6 @@ function MyPost({ currTab, communityData, onRemovePost }: PostProps) {
 	const [isShowMore, setIsShowMore] = useState<boolean>(false);
 	const truncatedTitle = truncateTitle(title);
 	const navigate = useNavigate();
-
 	const handleButtonClick = () => {
 		if (currTab === TabTypes.WRITTEN_REVIEW) {
 			navigate(`/review/${_id}`);
