@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import ReactModal from 'react-modal';
 import Swal from 'sweetalert2';
 import dayjs from 'dayjs';
@@ -28,11 +29,17 @@ interface TeamModalProps {
 	isOpen: boolean;
 	closeModal: () => void;
 	teamData: TeamType;
+	setIsModified: Dispatch<SetStateAction<boolean>>;
 }
 
 const apiURL = import.meta.env.VITE_API_URL;
 
-const TeamModal = ({ isOpen, closeModal, teamData }: TeamModalProps) => {
+const TeamModal = ({
+	isOpen,
+	closeModal,
+	teamData,
+	setIsModified,
+}: TeamModalProps) => {
 	const handleClose = () => {
 		closeModal();
 	};
@@ -55,6 +62,8 @@ const TeamModal = ({ isOpen, closeModal, teamData }: TeamModalProps) => {
 					},
 					{},
 				);
+				setIsModified(() => true);
+				closeModal();
 				Swal.fire('수락되었습니다.');
 			}
 		});
@@ -71,6 +80,8 @@ const TeamModal = ({ isOpen, closeModal, teamData }: TeamModalProps) => {
 					},
 					{},
 				);
+				setIsModified(() => true);
+				closeModal();
 				Swal.fire('거부되었습니다.');
 			}
 		});
