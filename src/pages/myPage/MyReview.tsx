@@ -5,7 +5,7 @@ import {
 	MenuBar,
 	TabMenu,
 } from '@components/MyPage/myPage.ts';
-
+import Pagination from '@src/components/Pagination/Pagination.tsx';
 import Tab from '@components/Tab/Tab.tsx';
 import MyPost from '@components/MyPost/MyPost.tsx';
 import Menu from '@components/Menu/Menu.tsx';
@@ -26,6 +26,12 @@ function MyReview() {
 	const tabs = [TabTypes.WRITTEN_REVIEW];
 	const [currTab] = useState<TabTypes>(TabTypes.WRITTEN_REVIEW);
 	const [userReviewData, setUserReviewData] = useState<ReviewProps[]>([]);
+	//페이지네이션
+	const [currentPage, setCurrentPage] = useState(1);
+	const pageSize = 5;
+	const handlePageChange = (pageNumber: number) => {
+		setCurrentPage(pageNumber);
+	};
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -40,11 +46,11 @@ function MyReview() {
 
 		fetchData();
 	}, []);
-	console.log(userReviewData);
 
 	const removePost = (postId: string) => {
 		setUserReviewData(userReviewData.filter((post) => post._id !== postId));
 	};
+	console.log(userReviewData);
 
 	return (
 		<>
@@ -68,6 +74,13 @@ function MyReview() {
 							/>
 						);
 					})}
+					{userReviewData.length > 0 && (
+						<Pagination
+							currentPage={currentPage}
+							totalPages={Math.ceil(userReviewData.length / pageSize)}
+							handlePageChange={handlePageChange}
+						/>
+					)}
 				</Main>
 			</Container>
 		</>

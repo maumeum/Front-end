@@ -6,11 +6,9 @@ import {
 	TabMenu,
 	CardBox,
 } from '@components/MyPage/myPage.ts';
-
-import MyReview from '@src/components/MyPost/MyReview';
-
 import Tab from '@components/Tab/Tab.tsx';
 import Card from '@components/Card/Card.tsx';
+import Pagination from '@components/Pagination/Pagination.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/types/myPageConstants';
 import { get } from '@api/api';
@@ -42,6 +40,13 @@ function VolunSuggest() {
 	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
 	const currTab = tabs[0];
 
+	//페이지네이션
+	const [currentPage, setCurrentPage] = useState(1);
+	const pageSize = 5;
+	const handlePageChange = (pageNumber: number) => {
+		setCurrentPage(pageNumber);
+	};
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -49,7 +54,6 @@ function VolunSuggest() {
 					'/api/volunteers/registerations',
 					{},
 				);
-				console.log(getSuggestedData);
 				setSuggestVolunList(
 					getSuggestedData.data.registerationVolunteers as ResponseData[],
 				);
@@ -64,6 +68,7 @@ function VolunSuggest() {
 		//Card 컴포넌트 형식에 맞게 데이터형태 변환
 		return {
 			createdAt: data.createdAt,
+			_id: data._id,
 			volunteer_id: {
 				startDate: data.startDate,
 				endDate: data.endDate,
@@ -104,6 +109,13 @@ function VolunSuggest() {
 					</CardBox>
 				</Main>
 			</Container>
+			{transformData.length > 0 && (
+				<Pagination
+					currentPage={currentPage}
+					totalPages={Math.ceil(transformData.length / pageSize)}
+					handlePageChange={handlePageChange}
+				/>
+			)}
 		</>
 	);
 }

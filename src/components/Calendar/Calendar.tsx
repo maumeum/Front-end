@@ -8,7 +8,7 @@ import {
 	Month,
 	Year,
 	MonthButton,
-} from './Component.style';
+} from './style';
 import 'react-datepicker/dist/react-datepicker.css';
 
 interface CalendarProps {

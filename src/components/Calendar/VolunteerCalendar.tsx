@@ -9,7 +9,7 @@ import {
 	Month,
 	Year,
 	MonthButton,
-} from './Component.style';
+} from './style';
 import 'react-datepicker/dist/react-datepicker.css';
 
 interface CalendarProps {
@@ -49,7 +49,6 @@ const MONTHS = [
 
 const Calendar = ({ selectedDate, setSelectedDate }: CalendarProps) => {
 	const limitRange = limitCalendarRange();
-	// 만약 StartDate가 deadline보다 작다면 유저에게 경고창을 띄고, 다시 작성하게 한다.
 	return (
 		<CalenderWrapper>
 			<DatePicker

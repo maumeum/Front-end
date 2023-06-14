@@ -29,6 +29,7 @@ import CommunityEditPage from '@src/pages/community/CommunityEditPage';
 import ReviewEdit from '@src/pages/reviewPage/ReviewEdit';
 import Error from '@pages/errorPage/Error';
 import AuthTeam from '@pages/myPage/AuthTeam';
+import ReportedUser from '@pages/adminPage/ReportedUser';
 import PrivateRoute from '@utils/PrivateRoute';
 // '같이 봉사해요' 게시판 관련:
 import VolunteerOngoing from '@pages/volunteerPage/VolunteerOngoingPage';
@@ -76,6 +77,7 @@ function App() {
 					<Route path='/mypage/withdrawal' element={<Withdrawal />} />
 					<Route path='/admin/team_auth' element={<TeamAuth />} />
 					<Route path='/admin/report' element={<Report />} />
+					<Route path='/admin/manage_user' element={<ReportedUser />} />
 				</Route>
 				<Route path='/*' element={<Error />} />
 			</Routes>

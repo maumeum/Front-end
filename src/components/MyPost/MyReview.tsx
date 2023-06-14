@@ -18,7 +18,6 @@ function MyReview({ closeModal, id }: MyReviewProps) {
 	const [content, setContent] = useState<string>('');
 	const [files, setFiles] = useState<File[]>([]);
 	const volunteer_id = id;
-	console.log(id);
 	const handleContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		setContent(e.target.value);
 	};
@@ -59,14 +58,12 @@ function MyReview({ closeModal, id }: MyReviewProps) {
 		}
 
 		try {
-			const response = await post<DataType>('/api/review', formData, {
+			await post<DataType>('/api/review', formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
 				},
 			});
-			console.log(response);
 			closeModal();
-			//해당 리뷰의 상세보기 페이지로 이동
 		} catch (error) {
 			console.log(error);
 		}

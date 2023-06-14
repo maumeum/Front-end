@@ -11,7 +11,7 @@ export interface CardProps {
 export const CardContainer = styled.div<CardProps>`
 	display: flex;
 	flex-direction: column;
-	/* width: calc(100% - 0.3rem); */
+	width: calc(100% - 0.1rem);
 	min-height: 42.9rem;
 	border-radius: ${({ theme }) => theme.radius.s2};
 	cursor: pointer;
@@ -249,7 +249,7 @@ export const ReviewContent = styled.p`
 export const VolunteerSection = styled.div`
 	margin-bottom: 6rem;
 	width: 100%;
-	height: 37rem;
+	height: 33rem;
 	background-color: #ffffff;
 	border: none;
 	border-radius: 12px;
@@ -433,4 +433,34 @@ export const InfoBox = styled.div`
 export const VolunteerUserInfo = styled(UserInfo)`
 	margin-top: 0;
 	margin-right: 0.5rem;
+`;
+
+// UserCard
+
+export const NickNameContainer = styled.div`
+	display: flex;
+	justify-content: center;
+`;
+
+export const AuthImage = styled.img`
+	width: 10%;
+	aspect-ratio: 1;
+`;
+
+export const UserNickName = styled.h2`
+	margin: 1rem 0.5rem 1.5rem;
+	font-size: 1.8rem;
+	font-weight: 800;
+`;
+
+export const UserEmail = styled.p`
+	margin-top: 0;
+	font-size: 1.3rem;
+	color: ${({ theme }) => theme.colors.gray500};
+`;
+
+export const UserPhone = styled.p`
+	margin-top: 0.5rem;
+	font-size: 1.3rem;
+	color: ${({ theme }) => theme.colors.gray500};
 `;

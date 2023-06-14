@@ -11,22 +11,23 @@ export const MenuBar = styled.div`
 	border-radius: 5px;
 	margin: -30rem 0 0 10rem;
 `;
+
 export const MainContainer = styled.div`
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 	width: 100%;
 	background-color: ${({ theme }) => theme.colors.pink200};
-	}
 `;
+
 export const QuestionMainContainer = styled.div`
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 	width: 100%;
 	background-color: ${({ theme }) => theme.colors.yellow100};
-	}
 `;
+
 export const FFImageArea = styled.img`
 	width: 33%;
 	margin-left: auto;

@@ -23,6 +23,7 @@ export const Ongoing: Story = {
 		currTab: '신청한 봉사',
 		data: {
 			createdAt: '2023-06-12',
+			_id: '234636',
 			isParticipate: false,
 			volunteer_id: {
 				startDate: '2021-01-01',
@@ -44,6 +45,8 @@ export const Complete: Story = {
 		currTab: '완료한 봉사',
 		data: {
 			createdAt: '2023-06-12',
+			_id: '234636',
+			isParticipate: false,
 			volunteer_id: {
 				startDate: '2021-01-01',
 				endDate: '2021-01-02',
@@ -64,6 +67,8 @@ export const Close: Story = {
 		currTab: '완료한 봉사',
 		data: {
 			createdAt: '2023-06-12',
+			_id: '234636',
+			isParticipate: false,
 			volunteer_id: {
 				startDate: '2021-01-01',
 				endDate: '2021-01-02',
