@@ -11,18 +11,18 @@ export function getCurrent() {
 	return currentDate;
 }
 
-export function remainingDaysCulcurator(
+// 윤년 체크
+function isLeapYear(year: number) {
+	return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+}
+
+export function remainingDaysCalculator(
 	currentDate: string,
 	deadlineDate: string,
 ) {
 	const oneDay = 24 * 60 * 60 * 1000;
 	const currentDateObj = new Date(currentDate);
 	const deadlineDateObj = new Date(deadlineDate);
-
-	// 윤년 체크
-	function isLeapYear(year: number) {
-		return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-	}
 
 	const currentYear = currentDateObj.getFullYear();
 	const deadlineYear = deadlineDateObj.getFullYear();
@@ -40,4 +40,14 @@ export function remainingDaysCulcurator(
 	}
 
 	return remainingDays;
+}
+
+export function limitCalendarRange(): string[] {
+	const today = dayjs();
+	const minDate = today.add(1, 'day');
+	const maxDate = today.add(120, 'day');
+
+	const formattedMinDate = minDate.format('YYYY-MM-DD');
+	const formattedMaxDate = maxDate.format('YYYY-MM-DD');
+	return [formattedMinDate, formattedMaxDate];
 }

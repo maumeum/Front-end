@@ -134,36 +134,66 @@ export const SelectContainer = styled.div`
 // Community Card
 export const CommunityContainer = styled.div`
 	display: flex;
-	justify-content: start;
-	align-items: center;
-	height: 11rem;
-	background-color: #ffffff;
-	border: none;
-	border-radius: 12px;
-	filter: drop-shadow(0 2px 10px rgb(0, 0, 0, 10%));
+	margin: 1rem 2rem 0;
+	max-height: 30%;
+	border-bottom: 1px solid ${({ theme }) => theme.colors.gray200};
+	transition: transform 0.1s ease;
 	cursor: pointer;
+
+	&:hover {
+		transform: scale(1.03);
+	}
 `;
 
-export const PostType = styled.div`
-	width: 25%;
+export const QnaType = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 1rem 0;
+	width: 15%;
+	aspect-ratio: 1;
+	background-color: ${({ theme }) => theme.colors.green200};
+	border-radius: 50%;
+	font-size: 1.5rem;
+`;
+
+export const TogetherType = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 1rem 0;
+	width: 15%;
+	aspect-ratio: 1;
 	text-align: center;
-	color: #888888;
-	font-size: 2.5rem;
+	background-color: ${({ theme }) => theme.colors.pink200};
+	border-radius: 50%;
+	font-size: 1.5rem;
 `;
 
 export const CommunityTitle = styled.p`
-	margin: 0 6rem 0 3rem;
-	font-size: 2rem;
+	margin: 1rem 6rem 0 3rem;
+	font-size: 1.6rem;
+`;
+
+export const WriterNickname = styled.p`
+	margin: 0.5rem 0 0 3rem;
+	font-size: 1rem;
+	color: ${({ theme }) => theme.colors.gray300};
 `;
 
 // Review Card
 export const ReviewSection = styled.div`
 	display: flex;
 	margin: 4rem 0;
-	width: 70rem;
+	width: 100%;
 	height: 25rem;
 	background-color: ${(props) =>
-		props.className === 'one' ? '#daebb7' : '#FFFFFF'};
+		props.className === 'one'
+			? '#202020'
+			: props.className === 'three'
+			? '#daebb7'
+			: '#FFFFFF'};
+	color: ${(props) => (props.className !== 'one' ? '#202020' : '#FFFFFF')};
 	border: none;
 	border-radius: 12px;
 	word-break: keep-all;
@@ -172,22 +202,24 @@ export const ReviewSection = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-	width: 32%;
+	width: 35%;
 	height: 100%;
 	overflow: hidden;
+	border-radius: 12px 0 0 12px;
 `;
 
 export const ReviewImage = styled.img`
 	height: 100%;
 	border: none;
-	border-radius: 12px 0 0 12px;
+	transform: translateX(-1.5rem);
 `;
 
 export const ReviewContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	margin: 3rem 2rem;
+	margin: 2.5% 2rem;
+	width: 60%;
 `;
 
 export const ReviewTitle = styled.h2`
@@ -197,12 +229,12 @@ export const ReviewTitle = styled.h2`
 export const Nickname = styled.p`
 	margin-top: 0;
 	font-size: 1.4rem;
-	color: #4a4a4a;
+	color: ${(props) => (props.className !== 'one' ? '#202020' : '#999999')};
 `;
 
 export const ReviewContent = styled.p`
 	font-size: 1.4rem;
-	color: #4a4a4a;
+	color: ${(props) => (props.className !== 'one' ? '#202020' : '#999999')};
 `;
 
 // volunteer card
