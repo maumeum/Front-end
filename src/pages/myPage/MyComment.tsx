@@ -4,7 +4,6 @@ import {
 	Main,
 	MenuBar,
 	TabMenu,
-	StyledLink,
 } from '@components/MyPage/myPage.ts';
 import Tab from '@components/Tab/Tab.tsx';
 import MyPost from '@components/MyPost/MyPost.tsx';
@@ -14,8 +13,6 @@ import { TabTypes } from '@src/types/myPageConstants';
 import { get } from '@api/api';
 import Swal from 'sweetalert2';
 import alertData from '@src/utils/swalObject';
-import { getToken } from '@api/token';
-const token = getToken();
 
 interface CommunityProps {
 	title: string;
@@ -77,6 +74,8 @@ function MyComment() {
 		setSelectedData(selecteddata.filter((post) => post._id !== postId));
 	};
 
+	console.log(selecteddata);
+
 	return (
 		<>
 			<Container>
@@ -91,17 +90,12 @@ function MyComment() {
 					{selecteddata.length === 0 && <h2>나의 활동내역이 없습니다</h2>}
 					{selecteddata.map((data) => {
 						return (
-							<StyledLink
-								to={`/community/${data._id}`}
-								key={`commenutyLink${data._id}`}
-								style={{ textDecoration: 'none' }}>
-								<MyPost
-									key={data._id}
-									currTab={currTab}
-									communityData={data}
-									onRemovePost={removePost}
-								/>
-							</StyledLink>
+							<MyPost
+								key={data._id}
+								currTab={currTab}
+								communityData={data}
+								onRemovePost={removePost}
+							/>
 						);
 					})}
 				</Main>

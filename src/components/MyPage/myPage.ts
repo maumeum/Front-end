@@ -57,8 +57,3 @@ export const ButtonWord = styled.p`
 	margin: 0;
 	color: black;
 `;
-
-export const StyledLink = styled(Link)`
-	text-decoration: none;
-	color: black;
-`;
