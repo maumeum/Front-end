@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Swal from 'sweetalert2';
-import alertData from '@src/utils/swalObject.ts';
+// import Swal from 'sweetalert2';
+// import alertData from '@src/utils/swalObject.ts';
 import VolunteerWritePage from '@components/WritePage/VolunteerWritePage';
 import { post } from '@api/api';
 import { getToken } from '@api/token';

@@ -5,13 +5,7 @@ import UserCard from '@components/Card/UserCard';
 import Menu from '@components/Menu/Menu.tsx';
 import { UserListType } from '@src/types/userType';
 import DataType from '@src/types/dataType';
-import {
-	MenuBar,
-	TopBarContainer,
-	TopBar,
-	PostContainer,
-	UserContainer,
-} from './style';
+import { MenuBar, TopBarContainer, TopBar, UserContainer } from './style';
 
 const ReportedUser = () => {
 	const [userList, setUserList] = useState<UserListType>([]);
