@@ -17,6 +17,7 @@ export const TitleInput = styled.input`
 	font-weight: 600;
 	color: #a7a7a7;
 `;
+
 export const ContentInput = styled.textarea`
 	width: 112rem;
 	margin: 0 auto;
