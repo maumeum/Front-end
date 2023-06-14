@@ -71,7 +71,10 @@ export interface CommentType {
 	_id: string;
 	nickname: string;
 	content: string;
+	post_id: string;
 }
+
+export type CommentListType = CommentType[];
 
 export interface VolunteerDetailType extends VolunteerType {
 	images: string[];
