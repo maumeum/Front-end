@@ -13,6 +13,7 @@ import { TabTypes } from '@src/types/myPageConstants';
 import { get } from '@api/api';
 import Swal from 'sweetalert2';
 import alertData from '@src/utils/swalObject';
+import Pagination from '@src/components/Pagination/Pagination.tsx';
 
 interface CommunityProps {
 	title: string;
@@ -27,8 +28,10 @@ function MyComment() {
 	const tabs = [TabTypes.WRITTEN_POSTS, TabTypes.COMMENTED_POSTS];
 	const [currTab, setCurrTab] = useState<TabTypes>(TabTypes.WRITTEN_POSTS);
 	const [postData, setPostData] = useState<CommunityProps[]>([]);
-	const [selecteddata, setSelectedData] = useState<CommunityProps[]>([]);
+	const [selectedData, setSelectedData] = useState<CommunityProps[]>([]);
 	const [commentData, setCommentData] = useState<CommunityProps[]>([]);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [pageSize, setPageSize] = useState(5);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -56,7 +59,6 @@ function MyComment() {
 				);
 			}
 		};
-
 		fetchData();
 	}, []);
 
@@ -66,15 +68,18 @@ function MyComment() {
 			: setSelectedData(commentData);
 	}, [currTab, postData, commentData]);
 
+	const handlePageChange = (page: number) => {
+		setCurrentPage(page);
+	};
 	const handleClickTab = (tab: TabTypes) => {
 		setCurrTab(tab);
 	};
 
 	const removePost = (postId: string) => {
-		setSelectedData(selecteddata.filter((post) => post._id !== postId));
+		setSelectedData(selectedData.filter((post) => post._id !== postId));
 	};
 
-	console.log(selecteddata);
+	console.log(selectedData);
 
 	return (
 		<>
@@ -87,17 +92,27 @@ function MyComment() {
 					<TabMenu>
 						<Tab currTab={currTab} onClick={handleClickTab} tabs={tabs} />
 					</TabMenu>
-					{selecteddata.length === 0 && <h2>나의 활동내역이 없습니다</h2>}
-					{selecteddata.map((data) => {
-						return (
-							<MyPost
-								key={data._id}
-								currTab={currTab}
-								communityData={data}
-								onRemovePost={removePost}
-							/>
-						);
-					})}
+					{selectedData.length === 0 && <h2>나의 활동내역이 없습니다</h2>}
+
+					{selectedData
+						.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+						.map((data) => {
+							return (
+								<MyPost
+									key={data._id}
+									currTab={currTab}
+									communityData={data}
+									onRemovePost={removePost}
+								/>
+							);
+						})}
+					{selectedData.length > 0 && (
+						<Pagination
+							currentPage={currentPage}
+							totalPages={Math.ceil(selectedData.length / pageSize)}
+							handlePageChange={handlePageChange}
+						/>
+					)}
 				</Main>
 			</Container>
 		</>

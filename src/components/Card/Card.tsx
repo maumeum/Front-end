@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import Modal from '@components/Modal/Modal.tsx';
 import Selector from '@components/Selector/Selector.tsx';
 import { SmallButton } from '@components/Buttons/SmallButton.ts';
-import dayjs from 'dayjs';
 import {
 	CardContainer,
 	ImgBox,
@@ -74,6 +73,7 @@ function Card({ currTab, data }: CardProps) {
 	const [selectedStatus, setSelectedStatus] = useState<string>(statusName);
 	const [selectedParticipationStatus, setSelectedParticipationStatus] =
 		useState<string>('');
+	const [_, setParticipationStatus] = useState('');
 	const [isPastEndDate, setIsPastEndDate] = useState(false);
 
 	useEffect(() => {
@@ -92,6 +92,7 @@ function Card({ currTab, data }: CardProps) {
 		setIsOpen(onoff);
 	};
 
+	//렌더링 잘되는지 테스트하기 ************************************************************
 	const handleRecruitmentStatusChange = async (selectedValue: string) => {
 		const result = await Swal.fire(
 			alertData.doubleCheckMessage('봉사활동 상태를 변경하시겠습니까??'),
@@ -118,8 +119,6 @@ function Card({ currTab, data }: CardProps) {
 	};
 
 	const handleParticipationStatusChange = async (selectedValue: string) => {
-		setSelectedParticipationStatus(selectedValue);
-
 		try {
 			if (selectedValue === 'complete') {
 				const result = await Swal.fire(
@@ -130,6 +129,8 @@ function Card({ currTab, data }: CardProps) {
 				);
 				if (result.isConfirmed) {
 					await post(`/api/review/users/participation/${_id}`, {});
+					setSelectedParticipationStatus(selectedValue);
+					setParticipationStatus(selectedValue);
 					await Swal.fire('완료된 봉사로 변경되었습니다!', 'success');
 				}
 			} else if (selectedValue === 'cancel') {
@@ -140,6 +141,7 @@ function Card({ currTab, data }: CardProps) {
 					alertData.doubleCheckMessage('봉사활동을 취소하시겠습니까?'),
 				);
 				if (result.isConfirmed) {
+					setParticipationStatus(selectedValue);
 					await Swal.fire(
 						alertData.successMessage('봉사활동이 취소되었습니다'),
 					);

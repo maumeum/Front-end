@@ -41,6 +41,8 @@ function MyVolunHistory() {
 	const [appliedData, setAppliedData] = useState<VolunProps[]>([]);
 	const [completedData, setCompletedData] = useState<VolunProps[]>([]);
 	const [volunData, setVolunData] = useState<VolunProps[]>([]);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [pageSize, _] = useState(10);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -79,6 +81,10 @@ function MyVolunHistory() {
 			: setVolunData(completedData);
 	}, [currTab, appliedData, completedData]);
 
+	const handlePageChange = (page: number) => {
+		setCurrentPage(page);
+	};
+
 	return (
 		<>
 			<Container>
@@ -102,6 +108,13 @@ function MyVolunHistory() {
 					</CardBox>
 				</Main>
 			</Container>
+			{volunData.length > 0 && (
+				<Pagination
+					currentPage={currentPage}
+					totalPages={Math.ceil(volunData.length / pageSize)}
+					handlePageChange={handlePageChange}
+				/>
+			)}
 		</>
 	);
 }

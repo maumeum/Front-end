@@ -6,11 +6,9 @@ import {
 	TabMenu,
 	CardBox,
 } from '@components/MyPage/myPage.ts';
-
-import MyReview from '@src/components/MyPost/MyReview';
-
 import Tab from '@components/Tab/Tab.tsx';
 import Card from '@components/Card/Card.tsx';
+import Pagination from '@components/Pagination/Pagination.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { TabTypes } from '@src/types/myPageConstants';
 import { get } from '@api/api';
@@ -41,6 +39,8 @@ function VolunSuggest() {
 	const [suggestVolunList, setSuggestVolunList] = useState<ResponseData[]>([]);
 	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
 	const currTab = tabs[0];
+	const [currentPage, setCurrentPage] = useState(1);
+	const [pageSize, _] = useState(10);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -83,6 +83,10 @@ function VolunSuggest() {
 		};
 	});
 
+	const handlePageChange = (page: number) => {
+		setCurrentPage(page);
+	};
+
 	return (
 		<>
 			<Container>
@@ -104,6 +108,13 @@ function VolunSuggest() {
 					</CardBox>
 				</Main>
 			</Container>
+			{transformData.length > 0 && (
+				<Pagination
+					currentPage={currentPage}
+					totalPages={Math.ceil(transformData.length / pageSize)}
+					handlePageChange={handlePageChange}
+				/>
+			)}
 		</>
 	);
 }

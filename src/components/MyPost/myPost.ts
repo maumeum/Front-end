@@ -10,6 +10,9 @@ export const PostBox = styled.div`
 	border: 1px solid #e6e6e6;
 	border-radius: 10px;
 	margin-bottom: 3rem;
+	&:hover {
+		box-shadow: 0 4px 6px rgba(0.1, 0.1, 0.1, 0.1);
+	}
 `;
 
 export const Title = styled.p`
@@ -24,6 +27,7 @@ export const Title = styled.p`
 
 export const Description = styled.div`
 	margin: 0;
+	padding: 4px;
 	font-family: kakaoReg;
 	word-break: keep-all;
 	font-size: 1.6rem;
