@@ -21,6 +21,7 @@ import PostList from '@components/PostList/PostList.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { get } from '@api/api';
 import DataType from '@src/types/dataType.ts';
+import findfriendImage from '@assets/images/findfriendImage.png';
 import throttle from '@utils/throttle.ts';
 import findfriendImage from '@assets/images/findfriendImage.png';
 
