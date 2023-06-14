@@ -36,14 +36,15 @@ const ReviewCard = ({ reviewData, onClick }: ReviewCardProps) => {
 	const colorClass = (key: number) => {
 		if (key === 0) {
 			return 'one';
+		} else if (key === 2) {
+			return 'three';
 		}
-		return 'two';
 	};
 
 	return (
 		<ReviewSection className={colorClass(key)} onClick={onClick}>
 			<ImageContainer>
-				<ReviewImage src={reviewImg.length !== 0 ? reviewImg : imgData} />
+				<ReviewImage src={reviewData.images[0] ? reviewImg : imgData} />
 			</ImageContainer>
 			<ReviewContainer>
 				<Nickname className={colorClass(key)}>
