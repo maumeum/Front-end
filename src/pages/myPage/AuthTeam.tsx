@@ -11,7 +11,7 @@ import {
 import Menu from '@components/Menu/Menu.tsx';
 import InputForm from '@components/UserForm/InputForm';
 import TextAreaForm from '@components/UserForm/TextAreaForm';
-import Calendar from '@components/Calendar/Component';
+import Calendar from '@components/Calendar/Calendar';
 import LargeButton from '@components/Buttons/LargeButton';
 import UploadTeamImg from '@components/Profile/TeamImg';
 import Tab from '@components/Tab/Tab.tsx';
