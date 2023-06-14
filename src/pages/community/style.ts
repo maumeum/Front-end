@@ -1,11 +1,83 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const PageContainer = styled.div`
 	margin-bottom: 40rem;
-	margin-top: -30rem;
-	margin-left: 15rem;
+	margin-top: 0;
 `;
 
+export const MenuBar = styled.div`
+	width: 10%;
+	min-width: 15.7rem;
+	border-radius: 5px;
+	margin: -30rem 0 0 10rem;
+`;
+export const MainContainer = styled.div`
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+	background-color: ${({ theme }) => theme.colors.pink200};
+	}
+`;
+export const QuestionMainContainer = styled.div`
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+	background-color: ${({ theme }) => theme.colors.yellow100};
+	}
+`;
+export const FFImageArea = styled.img`
+	width: 33%;
+	margin-left: auto;
+`;
+
+export const TextArea = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin-left: 25rem;
+	margin-top: 3rem;
+`;
+export const MiddleContainer = styled.div`
+	display: block;
+	text-align: center;
+	margin-bottom: 15rem;
+`;
+export const BigText = styled.p`
+	font-size: 6rem;
+	letter-spacing: 0.3rem;
+	color: #313739;
+`;
+export const Sub = styled.div`
+	display: flex;
+	flex-direction: column;
+	p {
+		font-size: 2.5rem;
+		margin-top: -2rem;
+		letter-spacing: 0.2rem;
+	}
+`;
+export const FfHighLight = styled.span`
+	background-color: #d2f3ff;
+`;
+export const MainTitle = styled.p`
+	font-size: 7rem;
+	text-align: left;
+	color: #313739;
+	margin: 0;
+	margin-bottom: 5rem;
+`;
+
+export const Subtitle = styled.p`
+	font-size: 2.5rem;
+	text-align: left;
+	margin: 0;
+	line-height: 5rem;
+`;
+export const Highlight = styled.span`
+	background-color: ${({ theme }) => theme.colors.pink200};
+`;
 export const NumberWriteContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
