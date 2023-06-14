@@ -47,3 +47,12 @@ export const PostContainer = styled.div`
 	margin: 6.4rem auto;
 	min-height: 80rem;
 `;
+
+export const UserContainer = styled.div`
+	min-width: 112rem;
+	min-height: 80rem;
+	margin: 6rem 40rem 4rem;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	column-gap: 2rem;
+`;
