@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from '@components/SearchBar/SearchBar.tsx';
-import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
 import WriteButton from '@components/Buttons/WriteButton/WriteButton.tsx';
 import {
 	NumberWriteContainer,
@@ -22,6 +21,7 @@ import Menu from '@components/Menu/Menu.tsx';
 import questionImage from '@assets/images/questionImage.png';
 import { get } from '@api/api';
 import DataType from '@src/types/dataType.ts';
+import throttle from '@utils/throttle.ts';
 
 type PostData = {
 	_id: string;
@@ -31,21 +31,50 @@ type PostData = {
 const Question = () => {
 	const navigate = useNavigate();
 	const [postListData, setPostListData] = useState<PostData[]>([]);
+	const [isLoad, setLoad] = useState<boolean>(false);
 
 	useEffect(() => {
 		const fetchPostList = async () => {
 			const response = await get<DataType>(
 				'/api/community/category/qna?skip=0&limit=10',
-				{
-					params: {
-						postType: 'qna',
-					},
-				},
+				{},
 			);
 			setPostListData(response.data.categoryPost);
+			setLoad(response.data.hasMore);
 		};
 		fetchPostList();
-	});
+		window.scrollTo(0, 0);
+	}, []);
+
+	const loadMoreData = async () => {
+		try {
+			if (!isLoad) {
+				const response = await get<DataType>(
+					`/api/community/category/qna?skip=${postListData.length}&limit=10`,
+					{},
+				);
+				const newPostListData = response.data.categoryPost;
+				setPostListData((prevData) => [...prevData, ...newPostListData]);
+				setLoad(response.data.hasMore);
+			}
+		} catch (error) {
+			console.error('Error loading more data:', error);
+		}
+	};
+
+	useEffect(() => {
+		if (postListData.length > 0) {
+			const handleScroll = throttle(() => {
+				const { scrollTop, offsetHeight } = document.documentElement;
+				if (offsetHeight - window.innerHeight - scrollTop < 200) {
+					loadMoreData();
+				}
+			});
+
+			window.addEventListener('scroll', handleScroll);
+			return () => window.removeEventListener('scroll', handleScroll);
+		}
+	}, [postListData]);
 
 	const handleSearch = async (query: string) => {
 		const response = await get<DataType>(
@@ -84,8 +113,10 @@ const Question = () => {
 					<Sub>
 						<p>궁금한 사항을 공유하고 새로운 정보를 얻어요</p>
 						<p>
-							<Highlight>제목에 궁금한 사항의 키워드를</Highlight> 포함하면 더욱
-							많은 댓글을 받을 수 있어요
+							<Highlight>
+								제목에 궁금한 사항의 키워드를 포함하면 더욱 많은 댓글을 받을 수
+								있어요
+							</Highlight>
 						</p>
 					</Sub>
 				</MiddleContainer>
@@ -94,10 +125,10 @@ const Question = () => {
 				</MenuBar>
 				<SearchBar onSearch={handleSearch} />
 				<NumberWriteContainer>
-					<TotalPostNumber totalPosts={postListData.length} />
 					<WriteButton toNavigate={navigateWrite} />
 				</NumberWriteContainer>
-				{postListData &&
+				{postListData !== null &&
+					postListData.length > 0 &&
 					postListData.map((postData) => (
 						<PostList
 							key={postData._id}

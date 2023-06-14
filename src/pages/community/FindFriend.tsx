@@ -1,7 +1,6 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from '@components/SearchBar/SearchBar.tsx';
-import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
 import WriteButton from '@components/Buttons/WriteButton/WriteButton.tsx';
 import {
 	NumberWriteContainer,
@@ -37,19 +36,15 @@ const FindFriend = () => {
 	// 처음 데이터 불러오기
 	useEffect(() => {
 		const fetchPostList = async () => {
-			try {
-				const response = await get<DataType>(
-					'/api/community/category/findfriend?skip=0&limit=10',
-					{},
-				);
-				setPostListData(response.data.categoryPost);
-				setLoad(response.data.hasMore);
-			} catch (error) {
-				console.error('Error fetching post list:', error);
-			}
+			const response = await get<DataType>(
+				'/api/community/category/findfriend?skip=0&limit=10',
+				{},
+			);
+			setPostListData(response.data.categoryPost);
+			setLoad(response.data.hasMore);
 		};
-
 		fetchPostList();
+		window.scrollTo(0, 0);
 	}, []);
 
 	// 데이터 불러오기
@@ -122,8 +117,10 @@ const FindFriend = () => {
 					<Sub>
 						<p>마음이 통하는 친구들과 아름다운 마음을 이어나가요</p>
 						<p>
-							<FfHighLight>제목에 봉사활동의 정보</FfHighLight>를 포함하면 더욱
-							많은 댓글을 받을 수 있어요
+							<FfHighLight>
+								제목에 봉사활동의 정보를 포함하면 더욱 많은 댓글을 받을 수
+								있어요
+							</FfHighLight>
 						</p>
 					</Sub>
 				</MiddleContainer>
@@ -131,9 +128,7 @@ const FindFriend = () => {
 					<Menu title={'커뮤니티'} />
 				</MenuBar>
 				<SearchBar onSearch={handleSearch} />
-
 				<NumberWriteContainer>
-					<TotalPostNumber totalPosts={postListData && postListData.length} />
 					<WriteButton toNavigate={navigateWrite} />
 				</NumberWriteContainer>
 				{postListData !== null &&

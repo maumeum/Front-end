@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 export const PageContainer = styled.div`
 	margin-bottom: 40rem;
@@ -80,7 +80,6 @@ export const Highlight = styled.span`
 `;
 export const NumberWriteContainer = styled.div`
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
 	width: 112rem;
 	margin: 5.8rem auto;
@@ -92,6 +91,7 @@ export const ReviewPageContainer = styled.div`
 export const DetailContainer = styled.div`
 	margin: 0 auto;
 	margin-top: 15rem;
+	min-height: 80rem;
 `;
 export const Header = styled.header`
 	margin: 0 auto;

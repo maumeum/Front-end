@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getToken } from '@api/token';
 import DataType from '@src/types/dataType.ts';
 import { get, patch } from '@api/api';
 import {
@@ -12,6 +11,7 @@ import {
 	ButtonContainer,
 	ContentInput,
 	TextLength,
+	ImageArea,
 } from '@src/components/WritePage/WritePageStyle';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
@@ -23,26 +23,17 @@ const ReviewEdit = () => {
 	const [post, setPost] = useState<any>([]);
 	const [inputContent, setInputContent] = useState('');
 	const [inputTitle, setInputTitle] = useState('');
+	const [selectedImage, setSelectedImage] = useState<File[]>([]);
 
 	useEffect(() => {
 		const fetchPost = async () => {
-			try {
-				const token = getToken();
-				const response = await get<DataType>(`/api/review/detail/${postId}`, {
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				});
-				setPost(response.data.post.post);
-				setInputTitle(response.data.post.post.title);
-				setInputContent(response.data.post.post.content);
-				console.log(response);
-			} catch (error) {
-				console.error('Error fetching post:', error);
-			}
+			const response = await get<DataType>(`/api/review/detail/${postId}`, {});
+			setPost(response.data.post.post);
+			setInputTitle(response.data.post.post.title);
+			setInputContent(response.data.post.post.content);
 		};
 		fetchPost();
-	}, [postId]);
+	}, []);
 
 	const handleInputChange = (event: any) => {
 		const text = event.target.value;
@@ -51,14 +42,35 @@ const ReviewEdit = () => {
 		}
 	};
 
+	const handelImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const chosenFiles = e.target.files;
+		if (chosenFiles) {
+			setSelectedImage((prevFiles) => [
+				...prevFiles,
+				...Array.from(chosenFiles),
+			]);
+		}
+	};
 	const editPost = async () => {
 		if (!inputTitle || !inputContent) {
 			Swal.fire(alertData.fillTitleContent);
 			return;
 		}
-		await patch<DataType>(`/api/review/users/${postId}`, {
-			title: inputTitle,
-			content: inputContent,
+		const formData = new FormData();
+		formData.append('title', inputTitle);
+		formData.append('content', inputContent);
+		if (selectedImage) {
+			for (let i = 0; i < selectedImage.length; i++) {
+				formData.append('images', selectedImage[i]);
+			}
+		}
+		for (const [key, value] of formData.entries()) {
+			console.log(`${key}: ${value}`);
+		}
+		await patch<DataType>(`/api/review/users/${postId}`, formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
 		});
 		navigate(`/review/${postId}`);
 	};
@@ -87,6 +99,17 @@ const ReviewEdit = () => {
 				</TextContainer>
 				<TextLength>{inputContent.length}/2000</TextLength>
 				<ButtonContainer>
+					<ImageArea>
+						이미지업로드
+						<input
+							id='fileInput'
+							type='file'
+							accept='image/*'
+							name='image'
+							multiple
+							onChange={handelImageChange}
+						/>
+					</ImageArea>
 					<CancelButton onClick={backPostList}>취소</CancelButton>
 					<SubmitButton onClick={editPost}>등록</SubmitButton>
 				</ButtonContainer>

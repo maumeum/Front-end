@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getToken } from '@api/token';
 import DataType from '@src/types/dataType.ts';
 import { get, patch } from '@api/api';
 import {
@@ -28,23 +27,13 @@ const CommunityEditPage = () => {
 
 	useEffect(() => {
 		const fetchPost = async () => {
-			try {
-				const token = getToken();
-				const response = await get<DataType>(`/api/community/${postId}`, {
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				});
-				setPost(response.data.post.post);
-				setInputTitle(response.data.post.post.title);
-				setInputContent(response.data.post.post.content);
-				console.log(response);
-			} catch (error) {
-				console.error('Error fetching post:', error);
-			}
+			const response = await get<DataType>(`/api/community/${postId}`, {});
+			setPost(response.data.post.post);
+			setInputTitle(response.data.post.post.title);
+			setInputContent(response.data.post.post.content);
 		};
 		fetchPost();
-	}, [postId]);
+	}, []);
 
 	const handleInputChange = (event: any) => {
 		const text = event.target.value;

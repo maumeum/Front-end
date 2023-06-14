@@ -8,4 +8,5 @@ export const WriteBtn = styled.button`
 	border-radius: 27.5px;
 	cursor: pointer;
 	font-size: 2rem;
+	margin-left: auto;
 `;

@@ -20,7 +20,6 @@ import {
 	BtnDelete,
 	BtnReport,
 } from '@src/pages/community/style';
-import CommentSection from '@src/components/Comment/Comment';
 import DataType from '@src/types/dataType';
 import useAuthStore from '@src/store/useAuthStore.ts';
 import Swal from 'sweetalert2';
@@ -148,7 +147,6 @@ const ReviewDetail = () => {
 					</Contentdiv>
 				</ContentContainer>
 			</DetailContainer>
-			<CommentSection postId={postId} />
 		</>
 	);
 };
