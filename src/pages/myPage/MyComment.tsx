@@ -30,8 +30,13 @@ function MyComment() {
 	const [postData, setPostData] = useState<CommunityProps[]>([]);
 	const [selectedData, setSelectedData] = useState<CommunityProps[]>([]);
 	const [commentData, setCommentData] = useState<CommunityProps[]>([]);
+
+	//페이지네이션
 	const [currentPage, setCurrentPage] = useState(1);
-	const [pageSize, setPageSize] = useState(5);
+	const pageSize = 5;
+	const handlePageChange = (pageNumber: number) => {
+		setCurrentPage(pageNumber);
+	};
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -68,9 +73,6 @@ function MyComment() {
 			: setSelectedData(commentData);
 	}, [currTab, postData, commentData]);
 
-	const handlePageChange = (page: number) => {
-		setCurrentPage(page);
-	};
 	const handleClickTab = (tab: TabTypes) => {
 		setCurrTab(tab);
 	};
@@ -78,8 +80,6 @@ function MyComment() {
 	const removePost = (postId: string) => {
 		setSelectedData(selectedData.filter((post) => post._id !== postId));
 	};
-
-	console.log(selectedData);
 
 	return (
 		<>
@@ -96,10 +96,10 @@ function MyComment() {
 
 					{selectedData
 						.slice((currentPage - 1) * pageSize, currentPage * pageSize)
-						.map((data) => {
+						.map((data, idx) => {
 							return (
 								<MyPost
-									key={data._id}
+									key={data._id + idx}
 									currTab={currTab}
 									communityData={data}
 									onRemovePost={removePost}

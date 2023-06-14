@@ -1,18 +1,20 @@
 import styled from 'styled-components';
 
-export const StyledPagination = styled.div`
+export const Container = styled.div`
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	position: relative;
+	left: -20px;
 
-	a {
-		display: block;
-		margin-right: 5rem;
-		padding: 5px;
+	button {
+		margin-top: 2rem;
+		border: none;
+		background-color: white;
 		cursor: pointer;
-		font-size: 15px;
+		color: #afcd81;
+		font-size: 16px;
 		&:hover {
-			color: #afcd81;
+			color: #ffd4d4;
 		}
 	}
 `;

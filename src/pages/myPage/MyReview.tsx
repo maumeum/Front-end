@@ -26,9 +26,12 @@ function MyReview() {
 	const tabs = [TabTypes.WRITTEN_REVIEW];
 	const [currTab] = useState<TabTypes>(TabTypes.WRITTEN_REVIEW);
 	const [userReviewData, setUserReviewData] = useState<ReviewProps[]>([]);
+	//페이지네이션
 	const [currentPage, setCurrentPage] = useState(1);
-	const [pageSize, _] = useState(5);
-
+	const pageSize = 5;
+	const handlePageChange = (pageNumber: number) => {
+		setCurrentPage(pageNumber);
+	};
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -43,10 +46,6 @@ function MyReview() {
 
 		fetchData();
 	}, []);
-
-	const handlePageChange = (page: number) => {
-		setCurrentPage(page);
-	};
 
 	const removePost = (postId: string) => {
 		setUserReviewData(userReviewData.filter((post) => post._id !== postId));

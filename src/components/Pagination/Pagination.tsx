@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { StyledPagination } from '@components/Pagination/pagination';
+import { Container } from './pagination';
 
 interface PaginationProps {
 	currentPage: number;
@@ -7,34 +6,44 @@ interface PaginationProps {
 	handlePageChange: (page: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({
+function Pagination({
 	currentPage,
 	totalPages,
 	handlePageChange,
-}: PaginationProps) => {
-	const NUM_SHOWN_PAGES = 5;
+}: PaginationProps) {
+	// 페이지 버튼을 만드는 함수
+	const renderPageButtons = () => {
+		const pageButtons = [];
+		for (let i = 1; i <= totalPages; i++) {
+			pageButtons.push(
+				<button
+					className={currentPage === i ? 'active' : ''}
+					onClick={() => handlePageChange(i)}
+					key={i}>
+					{i}
+				</button>,
+			);
+		}
+		return pageButtons;
+	};
 
-	const [pageStart, setPageStart] = useState(1);
-	const [pageEnd, setPageEnd] = useState(Math.min(totalPages, NUM_SHOWN_PAGES));
+	return (
+		<Container>
+			<button
+				className='pagination__button'
+				onClick={() => handlePageChange(currentPage - 1)}
+				disabled={currentPage === 1}>
+				&lt;
+			</button>
+			{renderPageButtons()}
+			<button
+				className='pagination__button'
+				onClick={() => handlePageChange(currentPage + 1)}
+				disabled={currentPage === totalPages}>
+				&gt;
+			</button>
+		</Container>
+	);
+}
 
-	// 페이지 범위 업데이트
-	useEffect(() => {
-		setPageStart(Math.max(1, currentPage - Math.floor(NUM_SHOWN_PAGES / 2)));
-		setPageEnd(Math.min(totalPages, pageStart + NUM_SHOWN_PAGES - 1));
-	}, [currentPage, totalPages]);
-
-	const pageLinks = [];
-	for (let i = pageStart; i <= pageEnd; i++) {
-		pageLinks.push(
-			<a
-				key={i}
-				onClick={() => handlePageChange(i)}
-				className={i === currentPage ? 'active' : ''}>
-				{i}
-			</a>,
-		);
-	}
-
-	return <StyledPagination>{pageLinks}</StyledPagination>;
-};
 export default Pagination;

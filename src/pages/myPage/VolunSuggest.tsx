@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import {
 	Container,
 	Main,
@@ -39,8 +39,13 @@ function VolunSuggest() {
 	const [suggestVolunList, setSuggestVolunList] = useState<ResponseData[]>([]);
 	const tabs = [TabTypes.VOLUNTEER_SUGGEST];
 	const currTab = tabs[0];
+
+	//페이지네이션
 	const [currentPage, setCurrentPage] = useState(1);
-	const [pageSize, _] = useState(10);
+	const pageSize = 5;
+	const handlePageChange = (pageNumber: number) => {
+		setCurrentPage(pageNumber);
+	};
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -82,10 +87,6 @@ function VolunSuggest() {
 			},
 		};
 	});
-
-	const handlePageChange = (page: number) => {
-		setCurrentPage(page);
-	};
 
 	return (
 		<>
