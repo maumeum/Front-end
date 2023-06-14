@@ -61,15 +61,17 @@ export const UtilContainer = styled.div`
 
 export const LoginButton = styled.button`
 	margin: 0 1rem;
-	width: 7rem;
-	min-width: 7rem;
-	height: 3.5rem;
-	background-color: transparent;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 7.5rem;
+	aspect-ratio: 2;
 	border-radius: 1.7rem;
-	border: 1px solid #cccccc;
-	text-align: center;
+	border: 1px solid rgb(204, 204, 204);
+	background-color: #ffffff;
+	box-sizing: border-box;
 	font-size: 1.2rem;
-	font-weight: 400;
+	text-decoration: none;
 	cursor: pointer;
 `;
 
