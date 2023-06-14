@@ -23,7 +23,6 @@ import { get } from '@api/api';
 import DataType from '@src/types/dataType.ts';
 import findfriendImage from '@assets/images/findfriendImage.png';
 import throttle from '@utils/throttle.ts';
-import findfriendImage from '@assets/images/findfriendImage.png';
 
 type PostData = {
 	_id: string;
