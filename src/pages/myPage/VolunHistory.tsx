@@ -15,6 +15,7 @@ import { get } from '@api/api';
 import DataType from '@src/types/dataType';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
+import NoData from '@components/NoData/NoData.tsx';
 
 interface VolunProps {
 	createdAt: string;
@@ -96,8 +97,8 @@ function MyVolunHistory() {
 					<TabMenu>
 						<Tab currTab={currTab} onClick={handleClickTab} tabs={tabs} />
 					</TabMenu>
+					{volunData.length === 0 && <NoData category='봉사' />}
 					<CardBox>
-						{volunData.length === 0 && <h2>봉사 내역이 존재하지 않습니다.</h2>}
 						{volunData.map((data, index) => (
 							<Card
 								key={data.volunteer_id._id + '-' + index}

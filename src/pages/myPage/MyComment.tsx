@@ -14,6 +14,7 @@ import { get } from '@api/api';
 import Swal from 'sweetalert2';
 import alertData from '@src/utils/swalObject';
 import Pagination from '@src/components/Pagination/Pagination.tsx';
+import NoData from '@components/NoData/NoData.tsx';
 
 interface CommunityProps {
 	title: string;
@@ -92,8 +93,7 @@ function MyComment() {
 					<TabMenu>
 						<Tab currTab={currTab} onClick={handleClickTab} tabs={tabs} />
 					</TabMenu>
-					{selectedData.length === 0 && <h2>나의 활동내역이 없습니다</h2>}
-
+					{selectedData.length === 0 && <NoData category='게시글' />}
 					{selectedData
 						.slice((currentPage - 1) * pageSize, currentPage * pageSize)
 						.map((data, idx) => {
