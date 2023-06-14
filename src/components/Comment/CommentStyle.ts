@@ -14,10 +14,12 @@ export const Title = styled.div`
 export const CommentArea = styled.textarea`
 	width: 112rem;
 	padding: 2rem;
+	font-size: 2rem;
 `;
 export const EditCommentArea = styled.textarea`
 	width: 105rem;
 	padding: 2rem;
+	font-size: 2rem;
 `;
 export const CommentLength = styled.p`
 	font-size: 2rem;
@@ -93,12 +95,13 @@ export const CommentHolder = styled.p`
 	font-size: 2rem;
 `;
 export const BtnReport = styled.button`
-	background-color: #f87474;
+	background-color: inherit;
 	border-radius: 3.3rem;
 	border: none;
-	height: 6rem;
+	height: 5rem;
 	width: 9rem;
 	margin-top: 2rem;
 	cursor: pointer;
 	font-size: 2rem;
+	color: #ff9c9c;
 `;

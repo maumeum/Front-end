@@ -17,6 +17,7 @@ export const SearchBarInput = styled.input`
 	height: 5.8rem;
 	border-radius: 1rem;
 	padding-left: 9.8rem;
+	font-size: 2rem;
 `;
 export const SearchLogo = styled.img`
 	width: 3rem;
@@ -38,4 +39,5 @@ export const SearchBarBtn = styled.button`
 	font-weight: bold;
 	border: none;
 	cursor: pointer;
+	font-size: 2rem;
 `;
