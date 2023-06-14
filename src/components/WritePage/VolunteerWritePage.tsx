@@ -10,7 +10,7 @@ import {
 	ContentInput,
 	TextLength,
 } from '../WritePage/WritePageStyle';
-import Calendar from '@components/Calendar/Component';
+import Calendar from '@components/Calendar/Calendar';
 
 type WritePageProps = {
 	onSave: (inputTitle: string, textContent: string) => void;
