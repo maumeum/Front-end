@@ -19,7 +19,7 @@ import alertData from '@utils/swalObject';
 import { validPhoneNum } from '@utils/signUpCheck.ts';
 import DataType from '@src/types/dataType';
 import { TabTypes } from '@src/types/myPageConstants';
-import { post, get } from '@api/api';
+import { post } from '@api/api';
 import useSummitStore from '@src/store/useSummitStore';
 import {
 	teamNameError,
@@ -39,21 +39,6 @@ import {
 	WaitMessage,
 } from './style';
 
-interface TeamInfo {
-	_id: string;
-	user_id: string;
-	category: string;
-	teamName: string;
-	introduction: string;
-	briefHistory: string;
-	establishmentDate: string;
-	phone: string;
-	location: string;
-	image: string;
-	isSubmit: boolean;
-	createdAt: string;
-}
-
 const AuthTeam = () => {
 	const [category, setCategory] = useState<string>('');
 	const [teamName, setTeamName] = useState<string>('');
@@ -64,8 +49,6 @@ const AuthTeam = () => {
 	const [location, setLocation] = useState<string>('');
 	const [phoneNum, setPhoneNum] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
-	const [beforeImg, setBeforeImg] = useState<string>('');
-	const [isEditMode, setIsEditMode] = useState<boolean>(false); //수정모드
 
 	const tabs = [TabTypes.GROUP_CERTIFICATION];
 	const { isSubmit, setIsSubmit } = useSummitStore();
@@ -74,43 +57,7 @@ const AuthTeam = () => {
 	//제출 여부 확인
 	useEffect(() => {
 		setIsSubmit();
-		isSubmit && setIsEditMode(true);
 	}, []);
-
-	useEffect(() => {
-		//isSunbmit true => 데이터 불러오고, 안내문 나옴
-		//이렇게 되면 값이 없으면 오류가나나? -> 오류가 남
-		//제출이 한번되고 나면 이 값이 변하면 안될거같음...혹은 다른 기준점이 필요
-		const fetchTeamInfo = async () => {
-			try {
-				const getTeamInfo = await get<DataType>('/api/team/auth');
-				const getTeamInfoData = getTeamInfo.data as TeamInfo;
-				const {
-					category,
-					teamName,
-					introduction,
-					briefHistory,
-					establishmentDate,
-					phone,
-					location,
-					image,
-				} = getTeamInfoData;
-				setCategory(category);
-				setTeamName(teamName);
-				setBriefHistory(briefHistory);
-				setIntroduction(introduction);
-				setDate(new Date(establishmentDate));
-				setPhoneNum(phone);
-				setLocation(location);
-				setBeforeImg(image);
-			} catch (error) {
-				console.error('Error fetching team info:', error);
-			}
-		};
-		if (isSubmit) {
-			fetchTeamInfo();
-		}
-	}, [isSubmit]);
 
 	// inputValue 함수
 	const getFormChanger =
