@@ -23,7 +23,7 @@ const apiURL = import.meta.env.VITE_API_URL;
 const TeamCard = ({ teamData, onClick }: TeamCardProps) => {
 	const image = `${apiURL}/${teamData.image}`;
 
-	const date = dayjs(teamData.createdAt)
+	const date = dayjs(teamData.establishmentDate)
 		.locale('ko')
 		.format('YYYY년 MM월 DD일');
 	return (
