@@ -38,7 +38,7 @@ interface UserInfo {
 	_id: string;
 	phone: string;
 	image: string;
-	authorizaion: boolean;
+	authorization: boolean;
 }
 
 function MyPageUserForm({ pageType }: MyPageUserFormProps) {
@@ -48,7 +48,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 	const [nickname, setNickname] = useState<string>('');
 	const [phone, setPhone] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
-	const [authorizaion, setAuthorizaion] = useState<boolean>(false);
+	const [authorization, setAuthorization] = useState<boolean>(false);
 	const canModify = pageType === TabTypes.MYPAGE;
 
 	useEffect(() => {
@@ -56,13 +56,13 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 			try {
 				const getUserInfoData = await get<DataType>('/api/users/info', {});
 				const responseData = getUserInfoData.data as UserInfo;
-				const { email, nickname, phone, authorizaion } = responseData;
+				const { email, nickname, phone, authorization } = responseData;
 				setEmail(email);
 				setNickname(nickname);
 				setPhone(phone);
 				setInitialNickname(nickname);
 				setInitialPhone(phone);
-				setAuthorizaion(authorizaion);
+				setAuthorization(authorization);
 			} catch (error) {
 				Swal.fire(
 					alertData.errorMessage('데이터를 가져오는데 실패하였습니다.'),
@@ -147,7 +147,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 							validFn={validEmail}
 						/>
 					)}
-					{authorizaion && <img src={check} alt='인증유저' />}
+					{authorization && <img src={check} alt='인증유저' />}
 
 					<InputForm
 						canModify={canModify}

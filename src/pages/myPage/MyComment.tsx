@@ -4,7 +4,6 @@ import {
 	Main,
 	MenuBar,
 	TabMenu,
-	StyledLink,
 } from '@components/MyPage/myPage.ts';
 import Tab from '@components/Tab/Tab.tsx';
 import MyPost from '@components/MyPost/MyPost.tsx';
@@ -14,8 +13,7 @@ import { TabTypes } from '@src/types/myPageConstants';
 import { get } from '@api/api';
 import Swal from 'sweetalert2';
 import alertData from '@src/utils/swalObject';
-import { getToken } from '@api/token';
-const token = getToken();
+import Pagination from '@src/components/Pagination/Pagination.tsx';
 
 interface CommunityProps {
 	title: string;
@@ -30,8 +28,15 @@ function MyComment() {
 	const tabs = [TabTypes.WRITTEN_POSTS, TabTypes.COMMENTED_POSTS];
 	const [currTab, setCurrTab] = useState<TabTypes>(TabTypes.WRITTEN_POSTS);
 	const [postData, setPostData] = useState<CommunityProps[]>([]);
-	const [selecteddata, setSelectedData] = useState<CommunityProps[]>([]);
+	const [selectedData, setSelectedData] = useState<CommunityProps[]>([]);
 	const [commentData, setCommentData] = useState<CommunityProps[]>([]);
+
+	//페이지네이션
+	const [currentPage, setCurrentPage] = useState(1);
+	const pageSize = 5;
+	const handlePageChange = (pageNumber: number) => {
+		setCurrentPage(pageNumber);
+	};
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -51,20 +56,14 @@ function MyComment() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const getCommentData = await get<DataType>('/api/postComments/users', {
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				});
+				const getCommentData = await get<DataType>('/api/postComments/users');
 				setCommentData(getCommentData.data as CommunityProps[]);
-				console.log(getCommentData);
 			} catch (error) {
 				Swal.fire(
 					alertData.errorMessage('데이터를 불러오는데 실패하였습니다.'),
 				);
 			}
 		};
-
 		fetchData();
 	}, []);
 
@@ -79,8 +78,9 @@ function MyComment() {
 	};
 
 	const removePost = (postId: string) => {
-		setSelectedData(selecteddata.filter((post) => post._id !== postId));
+		setSelectedData(selectedData.filter((post) => post._id !== postId));
 	};
+
 	return (
 		<>
 			<Container>
@@ -92,22 +92,27 @@ function MyComment() {
 					<TabMenu>
 						<Tab currTab={currTab} onClick={handleClickTab} tabs={tabs} />
 					</TabMenu>
-					{selecteddata.length === 0 && <h2>나의 활동내역이 없습니다</h2>}
-					{selecteddata.map((data) => {
-						return (
-							<StyledLink
-								to={`/community/${data._id}`}
-								key={`commenutyLink${data._id}`}
-								style={{ textDecoration: 'none' }}>
+					{selectedData.length === 0 && <h2>나의 활동내역이 없습니다</h2>}
+
+					{selectedData
+						.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+						.map((data, idx) => {
+							return (
 								<MyPost
-									key={data._id}
+									key={data._id + idx}
 									currTab={currTab}
 									communityData={data}
 									onRemovePost={removePost}
 								/>
-							</StyledLink>
-						);
-					})}
+							);
+						})}
+					{selectedData.length > 0 && (
+						<Pagination
+							currentPage={currentPage}
+							totalPages={Math.ceil(selectedData.length / pageSize)}
+							handlePageChange={handlePageChange}
+						/>
+					)}
 				</Main>
 			</Container>
 		</>

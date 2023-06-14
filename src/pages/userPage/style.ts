@@ -116,7 +116,7 @@ export const SignUpForm = styled.div`
 	img {
 		position: absolute;
 		left: 11.3rem;
-		top: 15.2rem;
+		top: 15rem;
 	}
 `;
 

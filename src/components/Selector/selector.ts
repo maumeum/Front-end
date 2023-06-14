@@ -11,4 +11,5 @@ export const OptionColor = styled.option`
 export const SelectColor = styled.select`
 	border: none;
 	color: var(--button--color);
+	z-index: 1;
 `;

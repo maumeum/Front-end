@@ -6,6 +6,7 @@ export const Container = styled.div`
 	position: relative;
 	margin: 0;
 	padding: 0;
+	margin-left: 15rem;
 	min-height: 100rem;
 `;
 
@@ -54,10 +55,5 @@ export const ButtonContainer = styled.button`
 
 export const ButtonWord = styled.p`
 	margin: 0;
-	color: black;
-`;
-
-export const StyledLink = styled(Link)`
-	text-decoration: none;
 	color: black;
 `;
