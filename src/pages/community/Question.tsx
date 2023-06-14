@@ -1,15 +1,26 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import TopBar from '@components/TopBar/TopBar.tsx';
 import SearchBar from '@components/SearchBar/SearchBar.tsx';
 import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
 import WriteButton from '@components/Buttons/WriteButton/WriteButton.tsx';
-import { NumberWriteContainer, PageContainer } from './style.ts';
+import {
+	NumberWriteContainer,
+	PageContainer,
+	QuestionMainContainer,
+	FFImageArea,
+	MainTitle,
+	Subtitle,
+	TextArea,
+	MenuBar,
+	MiddleContainer,
+	BigText,
+	Sub,
+	Highlight,
+} from './style.ts';
 import PostList from '@components/PostList/PostList.tsx';
 import Menu from '@components/Menu/Menu.tsx';
-import { MenuBar } from '@components/MyPage/myPage';
+import questionImage from '@assets/images/questionImage.png';
 import { get } from '@api/api';
-import { getToken } from '@api/token';
 import DataType from '@src/types/dataType.ts';
 
 type PostData = {
@@ -22,29 +33,19 @@ const Question = () => {
 	const [postListData, setPostListData] = useState<PostData[]>([]);
 
 	useEffect(() => {
-		fetchPostList();
-	}, []);
-
-	const fetchPostList = async () => {
-		try {
-			const token = getToken();
+		const fetchPostList = async () => {
 			const response = await get<DataType>(
 				'/api/community/category/qna?skip=0&limit=10',
 				{
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
 					params: {
 						postType: 'qna',
 					},
 				},
 			);
-			setPostListData(response.data);
-			console.log(response);
-		} catch (error) {
-			console.error('Error fetching post list:', error);
-		}
-	};
+			setPostListData(response.data.categoryPost);
+		};
+		fetchPostList();
+	});
 
 	const handleSearch = async (query: string) => {
 		const response = await get<DataType>(
@@ -63,11 +64,34 @@ const Question = () => {
 
 	return (
 		<>
-			<MenuBar>
-				<Menu title={'커뮤니티'} />
-			</MenuBar>
 			<PageContainer>
-				<TopBar title='궁금해요' text='봉사와 관련된 궁금한 사항을 질문해요' />
+				<QuestionMainContainer>
+					<TextArea>
+						<MainTitle>마음이음</MainTitle>
+						<Subtitle>
+							마음이음은 동행을 추구합니다.
+							<br />
+							함께 봉사하는 이들을 위한 커뮤니티에서 소중한 경험을 공유하고
+							마음을 이어보세요!
+						</Subtitle>
+					</TextArea>
+
+					<FFImageArea src={questionImage} alt='question-image' />
+				</QuestionMainContainer>
+
+				<MiddleContainer>
+					<BigText>궁금해요</BigText>
+					<Sub>
+						<p>궁금한 사항을 공유하고 새로운 정보를 얻어요</p>
+						<p>
+							<Highlight>제목에 궁금한 사항의 키워드를</Highlight> 포함하면 더욱
+							많은 댓글을 받을 수 있어요
+						</p>
+					</Sub>
+				</MiddleContainer>
+				<MenuBar>
+					<Menu title={'커뮤니티'} />
+				</MenuBar>
 				<SearchBar onSearch={handleSearch} />
 				<NumberWriteContainer>
 					<TotalPostNumber totalPosts={postListData.length} />
