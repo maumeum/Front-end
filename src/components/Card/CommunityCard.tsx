@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { CommunityType } from '@src/types/cardType';
 
 import {
