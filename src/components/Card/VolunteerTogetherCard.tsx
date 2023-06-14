@@ -2,7 +2,7 @@ import { VolunteerDetailType } from '@src/types/cardType.ts';
 import {
 	dateFormatter,
 	getCurrent,
-	remainingDaysCulcurator,
+	remainingDaysCalculator,
 } from '@utils/dateUtils.ts';
 import {
 	CardProps,
@@ -28,7 +28,7 @@ const VolunteerTogetherCard = ({ volunteerCardData }: VolunteerCardProps) => {
 		volunteerCardData;
 	const currentDate = getCurrent();
 	const deadlineDate = dateFormatter(deadline, 'YYYY-MM-DD');
-	const remainingDays = remainingDaysCulcurator(currentDate, deadlineDate);
+	const remainingDays = remainingDaysCalculator(currentDate, deadlineDate);
 	const thumbnail = images[0];
 
 	return (

@@ -12,6 +12,7 @@ import { MenuBar, TopBarContainer, TopBar, TeamCardContainer } from './style';
 const TeamAuth = () => {
 	const [teamList, setTeamList] = useState<TeamListType>([]);
 	const [select, setSelect] = useState<number | null>(null);
+	const [isModified, setIsModified] = useState<boolean>(false);
 
 	// teamList 불러오기
 	useEffect(() => {
@@ -20,8 +21,12 @@ const TeamAuth = () => {
 			setTeamList(responseData.data);
 		};
 		fetchData();
-		window.scrollTo(0, 0);
-	}, []);
+		if (isModified) {
+			fetchData();
+			setIsModified(false);
+			window.scrollTo(0, 0);
+		}
+	}, [isModified]);
 
 	const handleClick = (query: string) => {
 		console.log(query);
@@ -54,6 +59,7 @@ const TeamAuth = () => {
 								isOpen={select === index}
 								closeModal={() => setSelect(null)}
 								teamData={item}
+								setIsModified={setIsModified}
 							/>
 						</>
 					))}

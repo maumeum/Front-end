@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TopBar from '@components/TopBar/TopBar.tsx';
 import SearchBar from '@components/SearchBar/SearchBar.tsx';
@@ -19,30 +19,51 @@ type PostData = {
 };
 const FindFriend = () => {
 	const navigate = useNavigate();
+	const obsRef = useRef(null);
+	const [page, setPage] = useState(1);
+	const [load, setLoad] = useState(false); //로딩스피너
+	const preventRef = useRef(true); //옵저버 중복실행방지
+	const endRef = useRef(false); //모든 글 로드 확인
 	const [postListData, setPostListData] = useState<PostData[]>([]);
 
+	//옵저버 생성하기
 	useEffect(() => {
+		const observer = new IntersectionObserver(obsHandler, { threshold: 0.5 });
+		if (obsRef.current) observer.observe(obsRef.current);
+		return () => {
+			observer.disconnect();
+		};
+	}, []);
+
+	useEffect(() => {
+		const fetchPostList = async () => {
+			try {
+				const token = getToken();
+				const response = await get<DataType>(
+					'/api/community/category/findfriend?skip=0&limit=10',
+					{
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+						params: {
+							postType: 'findfriend',
+						},
+					},
+				);
+				setPostListData(response.data);
+				console.log(response);
+			} catch (error) {
+				console.error('Error fetching post list:', error);
+			}
+		};
 		fetchPostList();
 	}, []);
 
-	const fetchPostList = async () => {
-		try {
-			const token = getToken();
-			const response = await get<DataType>(
-				'/api/community/category/findfriend?skip=0&limit=10',
-				{
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-					params: {
-						postType: 'findfriend',
-					},
-				},
-			);
-			setPostListData(response.data);
-			console.log(response);
-		} catch (error) {
-			console.error('Error fetching post list:', error);
+	const obsHandler = (entries: any) => {
+		const target = entries[0];
+		if (!endRef.current && target.isIntersecting && preventRef.current) {
+			preventRef.current = false;
+			setPage((prev) => prev + 1);
 		}
 	};
 

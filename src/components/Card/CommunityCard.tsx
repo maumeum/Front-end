@@ -3,8 +3,10 @@ import { CommunityType } from '@src/types/cardType';
 
 import {
 	CommunityContainer,
-	PostType,
+	QnaType,
+	TogetherType,
 	CommunityTitle,
+	WriterNickname,
 } from '@components/Card/card';
 
 interface CommunityCardProps {
@@ -13,19 +15,22 @@ interface CommunityCardProps {
 }
 
 const CommunityCard = ({ communityData, onClick }: CommunityCardProps) => {
-	const [postType, setPostType] = useState<string>('');
-	useEffect(() => {
-		if (communityData.postType === 'qna') {
-			setPostType('궁금해요');
-		} else {
-			setPostType('동행 구해요');
-		}
-	}, []);
+	const title =
+		communityData.title.length > 15
+			? `${communityData.title.slice(0, 15)}...`
+			: communityData.title;
 
 	return (
 		<CommunityContainer onClick={onClick}>
-			<PostType>{postType}</PostType>
-			<CommunityTitle>{communityData.title}</CommunityTitle>
+			{communityData.postType === 'qna' ? (
+				<QnaType>QnA</QnaType>
+			) : (
+				<TogetherType>동행</TogetherType>
+			)}
+			<div>
+				<CommunityTitle>{title}</CommunityTitle>
+				<WriterNickname>{communityData.user_id.nickname}</WriterNickname>
+			</div>
 		</CommunityContainer>
 	);
 };

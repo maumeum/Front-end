@@ -110,12 +110,13 @@ export const ImageArea = styled.label`
 	}
 `;
 export const BtnReport = styled.button`
-	background-color: #f87474;
+	background-color: inherit;
 	border-radius: 3.3rem;
 	border: none;
 	height: 6.6rem;
 	width: 13rem;
 	margin-top: 2rem;
 	cursor: pointer;
-	font-size: 2.5rem;
+	font-size: 2rem;
+	color: #ff9c9c;
 `;

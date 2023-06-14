@@ -58,7 +58,6 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 				},
 			});
 			setValue(response.data.postCommentList);
-			console.log(response.data);
 		} catch (error) {
 			console.error('Error fetching post:', error);
 		}

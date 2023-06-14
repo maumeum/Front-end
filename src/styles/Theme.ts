@@ -23,6 +23,7 @@ const colors = {
 	gray300: '#D8D8D8', // 회색버튼 default, 선 색상
 	gray400: '#C7C7C7', // 회색버튼 click
 	gray500: '#888888', // 회색 폰트색
+	gray600: '#666666', // 회색 폰트색2
 };
 
 const radius = {
