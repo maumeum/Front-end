@@ -64,6 +64,7 @@ function VolunSuggest() {
 		//Card 컴포넌트 형식에 맞게 데이터형태 변환
 		return {
 			createdAt: data.createdAt,
+			_id: data._id,
 			volunteer_id: {
 				startDate: data.startDate,
 				endDate: data.endDate,

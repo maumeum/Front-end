@@ -63,6 +63,7 @@ function Withdrawal() {
 			Swal.fire(
 				alertData.successMessage('다음에 다시 만날 날을 기대합니다!👋🏻'),
 			);
+			window.location.reload();
 		}
 	};
 
