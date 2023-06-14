@@ -8,6 +8,20 @@ export const Container = styled.div`
 	width: 112rem;
 	margin-bottom: 20rem;
 `;
+export const CategoryContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
+export const LayoutContainer = styled.div`
+	display: flex;
+	justify-content: space-between;
+`;
+
+export const LayoutChildContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
+
 export const TitleInput = styled.input`
 	width: 112rem;
 	margin: 0 auto;

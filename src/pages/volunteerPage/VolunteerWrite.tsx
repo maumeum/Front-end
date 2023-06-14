@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import Swal from 'sweetalert2';
+import alertData from '@src/utils/swalObject.ts';
 import VolunteerWritePage from '@components/WritePage/VolunteerWritePage';
 import { post } from '@api/api';
 import { getToken } from '@api/token';
@@ -24,6 +26,7 @@ const VolunteerWrite = () => {
 		}
 	};
 
+	// selectedActType: string, inputRegisterCount: number, deadline: Date, startDate: Date, endDate: Date,
 	const onSavePost = async (inputTitle: string, content: string) => {
 		setPostData({
 			title: inputTitle,
