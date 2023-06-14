@@ -134,6 +134,7 @@ export const Btn = styled.button`
 	margin-top: 2rem;
 	cursor: pointer;
 	margin-left: 50rem;
+	font-size: 2rem;
 `;
 export const BtnDelete = styled.button`
 	background-color: #ffd4d4;
@@ -143,6 +144,7 @@ export const BtnDelete = styled.button`
 	width: 13rem;
 	margin-top: 2rem;
 	cursor: pointer;
+	font-size: 2rem;
 `;
 export const Line = styled.hr`
 	width: 112rem;
