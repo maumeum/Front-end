@@ -9,6 +9,7 @@ import {
 import Tab from '@components/Tab/Tab.tsx';
 import Card from '@components/Card/Card.tsx';
 import Menu from '@components/Menu/Menu.tsx';
+import Pagination from '@components/Pagination/Pagination.tsx';
 import { TabTypes } from '@src/types/myPageConstants';
 import { get } from '@api/api';
 import DataType from '@src/types/dataType';
@@ -91,8 +92,12 @@ function MyVolunHistory() {
 					</TabMenu>
 					<CardBox>
 						{volunData.length === 0 && <h2>봉사 내역이 존재하지 않습니다.</h2>}
-						{volunData.map((data) => (
-							<Card key={data.volunteer_id._id} currTab={currTab} data={data} />
+						{volunData.map((data, index) => (
+							<Card
+								key={data.volunteer_id._id + '-' + index}
+								currTab={currTab}
+								data={data}
+							/>
 						))}
 					</CardBox>
 				</Main>

@@ -51,13 +51,8 @@ function MyComment() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const getCommentData = await get<DataType>('/api/postComments/users', {
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				});
+				const getCommentData = await get<DataType>('/api/postComments/users');
 				setCommentData(getCommentData.data as CommunityProps[]);
-				console.log(getCommentData);
 			} catch (error) {
 				Swal.fire(
 					alertData.errorMessage('데이터를 불러오는데 실패하였습니다.'),
@@ -81,6 +76,7 @@ function MyComment() {
 	const removePost = (postId: string) => {
 		setSelectedData(selecteddata.filter((post) => post._id !== postId));
 	};
+
 	return (
 		<>
 			<Container>

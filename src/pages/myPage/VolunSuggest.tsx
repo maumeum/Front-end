@@ -49,7 +49,6 @@ function VolunSuggest() {
 					'/api/volunteers/registerations',
 					{},
 				);
-				console.log(getSuggestedData);
 				setSuggestVolunList(
 					getSuggestedData.data.registerationVolunteers as ResponseData[],
 				);

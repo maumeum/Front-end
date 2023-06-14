@@ -40,7 +40,6 @@ function MyReview() {
 
 		fetchData();
 	}, []);
-	console.log(userReviewData);
 
 	const removePost = (postId: string) => {
 		setUserReviewData(userReviewData.filter((post) => post._id !== postId));
