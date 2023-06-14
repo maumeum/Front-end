@@ -5,12 +5,12 @@ import SearchBar from '@components/SearchBar/SearchBar.tsx';
 import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
 import WriteButton from '@components/Buttons/WriteButton/WriteButton.tsx';
 import { NumberWriteContainer, PageContainer } from './style.ts';
-import PostList from '@components/PostList/PostList.tsx';
+// import PostList from '@components/PostList/PostList.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { MenuBar, CardBox } from '@components/MyPage/myPage.ts';
 import Card from '@components/Card/Card.tsx';
 import { get } from '@api/api';
-import { getToken } from '@api/token';
+// import { getToken } from '@api/token';
 import DataType from '@src/types/dataType.ts';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
@@ -45,6 +45,7 @@ const VolunteerOngoing = () => {
 					{},
 				);
 				setAppliedData(getCompetededData.data as VolunProps[]);
+				console.log(appliedData);
 			} catch (error) {
 				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
 			}
@@ -61,6 +62,7 @@ const VolunteerOngoing = () => {
 					{},
 				);
 				setCompletedData(getAppliedData.data as VolunProps[]);
+				console.log(completedData);
 			} catch (error) {
 				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
 			}
@@ -79,10 +81,6 @@ const VolunteerOngoing = () => {
 
 	const navigateWrite = () => {
 		navigate('/volunteers/edit');
-	};
-
-	const navigateDetail = (postId: string) => {
-		navigate(`/community/${postId}`);
 	};
 
 	return (
