@@ -84,6 +84,7 @@ const SignUp = () => {
 					submit={submit}
 					dataName='닉네임'
 					inputType='text'
+					maxlength={8}
 					name='nickname'
 					placeholder='닉네임을 입력해주세요.'
 					value={nickname}

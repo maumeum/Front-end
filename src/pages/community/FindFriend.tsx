@@ -22,6 +22,7 @@ import Menu from '@components/Menu/Menu.tsx';
 import { get } from '@api/api';
 import DataType from '@src/types/dataType.ts';
 import findfriendImage from '@assets/images/findfriendImage.png';
+import throttle from '@utils/throttle.ts';
 
 type PostData = {
 	_id: string;
@@ -31,26 +32,58 @@ type PostData = {
 const FindFriend = () => {
 	const navigate = useNavigate();
 	const [postListData, setPostListData] = useState<PostData[]>([]);
+	const [isLoad, setLoad] = useState<boolean>(false);
 
+	// 처음 데이터 불러오기
 	useEffect(() => {
 		const fetchPostList = async () => {
 			try {
 				const response = await get<DataType>(
 					'/api/community/category/findfriend?skip=0&limit=10',
-					{
-						params: {
-							postType: 'findfriend',
-						},
-					},
+					{},
 				);
 				setPostListData(response.data.categoryPost);
-				console.log(response);
+				setLoad(response.data.hasMore);
 			} catch (error) {
 				console.error('Error fetching post list:', error);
 			}
 		};
+
 		fetchPostList();
 	}, []);
+
+	// 데이터 불러오기
+	const loadMoreData = async () => {
+		try {
+			if (!isLoad) {
+				console.log(postListData.length);
+				const response = await get<DataType>(
+					`/api/community/category/findfriend?skip=${postListData.length}&limit=10`,
+					{},
+				);
+				const newPostListData = response.data.categoryPost;
+				setPostListData((prevData) => [...prevData, ...newPostListData]);
+				setLoad(response.data.hasMore);
+			}
+		} catch (error) {
+			console.error('Error loading more data:', error);
+		}
+	};
+
+	// 무한 스크롤
+	useEffect(() => {
+		if (postListData.length > 0) {
+			const handleScroll = throttle(() => {
+				const { scrollTop, offsetHeight } = document.documentElement;
+				if (offsetHeight - window.innerHeight - scrollTop < 200) {
+					loadMoreData();
+				}
+			});
+
+			window.addEventListener('scroll', handleScroll);
+			return () => window.removeEventListener('scroll', handleScroll);
+		}
+	}, [postListData]);
 
 	const handleSearch = async (query: string) => {
 		const response = await get<DataType>(
