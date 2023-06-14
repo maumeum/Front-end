@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { get } from '@src/api/api';
 import DataType from '@src/types/dataType';
+import throttle from '@utils/throttle.ts';
 
 type PostData = {
 	_id: string;
@@ -19,15 +20,46 @@ type PostData = {
 const reviewPage = () => {
 	const navigate = useNavigate();
 	const [postListData, setPostListData] = useState<PostData[]>([]);
+	const [isLoad, setLoad] = useState<boolean>(false);
 
 	useEffect(() => {
 		const fetchPostList = async () => {
 			const response = await get<DataType>('/api/review?skip=0&limit=10');
 			setPostListData(response.data.reviews);
-			console.log('리뷰', response);
 		};
 		fetchPostList();
 	}, []);
+
+	const loadMoreData = async () => {
+		try {
+			if (!isLoad) {
+				console.log(postListData.length);
+				const response = await get<DataType>(
+					`/api/review?skip=${postListData.length}&limit=10`,
+					{},
+				);
+				const newPostListData = response.data.reviews;
+				setPostListData((prevData) => [...prevData, ...newPostListData]);
+				setLoad(response.data.hasMore);
+			}
+		} catch (error) {
+			console.error('Error loading more data:', error);
+		}
+	};
+
+	useEffect(() => {
+		if (postListData.length > 0) {
+			const handleScroll = throttle(() => {
+				const { scrollTop, offsetHeight } = document.documentElement;
+				if (offsetHeight - window.innerHeight - scrollTop < 200) {
+					loadMoreData();
+				}
+			});
+
+			window.addEventListener('scroll', handleScroll);
+			return () => window.removeEventListener('scroll', handleScroll);
+		}
+	}, [postListData]);
 
 	const navigateDetail = (postId: string) => {
 		navigate(`/review/${postId}`);

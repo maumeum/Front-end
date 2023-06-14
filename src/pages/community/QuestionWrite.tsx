@@ -57,7 +57,6 @@ const QuestionWrite = () => {
 			content: '',
 			postType: 'qna',
 		});
-		console.log('Cancelled Post');
 	};
 
 	return (
