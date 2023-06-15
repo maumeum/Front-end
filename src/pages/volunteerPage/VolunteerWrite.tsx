@@ -81,7 +81,7 @@ const VolunteerWrite = () => {
 				Authorization: `Bearer ${token}`,
 			},
 		});
-		navigate('/volunteer');
+		navigate('/volunteers/ongoing');
 	};
 
 	const onCancelPost = () => {
@@ -96,7 +96,7 @@ const VolunteerWrite = () => {
 			endDate: new Date(),
 		});
 		console.log('Cancelled Post');
-		navigate('/volunteers');
+		navigate('/volunteers/ongoing');
 	};
 
 	return (

@@ -29,7 +29,7 @@ export function remainingDaysCalculator(
 	const isCurrentYearLeap = isLeapYear(currentYear);
 	const isDeadlineYearLeap = isLeapYear(deadlineYear);
 
-	const timeDiff = currentDateObj.getTime() - deadlineDateObj.getTime();
+	const timeDiff = deadlineDateObj.getTime() - currentDateObj.getTime();
 	let remainingDays = Math.ceil(timeDiff / oneDay);
 
 	if (isCurrentYearLeap && currentDateObj.getMonth() < 1) {
