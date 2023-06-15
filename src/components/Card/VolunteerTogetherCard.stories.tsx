@@ -22,90 +22,66 @@ type Story = StoryObj<typeof meta>;
 
 export const Ongoing: Story = {
 	args: {
-		volunteerCardData: {
+		data: {
 			_id: '345734',
 			title:
 				'세상에서 제일 재밌는 봉사활동, 런닝과 환경 보호를 한번에! 참여해보세요',
+			centName: '엘리스봉사단',
 			statusName: '모집중', // 모집완료, 모집중단
 			deadline: '2023-06-05T17:06:58.150+00:00',
 			applyCount: 3,
 			registerCount: 10,
-			actTypeName: '동물보호',
-			teenager: false,
-			createdAt: '2023-05-10T17:06:58.150+00:00',
 			images: [TestImage1, TestImage2],
-
-			register_user: {
+			register_user_id: {
+				_id: '453561',
 				nickname: '봉사왕김봉사',
 				image: TestUserImage,
 			},
-
-			team: {
-				teamName: '데일리플러깅',
-			},
-			content: '안녕하세요',
-			centName: '엘리스봉사단',
-			user_id: '648682815370d42f67c12006',
+			createdAt: '2023-05-10T17:06:58.150+00:00',
 		},
 	},
 };
 
 export const Complete: Story = {
 	args: {
-		volunteerCardData: {
+		data: {
 			_id: '345734',
 			title:
 				'세상에서 제일 재밌는 봉사활동, 런닝과 환경 보호를 한번에! 참여해보세요',
+			centName: '엘리스봉사단',
 			statusName: '모집완료',
 			deadline: '2023-06-05T17:06:58.150+00:00',
 			applyCount: 3,
 			registerCount: 10,
-			actTypeName: '동물보호',
-			teenager: false,
-			createdAt: '2023-05-10T17:06:58.150+00:00',
 			images: [TestImage1, TestImage2],
-
-			register_user: {
+			register_user_id: {
+				_id: '453561',
 				nickname: '봉사왕김봉사',
 				image: TestUserImage,
 			},
-
-			team: {
-				teamName: '데일리플러깅',
-			},
-			content: '안녕하세요',
-			centName: '엘리스봉사단',
-			user_id: '648682815370d42f67c12006',
+			createdAt: '2023-05-10T17:06:58.150+00:00',
 		},
 	},
 };
 
 export const Close: Story = {
 	args: {
-		volunteerCardData: {
+		data: {
 			_id: '345734',
 			title:
 				'세상에서 제일 재밌는 봉사활동, 런닝과 환경 보호를 한번에! 참여해보세요',
+			centName: '엘리스봉사단',
 			statusName: '모집중단',
 			deadline: '2023-06-05T17:06:58.150+00:00',
 			applyCount: 3,
 			registerCount: 10,
-			actTypeName: '동물보호',
-			teenager: false,
-			createdAt: '2023-05-10T17:06:58.150+00:00',
 			images: [TestImage1, TestImage2],
-
-			register_user: {
+			register_user_id: {
+				_id: '453561',
 				nickname: '봉사왕김봉사',
 				image: TestUserImage,
 			},
-
-			team: {
-				teamName: '데일리플러깅',
-			},
-			content: '안녕하세요',
-			centName: '엘리스봉사단',
-			user_id: '648682815370d42f67c12006',
+			createdAt: '2023-05-10T17:06:58.150+00:00',
 		},
 	},
 };

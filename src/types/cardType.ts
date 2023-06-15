@@ -67,27 +67,37 @@ export interface TeamType {
 
 export type TeamListType = TeamType[];
 
-export interface CommentType {
-	_id: string;
-	nickname: string;
+export interface VolunteerCommentType {
+	volunteer_id: string;
 	content: string;
-	post_id: string;
 }
 
-export type CommentListType = CommentType[];
+export type VolunteerCommentListType = VolunteerCommentType[];
 
-export interface VolunteerDetailType extends VolunteerType {
+export interface VolunteerDetailType {
+	_id: string;
+	title: string;
+	content?: string;
+	statusName: string;
+	deadline: string;
+	applyCount: number;
+	registerCount: number;
+	actTypeName: string;
+	teenager: boolean;
+	createdAt: string;
 	images: string[];
-	startDate?: string; // 봉사시작일
-	endDate?: string; // 봉사종료일
+	startDate?: string;
+	endDate?: string;
 
 	register_user: {
+		// 글 작성자
 		nickname: string;
 		introduction?: string;
 		image: string;
-		createdAt?: string; // 가입일
 	};
+
 	team: {
+		// 글 작성자의 인증단체
 		category?: string;
 		teamName: string;
 		introduction?: string;
@@ -97,8 +107,23 @@ export interface VolunteerDetailType extends VolunteerType {
 		location?: string;
 		image?: string;
 	};
-
-	comments?: CommentType[];
 }
-
-export type VolunteerDetailListType = VolunteerDetailType[];
+// 봉사활동 전체보기 카드 한 개에 들어가야 할 데이터:
+export interface VolunteerTogetherType {
+	_id: string;
+	title: string;
+	centName: string;
+	statusName: string;
+	deadline: string;
+	applyCount: number;
+	registerCount: number;
+	images: string[];
+	register_user_id: {
+		_id: string;
+		nickname: string;
+		image: string;
+	};
+	createdAt: string;
+}
+// // 봉사활동 전체보기 리스트
+export type VolunteerTogetherListType = VolunteerTogetherType[];
