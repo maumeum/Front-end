@@ -17,14 +17,17 @@ import {
 
 import CardAvailableIcon from '@assets/icons/card_applier_is_available_icon.svg';
 import CardFullIcon from '@assets/icons/card_applier_is_full_icon.svg';
+import defaultImage from '@src/assets/images/volunteer1.jpg';
 
 interface VolunteerCardProps {
 	data: VolunteerTogetherType;
-	onClick: () => void;
 }
 
-const VolunteerTogetherCard = ({ data, onClick }: VolunteerCardProps) => {
+const url = import.meta.env.VITE_API_URL;
+
+const VolunteerTogetherCard = ({ data }: VolunteerCardProps) => {
 	const {
+		_id,
 		title,
 		centName,
 		statusName,
@@ -38,10 +41,19 @@ const VolunteerTogetherCard = ({ data, onClick }: VolunteerCardProps) => {
 	const remainingDays = remainingDaysCalculator(currentDate, deadlineDate);
 	const thumbnail = images[0];
 
+	const onClick = () => {
+		console.log('상세페이지로 이동합니다: _id');
+		navigate(`/volunteers/ongoing/detail/${_id}`);
+	};
+
 	return (
 		<CardContainer statusName={statusName} onClick={onClick}>
 			<ImgBox>
-				<img src={thumbnail} alt={`${title} 썸네일`} />
+				{images.length > 0 ? (
+					<img src={`${url}/${thumbnail}`} alt={`${title} 썸네일`} />
+				) : (
+					<img src={defaultImage} alt={'게시글 기본이미지'} />
+				)}
 				<VolunteerBadge statusName={statusName}>
 					<p>{statusName}</p>
 				</VolunteerBadge>
@@ -63,8 +75,8 @@ const VolunteerTogetherCard = ({ data, onClick }: VolunteerCardProps) => {
 			</ImgBox>
 			<TitleInfo>{`[${centName}] ${title}`}</TitleInfo>
 			<InfoBox statusName={statusName}>
-				<VolunteerUserInfo>
-					<img src={register_user_id.image} alt='작성자 프로필사진' />
+				<VolunteerUserInfo> 
+					<img src={`${url}/${register_user_id.image}`} alt='작성자 프로필사진' />
 					<p>{register_user_id.nickname}</p>
 				</VolunteerUserInfo>
 				{statusName === VolunteerTypes.CONTINUE && (

@@ -19,52 +19,34 @@ import {
 } from '@components/WritePage/WritePageStyle';
 import VolunteerCalendar from '@components/Calendar/VolunteerCalendar';
 import Selector from '@components/Selector/Selector.tsx';
-// import UploadThumbnail from './UploadThumbnail';
 import actTypes from '@src/types/actTypeConstants';
 import { Title, TeamType, TeamTypeRadio } from '@pages/myPage/style';
+import TeamInfo from '@src/types/writerUserTeamType.ts';
 
 interface VolunteerWritePageProps extends Omit<WritePageProps, 'onSave'> {
 	onSave: (
 		inputTitle: string,
 		textContent: string,
 		selectedActType: string,
-		// thumbnail: File | null,
-		// image: File | null,
 		inputRegisterCount: string,
 		teenager: boolean,
 		deadline: Date,
 		startDate: Date,
 		endDate: Date,
+		centName: string,
 	) => void;
-}
-
-interface TeamInfo {
-	_id: string;
-	user_id: string;
-	category: string;
-	teamName: string;
-	introduction: string;
-	briefHistory: string;
-	establishmentDate: string;
-	phone: string;
-	image: string;
-	isSubmit: boolean;
-	createdAt: string;
-	updatedAt: string;
 }
 
 const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 	const [content, setContent] = useState('');
 	const [inputTitle, setInputTitle] = useState('');
 	const [selectedActType, setSelectedActType] = useState('');
-	// const [thumbnail, setThumbnail] = useState<File | null>(null);
-	// const [image, setImage] = useState<File | null>(null);
 	const [inputRegisterCount, setInputRegisterCount] = useState('');
 	const [teenager, setTeenager] = useState(true);
 	const [deadline, setDeadline] = useState<Date>(new Date());
 	const [startDate, setStartDate] = useState<Date>(new Date());
 	const [endDate, setEndDate] = useState<Date>(new Date());
-	const [teamName, setTeamName] = useState<string>('');
+	const [centName, setCentName] = useState<string>('');
 
 	// 만약 StartDate가 deadline보다 작다면 유저에게 경고창을 띄고, 다시 작성하게 한다.
 	// 인증된 유저만 봉사활동 글 등록할 수 있도록 로직 추가했읍니다!!!!!!!!!!!!!!
@@ -76,7 +58,7 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 				const getUserInfoData = await get<DataType>('/api/team/auth', {});
 				const responseData = getUserInfoData.data as TeamInfo;
 				const { teamName } = responseData;
-				setTeamName(teamName);
+				setCentName(teamName);
 			} catch (error) {
 				Swal.fire(
 					alertData.errorMessage('데이터를 가져오는데 실패하였습니다.'),
@@ -92,13 +74,12 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 			inputTitle,
 			content,
 			selectedActType,
-			// thumbnail,
-			// image,
 			inputRegisterCount,
 			teenager,
 			deadline,
 			startDate,
 			endDate,
+			centName,
 		);
 		clearContentData();
 	};
@@ -146,8 +127,7 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 		setDeadline(new Date());
 		setStartDate(new Date());
 		setEndDate(new Date());
-		// setThumbnail(null);
-		// setImage(null);
+		setCentName('');
 	};
 
 	return (
@@ -156,7 +136,7 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 				<div>
 					<Title>제목</Title>
 					<TitleInput
-						placeholder={`[${teamName}] 팀네임 포함 40자 이하 작성`}
+						placeholder={`[${centName}] 팀네임 포함 40자 이하 작성`}
 						value={inputTitle}
 						onChange={handleInputTitle}
 					/>
@@ -199,14 +179,6 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 						]}
 					/>
 				</div>
-				{/* <div>
-					<Title>썸네일 등록</Title>
-					<UploadThumbnail setFile={setThumbnail} imageType='thumbnail' />
-				</div>
-				<div>
-					<Title>이미지 등록</Title>
-					<UploadThumbnail setFile={setImage} imageType='image' />
-				</div> */}
 				<div>
 					<Title>모집인원</Title>
 					<TitleInput

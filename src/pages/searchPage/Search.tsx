@@ -23,14 +23,17 @@ import CommunityCard from '@components/Card/CommunityCard';
 import throttle from '@utils/throttle.ts';
 
 const Search = () => {
-	const [query, setQuery] = useState<string>('');
+	const navigate = useNavigate();
+	const queryParams = new URLSearchParams(window.location.search);
+	const queryValue = queryParams.get('keyword');
+
+	const [query, setQuery] = useState<string | null>(queryValue);
 	const [submit, setSubmit] = useState<boolean>(false);
 	const [volunteerList, setVolunteerList] = useState<VolunteerListType>([]);
 	const [communityList, setCommunityList] = useState<CommunityListType>([]);
 	const [volunteerLoad, setVolunteerLoad] = useState<boolean>(true);
 	const [isLoad, setLoad] = useState<boolean>(true);
 	const [hidden, setHidden] = useState<boolean>(false);
-	const navigate = useNavigate();
 
 	const handleSearch = (query: string) => {
 		setQuery(query);

@@ -132,7 +132,7 @@ const AuthTeam = () => {
 						<InputForm
 							submit={submit}
 							inputType='text'
-							name='teamName'
+							name='long'
 							placeholder='프로젝트 팀명을 입력해주세요.'
 							value={teamName}
 							onChangeFn={getFormChanger(setTeamName)}
@@ -164,7 +164,7 @@ const AuthTeam = () => {
 						<InputForm
 							submit={submit}
 							inputType='text'
-							name='phoneNum'
+							name='long'
 							placeholder='전화번호를 입력해주세요.'
 							value={phoneNum}
 							onChangeFn={getFormChanger(setPhoneNum)}
@@ -175,7 +175,7 @@ const AuthTeam = () => {
 						<InputForm
 							submit={submit}
 							inputType='text'
-							name='location'
+							name='long'
 							placeholder='소재지 주소를 입력해주세요.'
 							value={location}
 							onChangeFn={getFormChanger(setLocation)}

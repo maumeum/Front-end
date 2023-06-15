@@ -18,10 +18,12 @@ import DataType from '@src/types/dataType.ts';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
 import Pagination from '@components/Pagination/Pagination.tsx';
+import TeamInfo from '@src/types/writerUserTeamType.ts';
 
 const VolunteerOngoing = () => {
 	const navigate = useNavigate();
 	const [cardListData, setCardListData] = useState<VolunteerTogetherType[]>([]);
+	const [centName, setCentName] = useState<string>('');
 
 	//페이지네이션
 	const [currentPage, setCurrentPage] = useState(1);
@@ -34,11 +36,11 @@ const VolunteerOngoing = () => {
 		const fetchData = async () => {
 			try {
 				const getData = await get<DataType>(
-					'/api/volunteers?skip=0&limit=5&status=true',
+					'/api/volunteers?skip=0&limit=12&status=true',
 					{},
 				);
 				console.log(getData.data.volunteerList);
-				setCardListData(getData.data.volunteerList as VolunteerTogetherType[]);
+				setCardListData(getData.data.volunteerList as VolunteerTogetherType[]); // 아직 centName이 없는 상태
 			} catch (error) {
 				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
 			}
@@ -46,8 +48,25 @@ const VolunteerOngoing = () => {
 		fetchData();
 	}, []);
 
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const getUserInfoData = await get<DataType>('/api/team/auth', {});
+				const responseData = getUserInfoData.data as TeamInfo;
+				const { teamName } = responseData;
+				setCentName(teamName);
+				console.log('centName:', centName);
+			} catch (error) {
+				Swal.fire(
+					alertData.errorMessage('데이터를 가져오는데 실패하였습니다.'),
+				);
+			}
+		};
+
+		fetchData();
+	}, []);
+
 	const transformData = cardListData.map((data) => {
-		//Card 컴포넌트 형식에 맞게 데이터형태 변환
 		return {
 			_id: data._id,
 			title: data.title,
