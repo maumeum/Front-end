@@ -181,6 +181,58 @@ export const WriterNickname = styled.p`
 	color: ${({ theme }) => theme.colors.gray300};
 `;
 
+export const SearchCommunityContainer = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 1rem 2rem 0;
+	border-bottom: 1px solid ${({ theme }) => theme.colors.gray200};
+	transition: transform 0.1s ease;
+	cursor: pointer;
+
+	&:hover {
+		transform: scale(1.03);
+	}
+`;
+
+export const SearchQna = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 1rem 0;
+	width: 10%;
+	aspect-ratio: 1;
+	background-color: ${({ theme }) => theme.colors.green200};
+	border-radius: 50%;
+	font-size: 1.8rem;
+`;
+
+export const SearchTogether = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 1rem 0;
+	width: 10%;
+	aspect-ratio: 1;
+	background-color: ${({ theme }) => theme.colors.pink200};
+	border-radius: 50%;
+	font-size: 1.8rem;
+`;
+
+export const SearchTitle = styled.div`
+	min-width: 50%;
+	margin: 1rem 6rem 0 3rem;
+	font-size: 2.3rem;
+`;
+
+export const SearchNickname = styled.p`
+	text-align: end;
+	margin: 1rem 0 0 3rem;
+	min-width: 20%;
+	font-size: 1.5rem;
+	color: ${({ theme }) => theme.colors.gray300};
+`;
+
 // Review Card
 export const ReviewSection = styled.div`
 	display: flex;
@@ -249,7 +301,7 @@ export const ReviewContent = styled.p`
 export const VolunteerSection = styled.div`
 	margin-bottom: 6rem;
 	width: 100%;
-	height: 33rem;
+	padding-bottom: 3rem;
 	background-color: #ffffff;
 	border: none;
 	border-radius: 12px;
