@@ -21,6 +21,7 @@ interface VolunProps {
 	createdAt: string;
 	_id: string;
 	isParticipate: boolean;
+	isReviewed: boolean;
 	volunteer_id: {
 		startDate: string;
 		endDate: string;
@@ -52,8 +53,9 @@ function MyVolunHistory() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
+				//완료한 봉사 (false)
 				const getCompetededData = await get<DataType>(
-					'/api/applications?status=true',
+					'/api/applications?status=false',
 					{},
 				);
 				setAppliedData(getCompetededData.data as VolunProps[]);
@@ -68,8 +70,9 @@ function MyVolunHistory() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
+				//신청한 봉사 (true)
 				const getAppliedData = await get<DataType>(
-					'/api/applications?status=false',
+					'/api/applications?status=true',
 					{},
 				);
 				setCompletedData(getAppliedData.data as VolunProps[]);
@@ -85,6 +88,8 @@ function MyVolunHistory() {
 			? setVolunData(appliedData)
 			: setVolunData(completedData);
 	}, [currTab, appliedData, completedData]);
+
+	console.log(volunData);
 
 	return (
 		<>

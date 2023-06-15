@@ -100,6 +100,7 @@ const AuthTeam = () => {
 				<TabMenu>
 					<Tab tabs={tabs} />
 				</TabMenu>
+
 				<TeamForm>
 					<MainContainer>
 						{isSubmit && (

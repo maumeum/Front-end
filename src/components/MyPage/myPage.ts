@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
 	display: flex;
@@ -55,4 +56,9 @@ export const ButtonContainer = styled.button`
 export const ButtonWord = styled.p`
 	margin: 0;
 	color: black;
+`;
+
+export const StyledLink = styled(Link)`
+	text-decoration: none;
+	color: #000000;
 `;

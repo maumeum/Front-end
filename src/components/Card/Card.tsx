@@ -37,7 +37,7 @@ export interface CardProps {
 		isParticipate?: boolean;
 		_id: string;
 		register_user_id?: RegisterUserId;
-
+		isReviewed?: boolean;
 		volunteer_id: {
 			startDate: string;
 			endDate: string;
@@ -59,7 +59,7 @@ function Card({ currTab, data }: CardProps) {
 	//userInfo, cardProps(이름 시멘틱하게) 데이터 따로 받아오기
 	const { _id, title, statusName, images, startDate, endDate } =
 		data.volunteer_id;
-	const { _id: volunId } = data;
+	const { _id: volunId, isReviewed } = data;
 	const isActiveUser = data.volunteer_id.register_user_id;
 	const {
 		nickname = '',
@@ -157,7 +157,6 @@ function Card({ currTab, data }: CardProps) {
 			);
 		}
 	};
-
 	return (
 		<>
 			<CardContainer currTab={currTab} statusName={statusName}>
@@ -167,13 +166,15 @@ function Card({ currTab, data }: CardProps) {
 					) : (
 						<img src={defaultImage} alt='게시글 기본이미지'></img>
 					)}
-					<Badge currTab={currTab} statusName={selectedStatus}>
-						<p
-							dangerouslySetInnerHTML={{
-								__html: splitStatusName(selectedStatus),
-							}}
-						/>
-					</Badge>
+					{currTab === TabTypes.VOLUNTEER_SUGGEST && (
+						<Badge currTab={currTab} statusName={selectedStatus}>
+							<p
+								dangerouslySetInnerHTML={{
+									__html: splitStatusName(selectedStatus),
+								}}
+							/>
+						</Badge>
+					)}
 				</ImgBox>
 				<ContentBox>
 					<VolunInfo>
@@ -192,7 +193,8 @@ function Card({ currTab, data }: CardProps) {
 						)}
 
 						{currTab === TabTypes.VOLUNTEER_COMPLETED &&
-							statusName !== VolunteerTypes.DISCONTINUE && (
+							statusName !== VolunteerTypes.DISCONTINUE &&
+							!isReviewed && (
 								<ButtonContainer>
 									<SmallButton onClick={toggleModal(true)}>
 										리뷰작성
