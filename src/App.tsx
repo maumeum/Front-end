@@ -44,7 +44,10 @@ function App() {
 				<Route path='/' element={<Main />} />
 				<Route path='/volunteers/ongoing' element={<VolunteerOngoing />} />
 				<Route path='/volunteers/ongoing/edit' element={<VolunteerWrite />} />
-				<Route path='/volunteers/detail' element={<VolunDetailPage />} />
+				<Route
+					path='/volunteers/ongoing/detail/:postId'
+					element={<VolunDetailPage />}
+				/>
 
 				<Route path='/community/findfriend' element={<FindFriend />} />
 				<Route path='/community/question' element={<Question />} />

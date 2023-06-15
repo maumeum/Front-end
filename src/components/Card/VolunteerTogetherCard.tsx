@@ -20,9 +20,10 @@ import CardFullIcon from '@assets/icons/card_applier_is_full_icon.svg';
 
 interface VolunteerCardProps {
 	data: VolunteerTogetherType;
+	onClick: () => void;
 }
 
-const VolunteerTogetherCard = ({ data }: VolunteerCardProps) => {
+const VolunteerTogetherCard = ({ data, onClick }: VolunteerCardProps) => {
 	const {
 		title,
 		centName,

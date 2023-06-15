@@ -104,7 +104,13 @@ const VolunteerOngoing = () => {
 						<h2>봉사 내역이 존재하지 않습니다.</h2>
 					)}
 					{transformData.map((data, index) => (
-						<VolunteerTogetherCard key={data._id + '-' + index} data={data} />
+						<VolunteerTogetherCard
+							key={data._id + '-' + index}
+							data={data}
+							onClick={() => {
+								console.log('dd');
+							}}
+						/>
 					))}
 				</CardBox>
 			</CardListContainer>
