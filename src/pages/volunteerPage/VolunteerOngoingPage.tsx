@@ -8,34 +8,22 @@ import { NumberWriteContainer, PageContainer } from './style.ts';
 // import PostList from '@components/PostList/PostList.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { MenuBar, CardBox } from '@components/MyPage/myPage.ts';
-import Card from '@components/Card/Card.tsx';
+import VolunteerTogetherCard from '@src/components/Card/VolunteerTogetherCard.tsx';
+import { VolunteerTogetherType } from '@src/types/cardType.ts';
 import { get } from '@api/api';
 // import { getToken } from '@api/token';
 import DataType from '@src/types/dataType.ts';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
-
-interface VolunProps {
-	createdAt: string;
-	_id: string;
-	isParticipate: boolean;
-	volunteer_id: {
-		startDate: string;
-		endDate: string;
-		_id: string;
-		title: string;
-		centName: string;
-		statusName: string;
-		deadline: string;
-		images: string[];
-	};
-}
+// /volunteers?skip=0&limit=1&status=true(or false)
 
 const VolunteerOngoing = () => {
 	const navigate = useNavigate();
-	const [appliedData, setAppliedData] = useState<VolunProps[]>([]);
-	const [completedData, setCompletedData] = useState<VolunProps[]>([]);
-	const [volunData, setVolunData] = useState<VolunProps[]>([]);
+	const [appliedData, setAppliedData] = useState<VolunteerTogetherType[]>([]);
+	const [completedData, setCompletedData] = useState<VolunteerTogetherType[]>(
+		[],
+	);
+	const [volunData, setVolunData] = useState<VolunteerTogetherType[]>([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -44,8 +32,7 @@ const VolunteerOngoing = () => {
 					'/api/applications?status=true',
 					{},
 				);
-				setAppliedData(getCompetededData.data as VolunProps[]);
-				console.log(appliedData);
+				setAppliedData(getCompetededData.data as VolunteerTogetherType[]);
 			} catch (error) {
 				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
 			}
@@ -61,8 +48,7 @@ const VolunteerOngoing = () => {
 					'/api/applications?status=false',
 					{},
 				);
-				setCompletedData(getAppliedData.data as VolunProps[]);
-				console.log(completedData);
+				setCompletedData(getAppliedData.data as VolunteerTogetherType[]);
 			} catch (error) {
 				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
 			}
@@ -100,8 +86,8 @@ const VolunteerOngoing = () => {
 				</NumberWriteContainer>
 				<CardBox>
 					{volunData.length === 0 && <h2>봉사 내역이 존재하지 않습니다.</h2>}
-					{volunData.map((data) => (
-						<Card key={data.volunteer_id._id} data={data} />
+					{volunData.map((data, index) => (
+						<VolunteerTogetherCard key={data._id + '-' + index} data={data} />
 					))}
 				</CardBox>
 			</PageContainer>
