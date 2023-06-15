@@ -1,7 +1,7 @@
 import { UserType } from '@src/types/userType';
 
 import {
-	VolunteerSection,
+	UserSection,
 	VolunteerImgContainer,
 	VolunteerImage,
 	VolunteerIntroContainer,
@@ -22,7 +22,7 @@ const apiUrL = import.meta.env.VITE_API_URL;
 const UserCard = ({ UserData }: VolunteerCardProps) => {
 	const userImage = `${apiUrL}/${UserData.image}`;
 	return (
-		<VolunteerSection>
+		<UserSection>
 			<VolunteerImgContainer>
 				<VolunteerImage src={userImage} />
 			</VolunteerImgContainer>
@@ -38,7 +38,7 @@ const UserCard = ({ UserData }: VolunteerCardProps) => {
 				<UserEmail>이메일: {UserData.email}</UserEmail>
 				<UserPhone>핸드폰 번호: {UserData.phone}</UserPhone>
 			</VolunteerIntroContainer>
-		</VolunteerSection>
+		</UserSection>
 	);
 };
 

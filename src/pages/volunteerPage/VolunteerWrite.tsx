@@ -6,6 +6,7 @@ import { post } from '@api/api';
 import { getToken } from '@api/token';
 import { useNavigate } from 'react-router-dom';
 import { ImageArea, Container } from './style';
+import actTypes from '@src/types/actTypeConstants';
 
 const VolunteerWrite = () => {
 	const navigate = useNavigate();
@@ -19,6 +20,7 @@ const VolunteerWrite = () => {
 		deadline: new Date(),
 		startDate: new Date(),
 		endDate: new Date(),
+		teamName: '',
 	});
 
 	const handelImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,6 +43,7 @@ const VolunteerWrite = () => {
 		deadlineDate: Date,
 		startDateData: Date,
 		endDateData: Date,
+		teamName: string,
 	) => {
 		setPostData({
 			title,
@@ -51,6 +54,7 @@ const VolunteerWrite = () => {
 			deadline: deadlineDate,
 			startDate: startDateData,
 			endDate: endDateData,
+			teamName,
 		});
 
 		const token = getToken();
@@ -63,12 +67,18 @@ const VolunteerWrite = () => {
 		formData.append('title', title);
 		formData.append('content', content);
 		formData.append('registerCount', registerCount);
-		formData.append('actType', actTypeName);
+		if (actTypeName === '') {
+			actTypeName = actTypes.OLD;
+			formData.append('actType', actTypeName);
+		} else {
+			formData.append('actType', actTypeName);
+		}
 		formData.append('statusName', '모집중');
 		formData.append('deadline', deadline);
 		formData.append('startDate', startDate);
 		formData.append('endDate', endDate);
 		formData.append('teenager', teenager);
+		formData.append('teamName', teamName);
 		for (let i = 0; i < selectedImage.length; i++) {
 			formData.append('images', selectedImage[i]);
 		}
@@ -94,6 +104,7 @@ const VolunteerWrite = () => {
 			deadline: new Date(),
 			startDate: new Date(),
 			endDate: new Date(),
+			teamName: '',
 		});
 		console.log('Cancelled Post');
 		navigate('/volunteers/ongoing');

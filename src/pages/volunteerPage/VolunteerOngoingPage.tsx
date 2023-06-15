@@ -34,10 +34,10 @@ const VolunteerOngoing = () => {
 		const fetchData = async () => {
 			try {
 				const getData = await get<DataType>(
-					'/api/volunteers?skip=0&limit=1&status=true',
+					'/api/volunteers?skip=0&limit=12&status=true',
 					{},
 				);
-				console.log('list', getData.data.volunteerList);
+				// console.log(getData.data.volunteerList);
 				setCardListData(getData.data.volunteerList as VolunteerTogetherType[]);
 			} catch (error) {
 				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
@@ -47,11 +47,10 @@ const VolunteerOngoing = () => {
 	}, []);
 
 	const transformData = cardListData.map((data) => {
-		//Card 컴포넌트 형식에 맞게 데이터형태 변환
 		return {
 			_id: data._id,
 			title: data.title,
-			centName: data.centName,
+			teamName: data.teamName,
 			statusName: data.statusName,
 			deadline: data.deadline,
 			applyCount: data.applyCount,
@@ -110,7 +109,7 @@ const VolunteerOngoing = () => {
 						<VolunteerTogetherCard
 							key={data._id + '-' + index}
 							data={data}
-							onClick={() => navigateDetail(data._id)}
+							/*onClick={() => navigateDetail(data._id)}*/
 						/>
 					))}
 				</CardBox>
