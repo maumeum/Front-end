@@ -66,7 +66,7 @@ const Header = () => {
 				</LogoContainer>
 				<NavContainer>
 					<NavCategory
-						to='/volunteers'
+						to='/volunteers/ongoing'
 						className={click === 'volunteers' ? 'volunteers' : ''}
 						onClick={() => {
 							setClick(() => 'volunteers');

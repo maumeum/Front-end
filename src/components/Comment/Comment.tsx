@@ -32,8 +32,9 @@ import { dateFormatter } from '@src/utils/dateUtils';
 import useAuthStore from '@src/store/useAuthStore';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
-import FindFriendImage from '@assets/images/findfriendImage.png';
 import throttle from '@utils/throttle.ts';
+
+const apiURL = import.meta.env.VITE_API_URL;
 
 type CommentProps = {
 	postId: string;
@@ -64,6 +65,7 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 			{},
 		);
 		setValue(response.data.postCommentList);
+		console.log('여기', response.data.postCommentList);
 	};
 
 	const loadMoreData = async () => {
@@ -218,7 +220,10 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 					<CommentContainer key={comment._id}>
 						<ProfileContainer>
 							<RandomPhoto>
-								<Img src={FindFriendImage} alt='' />
+								<Img
+									src={`${apiURL}/${comment.user_id.image}`}
+									alt='profile-image'
+								/>
 							</RandomPhoto>
 							<UserContainer>
 								<NameContainer>
@@ -245,6 +250,7 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 							// 수정 중이 아닌 댓글 표시
 							<>
 								<Contents>{comment.content}</Contents>
+
 								<BtnContainer2>
 									{String(comment.user_id.uuid) ===
 										String((userData as unknown as UserType)?.uuid) && (

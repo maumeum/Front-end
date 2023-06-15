@@ -15,6 +15,8 @@ import {
 	BigText,
 	Sub,
 	Highlight,
+	BottomArea,
+	SearchContainer,
 } from './style.ts';
 import PostList from '@components/PostList/PostList.tsx';
 import Menu from '@components/Menu/Menu.tsx';
@@ -119,29 +121,33 @@ const Question = () => {
 						</p>
 					</Sub>
 				</MiddleContainer>
-				<MenuBar>
-					<Menu title={'커뮤니티'} />
-				</MenuBar>
-				<SearchBar onSearch={handleSearch} />
-				<NumberWriteContainer>
-					<WriteButton toNavigate={navigateWrite} />
-				</NumberWriteContainer>
-				{postListData !== null &&
-					postListData.length > 0 &&
-					postListData.map((postData) => (
-						<PostList
-							key={postData._id}
-							postTitle={
-								postData.title.slice(0, 50) +
-								(postData.title.length > 50 ? '...' : '')
-							}
-							postContents={
-								postData.content.slice(0, 50) +
-								(postData.content.length > 50 ? '...' : '')
-							}
-							onClick={() => navigateDetail(postData._id)}
-						/>
-					))}
+				<SearchContainer>
+					<MenuBar>
+						<Menu title={'커뮤니티'} />
+					</MenuBar>
+					<BottomArea>
+						<SearchBar onSearch={handleSearch} />
+						<NumberWriteContainer>
+							<WriteButton toNavigate={navigateWrite} />
+						</NumberWriteContainer>
+						{postListData !== null &&
+							postListData.length > 0 &&
+							postListData.map((postData) => (
+								<PostList
+									key={postData._id}
+									postTitle={
+										postData.title.slice(0, 50) +
+										(postData.title.length > 50 ? '...' : '')
+									}
+									postContents={
+										postData.content.slice(0, 50) +
+										(postData.content.length > 50 ? '...' : '')
+									}
+									onClick={() => navigateDetail(postData._id)}
+								/>
+							))}
+					</BottomArea>
+				</SearchContainer>
 			</PageContainer>
 		</>
 	);

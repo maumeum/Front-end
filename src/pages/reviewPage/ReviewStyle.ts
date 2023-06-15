@@ -35,13 +35,20 @@ export const FirstCircle = styled.div`
 export const ImgCircle = styled.div`
 	width: 40rem;
 	height: 40rem;
-	background-color: black;
 	overflow: hidden;
 	border-radius: 50%;
-	z-index: 9999;
 	position: absolute;
 	top: 25rem;
 	left: 60rem;
+`;
+export const LitCircle = styled.div`
+	width: 20rem;
+	height: 20rem;
+	border-radius: 50%;
+	background-color: ${({ theme }) => theme.colors.yellow100};
+	position: absolute;
+	top: 9rem;
+	left: 145rem;
 `;
 export const Image = styled.img`
 	width: 100%;
@@ -61,15 +68,35 @@ export const SecondCircle = styled.div`
 export const ImgCircle2 = styled.div`
 	width: 40rem;
 	height: 40rem;
-	background-color: black;
 	overflow: hidden;
 	border-radius: 50%;
-	z-index: 9999;
 	position: absolute;
 	top: 25rem;
-	left: 125rem;
+	left: 133rem;
 `;
 export const Image2 = styled.img`
 	width: 160%;
 	margin-top: -3rem;
+`;
+export const TextBox1 = styled.div`
+	position: absolute;
+	top: 15rem;
+	left: 26rem;
+	width: 30rem;
+`;
+export const TextTitle = styled.p`
+	font-size: 3rem;
+	color: #2596be;
+`;
+export const TextName = styled.p`
+	font-size: 2rem;
+`;
+export const TextContent = styled.p`
+	font-size: 2rem;
+`;
+export const TextBox2 = styled.div`
+	position: absolute;
+	top: 15rem;
+	left: 102rem;
+	width: 30rem;
 `;

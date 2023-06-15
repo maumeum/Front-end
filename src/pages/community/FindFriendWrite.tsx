@@ -4,6 +4,8 @@ import { post } from '@api/api';
 import { getToken } from '@api/token';
 import { useNavigate } from 'react-router-dom';
 import { ImageArea, Container } from './style';
+import Swal from 'sweetalert2';
+import alertData from '@src/utils/swalObject.ts';
 
 const FindFriendWrite = () => {
 	const navigate = useNavigate();
@@ -48,6 +50,7 @@ const FindFriendWrite = () => {
 				Authorization: `Bearer ${token}`,
 			},
 		});
+		Swal.fire(alertData.successMessage('게시글이 등록되었습니다.'));
 		navigate('/community/findfriend');
 	};
 

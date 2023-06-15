@@ -1,6 +1,10 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
+import alertData from '@utils/swalObject';
+import { get } from '@api/api';
 import WritePageProps from './WritePageProps';
+import DataType from '@src/types/dataType';
 import {
 	TextContainer,
 	Container,
@@ -15,46 +19,83 @@ import {
 } from '@components/WritePage/WritePageStyle';
 import VolunteerCalendar from '@components/Calendar/VolunteerCalendar';
 import Selector from '@components/Selector/Selector.tsx';
-import UploadThumbnail from './UploadThumbnail';
+// import UploadThumbnail from './UploadThumbnail';
 import actTypes from '@src/types/actTypeConstants';
+import { Title, TeamType, TeamTypeRadio } from '@pages/myPage/style';
 
 interface VolunteerWritePageProps extends Omit<WritePageProps, 'onSave'> {
 	onSave: (
 		inputTitle: string,
 		textContent: string,
 		selectedActType: string,
-		thumbnail: File | null,
-		image: File | null,
-		inputRegisterCount: number,
+		// thumbnail: File | null,
+		// image: File | null,
+		inputRegisterCount: string,
+		teenager: boolean,
 		deadline: Date,
 		startDate: Date,
 		endDate: Date,
 	) => void;
 }
 
+interface TeamInfo {
+	_id: string;
+	user_id: string;
+	category: string;
+	teamName: string;
+	introduction: string;
+	briefHistory: string;
+	establishmentDate: string;
+	phone: string;
+	image: string;
+	isSubmit: boolean;
+	createdAt: string;
+	updatedAt: string;
+}
+
 const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 	const [content, setContent] = useState('');
 	const [inputTitle, setInputTitle] = useState('');
 	const [selectedActType, setSelectedActType] = useState('');
-	const [thumbnail, setThumbnail] = useState<File | null>(null);
-	const [image, setImage] = useState<File | null>(null);
-	const [inputRegisterCount, setInputRegisterCount] = useState<number>(0);
+	// const [thumbnail, setThumbnail] = useState<File | null>(null);
+	// const [image, setImage] = useState<File | null>(null);
+	const [inputRegisterCount, setInputRegisterCount] = useState('');
+	const [teenager, setTeenager] = useState(true);
 	const [deadline, setDeadline] = useState<Date>(new Date());
 	const [startDate, setStartDate] = useState<Date>(new Date());
 	const [endDate, setEndDate] = useState<Date>(new Date());
+	const [teamName, setTeamName] = useState<string>('');
 
 	// 만약 StartDate가 deadline보다 작다면 유저에게 경고창을 띄고, 다시 작성하게 한다.
 	// 인증된 유저만 봉사활동 글 등록할 수 있도록 로직 추가했읍니다!!!!!!!!!!!!!!
 	// user 필드에서 authorization이 true인 경우만 글 작성됩니다 아니면 에러를 띄워줍니다요.
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const getUserInfoData = await get<DataType>('/api/team/auth', {});
+				const responseData = getUserInfoData.data as TeamInfo;
+				const { teamName } = responseData;
+				setTeamName(teamName);
+			} catch (error) {
+				Swal.fire(
+					alertData.errorMessage('데이터를 가져오는데 실패하였습니다.'),
+				);
+			}
+		};
+
+		fetchData();
+	}, []);
 
 	const onClickHandler = () => {
 		onSave(
 			inputTitle,
 			content,
 			selectedActType,
-			thumbnail,
-			image,
+			// thumbnail,
+			// image,
 			inputRegisterCount,
+			teenager,
 			deadline,
 			startDate,
 			endDate,
@@ -78,11 +119,17 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 
 	const handleInputCategory = (selectedValue: string) => {
 		setSelectedActType(selectedValue);
+		console.log(`selectedValue가 ${selectedValue}로 변경됨!`);
 	};
 
 	const handleInputRegisterCount = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const count = Number(e.target.value);
+		const count = e.target.value;
 		setInputRegisterCount(count);
+	};
+
+	const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value;
+		setTeenager(value === 'teenager');
 	};
 
 	const deleteContent = () => {
@@ -94,24 +141,49 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 		setInputTitle('');
 		setContent('');
 		setSelectedActType('');
-		setInputRegisterCount(0);
+		setInputRegisterCount('');
+		setTeenager(true);
 		setDeadline(new Date());
 		setStartDate(new Date());
 		setEndDate(new Date());
-		setThumbnail(null);
-		setImage(null);
+		// setThumbnail(null);
+		// setImage(null);
 	};
 
 	return (
 		<>
 			<Container>
-				<TitleInput
-					placeholder='모집하려는 봉사활동을 잘 나타낼 수 있는 제목을 지어주세요. (40자 이하)'
-					value={inputTitle}
-					onChange={handleInputTitle}
-				/>
 				<div>
-					<h2>카테고리</h2>
+					<Title>제목</Title>
+					<TitleInput
+						placeholder={`[${teamName}] 팀네임 포함 40자 이하 작성`}
+						value={inputTitle}
+						onChange={handleInputTitle}
+					/>
+				</div>
+				<div>
+					<Title>미성년자 참여 여부</Title>
+					<TeamType>
+						<TeamTypeRadio
+							type='radio'
+							value='teenager'
+							checked={teenager}
+							onChange={handleRadioChange}
+						/>
+						가능
+					</TeamType>
+					<TeamType>
+						<TeamTypeRadio
+							type='radio'
+							value='adultOnly'
+							checked={!teenager}
+							onChange={handleRadioChange}
+						/>
+						불가능
+					</TeamType>
+				</div>
+				<div>
+					<Title>카테고리</Title>
 					<Selector
 						value={selectedActType}
 						onChange={handleInputCategory}
@@ -127,36 +199,39 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 						]}
 					/>
 				</div>
-				<div>
-					<h2>썸네일 등록</h2>
+				{/* <div>
+					<Title>썸네일 등록</Title>
 					<UploadThumbnail setFile={setThumbnail} imageType='thumbnail' />
 				</div>
 				<div>
-					<h2>이미지 등록</h2>
+					<Title>이미지 등록</Title>
 					<UploadThumbnail setFile={setImage} imageType='image' />
+				</div> */}
+				<div>
+					<Title>모집인원</Title>
+					<TitleInput
+						placeholder='모집인원을 입력해주세요. (숫자만 입력 가능)'
+						value={inputRegisterCount}
+						onChange={handleInputRegisterCount}
+					/>
 				</div>
-				<TitleInput
-					placeholder='모집인원을 입력해주세요. (숫자만 입력해주세요.)'
-					value={inputRegisterCount === 0 ? '' : inputRegisterCount}
-					onChange={handleInputRegisterCount}
-				/>
 				<LayoutContainer>
 					<LayoutChildContainer>
-						<h2>모집 마감일</h2>
+						<Title>모집 마감일</Title>
 						<VolunteerCalendar
 							selectedDate={deadline}
 							setSelectedDate={setDeadline}
 						/>
 					</LayoutChildContainer>
 					<LayoutChildContainer>
-						<h2>활동 시작일</h2>
+						<Title>활동 시작일</Title>
 						<VolunteerCalendar
 							selectedDate={startDate}
 							setSelectedDate={setStartDate}
 						/>
 					</LayoutChildContainer>
 					<LayoutChildContainer>
-						<h2>활동 종료일</h2>
+						<Title>활동 종료일</Title>
 						<VolunteerCalendar
 							selectedDate={endDate}
 							setSelectedDate={setEndDate}
@@ -165,7 +240,7 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 				</LayoutContainer>
 				<TextContainer>
 					<ContentInput
-						placeholder='봉사활동 주제와 일정을 포함하여 내용을 작성해주세요. 썸네일용 이미지는 필수입니다.'
+						placeholder='봉사활동 주제와 일정을 포함하여 내용을 작성해주세요. 썸네일을 올려서 활동을 소개해보세요.'
 						value={content}
 						onChange={handelInputContent}
 						maxLength={2000}

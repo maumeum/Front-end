@@ -77,6 +77,7 @@ const ReviewDetail = () => {
 					Authorization: `Bearer ${token}`,
 				},
 			});
+			Swal.fire(alertData.successMessage('게시글이 삭제되었습니다.'));
 			navigate('/review');
 		} catch (error) {
 			console.log('Error delecting post:', error);
