@@ -25,6 +25,7 @@ type PostListProps = {
 	comment?: string;
 	setIsModified?: Dispatch<SetStateAction<boolean>>;
 	isReported?: boolean;
+	volunteer?: string;
 };
 const PostList = ({
 	postTitle,
@@ -36,6 +37,7 @@ const PostList = ({
 	setIsModified,
 	isReported,
 	comment,
+	volunteer,
 }: PostListProps) => {
 	const { userData, getUserData } = useAuthStore();
 	useEffect(() => {
@@ -62,6 +64,11 @@ const PostList = ({
 					if (setIsModified) {
 						setIsModified(() => true);
 					}
+				} else if (volunteer === 'volunteer') {
+					del(`/api/volunteers/admins/reports/applications/${postId}`, {});
+					if (setIsModified) {
+						setIsModified(() => true);
+					}
 				}
 				Swal.fire('승인되었습니다.');
 			}
@@ -83,6 +90,11 @@ const PostList = ({
 					}
 				} else if (comment) {
 					patch(`/api/postComments/admins/reports/cancellations/${postId}`, {});
+					if (setIsModified) {
+						setIsModified(() => true);
+					}
+				} else if (volunteer) {
+					patch(`/api/volunteers/admins/reports/cancellations/${postId}`, {});
 					if (setIsModified) {
 						setIsModified(() => true);
 					}
