@@ -4,69 +4,87 @@ import TopBar from '@components/TopBar/TopBar.tsx';
 import SearchBar from '@components/SearchBar/SearchBar.tsx';
 import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
 import WriteButton from '@components/Buttons/WriteButton/WriteButton.tsx';
-import { NumberWriteContainer, PageContainer } from './style.ts';
-// import PostList from '@components/PostList/PostList.tsx';
+import {
+	NumberWriteContainer,
+	PageContainer,
+	CardListContainer,
+} from './style.ts';
 import Menu from '@components/Menu/Menu.tsx';
 import { MenuBar, CardBox } from '@components/MyPage/myPage.ts';
 import VolunteerTogetherCard from '@src/components/Card/VolunteerTogetherCard.tsx';
 import { VolunteerTogetherType } from '@src/types/cardType.ts';
 import { get } from '@api/api';
-// import { getToken } from '@api/token';
 import DataType from '@src/types/dataType.ts';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
-// /volunteers?skip=0&limit=1&status=true(or false)
+import Pagination from '@components/Pagination/Pagination.tsx';
+import NoData from '@components/NoData/NoData.tsx';
 
 const VolunteerOngoing = () => {
 	const navigate = useNavigate();
-	const [appliedData, setAppliedData] = useState<VolunteerTogetherType[]>([]);
-	const [completedData, setCompletedData] = useState<VolunteerTogetherType[]>(
-		[],
-	);
-	const [volunData, setVolunData] = useState<VolunteerTogetherType[]>([]);
+	const [cardListData, setCardListData] = useState<VolunteerTogetherType[]>([]);
+
+	//페이지네이션
+	const [currentPage, setCurrentPage] = useState(1);
+	const pageSize = 5;
+	const handlePageChange = (pageNumber: number) => {
+		setCurrentPage(pageNumber);
+	};
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const getCompetededData = await get<DataType>(
-					'/api/applications?status=true',
+				const getData = await get<DataType>(
+					'/api/volunteers?skip=0&limit=1&status=true',
 					{},
 				);
-				setAppliedData(getCompetededData.data as VolunteerTogetherType[]);
-			} catch (error) {
-				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
-			}
-		};
-
-		fetchData();
-	}, []);
-
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const getAppliedData = await get<DataType>(
-					'/api/applications?status=false',
-					{},
+				console.log(getData.data.volunteerStatus);
+				setCardListData(
+					getData.data.volunteerStatus as VolunteerTogetherType[],
 				);
-				setCompletedData(getAppliedData.data as VolunteerTogetherType[]);
 			} catch (error) {
 				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
 			}
 		};
 		fetchData();
 	}, []);
+
+	const transformData = cardListData.map((data) => {
+		//Card 컴포넌트 형식에 맞게 데이터형태 변환
+		return {
+			_id: data._id,
+			title: data.title,
+			centName: data.centName,
+			statusName: data.statusName,
+			deadline: data.deadline,
+			applyCount: data.applyCount,
+			registerCount: data.registerCount,
+			images: data.images,
+			register_user_id: {
+				_id: data.register_user_id._id,
+				nickname: data.register_user_id.nickname,
+				image: data.register_user_id.image,
+			},
+			createdAt: data.createdAt,
+		};
+	});
 
 	// volunteers/search/?keyword=유기견&skip=1&limit=2
 	const handleSearch = async (query: string) => {
 		const response = await get<DataType>(
 			`/api/volunteers/search?keyword=${query}`,
 		);
-		setVolunData(response.data);
+		setCardListData(response.data);
+		console.log(response.data);
 		console.log('검색어:', query);
 	};
 
 	const navigateWrite = () => {
-		navigate('/volunteers/edit');
+		navigate('/volunteers/ongoing/edit');
+	};
+
+	const navigateDetail = (postId: string) => {
+		navigate(`/volunteers/${postId}`);
 	};
 
 	return (
@@ -74,23 +92,32 @@ const VolunteerOngoing = () => {
 			<MenuBar>
 				<Menu title={'같이봉사해요'} />
 			</MenuBar>
-			<PageContainer>
+			<CardListContainer>
 				<TopBar
 					title='모집 중인 활동'
 					text='인증받은 단체에서 함께 봉사활동을 해요.'
 				/>
 				<SearchBar onSearch={handleSearch} />
 				<NumberWriteContainer>
-					<TotalPostNumber totalPosts={volunData.length} />
+					<TotalPostNumber totalPosts={cardListData.length} />
 					<WriteButton toNavigate={navigateWrite} />
 				</NumberWriteContainer>
 				<CardBox>
-					{volunData.length === 0 && <h2>봉사 내역이 존재하지 않습니다.</h2>}
-					{volunData.map((data, index) => (
+					{transformData.length === 0 && (
+						<h2>봉사 내역이 존재하지 않습니다.</h2>
+					)}
+					{transformData.map((data, index) => (
 						<VolunteerTogetherCard key={data._id + '-' + index} data={data} />
 					))}
 				</CardBox>
-			</PageContainer>
+			</CardListContainer>
+			{transformData.length > 0 && (
+				<Pagination
+					currentPage={currentPage}
+					totalPages={Math.ceil(transformData.length / pageSize)}
+					handlePageChange={handlePageChange}
+				/>
+			)}
 		</>
 	);
 };
