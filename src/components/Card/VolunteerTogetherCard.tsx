@@ -21,13 +21,13 @@ import defaultImage from '@src/assets/images/volunteer1.jpg';
 
 interface VolunteerCardProps {
 	data: VolunteerTogetherType;
-	onClick: () => void;
 }
 
 const url = import.meta.env.VITE_API_URL;
 
 const VolunteerTogetherCard = ({ data }: VolunteerCardProps) => {
 	const {
+		_id,
 		title,
 		centName,
 		statusName,
@@ -40,6 +40,11 @@ const VolunteerTogetherCard = ({ data }: VolunteerCardProps) => {
 	const deadlineDate = dateFormatter(deadline, 'YYYY-MM-DD');
 	const remainingDays = remainingDaysCalculator(currentDate, deadlineDate);
 	const thumbnail = images[0];
+
+	const onClick = () => {
+		console.log('상세페이지로 이동합니다: _id');
+		navigate(`/volunteers/ongoing/detail/${_id}`);
+	};
 
 	return (
 		<CardContainer statusName={statusName} onClick={onClick}>
