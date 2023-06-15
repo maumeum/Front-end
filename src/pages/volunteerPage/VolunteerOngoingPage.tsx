@@ -34,7 +34,7 @@ const VolunteerOngoing = () => {
 		const fetchData = async () => {
 			try {
 				const getData = await get<DataType>(
-					'/api/volunteers?skip=0&limit=1&status=true',
+					'/api/volunteers?skip=0&limit=5&status=true',
 					{},
 				);
 				console.log(getData.data.volunteerList);

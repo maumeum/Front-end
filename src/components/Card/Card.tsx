@@ -139,7 +139,7 @@ function Card({ currTab, data }: CardProps) {
 					alertData.doubleCheckMessage('봉사활동을 취소하시겠습니까?'),
 				);
 				if (result.isConfirmed) {
-					setParticipationStatus(selectedValue);
+					setSelectedParticipationStatus(selectedValue);
 					window.location.reload();
 					await Swal.fire(
 						alertData.successMessage('봉사활동이 취소되었습니다'),
