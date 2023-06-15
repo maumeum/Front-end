@@ -33,7 +33,10 @@ const MENU_ITEMS: MenuItems = {
 		{ link: '/admin/team_auth', label: '단체 인증 요청' },
 		{ link: '/admin/manage_user', label: '유저 관리' },
 	],
-	같이봉사해요: [{ link: '/volunteers', label: '모집 중인 활동' }],
+	같이봉사해요: [
+		{ link: '/volunteers/ongoing', label: '모집 중인 활동' },
+		{ link: '/volunteers/close', label: '모집 종료 활동' },
+	],
 };
 
 function Menu({ title }: MenuProps) {

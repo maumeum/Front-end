@@ -414,7 +414,7 @@ export const TitleInfo = styled.h2`
 	color: ${({ theme }) => theme.colors.text};
 `;
 
-export const InfoBox = styled.div`
+export const InfoBox = styled.div<CardProps>`
 	font-size: 0.875rem;
 	line-height: 1.5rem;
 	display: flex;
@@ -426,7 +426,19 @@ export const InfoBox = styled.div`
 		margin-left: 0.5rem;
 		font-size: ${({ theme }) => theme.typography.size.default};
 		font-weight: ${({ theme }) => theme.typography.weight.bold};
-		color: ${({ theme }) => theme.colors.highlight};
+
+		${({ statusName }) =>
+			statusName === VolunteerTypes.CONTINUE &&
+			css`
+				color: ${({ theme }) => theme.colors.highlight};
+			`}
+
+		${({ statusName }) =>
+			(statusName === VolunteerTypes.COMPLETED ||
+				statusName === VolunteerTypes.DISCONTINUE) &&
+			css`
+				color: ${({ theme }) => theme.colors.gray500};
+			`}
 	}
 `;
 

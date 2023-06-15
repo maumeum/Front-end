@@ -6,6 +6,20 @@ export const PageContainer = styled.div`
 	margin-left: 15rem;
 `;
 
+export const VolunteerPageContainer = styled.div`
+	margin-bottom: 40rem;
+	margin-top: -30rem;
+	margin-left: 15rem;
+	margin-right: 15rem;
+`;
+
+export const CardListContainer = styled.div`
+	width: 100%;
+	margin-top: 15rem;
+	padding: 3.5rem;
+	margin-left: 5rem;
+`;
+
 export const NumberWriteContainer = styled.div`
 	display: flex;
 	justify-content: space-between;

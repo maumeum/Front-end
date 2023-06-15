@@ -1,11 +1,11 @@
-import { VolunteerDetailType } from '@src/types/cardType.ts';
+import { VolunteerTogetherType } from '@src/types/cardType.ts';
+import { VolunteerTypes } from '@src/types/myPageConstants';
 import {
 	dateFormatter,
 	getCurrent,
 	remainingDaysCalculator,
 } from '@utils/dateUtils.ts';
 import {
-	CardProps,
 	VolunteerUserInfo,
 	CardContainer,
 	ImgBox,
@@ -16,16 +16,22 @@ import {
 } from '@components/Card/card.ts';
 
 import CardAvailableIcon from '@assets/icons/card_applier_is_available_icon.svg';
-// import CardFullIcon from '@assets/icons/card_applier_is_full_icon.svg';
+import CardFullIcon from '@assets/icons/card_applier_is_full_icon.svg';
 
-interface VolunteerCardProps extends CardProps {
-	volunteerCardData: VolunteerDetailType;
+interface VolunteerCardProps {
+	data: VolunteerTogetherType;
 }
 
-// 2023-06-05T17:06:58.150+00:00 -> 2023-06-05
-const VolunteerTogetherCard = ({ volunteerCardData }: VolunteerCardProps) => {
-	const { title, statusName, images, applyCount, register_user, deadline } =
-		volunteerCardData;
+const VolunteerTogetherCard = ({ data }: VolunteerCardProps) => {
+	const {
+		title,
+		centName,
+		statusName,
+		images,
+		applyCount,
+		register_user_id,
+		deadline,
+	} = data;
 	const currentDate = getCurrent();
 	const deadlineDate = dateFormatter(deadline, 'YYYY-MM-DD');
 	const remainingDays = remainingDaysCalculator(currentDate, deadlineDate);
@@ -39,17 +45,38 @@ const VolunteerTogetherCard = ({ volunteerCardData }: VolunteerCardProps) => {
 					<p>{statusName}</p>
 				</VolunteerBadge>
 				<Label>
-					<img src={CardAvailableIcon} alt='CardAvailableIcon' />
-					<p>{`현재 ${applyCount}명 신청중`}</p>
+					{statusName === VolunteerTypes.CONTINUE && (
+						<>
+							<img src={CardAvailableIcon} alt='Volunteer Available Icon' />
+							<p>{`현재 ${applyCount}명 신청중`}</p>
+						</>
+					)}
+					{(statusName === VolunteerTypes.COMPLETED ||
+						statusName === VolunteerTypes.DISCONTINUE) && (
+						<>
+							<img src={CardFullIcon} alt='Volunteer Close Icon' />
+							<p>{`${applyCount}명 신청 완료`}</p>
+						</>
+					)}
 				</Label>
 			</ImgBox>
-			<TitleInfo>{title}</TitleInfo>
-			<InfoBox>
+			<TitleInfo>{`[${centName}] ${title}`}</TitleInfo>
+			<InfoBox statusName={statusName}>
 				<VolunteerUserInfo>
-					<img src={register_user.image} alt='작성자 프로필사진' />
-					<p>{register_user.nickname}</p>
+					<img src={register_user_id.image} alt='작성자 프로필사진' />
+					<p>{register_user_id.nickname}</p>
 				</VolunteerUserInfo>
-				<b>{`${remainingDays}일 남음`}</b>
+				{statusName === VolunteerTypes.CONTINUE && (
+					<>
+						<b>{`${remainingDays}일 남음`}</b>
+					</>
+				)}
+				{(statusName === VolunteerTypes.COMPLETED ||
+					statusName === VolunteerTypes.DISCONTINUE) && (
+					<>
+						<b>{'모집 종료'}</b>
+					</>
+				)}
 			</InfoBox>
 		</CardContainer>
 	);
