@@ -1,5 +1,5 @@
 import { Container } from './pagination';
-
+import { useState } from 'react';
 interface PaginationProps {
 	currentPage: number;
 	totalPages: number;
@@ -12,13 +12,20 @@ function Pagination({
 	handlePageChange,
 }: PaginationProps) {
 	// 페이지 버튼을 만드는 함수
+
+	const [clickedButton, setClickedButton] = useState<number | null>(null);
 	const renderPageButtons = () => {
 		const pageButtons = [];
 		for (let i = 1; i <= totalPages; i++) {
 			pageButtons.push(
 				<button
-					className={currentPage === i ? 'active' : ''}
-					onClick={() => handlePageChange(i)}
+					className={`${currentPage === i ? 'active' : ''} ${
+						clickedButton === i ? 'clicked' : ''
+					}`}
+					onClick={() => {
+						handlePageChange(i);
+						setClickedButton(i); // 상태 업데이트
+					}}
 					key={i}>
 					{i}
 				</button>,

@@ -43,7 +43,7 @@ function VolunSuggest() {
 
 	//페이지네이션
 	const [currentPage, setCurrentPage] = useState(1);
-	const pageSize = 5;
+	const pageSize = 8;
 	const handlePageChange = (pageNumber: number) => {
 		setCurrentPage(pageNumber);
 	};
@@ -55,6 +55,7 @@ function VolunSuggest() {
 					'/api/volunteers/registerations',
 					{},
 				);
+				console.log(getSuggestedData);
 				setSuggestVolunList(
 					getSuggestedData.data.registerationVolunteers as ResponseData[],
 				);
@@ -102,9 +103,15 @@ function VolunSuggest() {
 					</TabMenu>
 					{suggestVolunList.length === 0 && <NoData category='봉사' />}
 					<CardBox>
-						{transformData.map((data) => (
-							<Card key={data.volunteer_id._id} data={data} currTab={currTab} />
-						))}
+						{transformData
+							.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+							.map((data) => (
+								<Card
+									key={data.volunteer_id._id}
+									data={data}
+									currTab={currTab}
+								/>
+							))}
 					</CardBox>
 				</Main>
 			</Container>
