@@ -6,7 +6,7 @@ import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
 import WriteButton from '@components/Buttons/WriteButton/WriteButton.tsx';
 import {
 	NumberWriteContainer,
-	PageContainer,
+	VolunteerPageContainer,
 	CardListContainer,
 } from './style.ts';
 import Menu from '@components/Menu/Menu.tsx';
@@ -18,7 +18,6 @@ import DataType from '@src/types/dataType.ts';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
 import Pagination from '@components/Pagination/Pagination.tsx';
-import NoData from '@components/NoData/NoData.tsx';
 
 const VolunteerOngoing = () => {
 	const navigate = useNavigate();
@@ -38,10 +37,8 @@ const VolunteerOngoing = () => {
 					'/api/volunteers?skip=0&limit=1&status=true',
 					{},
 				);
-				console.log(getData.data.volunteerStatus);
-				setCardListData(
-					getData.data.volunteerStatus as VolunteerTogetherType[],
-				);
+				console.log(getData.data.volunteerList);
+				setCardListData(getData.data.volunteerList as VolunteerTogetherType[]);
 			} catch (error) {
 				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
 			}
@@ -88,7 +85,7 @@ const VolunteerOngoing = () => {
 	};
 
 	return (
-		<>
+		<VolunteerPageContainer>
 			<MenuBar>
 				<Menu title={'같이봉사해요'} />
 			</MenuBar>
@@ -118,7 +115,7 @@ const VolunteerOngoing = () => {
 					handlePageChange={handlePageChange}
 				/>
 			)}
-		</>
+		</VolunteerPageContainer>
 	);
 };
 
