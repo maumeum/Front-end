@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 export const PageContainer = styled.div`
 	margin-bottom: 40rem;
@@ -81,7 +81,6 @@ export const Highlight = styled.span`
 `;
 export const NumberWriteContainer = styled.div`
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
 	width: 112rem;
 	margin: 5.8rem auto;
@@ -93,6 +92,8 @@ export const ReviewPageContainer = styled.div`
 export const DetailContainer = styled.div`
 	margin: 0 auto;
 	margin-top: 15rem;
+	min-height: 80rem;
+	margin-bottom: 30rem;
 `;
 export const Header = styled.header`
 	margin: 0 auto;
@@ -107,9 +108,19 @@ export const SubContainer = styled.div`
 	justify-content: space-between;
 `;
 export const InfoBox = styled.div``;
+export const NameBox = styled.div`
+	display: flex;
+`;
 export const UserName = styled.p`
 	font-size: 2.4rem;
+	margin-right: 1rem;
 `;
+export const NanoId = styled.p`
+	font-size: 1.8rem;
+	margin-top: 3rem;
+	color: #aaaaaa;
+`;
+
 export const Date = styled.p`
 	color: #989898;
 	font-size: 2rem;
@@ -123,6 +134,7 @@ export const Btn = styled.button`
 	margin-top: 2rem;
 	cursor: pointer;
 	margin-left: 50rem;
+	font-size: 2rem;
 `;
 export const BtnDelete = styled.button`
 	background-color: #ffd4d4;
@@ -132,6 +144,7 @@ export const BtnDelete = styled.button`
 	width: 13rem;
 	margin-top: 2rem;
 	cursor: pointer;
+	font-size: 2rem;
 `;
 export const Line = styled.hr`
 	width: 112rem;

@@ -105,6 +105,7 @@ function Card({ currTab, data }: CardProps) {
 					statusName: selectedValue,
 				});
 				setSelectedStatus(selectedValue);
+				window.location.reload();
 			} catch (error) {
 				await Swal.fire(
 					alertData.errorMessage('모집상태 변경에 실패하였습니다 :('),
@@ -131,6 +132,7 @@ function Card({ currTab, data }: CardProps) {
 					await post(`/api/review/users/participation/${_id}`, {});
 					setSelectedParticipationStatus(selectedValue);
 					setParticipationStatus(selectedValue);
+					window.location.reload();
 					await Swal.fire('완료된 봉사로 변경되었습니다!', 'success');
 				}
 			} else if (selectedValue === 'cancel') {
@@ -142,6 +144,7 @@ function Card({ currTab, data }: CardProps) {
 				);
 				if (result.isConfirmed) {
 					setParticipationStatus(selectedValue);
+					window.location.reload();
 					await Swal.fire(
 						alertData.successMessage('봉사활동이 취소되었습니다'),
 					);

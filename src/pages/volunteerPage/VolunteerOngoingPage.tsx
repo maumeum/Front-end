@@ -5,13 +5,13 @@ import SearchBar from '@components/SearchBar/SearchBar.tsx';
 import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
 import WriteButton from '@components/Buttons/WriteButton/WriteButton.tsx';
 import { NumberWriteContainer, PageContainer } from './style.ts';
-import PostList from '@components/PostList/PostList.tsx';
+// import PostList from '@components/PostList/PostList.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import { MenuBar, CardBox } from '@components/MyPage/myPage.ts';
 import VolunteerTogetherCard from '@src/components/Card/VolunteerTogetherCard.tsx';
 import { VolunteerTogetherType } from '@src/types/cardType.ts';
 import { get } from '@api/api';
-import { getToken } from '@api/token';
+// import { getToken } from '@api/token';
 import DataType from '@src/types/dataType.ts';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
@@ -67,10 +67,6 @@ const VolunteerOngoing = () => {
 
 	const navigateWrite = () => {
 		navigate('/volunteers/edit');
-	};
-
-	const navigateDetail = (postId: string) => {
-		navigate(`/community/${postId}`);
 	};
 
 	return (

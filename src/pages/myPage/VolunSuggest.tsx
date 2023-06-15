@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import {
 	Container,
 	Main,
@@ -15,6 +15,7 @@ import { get } from '@api/api';
 import DataType from '@src/types/dataType';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
+import NoData from '@components/NoData/NoData.tsx';
 
 interface ResponseData {
 	_id: string;
@@ -99,10 +100,8 @@ function VolunSuggest() {
 					<TabMenu>
 						<Tab tabs={tabs} />
 					</TabMenu>
+					{suggestVolunList.length === 0 && <NoData category='봉사' />}
 					<CardBox>
-						{suggestVolunList.length === 0 && (
-							<h2>내가 등록한 봉사 내역이 없습니다.</h2>
-						)}
 						{transformData.map((data) => (
 							<Card key={data.volunteer_id._id} data={data} currTab={currTab} />
 						))}

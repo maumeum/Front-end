@@ -6,6 +6,7 @@ import {
 	Title,
 	Comment,
 	BtnContainer,
+	BtnContainer2,
 	Btn1,
 	Btn2,
 	CommentContainer,
@@ -19,6 +20,11 @@ import {
 	CommentLength,
 	EditCommentArea,
 	BtnReport,
+	NameContainer,
+	NanoId,
+	Btn3,
+	RandomPhoto,
+	Img,
 } from './CommentStyle';
 import DataType from '@src/types/dataType';
 import { get, post, patch, del } from '@api/api';
@@ -26,6 +32,8 @@ import { dateFormatter } from '@src/utils/dateUtils';
 import useAuthStore from '@src/store/useAuthStore';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
+import FindFriendImage from '@assets/images/findfriendImage.png';
+import throttle from '@utils/throttle.ts';
 
 type CommentProps = {
 	postId: string;
@@ -36,32 +44,58 @@ type UserType = {
 
 const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 	const [inputArea, setInputArea] = useState('');
-	const [value, setValue] = useState<any>([]);
+	const [value, setValue] = useState<any[]>([]);
 	const [editingCommentId, setEditingCommentId] = useState('');
 	const [editedComment, setEditedComment] = useState('');
 	const { userData, getUserData } = useAuthStore();
-
-	useEffect(() => {
-		getComments();
-	}, []);
+	const [isLoad, setLoad] = useState<boolean>(false);
 
 	useEffect(() => {
 		getUserData();
 	}, []);
 
+	useEffect(() => {
+		getComments();
+	}, []);
+
 	const getComments = async () => {
+		const response = await get<DataType>(
+			`/api/postComments/${postId}?skip=0&limit=3`,
+			{},
+		);
+		setValue(response.data.postCommentList);
+	};
+
+	const loadMoreData = async () => {
 		try {
-			const token = getToken();
-			const response = await get<DataType>(`/api/postComments/${postId}`, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
-			setValue(response.data.postCommentList);
+			if (!isLoad) {
+				const response = await get<DataType>(
+					`/api/postComments/${postId}?skip=${value.length}&limit=3`,
+					{},
+				);
+				const newPostListData = response.data.postCommentList;
+				setValue((prevData) => [...prevData, ...newPostListData]);
+				setLoad(response.data.hasMore);
+			}
 		} catch (error) {
-			console.error('Error fetching post:', error);
+			console.error('Error loading more data:', error);
 		}
 	};
+
+	// 무한 스크롤
+	useEffect(() => {
+		if (value.length > 0) {
+			const handleScroll = throttle(() => {
+				const { scrollTop, offsetHeight } = document.documentElement;
+				if (offsetHeight - window.innerHeight - scrollTop < 200) {
+					loadMoreData();
+				}
+			});
+
+			window.addEventListener('scroll', handleScroll);
+			return () => window.removeEventListener('scroll', handleScroll);
+		}
+	}, [value]);
 
 	const handleCommentChange = (event: any) => {
 		const text = event.target.value;
@@ -97,10 +131,6 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 		} catch (error) {
 			console.log('Error posting comment:', error);
 		}
-	};
-
-	const handleCancelSubmit = () => {
-		setInputArea('');
 	};
 
 	const handelEditingComment = (comment_id: string) => {
@@ -167,11 +197,12 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 			<CommentArea
 				value={inputArea}
 				onChange={handleCommentChange}
+				placeholder='서로 예의를 지키며 아름다운 온라인 문화를 만들어가요'
 				maxLength={200}
 			/>
-			<CommentLength>{inputArea.length}/200</CommentLength>
+
 			<BtnContainer>
-				<Btn1 onClick={handleCancelSubmit}>취소</Btn1>
+				<CommentLength>{inputArea.length}/200</CommentLength>
 				<Btn2 onClick={handleCommentSubmit}>등록</Btn2>
 			</BtnContainer>
 
@@ -186,15 +217,14 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 				value.map((comment: any) => (
 					<CommentContainer key={comment._id}>
 						<ProfileContainer>
+							<RandomPhoto>
+								<Img src={FindFriendImage} alt='' />
+							</RandomPhoto>
 							<UserContainer>
-								<UserName>{comment.user_id.nickname}</UserName>
-								<Date>
-									{dateFormatter(
-										comment.createdAt,
-										'YYYY년 MM월 DD일 HH:mm:ss',
-										'ko',
-									)}
-								</Date>
+								<NameContainer>
+									<UserName>{comment.user_id.nickname}</UserName>
+									<NanoId>#{comment.user_id.nanoid}</NanoId>
+								</NameContainer>
 							</UserContainer>
 						</ProfileContainer>
 						{editingCommentId === comment._id ? (
@@ -205,18 +235,17 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 									onChange={(e) => setEditedComment(e.target.value)}
 									maxLength={200}
 								/>
-								<BtnContainer>
-									<Btn1 onClick={() => handleCancelSubmit()}>취소</Btn1>
-									<Btn2 onClick={() => handleEditComment(comment._id)}>
+								<BtnContainer2>
+									<Btn3 onClick={() => handleEditComment(comment._id)}>
 										저장
-									</Btn2>
-								</BtnContainer>
+									</Btn3>
+								</BtnContainer2>
 							</>
 						) : (
 							// 수정 중이 아닌 댓글 표시
 							<>
 								<Contents>{comment.content}</Contents>
-								<BtnContainer>
+								<BtnContainer2>
 									{String(comment.user_id.uuid) ===
 										String((userData as unknown as UserType)?.uuid) && (
 										<Btn1 onClick={() => handelEditingComment(comment._id)}>
@@ -242,9 +271,16 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 											삭제
 										</Btn2>
 									)}
-								</BtnContainer>
+								</BtnContainer2>
 							</>
 						)}
+						<Date>
+							{dateFormatter(
+								comment.createdAt,
+								'YYYY년 MM월 DD일 HH:mm:ss',
+								'ko',
+							)}
+						</Date>
 					</CommentContainer>
 				))
 			)}
