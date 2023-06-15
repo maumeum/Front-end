@@ -38,6 +38,9 @@ export function remainingDaysCalculator(
 	if (isDeadlineYearLeap && deadlineDateObj.getMonth() >= 1) {
 		remainingDays += 1;
 	}
+	if (remainingDays < 1) {
+		remainingDays = 0;
+	}
 
 	return remainingDays;
 }
