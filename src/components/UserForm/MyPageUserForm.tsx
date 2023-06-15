@@ -147,7 +147,7 @@ function MyPageUserForm({ pageType }: MyPageUserFormProps) {
 							validFn={validEmail}
 						/>
 					)}
-					{authorization && <img src={check} alt='인증유저' />}
+					{canModify && authorization && <img src={check} alt='인증유저' />}
 
 					<InputForm
 						canModify={canModify}

@@ -16,5 +16,9 @@ export const Container = styled.div`
 		&:hover {
 			color: #ffd4d4;
 		}
+
+		&.clicked {
+			border-bottom: 2px solid #afcd81;
+		}
 	}
 `;

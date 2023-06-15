@@ -4,6 +4,7 @@ import {
 	Main,
 	MenuBar,
 	TabMenu,
+	StyledLink,
 } from '@components/MyPage/myPage.ts';
 import Tab from '@components/Tab/Tab.tsx';
 import MyPost from '@components/MyPost/MyPost.tsx';
@@ -15,6 +16,7 @@ import Swal from 'sweetalert2';
 import alertData from '@src/utils/swalObject';
 import Pagination from '@src/components/Pagination/Pagination.tsx';
 import NoData from '@components/NoData/NoData.tsx';
+import { Link } from 'react-router-dom';
 
 interface CommunityProps {
 	title: string;
@@ -68,6 +70,8 @@ function MyComment() {
 		fetchData();
 	}, []);
 
+	console.log(commentData);
+
 	useEffect(() => {
 		currTab === TabTypes.WRITTEN_POSTS
 			? setSelectedData(postData)
@@ -88,7 +92,6 @@ function MyComment() {
 				<MenuBar>
 					<Menu title={'마이페이지'} />
 				</MenuBar>
-
 				<Main>
 					<TabMenu>
 						<Tab currTab={currTab} onClick={handleClickTab} tabs={tabs} />
@@ -98,12 +101,23 @@ function MyComment() {
 						.slice((currentPage - 1) * pageSize, currentPage * pageSize)
 						.map((data, idx) => {
 							return (
-								<MyPost
-									key={data._id + idx}
-									currTab={currTab}
-									communityData={data}
-									onRemovePost={removePost}
-								/>
+								<div key={data._id + idx + 'link'}>
+									{currTab === TabTypes.COMMENTED_POSTS ? (
+										<StyledLink to={`/community/${data._id}`}>
+											<MyPost
+												currTab={currTab}
+												communityData={data}
+												onRemovePost={removePost}
+											/>
+										</StyledLink>
+									) : (
+										<MyPost
+											currTab={currTab}
+											communityData={data}
+											onRemovePost={removePost}
+										/>
+									)}
+								</div>
 							);
 						})}
 					{selectedData.length > 0 && (

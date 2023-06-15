@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 import { IntroContainer, IntroBox } from '@components/Profile/myIntro';
 import { InputConatiner } from '@components/Profile/profileImg';
 import { BtnConatiner, TitleInput } from '@components/Modal/modal';
@@ -17,7 +17,16 @@ function MyReview({ closeModal, id }: MyReviewProps) {
 	const [title, setTitle] = useState<string>('');
 	const [content, setContent] = useState<string>('');
 	const [files, setFiles] = useState<File[]>([]);
+	const [isUploaded, setIsUploaded] = useState<boolean>(false);
 	const volunteer_id = id;
+
+	// useEffect(() => {
+	// 	if (isUploaded) {
+	// 		// 이미지 업로드가 완료되었으므로 업데이트된 리스트를 가져옵니다.
+	// 		// 리스트 업데이트 관련 코드
+	// 	}
+	// }, [isUploaded]);
+
 	const handleContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		setContent(e.target.value);
 	};
@@ -53,21 +62,19 @@ function MyReview({ closeModal, id }: MyReviewProps) {
 			formData.append('images', files[i]);
 		}
 
-		for (const [key, value] of formData.entries()) {
-			console.log(`${key}: ${value}`);
-		}
-
 		try {
 			await post<DataType>('/api/review', formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
 				},
 			});
-			closeModal();
+			// window.location.reload();
+			setIsUploaded(true);
 		} catch (error) {
 			console.log(error);
 		}
 		Swal.fire(alertData.successMessage('리뷰가 성공적으로 등록되었습니다:)'));
+		closeModal();
 	};
 
 	return (
