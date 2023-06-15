@@ -114,15 +114,14 @@ function MyVolunHistory() {
 					</CardBox>
 				</Main>
 			</Container>
-			<div>
-				{volunData.length > 0 && (
-					<Pagination
-						currentPage={currentPage}
-						totalPages={Math.ceil(volunData.length / pageSize)}
-						handlePageChange={handlePageChange}
-					/>
-				)}
-			</div>
+
+			{volunData.length > 0 && (
+				<Pagination
+					currentPage={currentPage}
+					totalPages={Math.ceil(volunData.length / pageSize)}
+					handlePageChange={handlePageChange}
+				/>
+			)}
 		</>
 	);
 }

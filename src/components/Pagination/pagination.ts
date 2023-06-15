@@ -4,7 +4,8 @@ export const Container = styled.div`
 	display: flex;
 	justify-content: center;
 	position: relative;
-	left: -20px;
+	left: 45px;
+	margin-bottom: 5rem;
 
 	button {
 		margin-top: 2rem;

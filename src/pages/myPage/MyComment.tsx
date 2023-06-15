@@ -120,15 +120,15 @@ function MyComment() {
 								</div>
 							);
 						})}
-					{selectedData.length > 0 && (
-						<Pagination
-							currentPage={currentPage}
-							totalPages={Math.ceil(selectedData.length / pageSize)}
-							handlePageChange={handlePageChange}
-						/>
-					)}
 				</Main>
 			</Container>
+			{selectedData.length > 0 && (
+				<Pagination
+					currentPage={currentPage}
+					totalPages={Math.ceil(selectedData.length / pageSize)}
+					handlePageChange={handlePageChange}
+				/>
+			)}
 		</>
 	);
 }
