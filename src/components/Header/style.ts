@@ -44,6 +44,8 @@ export const NavCategory = styled(NavLink)`
 			return 'var(--button--color)';
 		} else if (props.className === 'review') {
 			return 'var(--button--color)';
+		} else if (props.className === 'volunteers') {
+			return 'var(--button--color)';
 		} else {
 			return '#444444';
 		}
