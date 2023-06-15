@@ -127,3 +127,15 @@ export interface VolunteerTogetherType {
 }
 // // 봉사활동 전체보기 리스트
 export type VolunteerTogetherListType = VolunteerTogetherType[];
+
+export interface CommentType {
+	_id: string;
+	user_id: {
+		nickname: string;
+	};
+	content: string;
+	post_id: string;
+	isReported: boolean;
+}
+
+export type CommentListType = CommentType[];

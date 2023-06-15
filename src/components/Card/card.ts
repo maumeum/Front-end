@@ -501,6 +501,19 @@ export const VolunteerUserInfo = styled(UserInfo)`
 
 // UserCard
 
+export const UserSection = styled.div`
+	margin-bottom: 6rem;
+	width: 100%;
+	height: 35rem;
+	padding-bottom: 3rem;
+	background-color: #ffffff;
+	border: none;
+	border-radius: 12px;
+	filter: drop-shadow(0 2px 10px rgb(0, 0, 0, 10%));
+	word-break: keep-all;
+	cursor: pointer;
+`;
+
 export const NickNameContainer = styled.div`
 	display: flex;
 	justify-content: center;
