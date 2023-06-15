@@ -95,7 +95,7 @@ export interface VolunteerDetailType {
 		introduction?: string;
 		image: string;
 	};
-// 글 작성자의 인증단체 데이터
+	// 글 작성자의 인증단체 데이터
 	team: {
 		category?: string;
 		teamName: string;
@@ -112,7 +112,7 @@ export interface VolunteerDetailType {
 export interface VolunteerTogetherType {
 	_id: string;
 	title: string;
-	centName: string;
+	teamName: string;
 	statusName: string;
 	deadline: string;
 	applyCount: number;
@@ -122,6 +122,7 @@ export interface VolunteerTogetherType {
 		_id: string;
 		nickname: string;
 		image: string;
+		uuid?: string;
 	};
 	createdAt: string;
 }

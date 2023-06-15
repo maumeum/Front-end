@@ -20,7 +20,7 @@ const VolunteerWrite = () => {
 		deadline: new Date(),
 		startDate: new Date(),
 		endDate: new Date(),
-		centName: '',
+		teamName: '',
 	});
 
 	const handelImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +43,7 @@ const VolunteerWrite = () => {
 		deadlineDate: Date,
 		startDateData: Date,
 		endDateData: Date,
-		centName: string,
+		teamName: string,
 	) => {
 		setPostData({
 			title,
@@ -54,7 +54,7 @@ const VolunteerWrite = () => {
 			deadline: deadlineDate,
 			startDate: startDateData,
 			endDate: endDateData,
-			centName,
+			teamName,
 		});
 
 		const token = getToken();
@@ -78,7 +78,7 @@ const VolunteerWrite = () => {
 		formData.append('startDate', startDate);
 		formData.append('endDate', endDate);
 		formData.append('teenager', teenager);
-		formData.append('centName', centName);
+		formData.append('teamName', teamName);
 		for (let i = 0; i < selectedImage.length; i++) {
 			formData.append('images', selectedImage[i]);
 		}
@@ -104,7 +104,7 @@ const VolunteerWrite = () => {
 			deadline: new Date(),
 			startDate: new Date(),
 			endDate: new Date(),
-			centName: '',
+			teamName: '',
 		});
 		console.log('Cancelled Post');
 		navigate('/volunteers/ongoing');
