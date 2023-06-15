@@ -32,9 +32,34 @@ export const CommunityContainer = styled.div`
 	margin: 0 40rem;
 	padding-bottom: 12rem;
 	min-width: 112rem;
-	height: 89rem;
-	display: grid;
-	grid-template-rows: repeat(6, 1fr);
+`;
+
+export const ButtonContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 3rem;
+	color: ${({ theme }) => theme.colors.green100};
+`;
+
+export const Arrow = styled.div`
+	border: solid ${({ theme }) => theme.colors.green100};
+	border-width: 0 10px 10px 0;
+	display: inline-block;
+	border-radius: 15%;
+	padding: 1.8rem;
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	cursor: pointer;
+
+	&:hover {
+		border: solid ${({ theme }) => theme.colors.green300};
+		border-width: 0 10px 10px 0;
+	}
+`;
+
+export const MoreContent = styled.p`
+	font-size: 1.3rem;
 `;
 
 export const NoSearchContainer = styled.div`

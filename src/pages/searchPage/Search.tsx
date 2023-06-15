@@ -11,19 +11,25 @@ import {
 	VolunteerTitle,
 	CommunityContainer,
 	CommunityTitle,
+	ButtonContainer,
+	Arrow,
+	MoreContent,
 	NoSearchContainer,
 	NoKeyword,
 } from './style';
 import KeywordComponent from '@components/Keyword/Keyword';
 import VolunteerCard from '@components/Card/VolunteerCard';
 import CommunityCard from '@components/Card/CommunityCard';
+import throttle from '@utils/throttle.ts';
 
 const Search = () => {
 	const [query, setQuery] = useState<string>('');
 	const [submit, setSubmit] = useState<boolean>(false);
 	const [volunteerList, setVolunteerList] = useState<VolunteerListType>([]);
-	const [findFriendList, setFindFriendList] = useState<CommunityListType>([]);
-	const [qnaList, setQnaList] = useState<CommunityListType>([]);
+	const [communityList, setCommunityList] = useState<CommunityListType>([]);
+	const [volunteerLoad, setVolunteerLoad] = useState<boolean>(true);
+	const [isLoad, setLoad] = useState<boolean>(true);
+	const [hidden, setHidden] = useState<boolean>(false);
 	const navigate = useNavigate();
 
 	const handleSearch = (query: string) => {
@@ -39,39 +45,72 @@ const Search = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const responseData = await get<DataType>(
-				`/api/volunteers/search?keyword=${query}`,
+				`/api/volunteers/search?keyword=${query}&skip=0&limit=8`,
 			);
-			setVolunteerList(responseData.data);
+			setVolunteerList(responseData.data.searchVolunteers);
+			setVolunteerLoad(responseData.data.hasMore);
 		};
 		fetchData();
 	}, [query]);
 
-	// 동행 커뮤니티 조회
+	// 커뮤니티 조회
 	useEffect(() => {
 		const fetchData = async () => {
 			const responseData = await get<DataType>(
-				`/api/community/search?keyword=${query}&posttype=findfriend`,
+				`/api/community/totalsearch?keyword=${query}&skip=0&limit=5`,
 			);
-			setFindFriendList(responseData.data);
+			setCommunityList(responseData.data.posts);
+			setLoad(responseData.data.hasMore);
 		};
 		fetchData();
 	}, [query]);
 
-	// 질문 커뮤니티 조회
+	// 데이터 불러오기
+	const loadMoreData = async (dataType: string) => {
+		if (isLoad || volunteerLoad) {
+			let url = '';
+			if (dataType === 'community') {
+				url = `/api/community/totalsearch?keyword=${query}&skip=${communityList.length}&limit=5`;
+			} else if (dataType === 'volunteer') {
+				url = `/api/volunteers/search?keyword=${query}&skip=${volunteerList.length}&limit=8`;
+			}
+			const response = await get<DataType>(url, {});
+
+			if (dataType === 'community') {
+				const newPostListData = response.data.posts;
+				setCommunityList((prevData) => [...prevData, ...newPostListData]);
+				setLoad(response.data.hasMore);
+
+				setHidden(false);
+			} else if (dataType === 'volunteer') {
+				const newPostListData = response.data.searchVolunteers;
+				setVolunteerList((prevData) => [...prevData, ...newPostListData]);
+				setVolunteerLoad(response.data.hasMore);
+				setHidden(false);
+			}
+		}
+	};
+
+	// 하단으로 내려가면 더보기 버튼
 	useEffect(() => {
-		const fetchData = async () => {
-			const responseData = await get<DataType>(
-				`/api/community/search?keyword=${query}&posttype=qna`,
-			);
-			setQnaList(responseData.data);
-		};
-		fetchData();
-	}, [query]);
+		if (communityList.length > 0 || volunteerList.length > 0) {
+			const handleScroll = throttle(() => {
+				const { scrollTop, offsetHeight } = document.documentElement;
+				if (offsetHeight - window.innerHeight - scrollTop < 250) {
+					setHidden(true);
+				} else if (offsetHeight - window.innerHeight - scrollTop < 800) {
+					setHidden(true);
+				}
+			});
+
+			window.addEventListener('scroll', handleScroll);
+			return () => window.removeEventListener('scroll', handleScroll);
+		}
+	}, [communityList, volunteerList]);
 
 	const validSearch =
 		(query !== '' && volunteerList.length !== 0) ||
-		(query !== '' && findFriendList.length !== 0) ||
-		(query !== '' && qnaList.length !== 0);
+		(query !== '' && communityList.length !== 0);
 
 	return (
 		<SearchSection>
@@ -80,26 +119,32 @@ const Search = () => {
 				<>
 					<VolunteerTitle>봉사활동 검색결과</VolunteerTitle>
 					<VolunteerContainer>
-						{volunteerList.slice(0, 8).map((item) => (
+						{volunteerList.map((item) => (
 							<VolunteerCard key={item._id} volunteerData={item} />
 						))}
 					</VolunteerContainer>
+					{hidden && volunteerLoad && (
+						<ButtonContainer>
+							<Arrow onClick={() => loadMoreData('volunteer')} />
+							<MoreContent>more</MoreContent>
+						</ButtonContainer>
+					)}
 					<CommunityTitle>커뮤니티 검색결과</CommunityTitle>
 					<CommunityContainer>
-						{findFriendList.slice(0, 3).map((item) => (
+						{communityList.map((item) => (
 							<CommunityCard
 								key={item._id}
 								communityData={item}
 								onClick={() => navigate(`/community/${item._id}`)}
+								searchPage={true}
 							/>
 						))}
-						{qnaList.slice(0, 3).map((item) => (
-							<CommunityCard
-								key={item._id}
-								communityData={item}
-								onClick={() => navigate(`/community/${item._id}`)}
-							/>
-						))}
+						{hidden && isLoad && (
+							<ButtonContainer>
+								<Arrow onClick={() => loadMoreData('community')} />
+								<MoreContent>more</MoreContent>
+							</ButtonContainer>
+						)}
 					</CommunityContainer>
 				</>
 			) : (
