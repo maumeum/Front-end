@@ -73,7 +73,6 @@ function Card({ currTab, data }: CardProps) {
 	const [selectedStatus, setSelectedStatus] = useState<string>(statusName);
 	const [selectedParticipationStatus, setSelectedParticipationStatus] =
 		useState<string>('');
-	const [_, setParticipationStatus] = useState('');
 	const [isPastEndDate, setIsPastEndDate] = useState(false);
 
 	useEffect(() => {
@@ -100,7 +99,6 @@ function Card({ currTab, data }: CardProps) {
 
 		if (result.isConfirmed) {
 			try {
-				console.log(_id);
 				await patch(`/api/volunteers/registerations/${_id}`, {
 					statusName: selectedValue,
 				});
@@ -130,7 +128,6 @@ function Card({ currTab, data }: CardProps) {
 				if (result.isConfirmed) {
 					await post(`/api/review/users/participation/${_id}`, {});
 					setSelectedParticipationStatus(selectedValue);
-					setParticipationStatus(selectedValue);
 					window.location.reload();
 					await Swal.fire('완료된 봉사로 변경되었습니다!', 'success');
 				}
@@ -142,7 +139,7 @@ function Card({ currTab, data }: CardProps) {
 					alertData.doubleCheckMessage('봉사활동을 취소하시겠습니까?'),
 				);
 				if (result.isConfirmed) {
-					setParticipationStatus(selectedValue);
+					setSelectedParticipationStatus(selectedValue);
 					window.location.reload();
 					await Swal.fire(
 						alertData.successMessage('봉사활동이 취소되었습니다'),

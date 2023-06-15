@@ -16,7 +16,6 @@ import Swal from 'sweetalert2';
 import alertData from '@src/utils/swalObject';
 import Pagination from '@src/components/Pagination/Pagination.tsx';
 import NoData from '@components/NoData/NoData.tsx';
-import { Link } from 'react-router-dom';
 
 interface CommunityProps {
 	title: string;

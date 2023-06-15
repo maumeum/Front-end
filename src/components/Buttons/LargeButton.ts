@@ -2,9 +2,10 @@ import styled from 'styled-components';
 
 interface LargeButtonProps {
 	disabled?: boolean;
+	apply?: boolean;
 }
 const LargeButton = styled.button<LargeButtonProps>`
-	margin-top: 6rem;
+	margin-top: ${({ apply }) => (apply ? '0' : '6rem')};
 	width: 45rem;
 	height: 5.5rem;
 	background-color: ${({ disabled }) => (disabled ? '#d9eabe ' : '#afcd81')};
