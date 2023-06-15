@@ -28,10 +28,11 @@ const ReviewEdit = () => {
 	useEffect(() => {
 		const fetchPost = async () => {
 			const response = await get<DataType>(`/api/review/detail/${postId}`, {});
-			setPost(response.data.post.post);
-			setInputTitle(response.data.post.post.title);
-			setInputContent(response.data.post.post.content);
+			setPost(response.data);
+			setInputTitle(response.data.title);
+			setInputContent(response.data.content);
 		};
+
 		fetchPost();
 	}, []);
 
@@ -72,6 +73,7 @@ const ReviewEdit = () => {
 				'Content-Type': 'multipart/form-data',
 			},
 		});
+		Swal.fire(alertData.successMessage('게시글이 수정되었습니다.'));
 		navigate(`/review/${postId}`);
 	};
 
@@ -99,20 +101,20 @@ const ReviewEdit = () => {
 				</TextContainer>
 				<TextLength>{inputContent.length}/2000</TextLength>
 				<ButtonContainer>
-					<ImageArea>
-						이미지업로드
-						<input
-							id='fileInput'
-							type='file'
-							accept='image/*'
-							name='image'
-							multiple
-							onChange={handelImageChange}
-						/>
-					</ImageArea>
 					<CancelButton onClick={backPostList}>취소</CancelButton>
 					<SubmitButton onClick={editPost}>등록</SubmitButton>
 				</ButtonContainer>
+				<ImageArea>
+					이미지업로드
+					<input
+						id='fileInput'
+						type='file'
+						accept='image/*'
+						name='image'
+						multiple
+						onChange={handelImageChange}
+					/>
+				</ImageArea>
 			</Container>
 		</>
 	);

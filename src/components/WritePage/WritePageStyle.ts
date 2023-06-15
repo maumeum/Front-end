@@ -62,6 +62,7 @@ export const CancelButton = styled.button`
 	border: 0.2rem solid #888888;
 	border-radius: 1.2rem;
 	cursor: pointer;
+	font-size: 2rem;
 `;
 export const SubmitButton = styled.button`
 	width: 9rem;
@@ -70,6 +71,7 @@ export const SubmitButton = styled.button`
 	border: none;
 	border-radius: 1.2rem;
 	cursor: pointer;
+	font-size: 2rem;
 `;
 export const ImageArea = styled.label`
 	display: inline-block;

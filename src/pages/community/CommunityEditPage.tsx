@@ -75,6 +75,7 @@ const CommunityEditPage = () => {
 				'Content-Type': 'multipart/form-data',
 			},
 		});
+		Swal.fire(alertData.successMessage('게시글이 수정되었습니다.'));
 		navigate(`/community/${postId}`);
 	};
 

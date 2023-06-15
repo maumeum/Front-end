@@ -11,20 +11,15 @@ export const Title = styled.div`
 	margin-bottom: 5.9rem;
 	margin-top: 15rem;
 `;
-export const CommentArea = styled.textarea`
-	width: 105rem;
-	padding: 4rem;
-	font-size: 2rem;
-	border: none;
-	height: 6rem;
-	border-radius: 3rem;
-	background-color: ${({ theme }) => theme.colors.gray100};
-`;
+
 export const EditCommentArea = styled.textarea`
-	width: 100rem;
+	width: 95rem;
 	padding: 2rem;
 	margin-left: 2rem;
+	margin-top: 2rem;
 	font-size: 2rem;
+	resize: none;
+	white-space: pre-wrap;
 `;
 export const BtnContainer = styled.div`
 	margin-top: 4rem;
@@ -37,7 +32,7 @@ export const BtnContainer2 = styled.div`
 	margin-top: 4rem;
 	display: flex;
 	margin-left: 92rem;
-	margin-top: 2rem;
+	margin-top: 12rem;
 	gap: 1rem;
 	margin-bottom: 2rem;
 `;
@@ -84,14 +79,18 @@ export const Btn3 = styled.button`
 	border: none;
 	cursor: pointer;
 	font-size: 2rem;
+	margin-top: -13rem;
 	margin-bottom: 2rem;
 	margin-left: 10rem;
 `;
 export const CommentContainer = styled.div`
+	height: 32rem;
 	border: none;
 	border-radius: 0.7rem;
 	margin-bottom: 2rem;
 	position: relative;
+	word-wrap: break-word;
+	word-break: break-word;
 	background-color: ${({ theme }) => theme.colors.gray100};
 `;
 
@@ -112,12 +111,23 @@ export const RandomPhoto = styled.div`
 	border-radius: 50%;
 	margin-top: 4rem;
 	margin-left: 2rem;
-	background-color: red;
 	overflow: hidden;
 `;
 export const Img = styled.img`
-	width: 100%;
-	height: auto;
+	width: auto;
+	height: 100%;
+`;
+export const CommentArea = styled.textarea`
+	width: 105rem;
+	padding: 4rem;
+	font-size: 2rem;
+	border: none;
+	height: 6rem;
+	resize: none;
+	background-color: ${({ theme }) => theme.colors.gray100};
+	border-radius: 3rem;
+	white-space: 'pre-wrap;
+	
 `;
 export const UserContainer = styled.div`
 	margin: 0 0 0 2rem;
@@ -143,13 +153,15 @@ export const Date = styled.p`
 	top: 2rem;
 	right: 2rem;
 `;
+
 export const Contents = styled.p`
 	font-size: 2rem;
 	color: #475569;
-	margin-left: 4rem;
+	margin: 4rem;
 	position: absolute;
 	top: 8rem;
 	left: 10rem;
+	margin-bottom: 1rem;
 `;
 
 export const CommentHolder = styled.p`
@@ -161,7 +173,7 @@ export const BtnReport = styled.button`
 	border: none;
 	height: 5rem;
 	width: 9rem;
-	margin-top: 2rem;
+	margin-top: 1rem;
 	cursor: pointer;
 	font-size: 2rem;
 	color: #ff9c9c;

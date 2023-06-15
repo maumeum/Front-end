@@ -93,6 +93,7 @@ const QuestionDetail = () => {
 					Authorization: `Bearer ${token}`,
 				},
 			});
+			Swal.fire(alertData.successMessage('게시글이 삭제되었습니다.'));
 			navigate('/community/question');
 		} catch (error) {
 			console.log('Error delecting post:', error);
