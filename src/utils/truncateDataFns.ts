@@ -11,8 +11,8 @@ export const truncateCentName = (name: string) => {
 	if (!name) {
 		return '';
 	}
-	if (name.length > 10) {
-		return `${name.slice(0, 10)}...`;
+	if (name.length > 7) {
+		return `${name.slice(0, 5)}...`;
 	} else {
 		return name;
 	}

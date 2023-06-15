@@ -172,7 +172,12 @@ export const EmailButton = styled.button<SignUpProps>`
 `;
 
 export const DataInput = styled.input<SignUpProps>`
-	width: 45rem;
+	width: ${(props) => {
+		if (props.name === 'long') {
+			return '60rem';
+		}
+		return '45rem';
+	}};
 	height: 5.6rem;
 	padding-left: 1rem;
 	border: ${(props) => {

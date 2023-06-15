@@ -21,6 +21,7 @@ import defaultImage from '@src/assets/images/volunteer1.jpg';
 
 interface VolunteerCardProps {
 	data: VolunteerTogetherType;
+	onClick: () => void;
 }
 
 const url = import.meta.env.VITE_API_URL;
@@ -41,7 +42,7 @@ const VolunteerTogetherCard = ({ data }: VolunteerCardProps) => {
 	const thumbnail = images[0];
 
 	return (
-		<CardContainer statusName={statusName}>
+		<CardContainer statusName={statusName} onClick={onClick}>
 			<ImgBox>
 				{images.length > 0 ? (
 					<img src={`${url}/${thumbnail}`} alt={`${title} 썸네일`} />

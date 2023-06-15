@@ -105,7 +105,6 @@ function Card({ currTab, data }: CardProps) {
 					statusName: selectedValue,
 				});
 				setSelectedStatus(selectedValue);
-				window.location.reload();
 			} catch (error) {
 				await Swal.fire(
 					alertData.errorMessage('모집상태 변경에 실패하였습니다 :('),
