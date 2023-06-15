@@ -9,7 +9,7 @@ export const MenuBar = styled.div`
 	width: 10%;
 	min-width: 15.7rem;
 	border-radius: 5px;
-	margin: -30rem 0 0 10rem;
+	margin: -7rem 0 0 10rem;
 `;
 
 export const MainContainer = styled.div`
@@ -46,7 +46,7 @@ export const MiddleContainer = styled.div`
 	margin-bottom: 15rem;
 `;
 export const BigText = styled.p`
-	font-size: 6rem;
+	font-size: 5rem;
 	letter-spacing: 0.3rem;
 	color: #313739;
 `;
@@ -54,7 +54,7 @@ export const Sub = styled.div`
 	display: flex;
 	flex-direction: column;
 	p {
-		font-size: 2.5rem;
+		font-size: 2rem;
 		margin-top: -2rem;
 		letter-spacing: 0.2rem;
 	}
@@ -205,4 +205,13 @@ export const BtnReport = styled.button`
 	cursor: pointer;
 	font-size: 2rem;
 	color: #ff9c9c;
+`;
+export const SearchContainer = styled.div`
+	display: flex;
+`;
+
+export const BottomArea = styled.div`
+	margin: 0 auto;
+	margin-top: -10rem;
+	margin-left: 18rem;
 `;

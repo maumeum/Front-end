@@ -20,6 +20,12 @@ import {
 	SecondCircle,
 	ImgCircle2,
 	Image2,
+	TextContent,
+	TextBox2,
+	TextBox1,
+	TextName,
+	TextTitle,
+	LitCircle,
 } from '@src/pages/reviewPage/ReviewStyle';
 import volunteer from '@assets/images/volunteer.jpeg';
 import volunteers from '@assets/images/volunteers.jpeg';
@@ -93,10 +99,27 @@ const reviewPage = () => {
 				</MainContainer>
 				<MiddleContainer>
 					<FirstCircle></FirstCircle>
+					<TextBox1>
+						<TextTitle>유기견에게 새로운 삶을</TextTitle>
+						<TextName>김소연님</TextName>
+						<TextContent>
+							이 아이들에게 제 작은 도움의 손길이 따뜻한 행복감을 느끼게
+							해준다면 ﾠﾠ정말 보람찰 것 같아요
+						</TextContent>
+					</TextBox1>
+					<TextBox2>
+						<TextTitle>추억을 선물하고 왔어요</TextTitle>
+						<TextName>한승연님</TextName>
+						<TextContent>
+							일회성 봉사가 아닌 꾸준한 봉사로 ﾠﾠ아이들에게 새로운 추억을
+							선물하고 싶어요
+						</TextContent>
+					</TextBox2>
 					<ImgCircle>
 						<Image src={volunteer} alt='volunteer' />
 					</ImgCircle>
 					<SecondCircle></SecondCircle>
+					<LitCircle></LitCircle>
 					<ImgCircle2>
 						<Image2 src={volunteers} alt='volunteer' />
 					</ImgCircle2>
