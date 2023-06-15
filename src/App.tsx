@@ -34,7 +34,7 @@ import PrivateRoute from '@utils/PrivateRoute';
 // '같이 봉사해요' 게시판 관련:
 import VolunteerOngoing from '@pages/volunteerPage/VolunteerOngoingPage';
 import VolunteerWrite from '@src/pages/volunteerPage/VolunteerWrite';
-import VolunDetailPage from './pages/volunteerPage/VolunDetailPage';
+import VolunteerOngoingDetail from '@pages/volunteerPage/VolunteerOngoingDetail';
 
 function App() {
 	return (
@@ -44,7 +44,10 @@ function App() {
 				<Route path='/' element={<Main />} />
 				<Route path='/volunteers/ongoing' element={<VolunteerOngoing />} />
 				<Route path='/volunteers/ongoing/edit' element={<VolunteerWrite />} />
-				<Route path='/volunteers/detail' element={<VolunDetailPage />} />
+				<Route
+					path='/volunteers/ongoing/detail/:postId'
+					element={<VolunteerOngoingDetail />}
+				/>
 
 				<Route path='/community/findfriend' element={<FindFriend />} />
 				<Route path='/community/question' element={<Question />} />

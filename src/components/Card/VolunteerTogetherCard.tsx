@@ -20,9 +20,10 @@ import CardFullIcon from '@assets/icons/card_applier_is_full_icon.svg';
 
 interface VolunteerCardProps {
 	data: VolunteerTogetherType;
+	onClick: () => void;
 }
 
-const VolunteerTogetherCard = ({ data }: VolunteerCardProps) => {
+const VolunteerTogetherCard = ({ data, onClick }: VolunteerCardProps) => {
 	const {
 		title,
 		centName,
@@ -38,7 +39,7 @@ const VolunteerTogetherCard = ({ data }: VolunteerCardProps) => {
 	const thumbnail = images[0];
 
 	return (
-		<CardContainer statusName={statusName}>
+		<CardContainer statusName={statusName} onClick={onClick}>
 			<ImgBox>
 				<img src={thumbnail} alt={`${title} 썸네일`} />
 				<VolunteerBadge statusName={statusName}>
