@@ -66,6 +66,8 @@ const VolunteerOngoing = () => {
 		};
 	});
 
+	const uuid = cardListData.map((i) => i.register_user_id.uuid);
+
 	// volunteers/search/?keyword=유기견&skip=1&limit=2
 	const handleSearch = async (query: string) => {
 		const response = await get<DataType>(
@@ -81,7 +83,7 @@ const VolunteerOngoing = () => {
 	};
 
 	const navigateDetail = (postId: string) => {
-		navigate(`/volunteers/ongoing/detail/${postId}`);
+		navigate(`/volunteers/ongoing/detail/${postId}`, { state: { uuid: uuid } });
 	};
 
 	return (
