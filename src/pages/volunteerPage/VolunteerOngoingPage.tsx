@@ -81,7 +81,7 @@ const VolunteerOngoing = () => {
 	};
 
 	const navigateDetail = (postId: string) => {
-		navigate(`/volunteers/${postId}`);
+		navigate(`/volunteers/ongoing/detail/${postId}`);
 	};
 
 	return (
@@ -107,9 +107,7 @@ const VolunteerOngoing = () => {
 						<VolunteerTogetherCard
 							key={data._id + '-' + index}
 							data={data}
-							onClick={() => {
-								console.log('dd');
-							}}
+							onClick={() => navigateDetail(data._id)}
 						/>
 					))}
 				</CardBox>
