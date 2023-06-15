@@ -1,5 +1,6 @@
 import { VolunteerTogetherType } from '@src/types/cardType.ts';
 import { VolunteerTypes } from '@src/types/myPageConstants';
+import { useNavigate } from 'react-router-dom';
 import {
 	dateFormatter,
 	getCurrent,
@@ -26,10 +27,12 @@ interface VolunteerCardProps {
 const url = import.meta.env.VITE_API_URL;
 
 const VolunteerTogetherCard = ({ data }: VolunteerCardProps) => {
+	const navigate = useNavigate();
+
 	const {
 		_id,
 		title,
-		centName,
+		teamName,
 		statusName,
 		images,
 		applyCount,
@@ -42,7 +45,7 @@ const VolunteerTogetherCard = ({ data }: VolunteerCardProps) => {
 	const thumbnail = images[0];
 
 	const onClick = () => {
-		console.log('상세페이지로 이동합니다: _id');
+		console.log(`상세페이지로 이동합니다: ${_id}`);
 		navigate(`/volunteers/ongoing/detail/${_id}`);
 	};
 
@@ -73,10 +76,13 @@ const VolunteerTogetherCard = ({ data }: VolunteerCardProps) => {
 					)}
 				</Label>
 			</ImgBox>
-			<TitleInfo>{`[${centName}] ${title}`}</TitleInfo>
+			<TitleInfo>{`[${teamName}] ${title}`}</TitleInfo>
 			<InfoBox statusName={statusName}>
-				<VolunteerUserInfo> 
-					<img src={`${url}/${register_user_id.image}`} alt='작성자 프로필사진' />
+				<VolunteerUserInfo>
+					<img
+						src={`${url}/${register_user_id.image}`}
+						alt='작성자 프로필사진'
+					/>
 					<p>{register_user_id.nickname}</p>
 				</VolunteerUserInfo>
 				{statusName === VolunteerTypes.CONTINUE && (
