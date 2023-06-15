@@ -81,7 +81,7 @@ const VolunteerOngoing = () => {
 	};
 
 	const navigateDetail = (postId: string) => {
-		navigate(`/volunteers/${postId}`);
+		navigate(`/volunteers/ongoing/detail/${postId}`);
 	};
 
 	return (
@@ -104,7 +104,11 @@ const VolunteerOngoing = () => {
 						<h2>봉사 내역이 존재하지 않습니다.</h2>
 					)}
 					{transformData.map((data, index) => (
-						<VolunteerTogetherCard key={data._id + '-' + index} data={data} />
+						<VolunteerTogetherCard
+							key={data._id + '-' + index}
+							data={data}
+							onClick={() => navigateDetail(data._id)}
+						/>
 					))}
 				</CardBox>
 			</CardListContainer>
