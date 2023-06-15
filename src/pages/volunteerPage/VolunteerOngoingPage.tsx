@@ -37,7 +37,7 @@ const VolunteerOngoing = () => {
 					'/api/volunteers?skip=0&limit=1&status=true',
 					{},
 				);
-				console.log(getData.data.volunteerList);
+				console.log('list', getData.data.volunteerList);
 				setCardListData(getData.data.volunteerList as VolunteerTogetherType[]);
 			} catch (error) {
 				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
@@ -61,10 +61,13 @@ const VolunteerOngoing = () => {
 				_id: data.register_user_id._id,
 				nickname: data.register_user_id.nickname,
 				image: data.register_user_id.image,
+				uuid: data.register_user_id.uuid,
 			},
 			createdAt: data.createdAt,
 		};
 	});
+
+	const uuid = cardListData.map((i) => i.register_user_id.uuid);
 
 	// volunteers/search/?keyword=유기견&skip=1&limit=2
 	const handleSearch = async (query: string) => {
@@ -81,7 +84,7 @@ const VolunteerOngoing = () => {
 	};
 
 	const navigateDetail = (postId: string) => {
-		navigate(`/volunteers/ongoing/detail/${postId}`);
+		navigate(`/volunteers/ongoing/detail/${postId}`, { state: { uuid: uuid } });
 	};
 
 	return (
