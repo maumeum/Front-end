@@ -61,7 +61,16 @@ const ActivityIntro: React.FC<ActivityIntroProps> = ({ postId, uuid }) => {
 				)}
 
 				<ContentsContainer>
-					<Content>{formattedContent}</Content>
+					<Content>
+						{formattedContent.map((line: string, index: string) => {
+							return (
+								<span key={index}>
+									{line}
+									<br />
+								</span>
+							);
+						})}
+					</Content>
 				</ContentsContainer>
 			</Container>
 		</>
