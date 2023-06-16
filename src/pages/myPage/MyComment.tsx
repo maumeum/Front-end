@@ -93,7 +93,7 @@ function MyComment() {
 					<TabMenu>
 						<Tab currTab={currTab} onClick={handleClickTab} tabs={tabs} />
 					</TabMenu>
-					{selectedData.length === 0 && <NoData category='게시글' />}
+					{selectedData.length === 0 && <NoData category='게시' />}
 					{selectedData
 						.slice((currentPage - 1) * pageSize, currentPage * pageSize)
 						.map((data, idx) => {
