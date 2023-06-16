@@ -26,6 +26,7 @@ export const TeamTypeRadio = styled.input`
 	margin-right: 1.5rem;
 	width: 1.8rem;
 	height: 1.8rem;
+	font-weight: ${({ theme }) => theme.typography.weight.bold};
 `;
 
 export const MainContainer = styled.div``;

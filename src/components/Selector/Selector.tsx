@@ -1,12 +1,6 @@
 import React from 'react';
 import { OptionColor, SelectColor } from '@components/Selector/selector';
-
-interface SelectorProps {
-	value: string;
-	onChange: (selectedValue: string) => void;
-	options: Array<{ value: string; label: string }>;
-	disabled?: boolean;
-}
+import SelectorProps from './selectorProps';
 
 function Selector({ value, onChange, options, disabled }: SelectorProps) {
 	const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

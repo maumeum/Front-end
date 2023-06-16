@@ -105,8 +105,8 @@ export const ImageArea = styled.label`
 	display: inline-block;
 	padding: 8px 16px;
 	text-align: center;
-	background-color: var(--color--footer);
-	color: white;
+	background-color: ${({ theme }) => theme.colors.pink200};
+	color: ${({ theme }) => theme.colors.text};
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;

@@ -14,12 +14,16 @@ export const CategoryContainer = styled.div`
 `;
 export const LayoutContainer = styled.div`
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 3rem;
 `;
 
 export const LayoutChildContainer = styled.div`
 	display: flex;
 	flex-direction: column;
+	width: 150rem;
+	height: 20rem;
 `;
 
 export const TitleInput = styled.input`
