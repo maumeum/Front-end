@@ -24,7 +24,6 @@ import alertData from '@src/utils/swalObject.ts';
 import defaultImage from '@src/assets/images/volunteer1.jpg';
 import { VolunteerTypes } from '@src/types/myPageConstants.ts';
 import check from '@assets/icons/authentication.svg';
-import { StyledLink } from '@components/MyPage/myPage.ts';
 import { useNavigate } from 'react-router-dom';
 
 interface RegisterUserId {

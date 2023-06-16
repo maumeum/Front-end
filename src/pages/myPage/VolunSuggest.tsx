@@ -104,7 +104,7 @@ function VolunSuggest() {
 					<CardBox>
 						{transformData
 							.slice((currentPage - 1) * pageSize, currentPage * pageSize)
-							.map((data, index) => (
+							.map((data) => (
 								<Card
 									key={data.volunteer_id._id}
 									data={data}
