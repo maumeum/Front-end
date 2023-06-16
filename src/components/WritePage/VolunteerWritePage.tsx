@@ -18,10 +18,11 @@ import {
 	LayoutChildContainer,
 } from '@components/WritePage/WritePageStyle';
 import VolunteerCalendar from '@components/Calendar/VolunteerCalendar';
-import Selector from '@components/Selector/Selector.tsx';
+import LargeSelector from '@components/Selector/LargeSelector.tsx';
 import actTypes from '@src/types/actTypeConstants';
 import { Title, TeamType, TeamTypeRadio } from '@pages/myPage/style';
 import TeamInfo from '@src/types/writerUserTeamType.ts';
+import { useNavigate } from 'react-router-dom';
 
 interface VolunteerWritePageProps extends Omit<WritePageProps, 'onSave'> {
 	onSave: (
@@ -38,6 +39,7 @@ interface VolunteerWritePageProps extends Omit<WritePageProps, 'onSave'> {
 }
 
 const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
+	const navigate = useNavigate();
 	const [content, setContent] = useState('');
 	const [inputTitle, setInputTitle] = useState('');
 	const [selectedActType, setSelectedActType] = useState('');
@@ -48,10 +50,6 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 	const [endDate, setEndDate] = useState<Date>(new Date());
 	const [centName, setCentName] = useState<string>('');
 
-	// 만약 StartDate가 deadline보다 작다면 유저에게 경고창을 띄고, 다시 작성하게 한다.
-	// 인증된 유저만 봉사활동 글 등록할 수 있도록 로직 추가했읍니다!!!!!!!!!!!!!!
-	// user 필드에서 authorization이 true인 경우만 글 작성됩니다 아니면 에러를 띄워줍니다요.
-
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -61,8 +59,11 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 				setCentName(teamName);
 			} catch (error) {
 				Swal.fire(
-					alertData.errorMessage('데이터를 가져오는데 실패하였습니다.'),
+					alertData.errorMessage(
+						'단체 인증이 완료된 유저만 글을 작성할 수 있습니다.',
+					),
 				);
+				navigate('/volunteers/ongoing');
 			}
 		};
 
@@ -100,7 +101,6 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 
 	const handleInputCategory = (selectedValue: string) => {
 		setSelectedActType(selectedValue);
-		console.log(`selectedValue가 ${selectedValue}로 변경됨!`);
 	};
 
 	const handleInputRegisterCount = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -136,9 +136,10 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 				<div>
 					<Title>제목</Title>
 					<TitleInput
-						placeholder={`[${centName}] 팀네임 포함 40자 이하 작성`}
+						placeholder={`[${centName}]만의 특별한 활동 제목을 작성해주세요.`}
 						value={inputTitle}
 						onChange={handleInputTitle}
+						style={{ marginBottom: '0' }}
 					/>
 				</div>
 				<div>
@@ -150,7 +151,7 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 							checked={teenager}
 							onChange={handleRadioChange}
 						/>
-						가능
+						나이에 상관없이 모두 신청할 수 있어요.
 					</TeamType>
 					<TeamType>
 						<TeamTypeRadio
@@ -159,12 +160,12 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 							checked={!teenager}
 							onChange={handleRadioChange}
 						/>
-						불가능
+						성인만 신청할 수 있어요.
 					</TeamType>
 				</div>
 				<div>
 					<Title>카테고리</Title>
-					<Selector
+					<LargeSelector
 						value={selectedActType}
 						onChange={handleInputCategory}
 						options={[
@@ -185,41 +186,53 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 						placeholder='모집인원을 입력해주세요. (숫자만 입력 가능)'
 						value={inputRegisterCount}
 						onChange={handleInputRegisterCount}
+						style={{ marginBottom: '0' }}
 					/>
 				</div>
 				<LayoutContainer>
 					<LayoutChildContainer>
-						<Title>모집 마감일</Title>
+						<Title
+							style={{
+								textAlign: 'left',
+								paddingRight: '20rem',
+							}}>
+							모집 마감일
+						</Title>
 						<VolunteerCalendar
 							selectedDate={deadline}
 							setSelectedDate={setDeadline}
 						/>
 					</LayoutChildContainer>
 					<LayoutChildContainer>
-						<Title>활동 시작일</Title>
+						<Title style={{ textAlign: 'left', paddingRight: '20rem' }}>
+							활동 시작일
+						</Title>
 						<VolunteerCalendar
 							selectedDate={startDate}
 							setSelectedDate={setStartDate}
 						/>
 					</LayoutChildContainer>
 					<LayoutChildContainer>
-						<Title>활동 종료일</Title>
+						<Title style={{ textAlign: 'left', paddingRight: '20rem' }}>
+							활동 종료일
+						</Title>
 						<VolunteerCalendar
 							selectedDate={endDate}
 							setSelectedDate={setEndDate}
 						/>
 					</LayoutChildContainer>
 				</LayoutContainer>
-				<TextContainer>
+				<TextContainer style={{ marginTop: '2rem' }}>
 					<ContentInput
-						placeholder='봉사활동 주제와 일정을 포함하여 내용을 작성해주세요. 썸네일을 올려서 활동을 소개해보세요.'
+						placeholder='봉사활동 주제와 일정을 포함하여 내용을 작성해주세요.&#13;&#10;썸네일을 올려서 활동을 나타내는 대표 이미지를 등록해보세요.'
 						value={content}
 						onChange={handelInputContent}
 						maxLength={2000}
+						style={{ height: '65rem' }}
 					/>
 				</TextContainer>
 				<TextLength>{content.length}/2000</TextLength>
-				<ButtonContainer>
+				<ButtonContainer style={{ position: 'relative', bottom: '6.3rem' }}>
 					<CancelButton onClick={deleteContent}>취소</CancelButton>
 					<SubmitButton onClick={onClickHandler}>등록</SubmitButton>
 				</ButtonContainer>

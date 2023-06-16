@@ -20,7 +20,7 @@ import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
 import throttle from '@utils/throttle.ts';
 
-const VolunteerOngoing = () => {
+const VolunteerClose = () => {
 	const navigate = useNavigate();
 	const [cardList, setCardList] = useState<VolunteerTogetherType[]>([]);
 	const [isLoad, setLoad] = useState<boolean>(false);
@@ -29,10 +29,11 @@ const VolunteerOngoing = () => {
 		const fetchData = async () => {
 			try {
 				const responseData = await get<DataType>(
-					'/api/volunteers?skip=0&limit=12&status=true',
+					'/api/volunteers?skip=0&limit=12&status=false',
 					{},
 				);
 				setCardList(responseData.data.volunteerList);
+				console.log(responseData.data);
 				setLoad(responseData.data.hasMore);
 			} catch (error) {
 				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
@@ -48,27 +49,6 @@ const VolunteerOngoing = () => {
 		);
 		setCardList(response.data.searchVolunteers);
 	};
-
-	const transformData = cardList.map((data) => {
-		return {
-			_id: data._id,
-			title: data.title,
-			teamName: data.teamName,
-			statusName: data.statusName,
-			deadline: data.deadline,
-			applyCount: data.applyCount,
-			registerCount: data.registerCount,
-			images: data.images,
-			register_user_id: {
-				_id: data.register_user_id._id,
-				nickname: data.register_user_id.nickname,
-				image: data.register_user_id.image,
-				uuid: data.register_user_id.uuid,
-			},
-			createdAt: data.createdAt,
-		};
-	});
-	console.log(transformData);
 
 	// 데이터 불러오기
 	const loadMoreData = async () => {
@@ -108,10 +88,6 @@ const VolunteerOngoing = () => {
 		}
 	}, [cardList]);
 
-	const navigateWrite = () => {
-		navigate('/volunteers/ongoing/edit');
-	};
-
 	return (
 		<VolunteerPageContainer>
 			<MenuBar>
@@ -125,7 +101,6 @@ const VolunteerOngoing = () => {
 				<SearchBar onSearch={handleSearch} />
 				<NumberWriteContainer>
 					<TotalPostNumber totalPosts={cardList.length} />
-					<WriteButton toNavigate={navigateWrite} />
 				</NumberWriteContainer>
 				<VolunteerCardBox>
 					{cardList.length === 0 && <h2>봉사 내역이 존재하지 않습니다.</h2>}
@@ -142,4 +117,4 @@ const VolunteerOngoing = () => {
 	);
 };
 
-export default VolunteerOngoing;
+export default VolunteerClose;

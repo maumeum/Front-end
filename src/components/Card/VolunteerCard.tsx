@@ -12,20 +12,25 @@ import {
 
 interface VolunteerCardProps {
 	volunteerData: VolunteerType;
+	onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
 import imgData from '@assets/images/volunteer1.jpg';
 
-const VolunteerCard = ({ volunteerData }: VolunteerCardProps) => {
+const VolunteerCard = ({ volunteerData, onClick }: VolunteerCardProps) => {
 	return (
-		<VolunteerSection>
+		<VolunteerSection onClick={onClick}>
 			<VolunteerImgContainer>
 				<VolunteerImage src={imgData} />
-				<RecruitStatus>{volunteerData.statusName}</RecruitStatus>
+				<RecruitStatus className={volunteerData.statusName}>
+					{volunteerData.statusName}
+				</RecruitStatus>
 			</VolunteerImgContainer>
 			<VolunteerIntroContainer>
 				<VolunteerTitle>{volunteerData.title}</VolunteerTitle>
-				<VolunteerContent>{volunteerData.centName}</VolunteerContent>
+				<VolunteerContent>
+					{volunteerData.register_user_id.nickname}
+				</VolunteerContent>
 			</VolunteerIntroContainer>
 		</VolunteerSection>
 	);

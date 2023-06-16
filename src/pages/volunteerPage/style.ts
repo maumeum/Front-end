@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 
+// volunteer Page
+export const VolunteerCardBox = styled.div`
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-column-gap: 3rem;
+	grid-row-gap: 3rem;
+	min-width: 112rem;
+	width: 112rem;
+`;
+
 export const PageContainer = styled.div`
 	margin-bottom: 40rem;
 	margin-top: -30rem;
@@ -7,17 +17,16 @@ export const PageContainer = styled.div`
 `;
 
 export const VolunteerPageContainer = styled.div`
-	margin-bottom: 40rem;
-	margin-top: -30rem;
-	margin-left: 15rem;
-	margin-right: 15rem;
+	position: relative;
+	display: flex;
+	margin: 0;
+	padding: 0;
 `;
 
 export const CardListContainer = styled.div`
-	width: 100%;
-	margin-top: 15rem;
-	padding: 3.5rem;
-	margin-left: 5rem;
+	min-width: 112rem;
+	margin-left: 18rem;
+	margin-bottom: 12rem;
 `;
 
 export const NumberWriteContainer = styled.div`
@@ -105,8 +114,8 @@ export const ImageArea = styled.label`
 	display: inline-block;
 	padding: 8px 16px;
 	text-align: center;
-	background-color: var(--color--footer);
-	color: white;
+	background-color: ${({ theme }) => theme.colors.pink200};
+	color: ${({ theme }) => theme.colors.text};
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
