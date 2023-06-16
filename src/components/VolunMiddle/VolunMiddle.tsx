@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import CommentSection from '../Comment/Comment';
+import VolComment from '../Comment/VolComment';
 import ActivityIntro from './ActivityIntro';
 import IntroTeam from './IntroTeam';
 import {
@@ -41,7 +41,7 @@ const VolunMiddle = () => {
 					<ActivityIntro postId={postId} uuid={uuid} />
 				)}
 				{activeTab === 'introTeam' && uuid && <IntroTeam uuid={uuid} />}
-				{activeTab === 'comment' && <CommentSection postId={postId} />}
+				{activeTab === 'comment' && <VolComment postId={postId} />}
 			</Container>
 		</>
 	);
