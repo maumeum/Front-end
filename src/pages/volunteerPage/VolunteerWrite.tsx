@@ -90,9 +90,6 @@ const VolunteerWrite = () => {
 			for (let i = 0; i < selectedImage.length; i++) {
 				formData.append('images', selectedImage[i]);
 			}
-			for (const [key, value] of formData.entries()) {
-				console.log(`${key}: ${value}`);
-			}
 			await post('/api/volunteers', formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
@@ -120,7 +117,6 @@ const VolunteerWrite = () => {
 			endDate: new Date(),
 			teamName: '',
 		});
-		console.log('Cancelled Post');
 		navigate('/volunteers/ongoing');
 	};
 
