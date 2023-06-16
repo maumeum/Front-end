@@ -11,7 +11,7 @@ export interface CardProps {
 export const CardContainer = styled.div<CardProps>`
 	display: flex;
 	flex-direction: column;
-	width: calc(100% - 0.1rem);
+	width: 100%;
 	min-height: 42.9rem;
 	border-radius: ${({ theme }) => theme.radius.s2};
 	cursor: pointer;
@@ -21,6 +21,7 @@ export const CardContainer = styled.div<CardProps>`
 
 export const ImgBox = styled.div`
 	position: relative;
+	overflow: hidden;
 	img {
 		width: 100%;
 		height: 26.5rem;
@@ -324,7 +325,8 @@ export const VolunteerImage = styled.img`
 export const RecruitStatus = styled.div`
 	width: 25%;
 	text-align: center;
-	background-color: #202020;
+	background-color: ${(props) =>
+		props.className === '모집중' ? '#202020' : '#FF5A72'};
 	color: #ffffff;
 	font-size: 1.2rem;
 	border: none;
@@ -335,16 +337,19 @@ export const VolunteerIntroContainer = styled.div`
 	margin: 1.5rem;
 `;
 
-export const VolunteerTitle = styled.h2`
+export const VolunteerTitle = styled.div`
 	margin-bottom: 1.5rem;
 	font-size: 1.7rem;
 	font-weight: 800;
+	min-height: 5rem;
 `;
 
 export const VolunteerContent = styled.p`
 	margin-top: 0;
 	font-size: 1.3rem;
+	color: ${({ theme }) => theme.colors.gray600};
 `;
+
 // team card
 
 export const TeamCardSection = styled.div`
@@ -428,7 +433,10 @@ export const VolunteerBadge = styled(Badge)`
 			statusName === VolunteerTypes.DISCONTINUE) &&
 		css`
 			background: ${hexToRgba('#202020', 0.8)};
-		`}
+		`};
+
+	white-space: pre-line;
+	line-height: 1;
 `;
 
 export const Label = styled.div`
@@ -459,7 +467,7 @@ export const Label = styled.div`
 `;
 
 export const TitleInfo = styled.h2`
-	font-size: ${({ theme }) => theme.typography.size.subtitle};
+	font-size: 2.4rem;
 	line-height: 120%;
 	margin-top: 2rem;
 	margin-bottom: 2rem;

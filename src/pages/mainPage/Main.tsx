@@ -139,7 +139,13 @@ const Main = () => {
 					<VolunteerContainer>
 						{volunteerList &&
 							volunteerList.map((item) => (
-								<VolunteerCard key={item._id} volunteerData={item} />
+								<VolunteerCard
+									key={item._id}
+									volunteerData={item}
+									onClick={() =>
+										navigate(`/volunteers/ongoing/detail/${item._id}`)
+									}
+								/>
 							))}
 					</VolunteerContainer>
 				</>
