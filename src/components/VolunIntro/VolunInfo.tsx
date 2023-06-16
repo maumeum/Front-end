@@ -77,12 +77,14 @@ function VolunInfo() {
 		}
 	};
 
+	const apiURL = import.meta.env.VITE_API_URL;
+
 	return (
 		<>
 			<div>
 				<IntroContainer>
 					<ImgContainer>
-						<img src={image} alt='팀소개사진' />
+						<img src={`${apiURL}/${image}`} alt='팀대표이미지' />
 						<Badge>{statusName}</Badge>
 					</ImgContainer>
 					<TeamInfo>

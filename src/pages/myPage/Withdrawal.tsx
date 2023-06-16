@@ -52,7 +52,6 @@ function Withdrawal() {
 			try {
 				await del('/api/users', { data: { email: email, password: password } });
 			} catch (error) {
-				console.log(error);
 				Swal.fire(
 					alertData.infoMessage('이메일 또는 비밀번호를 확인해주세요.'),
 				);
