@@ -313,6 +313,8 @@ export const VolunteerSection = styled.div`
 `;
 
 export const VolunteerImgContainer = styled.div`
+	display: flex;
+	flex-direction: column;
 	margin-bottom: 0;
 `;
 
@@ -320,7 +322,7 @@ export const VolunteerImage = styled.img`
 	width: 100%;
 	aspect-ratio: 4/3;
 	border: none;
-	border-radius: 12px;
+	border-radius: 12px 12px 0 0;
 `;
 
 export const RecruitStatus = styled.div`
@@ -331,7 +333,7 @@ export const RecruitStatus = styled.div`
 	color: #ffffff;
 	font-size: 1.2rem;
 	border: none;
-	border-radius: 0 4px 4px 4px;
+	border-radius: 0 0 4px 4px;
 `;
 
 export const VolunteerIntroContainer = styled.div`

@@ -17,11 +17,15 @@ interface VolunteerCardProps {
 
 import imgData from '@assets/images/volunteer1.jpg';
 
+const apiURL = import.meta.env.VITE_API_URL;
+
 const VolunteerCard = ({ volunteerData, onClick }: VolunteerCardProps) => {
+	const volunteerImg = `${apiURL}/${volunteerData.images[0]}`;
+
 	return (
 		<VolunteerSection onClick={onClick}>
 			<VolunteerImgContainer>
-				<VolunteerImage src={imgData} />
+				<VolunteerImage src={volunteerImg ? volunteerImg : imgData} />
 				<RecruitStatus className={volunteerData.statusName}>
 					{volunteerData.statusName}
 				</RecruitStatus>
