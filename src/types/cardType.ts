@@ -33,7 +33,9 @@ export interface VolunteerType {
 	_id: string;
 	title: string;
 	content?: string;
-	centName?: string;
+	register_user_id: {
+		nickname: string;
+	};
 	statusName: string;
 	deadline: string;
 	applyCount: number;

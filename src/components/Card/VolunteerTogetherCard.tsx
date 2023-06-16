@@ -21,12 +21,12 @@ import CardFullIcon from '@assets/icons/card_applier_is_full_icon.svg';
 import defaultImage from '@src/assets/images/volunteer1.jpg';
 
 interface VolunteerCardProps {
-	data: VolunteerTogetherType;
+	volunteerData: VolunteerTogetherType;
 }
 
 const url = import.meta.env.VITE_API_URL;
 
-const VolunteerTogetherCard = ({ data }: VolunteerCardProps) => {
+const VolunteerTogetherCard = ({ volunteerData }: VolunteerCardProps) => {
 	const navigate = useNavigate();
 
 	const {
@@ -38,27 +38,34 @@ const VolunteerTogetherCard = ({ data }: VolunteerCardProps) => {
 		applyCount,
 		register_user_id,
 		deadline,
-	} = data;
+	} = volunteerData;
 	const currentDate = getCurrent();
 	const deadlineDate = dateFormatter(deadline, 'YYYY-MM-DD');
 	const remainingDays = remainingDaysCalculator(currentDate, deadlineDate);
 	const thumbnail = images[0];
-
+	const shortTitle = title.length > 13 ? `${title.slice(0, 13)}...` : title;
 	const onClick = () => {
-		console.log(`상세페이지로 이동합니다: ${_id}`);
-		navigate(`/volunteers/ongoing/detail/${_id}`);
+		if (statusName === '모집중') {
+			navigate(`/volunteers/ongoing/detail/${_id}`);
+		} else {
+			navigate(`/volunteers/close/detail/${_id}`);
+		}
 	};
 
 	return (
 		<CardContainer statusName={statusName} onClick={onClick}>
 			<ImgBox>
 				{images.length > 0 ? (
-					<img src={`${url}/${thumbnail}`} alt={`${title} 썸네일`} />
+					<img src={`${url}/${thumbnail}`} alt='Logo' />
 				) : (
 					<img src={defaultImage} alt={'게시글 기본이미지'} />
 				)}
 				<VolunteerBadge statusName={statusName}>
-					<p>{statusName}</p>
+					<p>
+						{statusName.length === 4
+							? `${statusName.slice(0, 2)}\n${statusName.slice(2)}`
+							: statusName}
+					</p>
 				</VolunteerBadge>
 				<Label>
 					{statusName === VolunteerTypes.CONTINUE && (
@@ -76,7 +83,7 @@ const VolunteerTogetherCard = ({ data }: VolunteerCardProps) => {
 					)}
 				</Label>
 			</ImgBox>
-			<TitleInfo>{`[${teamName}] ${title}`}</TitleInfo>
+			<TitleInfo>{`[${teamName}] ${shortTitle}`}</TitleInfo>
 			<InfoBox statusName={statusName}>
 				<VolunteerUserInfo>
 					<img

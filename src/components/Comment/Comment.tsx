@@ -39,6 +39,7 @@ const apiURL = import.meta.env.VITE_API_URL;
 type CommentProps = {
 	postId: string;
 };
+
 type UserType = {
 	uuid: string;
 };
@@ -65,7 +66,6 @@ const CommentSection: React.FC<CommentProps> = ({ postId }) => {
 			{},
 		);
 		setValue(response.data.postCommentList);
-		console.log('여기', response.data.postCommentList);
 	};
 
 	const loadMoreData = async () => {
