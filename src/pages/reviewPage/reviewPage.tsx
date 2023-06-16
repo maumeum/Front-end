@@ -38,6 +38,7 @@ const reviewPage = () => {
 	const navigate = useNavigate();
 	const [postListData, setPostListData] = useState<PostData[]>([]);
 	const [isLoad, setLoad] = useState<boolean>(false);
+	const [query, setQuery] = useState<string>('');
 
 	useEffect(() => {
 		const fetchPostList = async () => {
@@ -49,14 +50,16 @@ const reviewPage = () => {
 
 	const loadMoreData = async () => {
 		try {
-			if (!isLoad) {
-				const response = await get<DataType>(
-					`/api/review?skip=${postListData.length}&limit=10`,
-					{},
-				);
-				const newPostListData = response.data.reviews;
-				setPostListData((prevData) => [...prevData, ...newPostListData]);
-				setLoad(response.data.hasMore);
+			if (query === '') {
+				if (!isLoad) {
+					const response = await get<DataType>(
+						`/api/review?skip=${postListData.length}&limit=10`,
+						{},
+					);
+					const newPostListData = response.data.reviews;
+					setPostListData((prevData) => [...prevData, ...newPostListData]);
+					setLoad(response.data.hasMore);
+				}
 			}
 		} catch (error) {
 			console.error('Error loading more data:', error);
@@ -84,6 +87,7 @@ const reviewPage = () => {
 	const handleSearch = async (query: string) => {
 		const response = await get<DataType>(`/api/review/search?keyword=${query}`);
 		setPostListData(response.data);
+		setQuery(query);
 	};
 
 	return (
