@@ -5,21 +5,13 @@ import { patch, del } from '@api/api';
 import useAuthStore from '@src/store/useAuthStore';
 import alertData from '@utils/swalObject';
 import {
-	PostContainer,
-	PostListContainer,
-	PostTitle,
 	PostBox,
 	PostContents,
 	PostButtons,
 	AcceptButtons,
-	PostListLine,
 } from './PostListStyle';
 
-import {
-	Title,
-	Description,
-	PostBox as PostBoxStyle,
-} from '@components/MyPost/myPost';
+import { Title, PostBox as PostBoxStyle } from '@components/MyPost/myPost';
 
 type PostListProps = {
 	postTitle: string;

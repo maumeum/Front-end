@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface PostProps {
-	isCommunity: boolean;
+	isCommunity?: boolean;
 }
 
 export const PostListContainer = styled.div`

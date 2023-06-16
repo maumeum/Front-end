@@ -15,7 +15,6 @@ import {
 
 const VolunMiddle = () => {
 	const { postId } = useParams() as { postId: string };
-	const location = useLocation();
 	const [activeTab, setActiveTab] = useState('activityIntro');
 	const [uuid, setUuid] = useState<string>('');
 	const { uuidData } = useUUIDStore();
