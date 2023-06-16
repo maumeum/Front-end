@@ -37,6 +37,7 @@ const VolunteerOngoing = () => {
 	const [cardList, setCardList] = useState<VolunteerTogetherType[]>([]);
 	const [isLoad, setLoad] = useState<boolean>(false);
 	const [activeTab, setActiveTab] = useState('activeOn');
+	const [isAuthorizaion, isSetAuthorizaion] = useState<boolean>(false);
 
 	const handleTabChange = (tabName: string) => {
 		setActiveTab(tabName);
@@ -54,6 +55,19 @@ const VolunteerOngoing = () => {
 				window.scrollTo(0, 0);
 			} catch (error) {
 				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
+			}
+		};
+		fetchData();
+	}, []);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await get<DataType>('/api/users/info');
+				isSetAuthorizaion(response.data.authorizaion);
+				console.log(response.data.authorizaion);
+			} catch (error) {
+				console.log(error);
 			}
 		};
 		fetchData();
@@ -106,20 +120,19 @@ const VolunteerOngoing = () => {
 		}
 	}, [cardList]);
 
-	const navigateWrite = () => {
+	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				await get<DataType>('/api/users/teamAuth', {});
+				const response = await get<DataType>('/api/users/info');
+				isSetAuthorizaion(response.data.authorization);
 			} catch (error) {
-				Swal.fire(
-					alertData.errorMessage(
-						'단체 인증이 완료된 유저만 글을 작성할 수 있습니다.',
-					),
-				);
-				navigate('/volunteers/ongoing');
+				console.log(error);
 			}
 		};
 		fetchData();
+	}, []);
+
+	const navigateWrite = () => {
 		navigate('/volunteers/ongoing/edit');
 	};
 
@@ -149,7 +162,7 @@ const VolunteerOngoing = () => {
 					</BtnContainer>
 					<SearchBar onSearch={handleSearch} />
 					<NumberWriteContainer>
-						<WriteButton toNavigate={navigateWrite} />
+						{isAuthorizaion && <WriteButton toNavigate={navigateWrite} />}
 					</NumberWriteContainer>
 				</SearchContainer>
 				<CardListContainer>
