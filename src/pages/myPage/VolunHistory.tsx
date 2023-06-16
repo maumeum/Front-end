@@ -90,8 +90,6 @@ function MyVolunHistory() {
 			: setVolunData(completedData);
 	}, [currTab, appliedData, completedData]);
 
-	console.log(volunData);
-
 	return (
 		<>
 			<Container>
