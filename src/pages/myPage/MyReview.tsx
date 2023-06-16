@@ -74,15 +74,15 @@ function MyReview() {
 							/>
 						);
 					})}
-					{userReviewData.length > 0 && (
-						<Pagination
-							currentPage={currentPage}
-							totalPages={Math.ceil(userReviewData.length / pageSize)}
-							handlePageChange={handlePageChange}
-						/>
-					)}
 				</Main>
 			</Container>
+			{userReviewData.length > 0 && (
+				<Pagination
+					currentPage={currentPage}
+					totalPages={Math.ceil(userReviewData.length / pageSize)}
+					handlePageChange={handlePageChange}
+				/>
+			)}
 		</>
 	);
 }
