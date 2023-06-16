@@ -102,7 +102,7 @@ function MyVolunHistory() {
 					</TabMenu>
 					{volunData.length === 0 && <NoData category='봉사' />}
 					<CardBox>
-						{volunData.map((data, index) => (
+						{volunData.slice((currentPage - 1) * pageSize, currentPage * pageSize).map((data, index) => (
 							<Card
 								key={data.volunteer_id._id + '-' + index}
 								currTab={currTab}
