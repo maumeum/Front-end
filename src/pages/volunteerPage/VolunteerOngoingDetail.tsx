@@ -4,7 +4,6 @@ import VolunInfo from '@components/VolunIntro/VolunInfo.tsx';
 const VolunDetailPage = () => {
 	return (
 		<>
-			<div>VolunDetailPage</div>;
 			<VolunInfo />
 			<VolunMiddle />
 		</>

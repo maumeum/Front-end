@@ -8,8 +8,8 @@ export const Container = styled.div`
 export const Title = styled.div`
 	display: flex;
 	align-items: center;
-	margin-bottom: 5.9rem;
-	margin-top: 15rem;
+	margin-bottom: 2rem;
+	margin-top: 5rem;
 `;
 
 export const EditCommentArea = styled.textarea`
@@ -40,6 +40,7 @@ export const CommentLength = styled.p`
 	font-size: 2rem;
 	display: block;
 	margin: 1rem 2rem 0 106rem;
+	color: ${({ theme }) => theme.colors.gray400};
 `;
 export const Box = styled.div`
 	width: 0.8rem;
@@ -55,27 +56,29 @@ export const Btn1 = styled.button`
 	background-color: #aacb73;
 	width: 9rem;
 	height: 4.4rem;
-	border-radius: 2.2rem;
+	border-radius: 10%;
 	border: none;
 	cursor: pointer;
 	font-size: 2rem;
 	margin-bottom: 2rem;
+	color: #ffffff;
 `;
 export const Btn2 = styled.button`
 	background-color: #ffd4d4;
 	width: 9rem;
 	height: 4.4rem;
-	border-radius: 2.2rem;
+	border-radius: 10%;
 	border: none;
 	cursor: pointer;
 	font-size: 2rem;
 	margin-bottom: 2rem;
+	color: #ffffff;
 `;
 export const Btn3 = styled.button`
 	background-color: #ffd4d4;
 	width: 9rem;
 	height: 4.4rem;
-	border-radius: 2.2rem;
+	border-radius: 10%;
 	border: none;
 	cursor: pointer;
 	font-size: 2rem;
@@ -166,6 +169,7 @@ export const Contents = styled.p`
 
 export const CommentHolder = styled.p`
 	font-size: 2rem;
+	color: ${({ theme }) => theme.colors.gray400};
 `;
 export const BtnReport = styled.button`
 	background-color: inherit;

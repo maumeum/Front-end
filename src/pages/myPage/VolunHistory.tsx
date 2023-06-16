@@ -16,7 +16,6 @@ import DataType from '@src/types/dataType';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
 import NoData from '@components/NoData/NoData.tsx';
-import { StyledLink } from '@components/MyPage/myPage.ts';
 
 interface VolunProps {
 	createdAt: string;
@@ -106,15 +105,11 @@ function MyVolunHistory() {
 					{volunData.length === 0 && <NoData category='봉사' />}
 					<CardBox>
 						{volunData.map((data, index) => (
-							<StyledLink
-								to={`/volunteers/ongoing/detail/${data.volunteer_id._id}+link`}
-								key={data.volunteer_id._id + '-' + index + 'link'}>
-								<Card
-									key={data.volunteer_id._id + '-' + index}
-									currTab={currTab}
-									data={data}
-								/>
-							</StyledLink>
+							<Card
+								key={data.volunteer_id._id + '-' + index}
+								currTab={currTab}
+								data={data}
+							/>
 						))}
 					</CardBox>
 				</Main>

@@ -94,8 +94,8 @@ export const ReviewPageContainer = styled.div`
 export const DetailContainer = styled.div`
 	margin: 0 auto;
 	margin-top: 15rem;
-	min-height: 80rem;
-	margin-bottom: 30rem;
+	min-height: 60rem;
+	width: 80%;
 `;
 export const Header = styled.header`
 	margin: 0 auto;
@@ -114,7 +114,7 @@ export const NameBox = styled.div`
 	display: flex;
 `;
 export const UserName = styled.p`
-	font-size: 2.4rem;
+	font-size: 2rem;
 	margin-right: 1rem;
 `;
 export const NanoId = styled.p`
@@ -125,32 +125,34 @@ export const NanoId = styled.p`
 
 export const Date = styled.p`
 	color: #989898;
-	font-size: 2rem;
+	font-size: 1%.6;
 `;
 export const Btn = styled.button`
 	background-color: #aacb73;
-	border-radius: 3.3rem;
+	border-radius: 10%;
 	border: none;
-	height: 6.6rem;
-	width: 13rem;
+	height: 5rem;
+	width: 10rem;
 	margin-top: 2rem;
 	cursor: pointer;
-	margin-left: 50rem;
+	margin-left: 60rem;
 	font-size: 2rem;
+	color: #ffffff;
 `;
 export const BtnDelete = styled.button`
 	background-color: #ffd4d4;
-	border-radius: 3.3rem;
+	border-radius: 10%;
 	border: none;
-	height: 6.6rem;
-	width: 13rem;
+	height: 5rem;
+	width: 10rem;
 	margin-top: 2rem;
 	cursor: pointer;
 	font-size: 2rem;
+	color: #ffffff;
 `;
 export const Line = styled.hr`
 	width: 112rem;
-	border: 1px solid #989898;
+	border: 1px solid #afcd81;
 `;
 export const ContentContainer = styled.div`
 	width: 112rem;
@@ -161,13 +163,11 @@ export const Image = styled.img`
 	max-width: 100%;
 	height: auto;
 `;
-export const Contentdiv = styled.div`
-	margin-top: 10rem;
-	margin-bottom: 20rem;
-`;
+
 export const Content = styled.div`
-	font-size: 2.4rem;
+	font-size: 2rem;
 	line-height: 5rem;
+	border-radius: 0.7rem;
 `;
 export const Container = styled.div`
 	display: block;
