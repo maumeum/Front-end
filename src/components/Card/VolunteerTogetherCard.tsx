@@ -23,17 +23,15 @@ import defaultImage from '@src/assets/images/volunteer1.jpg';
 
 interface VolunteerCardProps {
 	volunteerData: VolunteerTogetherType;
-	uuid: string;
 }
 
 const url = import.meta.env.VITE_API_URL;
 
-const VolunteerTogetherCard = ({ volunteerData, uuid }: VolunteerCardProps) => {
+const VolunteerTogetherCard = ({ volunteerData }: VolunteerCardProps) => {
 	const navigate = useNavigate();
-
 	// uuid 저장
 	localStorage.removeItem('uuid');
-	localStorage.setItem('uuid', uuid);
+	localStorage.setItem('uuid', volunteerData.register_user_id.uuid);
 
 	const {
 		_id,

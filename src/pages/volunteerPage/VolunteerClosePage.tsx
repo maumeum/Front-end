@@ -81,7 +81,6 @@ const VolunteerClose = () => {
 							<VolunteerTogetherCard
 								key={data._id + '-' + index}
 								volunteerData={data}
-								uuid={data.register_user_id.uuid}
 							/>
 						))}
 				</VolunteerCardBox>

@@ -263,6 +263,7 @@ export const ImageContainer = styled.div`
 `;
 
 export const ReviewImage = styled.img`
+	width: 100%;
 	height: 100%;
 	border: none;
 	transform: translateX(-1.5rem);
@@ -314,8 +315,6 @@ export const VolunteerSection = styled.div`
 
 export const VolunteerImgContainer = styled.div`
 	width: 100%;
-	aspect-ratio: 4/3;
-	overflow: hidden;
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 0;
@@ -323,6 +322,7 @@ export const VolunteerImgContainer = styled.div`
 
 export const VolunteerImage = styled.img`
 	width: 100%;
+	aspect-ratio: 4/3;
 	border: none;
 	border-radius: 12px 12px 0 0;
 `;
