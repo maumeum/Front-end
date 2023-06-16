@@ -1,15 +1,9 @@
 import { useEffect, useState } from 'react';
-import TopBar from '@components/TopBar/TopBar.tsx';
-import SearchBar from '@components/SearchBar/SearchBar.tsx';
-import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
 import {
 	VolunteerCardBox,
-	NumberWriteContainer,
 	VolunteerPageContainer,
 	CardListContainer,
 } from './style.ts';
-import Menu from '@components/Menu/Menu.tsx';
-import { MenuBar } from '@components/MyPage/myPage.ts';
 import VolunteerTogetherCard from '@src/components/Card/VolunteerTogetherCard.tsx';
 import { VolunteerType, VolunteerTogetherType } from '@src/types/cardType.ts';
 import { get } from '@api/api';
@@ -38,14 +32,6 @@ const VolunteerClose = () => {
 		};
 		fetchData();
 	}, []);
-
-	// 검색 데이터 불러오기
-	const handleSearch = async (query: string) => {
-		const response = await get<DataType>(
-			`/api/volunteers/search?keyword=${query}&skip=$0&limit=8`,
-		);
-		setCardList(response.data.searchVolunteers);
-	};
 
 	// 데이터 불러오기
 	const loadMoreData = async () => {
@@ -87,18 +73,7 @@ const VolunteerClose = () => {
 
 	return (
 		<VolunteerPageContainer>
-			<MenuBar>
-				<Menu title={'같이봉사해요'} />
-			</MenuBar>
 			<CardListContainer>
-				<TopBar
-					title='모집 중인 활동'
-					text='인증받은 단체에서 함께 봉사활동을 해요.'
-				/>
-				<SearchBar onSearch={handleSearch} />
-				<NumberWriteContainer>
-					<TotalPostNumber totalPosts={cardList.length} />
-				</NumberWriteContainer>
 				<VolunteerCardBox>
 					{cardList.length === 0 && <h2>봉사 내역이 존재하지 않습니다.</h2>}
 					{cardList &&

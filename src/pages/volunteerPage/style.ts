@@ -71,18 +71,7 @@ export const MainContainer = styled.div`
 	background-color: ${({ theme }) => theme.colors.green100};
 `;
 export const SearchContainer = styled.div`
-	margin: 0 auto;
-	position: relative;
-`;
-
-export const MenuBar = styled.div`
-	width: 10%;
-	min-width: 15.7rem;
-	border-radius: 5px;
-	margin: -7rem 0 0 10rem;
-	position: absolute;
-	top: 3rem;
-	left: 0.5rem;
+	margin-left: 56rem;
 `;
 
 export const CardListContainer = styled.div`
@@ -98,6 +87,7 @@ export const NumberWriteContainer = styled.div`
 	align-items: center;
 	width: 112rem;
 	margin: 5.8rem auto;
+	margin-left: 1rem;
 `;
 export const ReviewPageContainer = styled.div`
 	margin-bottom: 40rem;
@@ -128,6 +118,39 @@ export const UserName = styled.p`
 export const Date = styled.p`
 	color: #989898;
 	font-size: 2rem;
+`;
+export const BtnContainer = styled.div`
+	display: flex;
+`;
+export const TabBtn1 = styled.button`
+	background-color: ${({ theme }) => theme.colors.pink100};
+	border: none;
+	margin-right: 2rem;
+	margin-bottom: -4rem;
+	margin-top: 3rem;
+	cursor: pointer;
+	height: 7rem;
+	width: 14rem;
+	border-radius: 3rem;
+	font-size: 2rem;
+	:hover {
+		background-color: ${({ theme }) => theme.colors.pink300};
+	}
+`;
+export const TabBtn2 = styled.button`
+	background-color: ${({ theme }) => theme.colors.green100};
+	border: none;
+	margin-right: 2rem;
+	margin-bottom: -4rem;
+	margin-top: 3rem;
+	cursor: pointer;
+	height: 7rem;
+	width: 14rem;
+	border-radius: 3rem;
+	font-size: 2rem;
+	:hover {
+		background-color: ${({ theme }) => theme.colors.green300};
+	}
 `;
 export const Btn = styled.button`
 	background-color: #aacb73;

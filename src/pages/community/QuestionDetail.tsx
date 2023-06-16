@@ -15,7 +15,6 @@ import {
 	Line,
 	ContentContainer,
 	Image,
-	Contentdiv,
 	Content,
 	BtnReport,
 	BtnDelete,
@@ -162,13 +161,13 @@ const QuestionDetail = () => {
 							))}
 						</div>
 					)}
-					<Contentdiv>
+					<div>
 						<Content>
 							{formattedContent.map((item: string, index: number) => (
 								<p key={index}>{item}</p>
 							))}
 						</Content>
-					</Contentdiv>
+					</div>
 				</ContentContainer>
 			</DetailContainer>
 			<CommentSection postId={postId} />
