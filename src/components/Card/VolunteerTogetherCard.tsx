@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import useUUIDStore from '@src/store/useUuidStore';
 import { VolunteerTogetherType } from '@src/types/cardType.ts';
 import { VolunteerTypes } from '@src/types/myPageConstants';
-import { useNavigate } from 'react-router-dom';
 import {
 	dateFormatter,
 	getCurrent,
@@ -22,12 +25,20 @@ import defaultImage from '@src/assets/images/volunteer1.jpg';
 
 interface VolunteerCardProps {
 	volunteerData: VolunteerTogetherType;
+	uuid?: string;
 }
 
 const url = import.meta.env.VITE_API_URL;
 
-const VolunteerTogetherCard = ({ volunteerData }: VolunteerCardProps) => {
+const VolunteerTogetherCard = ({ volunteerData, uuid }: VolunteerCardProps) => {
 	const navigate = useNavigate();
+	const { setUUID } = useUUIDStore();
+
+	useEffect(() => {
+		if (uuid) {
+			setUUID(uuid);
+		}
+	}, [uuid]);
 
 	const {
 		_id,

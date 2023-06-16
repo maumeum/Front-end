@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import TopBar from '@components/TopBar/TopBar.tsx';
 import SearchBar from '@components/SearchBar/SearchBar.tsx';
 import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
-import WriteButton from '@components/Buttons/WriteButton/WriteButton.tsx';
 import {
 	VolunteerCardBox,
 	NumberWriteContainer,
@@ -21,7 +19,6 @@ import alertData from '@utils/swalObject';
 import throttle from '@utils/throttle.ts';
 
 const VolunteerClose = () => {
-	const navigate = useNavigate();
 	const [cardList, setCardList] = useState<VolunteerTogetherType[]>([]);
 	const [isLoad, setLoad] = useState<boolean>(false);
 
@@ -33,8 +30,8 @@ const VolunteerClose = () => {
 					{},
 				);
 				setCardList(responseData.data.volunteerList);
-				console.log(responseData.data);
 				setLoad(responseData.data.hasMore);
+				window.scrollTo(0, 0);
 			} catch (error) {
 				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
 			}

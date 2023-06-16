@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import dayjs from 'dayjs';
+
 import {
 	Container,
 	TopArea,
@@ -18,29 +20,42 @@ import {
 } from './IntroTeamStyle';
 import car from '@assets/images/car.png';
 import DataType from '@src/types/dataType.ts';
-import { get } from '@api/api';
+import { post } from '@api/api';
+import { TeamType } from '@src/types/userType';
+import phoneNumSplit from '@utils/phoneNumSplit';
+
+type IntroTeamProps = {
+	uuid: string;
+};
 
 const apiURL = import.meta.env.VITE_API_URL;
 
-type IntroTeamProps = {
-	postId: string;
-	Uuid: string;
-};
 // eslint-disable-next-line react/prop-types
-const IntroTeam: React.FC<IntroTeamProps> = ({ postId, Uuid }) => {
-	const [post, setPost] = useState<any>([]);
+const IntroTeam: React.FC<IntroTeamProps> = ({ uuid }) => {
+	const [teamData, setTeamData] = useState<TeamType>({
+		category: '',
+		teamName: '',
+		introduction: '',
+		briefHistory: '',
+		establishmentDate: '',
+		phone: '',
+		location: '',
+		image: '',
+	});
+	const establishDate = dayjs(teamData.establishmentDate)
+		.locale('ko')
+		.format('YYYY년 MM월 DD일');
+	const image = `${apiURL}/${teamData.image}`;
 
 	useEffect(() => {
-		const fetchPost = async () => {
-			const response = await get<DataType>('/api/team/detail', {
-				data: {
-					uuid: Uuid,
-				},
+		const fetchData = async () => {
+			console.log('uuid', uuid);
+			const responseData = await post<DataType>('/api/team/detail', {
+				uuid,
 			});
-			setPost(response);
-			console.log('여기', response);
+			setTeamData(responseData.data);
 		};
-		fetchPost();
+		fetchData();
 	}, []);
 
 	return (
@@ -49,11 +64,11 @@ const IntroTeam: React.FC<IntroTeamProps> = ({ postId, Uuid }) => {
 				<TopArea>
 					<Cover>
 						<ImgContainer>
-							<Img src={car} alt='Team-image' />
+							<Img src={image} alt='Team-image' />
 						</ImgContainer>
 						<TextContainer>
-							<Team>기관</Team>
-							<TeamName>d</TeamName>
+							<Team>{teamData.category}</Team>
+							<TeamName>{teamData.teamName}</TeamName>
 						</TextContainer>
 					</Cover>
 				</TopArea>
@@ -61,11 +76,9 @@ const IntroTeam: React.FC<IntroTeamProps> = ({ postId, Uuid }) => {
 					<DivideContent>
 						<TextCover>
 							<Square></Square>
-							<SubTitle>팀 소개</SubTitle>
+							<SubTitle>{teamData.teamName}</SubTitle>
 						</TextCover>
-						<Content>
-							포인핸드는 사지 않고 입양하는 문화를 만드는 소셜벤처입니다
-						</Content>
+						<Content>{teamData.introduction}</Content>
 					</DivideContent>
 
 					<DivideContent>
@@ -73,21 +86,19 @@ const IntroTeam: React.FC<IntroTeamProps> = ({ postId, Uuid }) => {
 							<Square></Square>
 							<SubTitle>주요활동과 목적</SubTitle>
 						</TextCover>
-						<Content>
-							포인핸드는 사지 않고 입양하는 문화를 만드는 소셜벤처입니다
-						</Content>
+						<Content>{teamData.briefHistory}</Content>
 					</DivideContent>
 					<BottomContainer>
 						<SubTitle>설립일자</SubTitle>
-						<Team>2320.15.14</Team>
+						<Team>{establishDate}</Team>
 					</BottomContainer>
 					<BottomContainer>
 						<SubTitle>소재지 주소</SubTitle>
-						<Team>2320.15.14</Team>
+						<Team>{teamData.location}</Team>
 					</BottomContainer>
 					<BottomContainer>
 						<SubTitle>전화번호</SubTitle>
-						<Team>2320.15.14</Team>
+						<Team>{phoneNumSplit(teamData.phone)}</Team>
 					</BottomContainer>
 				</TextArea>
 			</Container>
