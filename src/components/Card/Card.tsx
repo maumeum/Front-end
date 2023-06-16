@@ -149,7 +149,6 @@ function Card({ currTab, data }: CardProps) {
 				}
 			}
 		} catch (error) {
-			console.log('오류 발생', error);
 			await Swal.fire(
 				alertData.errorMessage('활동이 시작되지 않은 봉사입니다.'),
 			);

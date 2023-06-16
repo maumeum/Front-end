@@ -78,7 +78,7 @@ function VolunInfo() {
 	};
 
 	const apiURL = import.meta.env.VITE_API_URL;
-	console.log(image);
+
 	return (
 		<>
 			<div>
