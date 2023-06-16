@@ -1,7 +1,5 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import useUUIDStore from '@src/store/useUuidStore';
 import { VolunteerTogetherType } from '@src/types/cardType.ts';
 import { VolunteerTypes } from '@src/types/myPageConstants';
 import {
@@ -25,20 +23,12 @@ import defaultImage from '@src/assets/images/volunteer1.jpg';
 
 interface VolunteerCardProps {
 	volunteerData: VolunteerTogetherType;
-	uuid?: string;
 }
 
 const url = import.meta.env.VITE_API_URL;
 
-const VolunteerTogetherCard = ({ volunteerData, uuid }: VolunteerCardProps) => {
+const VolunteerTogetherCard = ({ volunteerData }: VolunteerCardProps) => {
 	const navigate = useNavigate();
-	const { setUUID } = useUUIDStore();
-
-	useEffect(() => {
-		if (uuid) {
-			setUUID(uuid);
-		}
-	}, [uuid]);
 
 	const {
 		_id,
@@ -58,8 +48,12 @@ const VolunteerTogetherCard = ({ volunteerData, uuid }: VolunteerCardProps) => {
 	const onClick = () => {
 		if (statusName === '모집중') {
 			navigate(`/volunteers/ongoing/detail/${_id}`);
+			// uuid 저장
+			localStorage.setItem('uuid', volunteerData.register_user_id.uuid);
 		} else {
 			navigate(`/volunteers/close/detail/${_id}`);
+			// uuid 저장
+			localStorage.setItem('uuid', volunteerData.register_user_id.uuid);
 		}
 	};
 

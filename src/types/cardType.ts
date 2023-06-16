@@ -35,6 +35,7 @@ export interface VolunteerType {
 	content?: string;
 	register_user_id: {
 		nickname: string;
+		uuid: string;
 	};
 	statusName: string;
 	deadline: string;
@@ -44,7 +45,7 @@ export interface VolunteerType {
 	teenager: boolean;
 	user_id?: string;
 	createdAt: string;
-	images?: string[];
+	images: string[];
 }
 
 export type VolunteerListType = VolunteerType[];

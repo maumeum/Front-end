@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CommentSection from '../Comment/Comment';
 import ActivityIntro from './ActivityIntro';
 import IntroTeam from './IntroTeam';
-import useUUIDStore from '@src/store/useUuidStore';
 import {
 	Container,
 	Header,
@@ -16,18 +15,13 @@ import {
 const VolunMiddle = () => {
 	const { postId } = useParams() as { postId: string };
 	const [activeTab, setActiveTab] = useState('activityIntro');
-	const [uuid, setUuid] = useState<string>('');
-	const { uuidData } = useUUIDStore();
-
-	useEffect(() => {
-		setUuid(uuidData);
-	}, []);
-
-	console.log(uuid);
+	window.scrollTo(0, 0);
 
 	const handleTabChange = (tabName: string) => {
 		setActiveTab(tabName);
 	};
+
+	const uuid = localStorage.getItem('uuid');
 
 	return (
 		<>
@@ -43,7 +37,7 @@ const VolunMiddle = () => {
 						<Text>댓글</Text>
 					</CommentBtn>
 				</Header>
-				{activeTab === 'activityIntro' && (
+				{activeTab === 'activityIntro' && uuid && (
 					<ActivityIntro postId={postId} uuid={uuid} />
 				)}
 				{activeTab === 'introTeam' && uuid && <IntroTeam uuid={uuid} />}
