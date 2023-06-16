@@ -60,13 +60,12 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 			} catch (error) {
 				Swal.fire(
 					alertData.errorMessage(
-						'단체 인증이 완료된 유저만 글을 작성할 수 있습니다.',
+						'로그인 후 단체 인증이 완료된 유저만 글을 작성할 수 있습니다.',
 					),
 				);
 				navigate('/volunteers/ongoing');
 			}
 		};
-
 		fetchData();
 	}, []);
 
@@ -134,7 +133,7 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 		<>
 			<Container>
 				<div>
-					<Title>제목</Title>
+					<Title style={{ marginTop: '0' }}>제목</Title>
 					<TitleInput
 						placeholder={`[${centName}]만의 특별한 활동 제목을 작성해주세요.`}
 						value={inputTitle}

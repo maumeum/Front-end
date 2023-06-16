@@ -7,6 +7,13 @@ import {
 	NumberWriteContainer,
 	VolunteerPageContainer,
 	CardListContainer,
+	Background,
+	BigText,
+	DogImage,
+	FfHighLight,
+	MainImage,
+	MiddleContainer,
+	Sub,
 } from './style.ts';
 import Menu from '@components/Menu/Menu.tsx';
 import { MenuBar } from '@components/MyPage/myPage.ts';
@@ -17,6 +24,9 @@ import DataType from '@src/types/dataType.ts';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
 import throttle from '@utils/throttle.ts';
+import volunteerImage from '@assets/images/volunteerPage.png';
+import dog from '@assets/images/dog.png';
+import background from '@assets/images/background.jpg';
 
 const VolunteerClose = () => {
 	const [cardList, setCardList] = useState<VolunteerTogetherType[]>([]);
@@ -87,14 +97,21 @@ const VolunteerClose = () => {
 
 	return (
 		<VolunteerPageContainer>
+			<MiddleContainer>
+				<BigText>모집 종료 활동</BigText>
+				<Sub>
+					<FfHighLight>
+						마음이음을 통해 모집했던 봉사활동을 확인할 수 있어요.
+					</FfHighLight>
+					<MainImage src={volunteerImage} alt='main-image' />
+					<Background src={background} alt='background' />
+					<DogImage src={dog} alt='dog' />
+				</Sub>
+			</MiddleContainer>
 			<MenuBar>
 				<Menu title={'같이봉사해요'} />
 			</MenuBar>
-			<CardListContainer>
-				<TopBar
-					title='모집 중인 활동'
-					text='인증받은 단체에서 함께 봉사활동을 해요.'
-				/>
+			<CardListContainer style={{ marginTop: '0' }}>
 				<SearchBar onSearch={handleSearch} />
 				<NumberWriteContainer>
 					<TotalPostNumber totalPosts={cardList.length} />

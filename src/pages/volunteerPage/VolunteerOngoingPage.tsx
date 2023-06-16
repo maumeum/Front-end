@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import background from '@assets/images/background.jpg';
-import SearchBar from '@components/SearchBar/SearchBar.tsx';
+import VolunteerSearchBar from '@components/SearchBar/VolunteerSearchBar.tsx';
 import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
 import WriteButton from '@components/Buttons/WriteButton/WriteButton.tsx';
 import {
@@ -61,27 +61,6 @@ const VolunteerOngoing = () => {
 		window.scrollTo(0, 0);
 	};
 
-	const transformData = cardList.map((data) => {
-		return {
-			_id: data._id,
-			title: data.title,
-			teamName: data.teamName,
-			statusName: data.statusName,
-			deadline: data.deadline,
-			applyCount: data.applyCount,
-			registerCount: data.registerCount,
-			images: data.images,
-			register_user_id: {
-				_id: data.register_user_id._id,
-				nickname: data.register_user_id.nickname,
-				image: data.register_user_id.image,
-				uuid: data.register_user_id.uuid,
-			},
-			createdAt: data.createdAt,
-		};
-	});
-	console.log(transformData);
-
 	// 데이터 불러오기
 	const loadMoreData = async () => {
 		try {
@@ -121,6 +100,19 @@ const VolunteerOngoing = () => {
 	}, [cardList]);
 
 	const navigateWrite = () => {
+		const fetchData = async () => {
+			try {
+				await get<DataType>('/api/users/teamAuth', {});
+			} catch (error) {
+				Swal.fire(
+					alertData.errorMessage(
+						'단체 인증이 완료된 유저만 글을 작성할 수 있습니다.',
+					),
+				);
+				navigate('/volunteers/ongoing');
+			}
+		};
+		fetchData();
 		navigate('/volunteers/ongoing/edit');
 	};
 
@@ -143,7 +135,7 @@ const VolunteerOngoing = () => {
 					<MenuBar>
 						<Menu title={'같이봉사해요'} />
 					</MenuBar>
-					<SearchBar onSearch={handleSearch} />
+					<VolunteerSearchBar onSearch={handleSearch} />
 					<NumberWriteContainer>
 						<TotalPostNumber totalPosts={cardList.length} />
 						<WriteButton toNavigate={navigateWrite} />
