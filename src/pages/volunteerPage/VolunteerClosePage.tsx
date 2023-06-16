@@ -3,13 +3,6 @@ import {
 	VolunteerCardBox,
 	VolunteerPageContainer,
 	CardListContainer,
-	Background,
-	BigText,
-	DogImage,
-	FfHighLight,
-	MainImage,
-	MiddleContainer,
-	Sub,
 } from './style.ts';
 import VolunteerTogetherCard from '@src/components/Card/VolunteerTogetherCard.tsx';
 import { VolunteerType, VolunteerTogetherType } from '@src/types/cardType.ts';
@@ -18,9 +11,6 @@ import DataType from '@src/types/dataType.ts';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
 import throttle from '@utils/throttle.ts';
-import volunteerImage from '@assets/images/volunteerPage.png';
-import dog from '@assets/images/dog.png';
-import background from '@assets/images/background.jpg';
 
 const VolunteerClose = () => {
 	const [cardList, setCardList] = useState<VolunteerTogetherType[]>([]);
