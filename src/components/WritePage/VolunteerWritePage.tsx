@@ -57,7 +57,6 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 				const responseData = getUserInfoData.data as TeamInfo;
 				const { teamName } = responseData;
 				setCentName(teamName);
-				console.log(responseData);
 			} catch (error) {
 				Swal.fire(
 					alertData.errorMessage(
@@ -137,7 +136,7 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 				<div>
 					<Title>제목</Title>
 					<TitleInput
-						placeholder={`[${centName}] 40자 이하 작성`}
+						placeholder={`[${centName}]만의 특별한 활동 제목을 작성해주세요.`}
 						value={inputTitle}
 						onChange={handleInputTitle}
 						style={{ marginBottom: '0' }}
@@ -152,7 +151,7 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 							checked={teenager}
 							onChange={handleRadioChange}
 						/>
-						가능
+						나이에 상관없이 모두 신청할 수 있어요.
 					</TeamType>
 					<TeamType>
 						<TeamTypeRadio
@@ -161,7 +160,7 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 							checked={!teenager}
 							onChange={handleRadioChange}
 						/>
-						불가능
+						성인만 신청할 수 있어요.
 					</TeamType>
 				</div>
 				<div>
