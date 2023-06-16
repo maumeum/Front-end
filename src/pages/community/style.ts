@@ -42,17 +42,19 @@ export const TextArea = styled.div`
 `;
 export const MiddleContainer = styled.div`
 	display: block;
-	text-align: center;
-	margin-bottom: 15rem;
+	margin-left: 25rem;
+	margin-bottom: 10rem;
 `;
 export const BigText = styled.p`
 	font-size: 5rem;
 	letter-spacing: 0.3rem;
 	color: #313739;
+	margin-left: 25rem;
 `;
 export const Sub = styled.div`
 	display: flex;
 	flex-direction: column;
+	margin-left: 25rem;
 	p {
 		font-size: 2rem;
 		margin-top: -2rem;

@@ -32,7 +32,9 @@ export const PostTitle = styled.p`
 export const PostBox = styled.div`
 	margin-top: 0;
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
+	cursor: pointer;
 `;
 
 export const PostContents = styled.p`
