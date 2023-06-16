@@ -61,7 +61,7 @@ function MyReview({ closeModal, id }: MyReviewProps) {
 					'Content-Type': 'multipart/form-data',
 				},
 			});
-			// window.location.reload();
+			window.location.reload();
 			setIsUploaded(true);
 		} catch (error) {
 			console.log(error);
