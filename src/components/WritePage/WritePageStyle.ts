@@ -37,7 +37,7 @@ export const TitleInput = styled.input`
 `;
 
 export const ContentInput = styled.textarea`
-	width: 96%;
+	width: 95%;
 	margin: 0 auto;
 	height: 50rem;
 	border: 1px solid ${({ theme }) => theme.colors.gray400};
