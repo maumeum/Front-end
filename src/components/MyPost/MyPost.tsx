@@ -39,7 +39,7 @@ function truncateDate(createdAt: string) {
 	return dayjs(createdAt).format('YYYY-MM-DD');
 }
 
-function MyPost({ currTab, communityData, onRemovePost, onClick }: PostProps) {
+function MyPost({ currTab, communityData, onRemovePost }: PostProps) {
 	const { title, content, postType, createdAt, _id } = communityData;
 	const [isShowMore, setIsShowMore] = useState<boolean>(false);
 	const truncatedTitle = truncateTitle(title);
