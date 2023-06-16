@@ -33,6 +33,7 @@ type PostData = {
 const FindFriend = () => {
 	const navigate = useNavigate();
 	const [postListData, setPostListData] = useState<PostData[]>([]);
+	const [query, setQuery] = useState<string>('');
 	const [isLoad, setLoad] = useState<boolean>(false);
 
 	// 처음 데이터 불러오기
@@ -53,14 +54,23 @@ const FindFriend = () => {
 	const loadMoreData = async () => {
 		try {
 			if (!isLoad) {
-				console.log(postListData.length);
-				const response = await get<DataType>(
-					`/api/community/category/findfriend?skip=${postListData.length}&limit=10`,
-					{},
-				);
-				const newPostListData = response.data.categoryPost;
-				setPostListData((prevData) => [...prevData, ...newPostListData]);
-				setLoad(response.data.hasMore);
+				if (query === '') {
+					const response = await get<DataType>(
+						`/api/community/category/findfriend?skip=${postListData.length}&limit=10`,
+						{},
+					);
+					const newPostListData = response.data.categoryPost;
+					setPostListData((prevData) => [...prevData, ...newPostListData]);
+					setLoad(response.data.hasMore);
+				} else {
+					const response = await get<DataType>(
+						`/api/community/search?keyword=${query}&posttype=findfriend&skip=${postListData.length}&limit=5`,
+						{},
+					);
+					const newPostListData = response.data;
+					setPostListData((prevData) => [...prevData, ...newPostListData]);
+					setLoad(response.data.hasMore);
+				}
 			}
 		} catch (error) {
 			console.error('Error loading more data:', error);
@@ -84,9 +94,10 @@ const FindFriend = () => {
 
 	const handleSearch = async (query: string) => {
 		const response = await get<DataType>(
-			`/api/community/search?keyword=${query}&posttype=findfriend`,
+			`/api/community/search?keyword=${query}&posttype=findfriend&skip=0&limit=5`,
 		);
 		setPostListData(response.data);
+		setQuery(query);
 	};
 
 	const navigateWrite = () => {
