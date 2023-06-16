@@ -5,14 +5,7 @@ import VolunteerWritePage from '@components/WritePage/VolunteerWritePage';
 import { post } from '@api/api';
 import { getToken } from '@api/token';
 import { useNavigate } from 'react-router-dom';
-import {
-	ImageArea,
-	Container,
-	BigText,
-	FfHighLight,
-	MiddleContainer,
-	Sub,
-} from './style';
+import { ImageArea, Container, MiddleContainer } from './style';
 import actTypes from '@src/types/actTypeConstants';
 import TopBar from '@components/TopBar/TopBar';
 const VolunteerWrite = () => {
@@ -134,21 +127,6 @@ const VolunteerWrite = () => {
 						paddingBottom: '1rem',
 						textAlign: 'center',
 					}}>
-					{/* <BigText
-						style={{
-							color: '#333333',
-							paddingTop: '5rem',
-						}}>
-						글 작성하기
-					</BigText>
-					<Sub>
-						<FfHighLight
-							style={{
-								backgroundColor: '#FFFFE8',
-							}}>
-							어떤 봉사활동을 진행할지 사람들에게 소개해요.
-						</FfHighLight>
-					</Sub> */}
 					<TopBar
 						title={'글 작성하기'}
 						text={'우리 단체의 봉사활동을 홍보해요'}
