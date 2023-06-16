@@ -15,6 +15,7 @@ import {
 const VolunMiddle = () => {
 	const { postId } = useParams() as { postId: string };
 	const [activeTab, setActiveTab] = useState('activityIntro');
+	window.scrollTo(0, 0);
 
 	const handleTabChange = (tabName: string) => {
 		setActiveTab(tabName);
