@@ -45,7 +45,7 @@ function MyVolunHistory() {
 	const [volunData, setVolunData] = useState<VolunProps[]>([]);
 	//페이지네이션
 	const [currentPage, setCurrentPage] = useState(1);
-	const pageSize = 5;
+	const pageSize = 8;
 	const handlePageChange = (pageNumber: number) => {
 		setCurrentPage(pageNumber);
 	};
@@ -102,13 +102,15 @@ function MyVolunHistory() {
 					</TabMenu>
 					{volunData.length === 0 && <NoData category='봉사' />}
 					<CardBox>
-						{volunData.slice((currentPage - 1) * pageSize, currentPage * pageSize).map((data, index) => (
-							<Card
-								key={data.volunteer_id._id + '-' + index}
-								currTab={currTab}
-								data={data}
-							/>
-						))}
+						{volunData
+							.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+							.map((data, index) => (
+								<Card
+									key={data.volunteer_id._id + '-' + index}
+									currTab={currTab}
+									data={data}
+								/>
+							))}
 					</CardBox>
 				</Main>
 			</Container>
