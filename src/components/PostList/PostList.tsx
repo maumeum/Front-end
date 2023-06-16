@@ -15,6 +15,12 @@ import {
 	PostListLine,
 } from './PostListStyle';
 
+import {
+	Title,
+	Description,
+	PostBox as PostBoxStyle,
+} from '@components/MyPost/myPost';
+
 type PostListProps = {
 	postTitle: string;
 	postContents: string;
@@ -106,21 +112,21 @@ const PostList = ({
 
 	return (
 		<>
-			<PostListLine />
-			<PostContainer>
-				<PostListContainer onClick={onClick}>
-					<PostTitle>{postTitle}</PostTitle>
+			{/* <PostListLine /> */}
+			<PostBoxStyle isCommunity={true}>
+				<PostBox onClick={onClick}>
+					<Title>{postTitle}</Title>
 					<PostBox>
 						<PostContents>{postContents}</PostContents>
 					</PostBox>
-				</PostListContainer>
+				</PostBox>
 				{isAdmin && (
 					<>
 						<AcceptButtons onClick={AcceptClick}>수락</AcceptButtons>
 						<PostButtons onClick={CancelClick}>취소</PostButtons>
 					</>
 				)}
-			</PostContainer>
+			</PostBoxStyle>
 		</>
 	);
 };

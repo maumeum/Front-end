@@ -19,6 +19,7 @@ export const DataText = styled.textarea`
 	width: 60rem;
 	height: 20rem;
 	padding: 1rem 0 0 1rem;
+	resize: none;
 	border: ${(props) => {
 		if (props.value === '' && props.className !== '') {
 			return '1px solid #EB5757';

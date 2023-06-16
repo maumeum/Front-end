@@ -13,6 +13,7 @@ import {
 	ButtonContainer,
 	Divider,
 } from '@src/components/VolunIntro/volunInfo.ts';
+import { Badge } from '@components/Card/card';
 import star from '@assets/icons/star.svg';
 import LargeButton from '../Buttons/LargeButton';
 import { useParams } from 'react-router-dom';
@@ -49,10 +50,11 @@ function VolunInfo() {
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await get<DataType>(`/api/volunteers/${postId}`);
+			console.log(response);
 			setTitle(response.data.title);
 			setRegisterCount(response.data.registerCount);
 			setDeadline(response.data.deadline);
-			setImage(response.data.images[0]);
+			setImage(response.data.register_user_id.image);
 			setStartDate(response.data.startDate);
 			setEndDate(response.data.endDate);
 			setDeadline(response.data.deadline);
@@ -83,6 +85,7 @@ function VolunInfo() {
 				<IntroContainer>
 					<ImgContainer>
 						<img src={image} alt='팀소개사진' />
+						<Badge>{statusName}</Badge>
 					</ImgContainer>
 					<TeamInfo>
 						<Title>{truncateTitle(title)}</Title>

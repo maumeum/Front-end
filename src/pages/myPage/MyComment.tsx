@@ -44,6 +44,7 @@ function MyComment() {
 		const fetchData = async () => {
 			try {
 				const getPostData = await get<DataType>('/api/community/user', {});
+				console.log(getPostData);
 				setPostData(getPostData.data as CommunityProps[]);
 			} catch (error) {
 				Swal.fire(

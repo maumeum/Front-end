@@ -1,6 +1,6 @@
 import { useState } from 'react';
-// import Swal from 'sweetalert2';
-// import alertData from '@src/utils/swalObject.ts';
+import Swal from 'sweetalert2';
+import alertData from '@src/utils/swalObject.ts';
 import VolunteerWritePage from '@components/WritePage/VolunteerWritePage';
 import { post } from '@api/api';
 import { getToken } from '@api/token';
@@ -45,53 +45,60 @@ const VolunteerWrite = () => {
 		endDateData: Date,
 		teamName: string,
 	) => {
-		setPostData({
-			title,
-			content,
-			actTypeName,
-			registerCount,
-			teenager: teenagerData,
-			deadline: deadlineDate,
-			startDate: startDateData,
-			endDate: endDateData,
-			teamName,
-		});
+		try {
+			setPostData({
+				title,
+				content,
+				actTypeName,
+				registerCount,
+				teenager: teenagerData,
+				deadline: deadlineDate,
+				startDate: startDateData,
+				endDate: endDateData,
+				teamName,
+			});
 
-		const token = getToken();
-		const formData = new FormData();
-		const deadline = deadlineDate.toISOString();
-		const startDate = startDateData.toISOString();
-		const endDate = endDateData.toISOString();
-		const teenager = teenagerData.toString();
+			const token = getToken();
+			const formData = new FormData();
+			const deadline = deadlineDate.toISOString();
+			const startDate = startDateData.toISOString();
+			const endDate = endDateData.toISOString();
+			const teenager = teenagerData.toString();
 
-		formData.append('title', title);
-		formData.append('content', content);
-		formData.append('registerCount', registerCount);
-		if (actTypeName === '') {
-			actTypeName = actTypes.OLD;
-			formData.append('actType', actTypeName);
-		} else {
-			formData.append('actType', actTypeName);
+			formData.append('title', title);
+			formData.append('content', content);
+			formData.append('registerCount', registerCount);
+			if (actTypeName === '') {
+				actTypeName = actTypes.OLD;
+				formData.append('actType', actTypeName);
+			} else {
+				formData.append('actType', actTypeName);
+			}
+			formData.append('statusName', '모집중');
+			formData.append('deadline', deadline);
+			formData.append('startDate', startDate);
+			formData.append('endDate', endDate);
+			formData.append('teenager', teenager);
+			formData.append('teamName', teamName);
+			for (let i = 0; i < selectedImage.length; i++) {
+				formData.append('images', selectedImage[i]);
+			}
+			for (const [key, value] of formData.entries()) {
+				console.log(`${key}: ${value}`);
+			}
+			await post('/api/volunteers', formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+					Authorization: `Bearer ${token}`,
+				},
+			});
+			navigate('/volunteers/ongoing');
+		} catch (error) {
+			Swal.fire(
+				alertData.errorMessage('빠진 내용이 없는지 다시한번 확인해주세요.'),
+			);
+			navigate('/volunteers/ongoing/edit');
 		}
-		formData.append('statusName', '모집중');
-		formData.append('deadline', deadline);
-		formData.append('startDate', startDate);
-		formData.append('endDate', endDate);
-		formData.append('teenager', teenager);
-		formData.append('teamName', teamName);
-		for (let i = 0; i < selectedImage.length; i++) {
-			formData.append('images', selectedImage[i]);
-		}
-		for (const [key, value] of formData.entries()) {
-			console.log(`${key}: ${value}`);
-		}
-		await post('/api/volunteers', formData, {
-			headers: {
-				'Content-Type': 'multipart/form-data',
-				Authorization: `Bearer ${token}`,
-			},
-		});
-		navigate('/volunteers/ongoing');
 	};
 
 	const onCancelPost = () => {
@@ -114,7 +121,7 @@ const VolunteerWrite = () => {
 		<>
 			<Container>
 				<VolunteerWritePage onSave={onSavePost} onCancel={onCancelPost} />
-				<ImageArea>
+				<ImageArea style={{ marginTop: '9.2rem' }}>
 					이미지업로드
 					<input
 						id='fileInput'

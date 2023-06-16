@@ -50,7 +50,7 @@ const MONTHS = [
 const Calendar = ({ selectedDate, setSelectedDate }: CalendarProps) => {
 	const limitRange = limitCalendarRange();
 	return (
-		<CalenderWrapper>
+		<CalenderWrapper style={{ width: '240px', height: '30px' }}>
 			<DatePicker
 				dateFormat='yyyy.MM.dd'
 				formatWeekDay={(nameOfDay: string) => nameOfDay.substring(0, 1)}

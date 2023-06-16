@@ -44,6 +44,7 @@ const VolunteerOngoing = () => {
 				);
 				setCardList(responseData.data.volunteerList);
 				setLoad(responseData.data.hasMore);
+				window.scrollTo(0, 0);
 			} catch (error) {
 				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
 			}
@@ -57,7 +58,29 @@ const VolunteerOngoing = () => {
 			`/api/volunteers/search?keyword=${query}&skip=$0&limit=8`,
 		);
 		setCardList(response.data.searchVolunteers);
+		window.scrollTo(0, 0);
 	};
+
+	const transformData = cardList.map((data) => {
+		return {
+			_id: data._id,
+			title: data.title,
+			teamName: data.teamName,
+			statusName: data.statusName,
+			deadline: data.deadline,
+			applyCount: data.applyCount,
+			registerCount: data.registerCount,
+			images: data.images,
+			register_user_id: {
+				_id: data.register_user_id._id,
+				nickname: data.register_user_id.nickname,
+				image: data.register_user_id.image,
+				uuid: data.register_user_id.uuid,
+			},
+			createdAt: data.createdAt,
+		};
+	});
+	console.log(transformData);
 
 	// 데이터 불러오기
 	const loadMoreData = async () => {
@@ -134,6 +157,7 @@ const VolunteerOngoing = () => {
 								<VolunteerTogetherCard
 									key={data._id + '-' + index}
 									volunteerData={data}
+									uuid={data.register_user_id.uuid}
 								/>
 							))}
 					</VolunteerCardBox>
