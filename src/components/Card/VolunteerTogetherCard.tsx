@@ -29,9 +29,6 @@ const url = import.meta.env.VITE_API_URL;
 
 const VolunteerTogetherCard = ({ volunteerData }: VolunteerCardProps) => {
 	const navigate = useNavigate();
-	// uuid 저장
-	localStorage.removeItem('uuid');
-	localStorage.setItem('uuid', volunteerData.register_user_id.uuid);
 
 	const {
 		_id,
@@ -51,8 +48,14 @@ const VolunteerTogetherCard = ({ volunteerData }: VolunteerCardProps) => {
 	const onClick = () => {
 		if (statusName === '모집중') {
 			navigate(`/volunteers/ongoing/detail/${_id}`);
+			// uuid 저장
+			localStorage.removeItem('uuid');
+			localStorage.setItem('uuid', volunteerData.register_user_id.uuid);
 		} else {
 			navigate(`/volunteers/close/detail/${_id}`);
+			// uuid 저장
+			localStorage.removeItem('uuid');
+			localStorage.setItem('uuid', volunteerData.register_user_id.uuid);
 		}
 	};
 
