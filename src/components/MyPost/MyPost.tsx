@@ -40,7 +40,7 @@ function truncateDate(createdAt: string) {
 }
 
 function MyPost({ currTab, communityData, onRemovePost }: PostProps) {
-	const { title, content, postType, createdAt, _id } = communityData;
+	const { title, content, createdAt, postType, _id } = communityData;
 	const [isShowMore, setIsShowMore] = useState<boolean>(false);
 	const truncatedTitle = truncateTitle(title);
 	const navigate = useNavigate();
@@ -88,7 +88,7 @@ function MyPost({ currTab, communityData, onRemovePost }: PostProps) {
 
 					<PostInfo>
 						<p>{truncateDate(createdAt)}</p>
-						<p>{postType ? postType : '같이봉사해요'}</p>
+						<p>{postType ? postType : '봉사후기'}</p>
 						{currTab === TabTypes.WRITTEN_POSTS ||
 						currTab === TabTypes.WRITTEN_REVIEW ? (
 							<ButtonContainer>
