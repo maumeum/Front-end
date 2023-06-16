@@ -108,8 +108,11 @@ function VolunInfo() {
 							</p>
 						</InfoBox>
 						<ButtonContainer>
-							<LargeButton onClick={clickApply} apply={true}>
-								같이 참여하기
+							<LargeButton
+								onClick={clickApply}
+								apply={true}
+								disabled={applyCount === registerCount}>
+								{applyCount === registerCount ? '신청마감' : '같이 참여하기'}
 							</LargeButton>
 						</ButtonContainer>
 					</TeamInfo>

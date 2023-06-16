@@ -194,6 +194,7 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 							style={{
 								textAlign: 'left',
 								paddingRight: '20rem',
+								fontSize: '2rem',
 							}}>
 							모집 마감일
 						</Title>
@@ -203,7 +204,12 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 						/>
 					</LayoutChildContainer>
 					<LayoutChildContainer>
-						<Title style={{ textAlign: 'left', paddingRight: '20rem' }}>
+						<Title
+							style={{
+								textAlign: 'left',
+								paddingRight: '20rem',
+								fontSize: '2rem',
+							}}>
 							활동 시작일
 						</Title>
 						<VolunteerCalendar
@@ -212,7 +218,12 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 						/>
 					</LayoutChildContainer>
 					<LayoutChildContainer>
-						<Title style={{ textAlign: 'left', paddingRight: '20rem' }}>
+						<Title
+							style={{
+								textAlign: 'left',
+								paddingRight: '20rem',
+								fontSize: '2rem',
+							}}>
 							활동 종료일
 						</Title>
 						<VolunteerCalendar
