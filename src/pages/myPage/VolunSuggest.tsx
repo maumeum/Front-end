@@ -16,7 +16,7 @@ import DataType from '@src/types/dataType';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
 import NoData from '@components/NoData/NoData.tsx';
-import { StyledLink } from '@components/MyPage/myPage.ts';
+
 interface ResponseData {
 	_id: string;
 	title: string;
@@ -105,15 +105,11 @@ function VolunSuggest() {
 						{transformData
 							.slice((currentPage - 1) * pageSize, currentPage * pageSize)
 							.map((data, index) => (
-								<StyledLink
-									to={`/volunteers/ongoing/detail/${data.volunteer_id._id}`}
-									key={data.volunteer_id._id + '-' + index + 'link'}>
-									<Card
-										key={data.volunteer_id._id}
-										data={data}
-										currTab={currTab}
-									/>
-								</StyledLink>
+								<Card
+									key={data.volunteer_id._id}
+									data={data}
+									currTab={currTab}
+								/>
 							))}
 					</CardBox>
 				</Main>

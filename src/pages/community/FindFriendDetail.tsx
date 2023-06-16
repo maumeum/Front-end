@@ -15,7 +15,6 @@ import {
 	Line,
 	ContentContainer,
 	Image,
-	Contentdiv,
 	Content,
 	BtnDelete,
 	BtnReport,
@@ -162,13 +161,13 @@ const FindFriendDetail = () => {
 							))}
 						</div>
 					)}
-					<Contentdiv>
-						<Content>
-							{formattedContent.map((item: string, index: number) => (
-								<p key={index}>{item}</p>
-							))}
-						</Content>
-					</Contentdiv>
+					{/* <Contentdiv> */}
+					<Content>
+						{formattedContent.map((item: string, index: number) => (
+							<p key={index}>{item}</p>
+						))}
+					</Content>
+					{/* </Contentdiv> */}
 				</ContentContainer>
 			</DetailContainer>
 			<CommentSection postId={postId} />

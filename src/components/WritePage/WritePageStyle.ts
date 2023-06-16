@@ -5,7 +5,7 @@ export const Container = styled.div`
 	margin-top: 10rem;
 	display: flex;
 	flex-direction: column;
-	width: 112rem;
+	width: 95rem;
 	margin-bottom: 20rem;
 `;
 export const CategoryContainer = styled.div`
@@ -27,22 +27,24 @@ export const LayoutChildContainer = styled.div`
 `;
 
 export const TitleInput = styled.input`
-	width: 112rem;
+	width: 100%;
 	margin: 0 auto;
 	border: none;
-	margin-bottom: 8rem;
+	margin-bottom: 3rem;
 	font-size: 3.5rem;
 	font-weight: 600;
 	color: #a7a7a7;
 `;
 
 export const ContentInput = styled.textarea`
-	width: 112rem;
+	width: 96%;
 	margin: 0 auto;
-	height: 100rem;
-	border: 1px solid gray;
-	font-size: 2.5rem;
-	padding: 2rem;
+	height: 50rem;
+	border: 1px solid ${({ theme }) => theme.colors.gray400};
+	font-size: 2rem;
+	padding: 5rem;
+	border-radius: 5px;
+	resize: none;
 `;
 export const TextContainer = styled.div`
 	margin-bottom: 10rem;
@@ -52,6 +54,7 @@ export const TextLength = styled.p`
 	font-size: 2rem;
 	margin-top: -9rem;
 	margin-bottom: 10rem;
+	color: ${({ theme }) => theme.colors.gray400};
 `;
 
 export const ButtonContainer = styled.div`
@@ -76,19 +79,20 @@ export const SubmitButton = styled.button`
 	border-radius: 1.2rem;
 	cursor: pointer;
 	font-size: 2rem;
+	color: #ffffff;
 `;
 export const ImageArea = styled.label`
 	display: inline-block;
 	padding: 8px 16px;
 	text-align: center;
 	background-color: var(--color--footer);
-	color: black;
+	color: #ffffff;
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
 	width: 20rem;
 	font-size: 2rem;
-	margin-top: -10rem;
+	margin-top: -13rem;
 
 	input {
 		opacity: 0;
