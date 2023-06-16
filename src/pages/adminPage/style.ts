@@ -44,7 +44,7 @@ export const MenuBar = styled.div`
 `;
 
 export const PostContainer = styled.div`
-	margin: 6.4rem auto;
+	margin: 6.4rem auto 6.4rem 50rem;
 	min-height: 80rem;
 `;
 
