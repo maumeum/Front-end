@@ -16,7 +16,7 @@ export const SelectColor = styled.select`
 
 export const OptionColorLarge = styled.option`
 	height: 4rem;
-	width: 9rem;
+	width: 16rem;
 	font-weight: ${({ theme }) => theme.typography.weight.bold};
 	font-size: 2.6rem;
 	color: ${({ theme }) => theme.colors.green200};
@@ -28,7 +28,7 @@ export const OptionColorLarge = styled.option`
 
 export const SelectColorLarge = styled.select`
 	height: 4rem;
-	width: 9rem;
+	width: 16rem;
 	font-weight: ${({ theme }) => theme.typography.weight.bold};
 	font-size: 2.6rem;
 	border: none;

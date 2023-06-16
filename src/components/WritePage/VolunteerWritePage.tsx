@@ -22,6 +22,7 @@ import LargeSelector from '@components/Selector/LargeSelector.tsx';
 import actTypes from '@src/types/actTypeConstants';
 import { Title, TeamType, TeamTypeRadio } from '@pages/myPage/style';
 import TeamInfo from '@src/types/writerUserTeamType.ts';
+import { useNavigate } from 'react-router-dom';
 
 interface VolunteerWritePageProps extends Omit<WritePageProps, 'onSave'> {
 	onSave: (
@@ -38,6 +39,7 @@ interface VolunteerWritePageProps extends Omit<WritePageProps, 'onSave'> {
 }
 
 const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
+	const navigate = useNavigate();
 	const [content, setContent] = useState('');
 	const [inputTitle, setInputTitle] = useState('');
 	const [selectedActType, setSelectedActType] = useState('');
@@ -58,8 +60,11 @@ const VolunteerWritePage = ({ onSave, onCancel }: VolunteerWritePageProps) => {
 				console.log(responseData);
 			} catch (error) {
 				Swal.fire(
-					alertData.errorMessage('데이터를 가져오는데 실패하였습니다.'),
+					alertData.errorMessage(
+						'단체 인증이 완료된 유저만 글을 작성할 수 있습니다.',
+					),
 				);
+				navigate('/volunteers/ongoing');
 			}
 		};
 
