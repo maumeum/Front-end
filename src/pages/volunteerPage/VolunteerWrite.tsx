@@ -114,7 +114,7 @@ const VolunteerWrite = () => {
 		<>
 			<Container>
 				<VolunteerWritePage onSave={onSavePost} onCancel={onCancelPost} />
-				<ImageArea>
+				<ImageArea style={{ marginTop: '9.2rem' }}>
 					이미지업로드
 					<input
 						id='fileInput'
