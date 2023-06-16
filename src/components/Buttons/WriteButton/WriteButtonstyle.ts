@@ -9,4 +9,5 @@ export const WriteBtn = styled.button`
 	cursor: pointer;
 	font-size: 2rem;
 	margin-left: auto;
+	margin-right: 12rem;
 `;

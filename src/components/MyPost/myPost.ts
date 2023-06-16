@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 
+interface PostProps {
+	isCommunity: boolean;
+}
+
 export const PostListContainer = styled.div`
 	border-radius: 10px;
 `;
 
-export const PostBox = styled.div`
+export const PostBox = styled.div<PostProps>`
 	width: 80%;
+	width: ${({ isCommunity }) => (isCommunity ? '75%' : '80%')};
 	padding: 3rem;
 	border: 1px solid #e6e6e6;
 	border-radius: 10px;

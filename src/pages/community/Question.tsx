@@ -140,8 +140,8 @@ const Question = () => {
 										(postData.title.length > 50 ? '...' : '')
 									}
 									postContents={
-										postData.content.slice(0, 50) +
-										(postData.content.length > 50 ? '...' : '')
+										postData.content.slice(0, 200) +
+										(postData.content.length > 200 ? '...' : '')
 									}
 									onClick={() => navigateDetail(postData._id)}
 								/>
