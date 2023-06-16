@@ -62,7 +62,7 @@ const AuthTeam = () => {
 		const fetchData = async () => {
 			try {
 				const response = await get<DataType>('/api/users/info');
-				isSetAuthorizaion(response.data.authorizaion);
+				isSetAuthorizaion(response.data.authorization);
 			} catch (error) {
 				console.log(error);
 			} finally {
@@ -113,7 +113,7 @@ const AuthTeam = () => {
 					<Tab tabs={tabs} />
 				</TabMenu>
 
-				{!isAuthorizaion ? (
+				{isAuthorizaion ? (
 					<InfoMessage>
 						<img src={hug} alt='인증유저' />
 						<h1>이미 인증된 유저입니다.</h1>
