@@ -123,7 +123,13 @@ const Search = () => {
 					<VolunteerTitle>봉사활동 검색결과</VolunteerTitle>
 					<VolunteerContainer>
 						{volunteerList.map((item) => (
-							<VolunteerCard key={item._id} volunteerData={item} />
+							<VolunteerCard
+								key={item._id}
+								volunteerData={item}
+								onClick={() =>
+									navigate(`/volunteers/ongoing/detail/${item._id}`)
+								}
+							/>
 						))}
 					</VolunteerContainer>
 					{hidden && volunteerLoad && (
