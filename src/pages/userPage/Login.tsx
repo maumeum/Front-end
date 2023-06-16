@@ -53,15 +53,14 @@ const Login = () => {
 				email,
 				password,
 			});
-
+			console.log(response.data);
 			// 토큰이 있다면 localStorage에 토큰 저장
 			if (response.data.token) {
 				setToken(response.data.token);
 			}
-
+			window.location.reload();
 			setCheckData(true);
 			navigate('/');
-			window.location.reload();
 		} catch (err) {
 			Swal.fire(alertData.wrongUserData).then(() => {
 				window.location.reload();
