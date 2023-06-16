@@ -8,11 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import {
 	ImageArea,
 	Container,
-	Background,
 	BigText,
-	DogImage,
 	FfHighLight,
-	MainImage,
 	MiddleContainer,
 	Sub,
 } from './style';
