@@ -5,39 +5,35 @@ import SearchBar from '@components/SearchBar/SearchBar.tsx';
 import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
 import WriteButton from '@components/Buttons/WriteButton/WriteButton.tsx';
 import {
+	VolunteerCardBox,
 	NumberWriteContainer,
 	VolunteerPageContainer,
 	CardListContainer,
 } from './style.ts';
 import Menu from '@components/Menu/Menu.tsx';
-import { MenuBar, CardBox } from '@components/MyPage/myPage.ts';
+import { MenuBar } from '@components/MyPage/myPage.ts';
 import VolunteerTogetherCard from '@src/components/Card/VolunteerTogetherCard.tsx';
-import { VolunteerTogetherType } from '@src/types/cardType.ts';
+import { VolunteerType, VolunteerTogetherType } from '@src/types/cardType.ts';
 import { get } from '@api/api';
 import DataType from '@src/types/dataType.ts';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
-import Pagination from '@components/Pagination/Pagination.tsx';
+import throttle from '@utils/throttle.ts';
 
 const VolunteerOngoing = () => {
 	const navigate = useNavigate();
-	const [cardListData, setCardListData] = useState<VolunteerTogetherType[]>([]);
-
-	//페이지네이션
-	const [currentPage, setCurrentPage] = useState(1);
-	const pageSize = 5;
-	const handlePageChange = (pageNumber: number) => {
-		setCurrentPage(pageNumber);
-	};
+	const [cardList, setCardList] = useState<VolunteerTogetherType[]>([]);
+	const [isLoad, setLoad] = useState<boolean>(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const getData = await get<DataType>(
+				const responseData = await get<DataType>(
 					'/api/volunteers?skip=0&limit=12&status=true',
 					{},
 				);
-				setCardListData(getData.data.volunteerList as VolunteerTogetherType[]);
+				setCardList(responseData.data.volunteerList);
+				setLoad(responseData.data.hasMore);
 			} catch (error) {
 				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
 			}
@@ -45,44 +41,54 @@ const VolunteerOngoing = () => {
 		fetchData();
 	}, []);
 
-	const transformData = cardListData.map((data) => {
-		return {
-			_id: data._id,
-			title: data.title,
-			teamName: data.teamName,
-			statusName: data.statusName,
-			deadline: data.deadline,
-			applyCount: data.applyCount,
-			registerCount: data.registerCount,
-			images: data.images,
-			register_user_id: {
-				_id: data.register_user_id._id,
-				nickname: data.register_user_id.nickname,
-				image: data.register_user_id.image,
-				uuid: data.register_user_id.uuid,
-			},
-			createdAt: data.createdAt,
-		};
-	});
-
-	const uuid = cardListData.map((i) => i.register_user_id.uuid);
-
-	// volunteers/search/?keyword=유기견&skip=1&limit=2
+	// 검색 데이터 불러오기
 	const handleSearch = async (query: string) => {
 		const response = await get<DataType>(
-			`/api/volunteers/search?keyword=${query}`,
+			`/api/volunteers/search?keyword=${query}&skip=$0&limit=8`,
 		);
-		setCardListData(response.data);
-		console.log(response.data);
-		console.log('검색어:', query);
+		setCardList(response.data.searchVolunteers);
 	};
+
+	// 데이터 불러오기
+	const loadMoreData = async () => {
+		try {
+			if (isLoad) {
+				const response = await get<DataType>(
+					`/api/volunteers?skip=${cardList.length}&limit=12&status=true`,
+					{},
+				);
+				const newPostListData = response.data.volunteerList;
+				setCardList((prevData) => {
+					// 중복된 데이터 필터링
+					const filteredData = newPostListData.filter(
+						(newItem: VolunteerType) =>
+							!prevData.some((item) => item._id === newItem._id),
+					);
+					return [...prevData, ...filteredData];
+				});
+				setLoad(response.data.hasMore);
+			}
+		} catch (error) {
+			console.error('Error loading more data:', error);
+		}
+	};
+
+	// 무한 스크롤
+	useEffect(() => {
+		if (cardList.length > 0) {
+			const handleScroll = throttle(() => {
+				const { scrollTop, offsetHeight } = document.documentElement;
+				if (offsetHeight - window.innerHeight - scrollTop < 200) {
+					loadMoreData();
+				}
+			});
+			window.addEventListener('scroll', handleScroll);
+			return () => window.removeEventListener('scroll', handleScroll);
+		}
+	}, [cardList]);
 
 	const navigateWrite = () => {
 		navigate('/volunteers/ongoing/edit');
-	};
-
-	const navigateDetail = (postId: string) => {
-		navigate(`/volunteers/ongoing/detail/${postId}`, { state: { uuid: uuid } });
 	};
 
 	return (
@@ -97,29 +103,20 @@ const VolunteerOngoing = () => {
 				/>
 				<SearchBar onSearch={handleSearch} />
 				<NumberWriteContainer>
-					<TotalPostNumber totalPosts={cardListData.length} />
+					<TotalPostNumber totalPosts={cardList.length} />
 					<WriteButton toNavigate={navigateWrite} />
 				</NumberWriteContainer>
-				<CardBox>
-					{transformData.length === 0 && (
-						<h2>봉사 내역이 존재하지 않습니다.</h2>
-					)}
-					{transformData.map((data, index) => (
-						<VolunteerTogetherCard
-							key={data._id + '-' + index}
-							data={data}
-							onClick={() => navigateDetail(data._id)}
-						/>
-					))}
-				</CardBox>
+				<VolunteerCardBox>
+					{cardList.length === 0 && <h2>봉사 내역이 존재하지 않습니다.</h2>}
+					{cardList &&
+						cardList.map((data, index) => (
+							<VolunteerTogetherCard
+								key={data._id + '-' + index}
+								volunteerData={data}
+							/>
+						))}
+				</VolunteerCardBox>
 			</CardListContainer>
-			{transformData.length > 0 && (
-				<Pagination
-					currentPage={currentPage}
-					totalPages={Math.ceil(transformData.length / pageSize)}
-					handlePageChange={handlePageChange}
-				/>
-			)}
 		</VolunteerPageContainer>
 	);
 };
