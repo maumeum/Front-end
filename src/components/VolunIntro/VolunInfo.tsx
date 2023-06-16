@@ -49,7 +49,6 @@ function VolunInfo() {
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await get<DataType>(`/api/volunteers/${postId}`);
-			console.log(response);
 			setTitle(response.data.title);
 			setRegisterCount(response.data.registerCount);
 			setDeadline(response.data.deadline);
