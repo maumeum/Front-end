@@ -36,6 +36,10 @@ const ActivityIntro: React.FC<ActivityIntroProps> = ({ postId, uuid }) => {
 	}, []);
 
 	const hasPostImage = !!post.images;
+	let formattedContent = [];
+	if (post.content) {
+		formattedContent = post.content.split('\n');
+	}
 	return (
 		<>
 			<Container>
@@ -57,7 +61,7 @@ const ActivityIntro: React.FC<ActivityIntroProps> = ({ postId, uuid }) => {
 				)}
 
 				<ContentsContainer>
-					<Content>{post.content}</Content>
+					<Content>{formattedContent}</Content>
 				</ContentsContainer>
 			</Container>
 		</>

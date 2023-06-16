@@ -42,7 +42,7 @@ export const VolunInfo = styled.div`
 	p {
 		word-break: keep-all;
 
-		font-size: 1.7rem;
+		font-size: 2rem;
 		line-height: 2.4rem;
 		letter-spacing: -0.1px;
 		text-align: left;
