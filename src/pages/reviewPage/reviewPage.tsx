@@ -50,7 +50,6 @@ const reviewPage = () => {
 	const loadMoreData = async () => {
 		try {
 			if (!isLoad) {
-				console.log(postListData.length);
 				const response = await get<DataType>(
 					`/api/review?skip=${postListData.length}&limit=10`,
 					{},
