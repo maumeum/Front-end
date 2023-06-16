@@ -33,6 +33,7 @@ type PostData = {
 const Question = () => {
 	const navigate = useNavigate();
 	const [postListData, setPostListData] = useState<PostData[]>([]);
+	const [query, setQuery] = useState<string>('');
 	const [isLoad, setLoad] = useState<boolean>(false);
 
 	useEffect(() => {
@@ -51,13 +52,23 @@ const Question = () => {
 	const loadMoreData = async () => {
 		try {
 			if (!isLoad) {
-				const response = await get<DataType>(
-					`/api/community/category/qna?skip=${postListData.length}&limit=10`,
-					{},
-				);
-				const newPostListData = response.data.categoryPost;
-				setPostListData((prevData) => [...prevData, ...newPostListData]);
-				setLoad(response.data.hasMore);
+				if (query === '') {
+					const response = await get<DataType>(
+						`/api/community/category/qna?skip=${postListData.length}&limit=10`,
+						{},
+					);
+					const newPostListData = response.data.categoryPost;
+					setPostListData((prevData) => [...prevData, ...newPostListData]);
+					setLoad(response.data.hasMore);
+				} else {
+					const response = await get<DataType>(
+						`/api/community/search?keyword=${query}&posttype=qna?skip=${postListData.length}&limit=5`,
+						{},
+					);
+					const newPostListData = response.data;
+					setPostListData((prevData) => [...prevData, ...newPostListData]);
+					setLoad(response.data.hasMore);
+				}
 			}
 		} catch (error) {
 			console.error('Error loading more data:', error);
@@ -80,9 +91,10 @@ const Question = () => {
 
 	const handleSearch = async (query: string) => {
 		const response = await get<DataType>(
-			`/api/community/search?keyword=${query}&posttype=qna`,
+			`/api/community/search?keyword=${query}&posttype=qna&skip=0&limit=5`,
 		);
 		setPostListData(response.data);
+		setQuery(query);
 	};
 
 	const navigateWrite = () => {
