@@ -49,7 +49,6 @@ function VolunInfo() {
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await get<DataType>(`/api/volunteers/${postId}`);
-			console.log(response.data);
 			setTitle(response.data.title);
 			setRegisterCount(response.data.registerCount);
 			setDeadline(response.data.deadline);
@@ -79,7 +78,7 @@ function VolunInfo() {
 	};
 
 	const apiURL = import.meta.env.VITE_API_URL;
-	console.log(image);
+
 	return (
 		<>
 			<div>
