@@ -10,3 +10,8 @@ export interface SubmitType {
 	setIsSubmit: () => void;
 	resetSubmit: () => void;
 }
+
+export interface UuidType {
+	uuidData: string;
+	setUUID: (uuidData: string) => void;
+}

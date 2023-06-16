@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import CommentSection from '../Comment/Comment';
 import ActivityIntro from './ActivityIntro';
 import IntroTeam from './IntroTeam';
+import useUUIDStore from '@src/store/useUuidStore';
 import {
 	Container,
 	Header,
@@ -12,15 +13,17 @@ import {
 	CommentBtn,
 } from './VolunMiddleStyle';
 
-interface LocationState {
-	uuid: string;
-}
-
 const VolunMiddle = () => {
 	const { postId } = useParams() as { postId: string };
-	const location = useLocation();
-	const { uuid } = location.state || ({} as LocationState);
 	const [activeTab, setActiveTab] = useState('activityIntro');
+	const [uuid, setUuid] = useState<string>('');
+	const { uuidData } = useUUIDStore();
+
+	useEffect(() => {
+		setUuid(uuidData);
+	}, []);
+
+	console.log(uuid);
 
 	const handleTabChange = (tabName: string) => {
 		setActiveTab(tabName);
@@ -41,9 +44,9 @@ const VolunMiddle = () => {
 					</CommentBtn>
 				</Header>
 				{activeTab === 'activityIntro' && (
-					<ActivityIntro postId={postId} Uuid={uuid} />
+					<ActivityIntro postId={postId} uuid={uuid} />
 				)}
-				{activeTab === 'introTeam' && <IntroTeam postId={postId} Uuid={uuid} />}
+				{activeTab === 'introTeam' && uuid && <IntroTeam uuid={uuid} />}
 				{activeTab === 'comment' && <CommentSection postId={postId} />}
 			</Container>
 		</>

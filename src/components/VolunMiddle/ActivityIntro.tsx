@@ -15,18 +15,17 @@ const apiURL = import.meta.env.VITE_API_URL;
 
 type ActivityIntroProps = {
 	postId: string;
-	Uuid: string;
+	uuid: string;
 };
 
 // eslint-disable-next-line react/prop-types
-const ActivityIntro: React.FC<ActivityIntroProps> = ({ postId, Uuid }) => {
+const ActivityIntro: React.FC<ActivityIntroProps> = ({ postId, uuid }) => {
 	const [post, setPost] = useState<any>([]);
-
 	useEffect(() => {
 		const fetchPost = async () => {
 			const response = await get<DataType>(`/api/volunteers/${postId}`, {
 				data: {
-					uuid: Uuid,
+					uuid: uuid,
 				},
 			});
 			setPost(response.data);

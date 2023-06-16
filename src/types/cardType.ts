@@ -124,7 +124,7 @@ export interface VolunteerTogetherType {
 		_id: string;
 		nickname: string;
 		image: string;
-		uuid?: string;
+		uuid: string;
 	};
 	createdAt: string;
 }
