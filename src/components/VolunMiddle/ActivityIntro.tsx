@@ -7,6 +7,7 @@ import {
 	ImgContainer,
 	ContentsContainer,
 	Content,
+	Image,
 } from './ActivityStyle';
 import DataType from '@src/types/dataType.ts';
 import { get } from '@api/api';
@@ -46,7 +47,11 @@ const ActivityIntro: React.FC<ActivityIntroProps> = ({ postId, uuid }) => {
 				{hasPostImage && (
 					<ImgContainer>
 						{post.images.map((image: any, index: any) => (
-							<img key={index} src={`${apiURL}/${image}`} alt='content-image' />
+							<Image
+								key={index}
+								src={`${apiURL}/${image}`}
+								alt='content-image'
+							/>
 						))}
 					</ImgContainer>
 				)}
