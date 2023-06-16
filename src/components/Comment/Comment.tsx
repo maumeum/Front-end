@@ -39,6 +39,7 @@ const apiURL = import.meta.env.VITE_API_URL;
 type CommentProps = {
 	postId: string;
 };
+
 type UserType = {
 	uuid: string;
 };

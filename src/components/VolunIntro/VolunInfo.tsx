@@ -82,7 +82,7 @@ function VolunInfo() {
 			<div>
 				<IntroContainer>
 					<ImgContainer>
-						<img src={car} alt='팀소개사진' />
+						<img src={image} alt='팀소개사진' />
 					</ImgContainer>
 					<TeamInfo>
 						<Title>{truncateTitle(title)}</Title>

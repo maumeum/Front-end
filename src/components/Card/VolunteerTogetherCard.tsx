@@ -22,11 +22,12 @@ import defaultImage from '@src/assets/images/volunteer1.jpg';
 
 interface VolunteerCardProps {
 	data: VolunteerTogetherType;
+	onClick: () => void;
 }
 
 const url = import.meta.env.VITE_API_URL;
 
-const VolunteerTogetherCard = ({ data }: VolunteerCardProps) => {
+const VolunteerTogetherCard = ({ data, onClick }: VolunteerCardProps) => {
 	const navigate = useNavigate();
 
 	const {
@@ -44,13 +45,13 @@ const VolunteerTogetherCard = ({ data }: VolunteerCardProps) => {
 	const remainingDays = remainingDaysCalculator(currentDate, deadlineDate);
 	const thumbnail = images[0];
 
-	const onClick = () => {
+	const onClickDetail = () => {
 		console.log(`상세페이지로 이동합니다: ${_id}`);
 		navigate(`/volunteers/ongoing/detail/${_id}`);
 	};
 
 	return (
-		<CardContainer statusName={statusName} onClick={onClick}>
+		<CardContainer statusName={statusName} onClick={onClickDetail}>
 			<ImgBox>
 				{images.length > 0 ? (
 					<img src={`${url}/${thumbnail}`} alt={`${title} 썸네일`} />
