@@ -17,16 +17,79 @@ export const PageContainer = styled.div`
 `;
 
 export const VolunteerPageContainer = styled.div`
-	position: relative;
-	display: flex;
-	margin: 0;
+	width: 100%;
+	margin: 0 auto;
 	padding: 0;
+`;
+export const MiddleContainer = styled.div`
+	width: 112rem;
+	margin: 0 auto;
+	margin-top: 10rem;
+	margin-bottom: 47rem;
+`;
+export const BigText = styled.p`
+	font-size: 6rem;
+	color: ${({ theme }) => theme.colors.green100};
+	margin-bottom: 2rem;
+`;
+export const SubMain = styled.p`
+	font-size: 3rem;
+`;
+export const FfHighLight = styled.span`
+	font-size: 3rem;
+	color: black;
+	background-color: ${({ theme }) => theme.colors.green100};
+`;
+export const Sub = styled.div`
+	position: relative;
+`;
+export const MainImage = styled.img`
+	width: 50%;
+	position: absolute;
+	top: 0;
+	left: 70rem;
+`;
+export const Background = styled.img`
+	width: 90%;
+	position: absolute;
+	z-index: -999;
+	top: -30rem;
+	left: 50rem;
+`;
+export const DogImage = styled.img`
+	width: 50%;
+	position: absolute;
+	z-index: -999;
+	top: 20rem;
+	left: 30rem;
+`;
+export const MainContainer = styled.div`
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+	background-color: ${({ theme }) => theme.colors.green100};
+`;
+export const SearchContainer = styled.div`
+	margin: 0 auto;
+	position: relative;
+`;
+
+export const MenuBar = styled.div`
+	width: 10%;
+	min-width: 15.7rem;
+	border-radius: 5px;
+	margin: -7rem 0 0 10rem;
+	position: absolute;
+	top: 3rem;
+	left: 0.5rem;
 `;
 
 export const CardListContainer = styled.div`
-	min-width: 112rem;
-	margin-left: 18rem;
-	margin-bottom: 12rem;
+	width: 112rem;
+	margin: 0 auto;
+	margin-top: 10rem;
+	margin-bottom: 20rem;
 `;
 
 export const NumberWriteContainer = styled.div`
@@ -39,7 +102,9 @@ export const NumberWriteContainer = styled.div`
 export const ReviewPageContainer = styled.div`
 	margin-bottom: 40rem;
 `;
-
+export const SecondContainer = styled.div`
+	margin: 0 auto;
+`;
 export const DetailContainer = styled.div`
 	margin: 0 auto;
 	margin-top: 15rem;

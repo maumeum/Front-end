@@ -18,7 +18,6 @@ import {
 	DivideContent,
 	BottomContainer,
 } from './IntroTeamStyle';
-import car from '@assets/images/car.png';
 import DataType from '@src/types/dataType.ts';
 import { post } from '@api/api';
 import { TeamType } from '@src/types/userType';
