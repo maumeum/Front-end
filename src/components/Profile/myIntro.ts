@@ -14,9 +14,10 @@ export const IntroContainer = styled.div`
 	border: none;
 
 	textarea {
-		/* width: 95%; */
 		margin: 1rem auto;
 		padding: 16px 18px;
+		max-width: 66.5rem;
+		resize: none;
 	}
 `;
 

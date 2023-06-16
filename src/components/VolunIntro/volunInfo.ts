@@ -2,22 +2,25 @@ import styled from 'styled-components';
 
 export const Title = styled.h1`
 	font-size: 3.6rem;
+	word-break: keep-all;
 `;
 
 export const IntroContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 111.2rem;
+	width: 112rem;
 	height: 44.5rem;
+	margin: 8rem auto;
 `;
 
 export const ImgContainer = styled.div`
-	width: 40rem;
+	width: 50%;
 	height: 48rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: relative;
 	img {
 		width: 100%;
 		height: 40rem;

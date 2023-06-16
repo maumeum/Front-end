@@ -4,7 +4,7 @@ import { hexToRgba } from '@utils/styleUtils.ts';
 
 export interface CardProps {
 	currTab?: string;
-	statusName: string;
+	statusName?: string;
 	applyCount?: string;
 }
 
