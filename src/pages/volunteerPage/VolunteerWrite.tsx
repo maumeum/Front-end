@@ -14,7 +14,7 @@ import {
 	Sub,
 } from './style';
 import actTypes from '@src/types/actTypeConstants';
-
+import TopBar from '@components/TopBar/TopBar';
 const VolunteerWrite = () => {
 	const navigate = useNavigate();
 	const [selectedImage, setSelectedImage] = useState<File[]>([]);
@@ -134,7 +134,7 @@ const VolunteerWrite = () => {
 						paddingBottom: '1rem',
 						textAlign: 'center',
 					}}>
-					<BigText
+					{/* <BigText
 						style={{
 							color: '#333333',
 							paddingTop: '5rem',
@@ -148,7 +148,11 @@ const VolunteerWrite = () => {
 							}}>
 							어떤 봉사활동을 진행할지 사람들에게 소개해요.
 						</FfHighLight>
-					</Sub>
+					</Sub> */}
+					<TopBar
+						title={'글 작성하기'}
+						text={'우리 단체의 봉사활동을 홍보해요'}
+					/>
 				</MiddleContainer>
 				<VolunteerWritePage onSave={onSavePost} onCancel={onCancelPost} />
 				<ImageArea style={{ marginTop: '9.2rem' }}>

@@ -62,7 +62,6 @@ const Calendar = ({ selectedDate, setSelectedDate }: CalendarProps) => {
 				maxDate={new Date(limitRange[1])}
 				selected={selectedDate}
 				onChange={(date: Date) => setSelectedDate(date)}
-				isClearable={true}
 				renderCustomHeader={({
 					date,
 					changeYear,

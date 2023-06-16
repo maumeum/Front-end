@@ -211,6 +211,7 @@ export const ImageArea = styled.label`
 	font-size: 2rem;
 	position: absolute;
 	top: 90%;
+	left: 8rem;
 
 	input {
 		opacity: 0;
