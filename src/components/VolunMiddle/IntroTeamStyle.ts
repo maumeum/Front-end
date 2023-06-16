@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
 	margin: 0 auto;
 	margin-top: 10rem;
+	margin-bottom: 20rem;
 `;
 export const TopArea = styled.div`
 	width: 112rem;
@@ -21,7 +22,7 @@ export const ImgContainer = styled.div`
 	overflow: hidden;
 `;
 export const Img = styled.img`
-	width: auto;
+	width: 100%;
 	height: 100%;
 `;
 export const TextContainer = styled.div`

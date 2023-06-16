@@ -12,6 +12,7 @@ export const SelectColor = styled.select`
 	border: none;
 	color: ${({ theme }) => theme.colors.green200};
 	z-index: 1;
+	cursor: pointer;
 `;
 
 export const OptionColorLarge = styled.option`

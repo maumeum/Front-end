@@ -13,7 +13,7 @@ export const SearchBarForm = styled.form``;
 export const SearchBarInput = styled.input`
 	box-sizing: border-box;
 	border: 1px solid #cecdcd;
-	width: 107rem;
+	width: 85rem;
 	height: 5.8rem;
 	border-radius: 1rem;
 	padding-left: 9.8rem;

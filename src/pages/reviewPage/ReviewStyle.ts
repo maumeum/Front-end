@@ -100,3 +100,7 @@ export const TextBox2 = styled.div`
 	left: 102rem;
 	width: 30rem;
 `;
+
+export const ReviewPostContainer = styled.div`
+	margin-left: 48rem;
+`;

@@ -10,7 +10,7 @@ export const PostListContainer = styled.div`
 
 export const PostBox = styled.div<PostProps>`
 	width: 80%;
-	width: ${({ isCommunity }) => (isCommunity ? '75%' : '80%')};
+	width: ${({ isCommunity }) => (isCommunity ? '90rem' : '85rem')};
 	padding: 3rem;
 	border: 1px solid #e6e6e6;
 	border-radius: 10px;

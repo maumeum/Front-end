@@ -71,7 +71,7 @@ export const MainContainer = styled.div`
 	background-color: ${({ theme }) => theme.colors.green100};
 `;
 export const SearchContainer = styled.div`
-	margin: 0 auto;
+	margin-left: 56rem;
 `;
 
 export const CardListContainer = styled.div`
@@ -87,6 +87,7 @@ export const NumberWriteContainer = styled.div`
 	align-items: center;
 	width: 112rem;
 	margin: 5.8rem auto;
+	margin-left: 1rem;
 `;
 export const ReviewPageContainer = styled.div`
 	margin-bottom: 40rem;
