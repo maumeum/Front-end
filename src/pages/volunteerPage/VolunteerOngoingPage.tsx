@@ -65,7 +65,6 @@ const VolunteerOngoing = () => {
 			try {
 				const response = await get<DataType>('/api/users/info');
 				isSetAuthorizaion(response.data.authorizaion);
-				console.log(response.data.authorizaion);
 			} catch (error) {
 				console.log(error);
 			}
