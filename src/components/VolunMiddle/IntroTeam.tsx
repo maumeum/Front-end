@@ -48,7 +48,6 @@ const IntroTeam: React.FC<IntroTeamProps> = ({ uuid }) => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			console.log('uuid', uuid);
 			const responseData = await post<DataType>('/api/team/detail', {
 				uuid,
 			});

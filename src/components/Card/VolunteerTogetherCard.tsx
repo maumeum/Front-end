@@ -49,12 +49,10 @@ const VolunteerTogetherCard = ({ volunteerData }: VolunteerCardProps) => {
 		if (statusName === '모집중') {
 			navigate(`/volunteers/ongoing/detail/${_id}`);
 			// uuid 저장
-			localStorage.removeItem('uuid');
 			localStorage.setItem('uuid', volunteerData.register_user_id.uuid);
 		} else {
 			navigate(`/volunteers/close/detail/${_id}`);
 			// uuid 저장
-			localStorage.removeItem('uuid');
 			localStorage.setItem('uuid', volunteerData.register_user_id.uuid);
 		}
 	};
