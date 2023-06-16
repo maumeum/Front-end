@@ -5,7 +5,17 @@ import VolunteerWritePage from '@components/WritePage/VolunteerWritePage';
 import { post } from '@api/api';
 import { getToken } from '@api/token';
 import { useNavigate } from 'react-router-dom';
-import { ImageArea, Container } from './style';
+import {
+	ImageArea,
+	Container,
+	Background,
+	BigText,
+	DogImage,
+	FfHighLight,
+	MainImage,
+	MiddleContainer,
+	Sub,
+} from './style';
 import actTypes from '@src/types/actTypeConstants';
 
 const VolunteerWrite = () => {
@@ -120,6 +130,29 @@ const VolunteerWrite = () => {
 	return (
 		<>
 			<Container>
+				<MiddleContainer
+					style={{
+						backgroundColor: '#FFFFE8',
+						marginBottom: '0',
+						paddingBottom: '1rem',
+						textAlign: 'center',
+					}}>
+					<BigText
+						style={{
+							color: '#333333',
+							paddingTop: '5rem',
+						}}>
+						글 작성하기
+					</BigText>
+					<Sub>
+						<FfHighLight
+							style={{
+								backgroundColor: '#FFFFE8',
+							}}>
+							어떤 봉사활동을 진행할지 사람들에게 소개해요.
+						</FfHighLight>
+					</Sub>
+				</MiddleContainer>
 				<VolunteerWritePage onSave={onSavePost} onCancel={onCancelPost} />
 				<ImageArea style={{ marginTop: '9.2rem' }}>
 					이미지업로드

@@ -68,27 +68,6 @@ const VolunteerOngoing = () => {
 		window.scrollTo(0, 0);
 	};
 
-	const transformData = cardList.map((data) => {
-		return {
-			_id: data._id,
-			title: data.title,
-			teamName: data.teamName,
-			statusName: data.statusName,
-			deadline: data.deadline,
-			applyCount: data.applyCount,
-			registerCount: data.registerCount,
-			images: data.images,
-			register_user_id: {
-				_id: data.register_user_id._id,
-				nickname: data.register_user_id.nickname,
-				image: data.register_user_id.image,
-				uuid: data.register_user_id.uuid,
-			},
-			createdAt: data.createdAt,
-		};
-	});
-	console.log(transformData);
-
 	// 데이터 불러오기
 	const loadMoreData = async () => {
 		try {
@@ -128,6 +107,19 @@ const VolunteerOngoing = () => {
 	}, [cardList]);
 
 	const navigateWrite = () => {
+		const fetchData = async () => {
+			try {
+				await get<DataType>('/api/users/teamAuth', {});
+			} catch (error) {
+				Swal.fire(
+					alertData.errorMessage(
+						'단체 인증이 완료된 유저만 글을 작성할 수 있습니다.',
+					),
+				);
+				navigate('/volunteers/ongoing');
+			}
+		};
+		fetchData();
 		navigate('/volunteers/ongoing/edit');
 	};
 
