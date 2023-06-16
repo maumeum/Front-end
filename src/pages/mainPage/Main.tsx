@@ -142,9 +142,10 @@ const Main = () => {
 								<VolunteerCard
 									key={item._id}
 									volunteerData={item}
-									onClick={() =>
-										navigate(`/volunteers/ongoing/detail/${item._id}`)
-									}
+									onClick={() => {
+										localStorage.setItem('uuid', item.register_user_id.uuid);
+										navigate(`/volunteers/ongoing/detail/${item._id}`);
+									}}
 								/>
 							))}
 					</VolunteerContainer>

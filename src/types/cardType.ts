@@ -35,6 +35,7 @@ export interface VolunteerType {
 	content?: string;
 	register_user_id: {
 		nickname: string;
+		uuid: string;
 	};
 	statusName: string;
 	deadline: string;
