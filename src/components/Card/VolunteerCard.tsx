@@ -26,10 +26,10 @@ const VolunteerCard = ({ volunteerData, onClick }: VolunteerCardProps) => {
 		<VolunteerSection onClick={onClick}>
 			<VolunteerImgContainer>
 				<VolunteerImage src={volunteerImg ? volunteerImg : imgData} />
-				<RecruitStatus className={volunteerData.statusName}>
-					{volunteerData.statusName}
-				</RecruitStatus>
 			</VolunteerImgContainer>
+			<RecruitStatus className={volunteerData.statusName}>
+				{volunteerData.statusName}
+			</RecruitStatus>
 			<VolunteerIntroContainer>
 				<VolunteerTitle>{volunteerData.title}</VolunteerTitle>
 				<VolunteerContent>

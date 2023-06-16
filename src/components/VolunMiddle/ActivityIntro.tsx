@@ -36,6 +36,7 @@ const ActivityIntro: React.FC<ActivityIntroProps> = ({ postId, uuid }) => {
 	}, []);
 
 	const hasPostImage = !!post.images;
+	console.log(post.content);
 	let formattedContent = [];
 	if (post.content) {
 		formattedContent = post.content.split('\n');
