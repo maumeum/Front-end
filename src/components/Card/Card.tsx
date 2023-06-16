@@ -24,6 +24,7 @@ import alertData from '@src/utils/swalObject.ts';
 import defaultImage from '@src/assets/images/volunteer1.jpg';
 import { VolunteerTypes } from '@src/types/myPageConstants.ts';
 import check from '@assets/icons/authentication.svg';
+import { useNavigate } from 'react-router-dom';
 
 interface RegisterUserId {
 	nickname: string;
@@ -74,6 +75,7 @@ function Card({ currTab, data }: CardProps) {
 	const [selectedParticipationStatus, setSelectedParticipationStatus] =
 		useState<string>('');
 	const [isPastEndDate, setIsPastEndDate] = useState(false);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const checkEndDate = () => {
@@ -153,10 +155,14 @@ function Card({ currTab, data }: CardProps) {
 			);
 		}
 	};
+
+	const clickNavigate = () => {
+		navigate(`/volunteers/ongoing/detail/${_id}`);
+	};
 	return (
 		<>
 			<CardContainer currTab={currTab} statusName={statusName}>
-				<ImgBox>
+				<ImgBox onClick={clickNavigate}>
 					{images.length > 0 ? (
 						<img src={`${url}/${images[0]}`} alt='게시글 대표이미지' />
 					) : (
@@ -173,8 +179,8 @@ function Card({ currTab, data }: CardProps) {
 					)}
 				</ImgBox>
 				<ContentBox>
-					<VolunInfo>
-						<p>{title}</p>
+					<VolunInfo onClick={clickNavigate}>
+						<p onClick={clickNavigate}>{title}</p>
 						<p>{`활동기간: ${truncateDate(startDate)} ~ ${truncateDate(
 							endDate,
 						)}`}</p>

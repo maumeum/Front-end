@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
 	margin-top: 10rem;
+	margin-bottom: 20rem;
 `;
 export const TitleContainer = styled.div`
 	display: flex;
@@ -17,7 +18,7 @@ export const Title = styled.p`
 	font-size: 3rem;
 `;
 export const ImgContainer = styled.div`
-	width: 112rem;
+	width: 100%;
 	height: auto;
 	margin-top: 10rem;
 `;

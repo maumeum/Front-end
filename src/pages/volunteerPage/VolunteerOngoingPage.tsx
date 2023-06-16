@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import background from '@assets/images/background.jpg';
-import VolunteerSearchBar from '@components/SearchBar/VolunteerSearchBar.tsx';
-import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
+import SearchBar from '@components/SearchBar/SearchBar.tsx';
 import WriteButton from '@components/Buttons/WriteButton/WriteButton.tsx';
 import {
 	VolunteerCardBox,
-	NumberWriteContainer,
 	VolunteerPageContainer,
 	CardListContainer,
 	MiddleContainer,
@@ -16,10 +14,13 @@ import {
 	MainImage,
 	Background,
 	SearchContainer,
-	MenuBar,
 	DogImage,
+	TabBtn1,
+	TabBtn2,
+	BtnContainer,
+	NumberWriteContainer,
 } from './style.ts';
-import Menu from '@components/Menu/Menu.tsx';
+
 import VolunteerTogetherCard from '@src/components/Card/VolunteerTogetherCard.tsx';
 import { VolunteerType, VolunteerTogetherType } from '@src/types/cardType.ts';
 import { get } from '@api/api';
@@ -29,11 +30,17 @@ import alertData from '@utils/swalObject';
 import throttle from '@utils/throttle.ts';
 import volunteerImage from '@assets/images/volunteerPage.png';
 import dog from '@assets/images/dog.png';
+import VolunteerClose from './VolunteerClosePage.tsx';
 
 const VolunteerOngoing = () => {
 	const navigate = useNavigate();
 	const [cardList, setCardList] = useState<VolunteerTogetherType[]>([]);
 	const [isLoad, setLoad] = useState<boolean>(false);
+	const [activeTab, setActiveTab] = useState('activeOn');
+
+	const handleTabChange = (tabName: string) => {
+		setActiveTab(tabName);
+	};
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -132,27 +139,34 @@ const VolunteerOngoing = () => {
 					</Sub>
 				</MiddleContainer>
 				<SearchContainer>
-					<MenuBar>
-						<Menu title={'같이봉사해요'} />
-					</MenuBar>
-					<VolunteerSearchBar onSearch={handleSearch} />
+					<BtnContainer>
+						<TabBtn1 onClick={() => handleTabChange('activeOn')}>
+							모집중인 활동
+						</TabBtn1>
+						<TabBtn2 onClick={() => handleTabChange('activeClose')}>
+							모집종료 활동
+						</TabBtn2>
+					</BtnContainer>
+					<SearchBar onSearch={handleSearch} />
 					<NumberWriteContainer>
-						<TotalPostNumber totalPosts={cardList.length} />
 						<WriteButton toNavigate={navigateWrite} />
 					</NumberWriteContainer>
 				</SearchContainer>
 				<CardListContainer>
-					<VolunteerCardBox>
-						{cardList.length === 0 && <h2>봉사 내역이 존재하지 않습니다.</h2>}
-						{cardList &&
-							cardList.map((data, index) => (
-								<VolunteerTogetherCard
-									key={data._id + '-' + index}
-									volunteerData={data}
-									uuid={data.register_user_id.uuid}
-								/>
-							))}
-					</VolunteerCardBox>
+					{activeTab === 'activeOn' && (
+						<VolunteerCardBox>
+							{cardList.length === 0 && <h2>봉사 내역이 존재하지 않습니다.</h2>}
+							{cardList &&
+								cardList.map((data, index) => (
+									<VolunteerTogetherCard
+										key={data._id + '-' + index}
+										volunteerData={data}
+										uuid={data.register_user_id.uuid}
+									/>
+								))}
+						</VolunteerCardBox>
+					)}
+					{activeTab === 'activeClose' && <VolunteerClose />}
 				</CardListContainer>
 			</VolunteerPageContainer>
 		</>

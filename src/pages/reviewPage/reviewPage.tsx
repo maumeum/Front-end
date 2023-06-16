@@ -1,5 +1,4 @@
 import SearchBar from '@components/SearchBar/SearchBar.tsx';
-import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
 import PostList from '@components/PostList/PostList.tsx';
 import {
 	NumberWriteContainer,
@@ -26,6 +25,7 @@ import {
 	TextName,
 	TextTitle,
 	LitCircle,
+	ReviewPostContainer,
 } from '@src/pages/reviewPage/ReviewStyle';
 import volunteer from '@assets/images/volunteer.jpeg';
 import volunteers from '@assets/images/volunteers.jpeg';
@@ -124,25 +124,25 @@ const reviewPage = () => {
 						<Image2 src={volunteers} alt='volunteer' />
 					</ImgCircle2>
 				</MiddleContainer>
-				<SearchBar onSearch={handleSearch} />
-				<NumberWriteContainer>
-					<TotalPostNumber totalPosts={postListData.length} />
-				</NumberWriteContainer>
-				{postListData &&
-					postListData.map((postData) => (
-						<PostList
-							key={postData._id}
-							postTitle={
-								postData.title.slice(0, 50) +
-								(postData.title.length > 50 ? '...' : '')
-							}
-							postContents={
-								postData.content.slice(0, 50) +
-								(postData.content.length > 50 ? '...' : '')
-							}
-							onClick={() => navigateDetail(postData._id)}
-						/>
-					))}
+				<ReviewPostContainer>
+					<SearchBar onSearch={handleSearch} />
+					<NumberWriteContainer></NumberWriteContainer>
+					{postListData &&
+						postListData.map((postData) => (
+							<PostList
+								key={postData._id}
+								postTitle={
+									postData.title.slice(0, 50) +
+									(postData.title.length > 50 ? '...' : '')
+								}
+								postContents={
+									postData.content.slice(0, 200) +
+									(postData.content.length > 200 ? '...' : '')
+								}
+								onClick={() => navigateDetail(postData._id)}
+							/>
+						))}
+				</ReviewPostContainer>
 			</ReviewPageContainer>
 		</>
 	);

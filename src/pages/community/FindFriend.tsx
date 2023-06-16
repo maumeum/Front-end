@@ -42,6 +42,7 @@ const FindFriend = () => {
 				'/api/community/category/findfriend?skip=0&limit=10',
 				{},
 			);
+			console.log(response.data);
 			setPostListData(response.data.categoryPost);
 			setLoad(response.data.hasMore);
 		};

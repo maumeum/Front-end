@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import car from '@assets/images/car.png';
 import { remainingDaysCalculator, getCurrent } from '@utils/dateUtils.ts';
 import { truncateDate } from '@utils/truncateDataFns';
 import {
