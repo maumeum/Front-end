@@ -43,3 +43,15 @@ export const WaitMessage = styled.div`
 	border-radius: 5%;
 	background-color: #ffffe8;
 `;
+
+export const InfoMessage = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	img {
+		width: 40rem;
+		height: 40rem;
+	}
+`;
