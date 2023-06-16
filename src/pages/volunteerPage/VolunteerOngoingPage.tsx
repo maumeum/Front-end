@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import TopBar from '@components/TopBar/TopBar.tsx';
+import background from '@assets/images/background.jpg';
 import SearchBar from '@components/SearchBar/SearchBar.tsx';
 import TotalPostNumber from '@components/TotalPostNumber/TotalPostNumber.tsx';
 import WriteButton from '@components/Buttons/WriteButton/WriteButton.tsx';
@@ -9,9 +9,17 @@ import {
 	NumberWriteContainer,
 	VolunteerPageContainer,
 	CardListContainer,
+	MiddleContainer,
+	BigText,
+	FfHighLight,
+	Sub,
+	MainImage,
+	Background,
+	SearchContainer,
+	MenuBar,
+	DogImage,
 } from './style.ts';
 import Menu from '@components/Menu/Menu.tsx';
-import { MenuBar } from '@components/MyPage/myPage.ts';
 import VolunteerTogetherCard from '@src/components/Card/VolunteerTogetherCard.tsx';
 import { VolunteerType, VolunteerTogetherType } from '@src/types/cardType.ts';
 import { get } from '@api/api';
@@ -19,6 +27,8 @@ import DataType from '@src/types/dataType.ts';
 import Swal from 'sweetalert2';
 import alertData from '@utils/swalObject';
 import throttle from '@utils/throttle.ts';
+import volunteerImage from '@assets/images/volunteerPage.png';
+import dog from '@assets/images/dog.png';
 
 const VolunteerOngoing = () => {
 	const navigate = useNavigate();
@@ -92,32 +102,44 @@ const VolunteerOngoing = () => {
 	};
 
 	return (
-		<VolunteerPageContainer>
-			<MenuBar>
-				<Menu title={'같이봉사해요'} />
-			</MenuBar>
-			<CardListContainer>
-				<TopBar
-					title='모집 중인 활동'
-					text='인증받은 단체에서 함께 봉사활동을 해요.'
-				/>
-				<SearchBar onSearch={handleSearch} />
-				<NumberWriteContainer>
-					<TotalPostNumber totalPosts={cardList.length} />
-					<WriteButton toNavigate={navigateWrite} />
-				</NumberWriteContainer>
-				<VolunteerCardBox>
-					{cardList.length === 0 && <h2>봉사 내역이 존재하지 않습니다.</h2>}
-					{cardList &&
-						cardList.map((data, index) => (
-							<VolunteerTogetherCard
-								key={data._id + '-' + index}
-								volunteerData={data}
-							/>
-						))}
-				</VolunteerCardBox>
-			</CardListContainer>
-		</VolunteerPageContainer>
+		<>
+			<VolunteerPageContainer>
+				<MiddleContainer>
+					<BigText>같이 봉사해요</BigText>
+					<Sub>
+						<FfHighLight>
+							더 나은 세상을 위해 지금 할 수 있는 일을 같이 봉사하기에서 찾아볼
+							수 있어요
+						</FfHighLight>
+						<MainImage src={volunteerImage} alt='main-image' />
+						<Background src={background} alt='background' />
+						<DogImage src={dog} alt='dog' />
+					</Sub>
+				</MiddleContainer>
+				<SearchContainer>
+					<MenuBar>
+						<Menu title={'같이봉사해요'} />
+					</MenuBar>
+					<SearchBar onSearch={handleSearch} />
+					<NumberWriteContainer>
+						<TotalPostNumber totalPosts={cardList.length} />
+						<WriteButton toNavigate={navigateWrite} />
+					</NumberWriteContainer>
+				</SearchContainer>
+				<CardListContainer>
+					<VolunteerCardBox>
+						{cardList.length === 0 && <h2>봉사 내역이 존재하지 않습니다.</h2>}
+						{cardList &&
+							cardList.map((data, index) => (
+								<VolunteerTogetherCard
+									key={data._id + '-' + index}
+									volunteerData={data}
+								/>
+							))}
+					</VolunteerCardBox>
+				</CardListContainer>
+			</VolunteerPageContainer>
+		</>
 	);
 };
 
