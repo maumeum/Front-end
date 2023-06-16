@@ -37,7 +37,6 @@ const VolunteerOngoing = () => {
 					'/api/volunteers?skip=0&limit=12&status=true',
 					{},
 				);
-				// console.log(getData.data.volunteerList);
 				setCardListData(getData.data.volunteerList as VolunteerTogetherType[]);
 			} catch (error) {
 				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
@@ -109,7 +108,7 @@ const VolunteerOngoing = () => {
 						<VolunteerTogetherCard
 							key={data._id + '-' + index}
 							data={data}
-							/*onClick={() => navigateDetail(data._id)}*/
+							onClick={() => navigateDetail(data._id)}
 						/>
 					))}
 				</CardBox>

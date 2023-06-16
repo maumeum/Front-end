@@ -19,8 +19,7 @@ interface LocationState {
 const VolunMiddle = () => {
 	const { postId } = useParams() as { postId: string };
 	const location = useLocation();
-	const { uuid } = location.state as LocationState;
-
+	const { uuid } = location.state || ({} as LocationState);
 	const [activeTab, setActiveTab] = useState('activityIntro');
 
 	const handleTabChange = (tabName: string) => {
@@ -45,9 +44,7 @@ const VolunMiddle = () => {
 					<ActivityIntro postId={postId} Uuid={uuid} />
 				)}
 				{activeTab === 'introTeam' && <IntroTeam postId={postId} Uuid={uuid} />}
-				{activeTab === 'comment' && (
-					<CommentSection postId={postId} Uuid={uuid} />
-				)}
+				{activeTab === 'comment' && <CommentSection postId={postId} />}
 			</Container>
 		</>
 	);
