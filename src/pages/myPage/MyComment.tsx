@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 import alertData from '@src/utils/swalObject';
 import Pagination from '@src/components/Pagination/Pagination.tsx';
 import NoData from '@components/NoData/NoData.tsx';
+import { useNavigate } from 'react-router-dom';
 
 interface CommunityProps {
 	title: string;
@@ -33,6 +34,7 @@ function MyComment() {
 	const [selectedData, setSelectedData] = useState<CommunityProps[]>([]);
 	const [commentData, setCommentData] = useState<CommunityProps[]>([]);
 	const [volunData, setVolunData] = useState<CommunityProps[]>([]);
+	const navigate = useNavigate();
 
 	//페이지네이션
 	const [currentPage, setCurrentPage] = useState(1);
@@ -105,6 +107,14 @@ function MyComment() {
 		setSelectedData(selectedData.filter((post) => post._id !== postId));
 	};
 
+	const handleButtonClick = (data: any) => {
+		if (!data.postType) {
+			navigate(`/volunteers/ongoing/detail/${data._id}`);
+		} else if (currTab === TabTypes.COMMENTED_POSTS) {
+			navigate(`/community/${data._id}`);
+		}
+	};
+
 	return (
 		<>
 			<Container>
@@ -119,10 +129,15 @@ function MyComment() {
 					{selectedData
 						.slice((currentPage - 1) * pageSize, currentPage * pageSize)
 						.map((data, idx) => {
+							const handleClick = () => handleButtonClick(data);
 							return (
 								<div key={data._id + idx + 'link'}>
 									{currTab === TabTypes.COMMENTED_POSTS ? (
-										<StyledLink to={`/community/${data._id}`}>
+										<StyledLink
+											to={`/volunteers/ongoing/detail/${data._id}`}
+											onClick={handleClick}>
+											{' '}
+											{/* 'to' 속성 추가 */}
 											<MyPost
 												currTab={currTab}
 												communityData={data}
@@ -134,6 +149,7 @@ function MyComment() {
 											currTab={currTab}
 											communityData={data}
 											onRemovePost={removePost}
+											onClick={handleClick}
 										/>
 									)}
 								</div>

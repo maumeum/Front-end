@@ -27,6 +27,7 @@ interface PostProps {
 	};
 	onRemovePost: (id: string) => void;
 	currTab?: string;
+	onClick?: () => void;
 }
 
 function truncateTitle(title: string) {
@@ -38,11 +39,12 @@ function truncateDate(createdAt: string) {
 	return dayjs(createdAt).format('YYYY-MM-DD');
 }
 
-function MyPost({ currTab, communityData, onRemovePost }: PostProps) {
+function MyPost({ currTab, communityData, onRemovePost, onClick }: PostProps) {
 	const { title, content, postType, createdAt, _id } = communityData;
 	const [isShowMore, setIsShowMore] = useState<boolean>(false);
 	const truncatedTitle = truncateTitle(title);
 	const navigate = useNavigate();
+
 	const handleButtonClick = () => {
 		if (currTab === TabTypes.WRITTEN_REVIEW) {
 			navigate(`/review/${_id}`);
