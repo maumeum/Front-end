@@ -104,7 +104,7 @@ const alertData = {
 		text: '관리자의 확인 후 승인 여부가 2~3일 내에 메일로 발송됩니다.',
 		confirmButtonColor: 'var(--button--color)',
 	},
-	AcceptReported: {
+	acceptReported: {
 		title: '승인 하시겠습니까?',
 		icon: 'warning' as SweetAlertIcon,
 		showCancelButton: true,
