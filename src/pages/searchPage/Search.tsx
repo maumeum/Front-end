@@ -83,7 +83,6 @@ const Search = () => {
 				const newPostListData = response.data.posts;
 				setCommunityList((prevData) => [...prevData, ...newPostListData]);
 				setLoad(response.data.hasMore);
-
 				setHidden(false);
 			} else if (dataType === 'volunteer') {
 				const newPostListData = response.data.searchVolunteers;
@@ -160,7 +159,7 @@ const Search = () => {
 				<NoSearchContainer>
 					{submit ? <NoKeyword>검색결과가 없습니다.</NoKeyword> : ''}
 					<VolunteerTitle>아래와 같은 키워드는 어떠신가요?</VolunteerTitle>
-					<KeywordComponent />
+					<KeywordComponent setQuery={setQuery} setSubmit={setSubmit} />
 				</NoSearchContainer>
 			)}
 		</SearchSection>

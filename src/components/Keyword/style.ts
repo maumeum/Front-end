@@ -27,6 +27,12 @@ export const KeywordImage = styled.img`
 	width: 100%;
 	border-radius: 50%;
 	aspect-ratio: 1;
+	transition: transform 0.1s ease;
+	cursor: pointer;
+
+	&:hover {
+		transform: scale(1.03);
+	}
 `;
 
 export const Keyword = styled.p`
