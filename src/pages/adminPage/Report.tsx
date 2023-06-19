@@ -26,61 +26,38 @@ const Report = () => {
 	const [isModified, setIsModified] = useState<boolean>(false);
 	const navigate = useNavigate();
 
-	// 신고된 커뮤니티
-	useEffect(() => {
-		const fetchData = async () => {
-			const responseData = await get<DataType>('/api/community/admins/reports');
-			setCommunityList(responseData.data);
-		};
-		fetchData();
-		if (isModified) {
-			fetchData();
-			setIsModified(false);
-			window.scrollTo(0, 0);
+	// 데이터 가져오기
+	const fetchData = async (url: string, setData: any, datatype?: string) => {
+		const responseData = await get<DataType>(url);
+		if (datatype) {
+			setData(responseData.data[datatype]);
+		} else {
+			setData(responseData.data);
 		}
-	}, [isModified]);
+	};
 
-	// 신고된 리뷰
 	useEffect(() => {
-		const fetchData = async () => {
-			const responseData = await get<DataType>('/api/review/admins/reports');
-			setReviewList(responseData.data.reviews);
+		const fetchAllData = async () => {
+			await Promise.all([
+				fetchData('/api/community/admins/reports', setCommunityList),
+				fetchData('/api/review/admins/reports', setReviewList, 'reviews'),
+				fetchData(
+					'/api/volunteers/admins/reports',
+					setVolunteerList,
+					'reportedVolunteer',
+				),
+				fetchData(
+					'/api/postComments/admins/reports',
+					setCommunityCommentList,
+					'reportedPostComment',
+				),
+			]);
 		};
-		fetchData();
-		if (isModified) {
-			fetchData();
-			setIsModified(false);
-			window.scrollTo(0, 0);
-		}
-	}, [isModified]);
 
-	// 신고된 봉사활동
-	useEffect(() => {
-		const fetchData = async () => {
-			const responseData = await get<DataType>(
-				'/api/volunteers/admins/reports',
-			);
-			setVolunteerList(responseData.data.reportedVolunteer);
-		};
-		fetchData();
-		if (isModified) {
-			fetchData();
-			setIsModified(false);
-			window.scrollTo(0, 0);
-		}
-	}, [isModified]);
+		fetchAllData();
 
-	// 신고된 커뮤니티 댓글
-	useEffect(() => {
-		const fetchData = async () => {
-			const responseData = await get<DataType>(
-				'/api/postComments/admins/reports',
-			);
-			setCommunityCommentList(responseData.data.reportedPostComment);
-		};
-		fetchData();
 		if (isModified) {
-			fetchData();
+			fetchAllData();
 			setIsModified(false);
 			window.scrollTo(0, 0);
 		}
@@ -99,33 +76,38 @@ const Report = () => {
 		navigate(`/volunteers/ongoing/${postId}`);
 	};
 
-	// 상단 nav바 클릭
+	// Nav
+	const setNav = (
+		community: boolean,
+		review: boolean,
+		comment: boolean,
+		volunteer: boolean,
+	) => {
+		setCommunityNav(community);
+		setReviewNav(review);
+		setCommentNav(comment);
+		setVolunteerNav(volunteer);
+	};
+
 	const reviewNavClick = () => {
-		setCommunityNav(false);
-		setReviewNav(true);
-		setCommentNav(false);
-		setVolunteerNav(false);
+		setNav(false, true, false, false);
 	};
 
 	const communityNavClick = () => {
-		setCommunityNav(true);
-		setReviewNav(false);
-		setCommentNav(false);
-		setVolunteerNav(false);
+		setNav(true, false, false, false);
 	};
 
 	const volunteerNavClick = () => {
-		setCommunityNav(false);
-		setReviewNav(false);
-		setCommentNav(false);
-		setVolunteerNav(true);
+		setNav(false, false, false, true);
 	};
 
 	const CommentNavClick = () => {
-		setCommunityNav(false);
-		setReviewNav(false);
-		setCommentNav(true);
-		setVolunteerNav(false);
+		setNav(false, false, true, false);
+	};
+
+	// title, content 미리보기 함수
+	const previewData = (data: string) => {
+		return data.slice(0, 50) + (data.length > 50 ? '...' : '');
 	};
 
 	return (
@@ -161,14 +143,8 @@ const Report = () => {
 					communityList.map((postData) => (
 						<PostList
 							key={postData._id}
-							postTitle={
-								postData.title.slice(0, 50) +
-								(postData.title.length > 50 ? '...' : '')
-							}
-							postContents={
-								postData.content.slice(0, 50) +
-								(postData.content.length > 50 ? '...' : '')
-							}
+							postTitle={previewData(postData.title)}
+							postContents={previewData(postData.content)}
 							onClick={() => postClick(postData._id)}
 							postId={postData._id}
 							postType='postType'
@@ -181,10 +157,7 @@ const Report = () => {
 					communityCommentList.map((postData) => (
 						<PostList
 							key={postData._id}
-							postTitle={
-								postData.content.slice(0, 50) +
-								(postData.content.length > 50 ? '...' : '')
-							}
+							postTitle={previewData(postData.content)}
 							postContents={postData.user_id.nickname}
 							onClick={() => postClick(postData.post_id)}
 							postId={postData._id}
@@ -198,14 +171,8 @@ const Report = () => {
 					reviewList.map((postData) => (
 						<PostList
 							key={postData._id}
-							postTitle={
-								postData.title.slice(0, 50) +
-								(postData.title.length > 50 ? '...' : '')
-							}
-							postContents={
-								postData.content.slice(0, 50) +
-								(postData.content.length > 50 ? '...' : '')
-							}
+							postTitle={previewData(postData.title)}
+							postContents={previewData(postData.content)}
 							onClick={() => reviewClick(postData._id)}
 							postId={postData._id}
 							volunteerId={postData.volunteer_id}
@@ -218,15 +185,9 @@ const Report = () => {
 					volunteerList.map((postData) => (
 						<PostList
 							key={postData._id}
-							postTitle={
-								postData.title.slice(0, 50) +
-								(postData.title.length > 50 ? '...' : '')
-							}
+							postTitle={previewData(postData.title)}
 							postContents={
-								postData.content
-									? postData.content.slice(0, 50) +
-									  (postData.content.length > 50 ? '...' : '')
-									: ''
+								postData.content ? previewData(postData.content) : ''
 							}
 							onClick={() => volunteerClick(postData._id)}
 							postId={postData._id}
