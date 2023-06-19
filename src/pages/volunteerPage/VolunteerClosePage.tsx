@@ -25,7 +25,6 @@ const VolunteerClose = () => {
 				);
 				setCardList(responseData.data.volunteerList);
 				setLoad(responseData.data.hasMore);
-				window.scrollTo(0, 0);
 			} catch (error) {
 				Swal.fire(alertData.errorMessage('데이터를 불러오는데 실패했습니다.'));
 			}
