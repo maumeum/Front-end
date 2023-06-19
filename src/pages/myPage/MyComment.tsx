@@ -123,7 +123,12 @@ function MyComment() {
 							return (
 								<div key={data._id + idx + 'link'}>
 									{currTab === TabTypes.COMMENTED_POSTS ? (
-										<StyledLink to={`/community/${data._id}`}>
+										<StyledLink
+											to={
+												data.postType
+													? `/community/${data._id}`
+													: `/volunteers/ongoing/detail/${data._id}`
+											}>
 											<MyPost
 												currTab={currTab}
 												communityData={data}
