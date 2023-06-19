@@ -6,7 +6,6 @@ import {
 	TogetherType,
 	CommunityTitle,
 	WriterNickname,
-	SearchCommunityContainer,
 	SearchQna,
 	SearchTogether,
 	SearchTitle,
@@ -36,29 +35,31 @@ const CommunityCard = ({
 
 	return (
 		<>
-			{!searchPage ? (
-				<CommunityContainer onClick={onClick}>
-					{communityData.postType === 'qna' ? (
-						<QnaType>QnA</QnaType>
-					) : (
-						<TogetherType>동행</TogetherType>
-					)}
-					<div>
-						<CommunityTitle>{title}</CommunityTitle>
-						<WriterNickname>{communityData.user_id.nickname}</WriterNickname>
-					</div>
-				</CommunityContainer>
-			) : (
-				<SearchCommunityContainer onClick={onClick}>
-					{communityData.postType === 'qna' ? (
-						<SearchQna>QnA</SearchQna>
-					) : (
-						<SearchTogether>동행</SearchTogether>
-					)}
-					<SearchTitle>{searchTitle}</SearchTitle>
-					<SearchNickname>{communityData.user_id.nickname}</SearchNickname>
-				</SearchCommunityContainer>
-			)}
+			<CommunityContainer onClick={onClick}>
+				{!searchPage ? (
+					<>
+						{communityData.postType === 'qna' ? (
+							<QnaType>QnA</QnaType>
+						) : (
+							<TogetherType>동행</TogetherType>
+						)}
+						<div>
+							<CommunityTitle>{title}</CommunityTitle>
+							<WriterNickname>{communityData.user_id.nickname}</WriterNickname>
+						</div>
+					</>
+				) : (
+					<>
+						{communityData.postType === 'qna' ? (
+							<SearchQna>QnA</SearchQna>
+						) : (
+							<SearchTogether>동행</SearchTogether>
+						)}
+						<SearchTitle>{searchTitle}</SearchTitle>
+						<SearchNickname>{communityData.user_id.nickname}</SearchNickname>
+					</>
+				)}
+			</CommunityContainer>
 		</>
 	);
 };

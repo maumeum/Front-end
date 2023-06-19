@@ -32,10 +32,11 @@ function MyComment() {
 	const [postData, setPostData] = useState<CommunityProps[]>([]);
 	const [selectedData, setSelectedData] = useState<CommunityProps[]>([]);
 	const [commentData, setCommentData] = useState<CommunityProps[]>([]);
+	const [volunData, setVolunData] = useState<CommunityProps[]>([]);
 
 	//페이지네이션
 	const [currentPage, setCurrentPage] = useState(1);
-	const pageSize = 5;
+	const pageSize = 8;
 	const handlePageChange = (pageNumber: number) => {
 		setCurrentPage(pageNumber);
 	};
@@ -45,6 +46,23 @@ function MyComment() {
 			try {
 				const getPostData = await get<DataType>('/api/community/user', {});
 				setPostData(getPostData.data as CommunityProps[]);
+			} catch (error) {
+				Swal.fire(
+					alertData.errorMessage('데이터를 불러오는데 실패하였습니다.'),
+				);
+			}
+		};
+
+		fetchData();
+	}, []);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const getVolunData = await get<DataType>(
+					'/api/volunteerComments/users',
+				);
+				setVolunData(getVolunData.data.volunteerList as CommunityProps[]);
 			} catch (error) {
 				Swal.fire(
 					alertData.errorMessage('데이터를 불러오는데 실패하였습니다.'),
@@ -70,10 +88,15 @@ function MyComment() {
 	}, []);
 
 	useEffect(() => {
-		currTab === TabTypes.WRITTEN_POSTS
-			? setSelectedData(postData)
-			: setSelectedData(commentData);
-	}, [currTab, postData, commentData]);
+		let data = [];
+		if (currTab === TabTypes.WRITTEN_POSTS) {
+			data = postData;
+			setSelectedData(data);
+		} else {
+			data = [...commentData, ...volunData];
+			setSelectedData(data);
+		}
+	}, [currTab, postData, commentData, volunData]);
 
 	const handleClickTab = (tab: TabTypes) => {
 		setCurrTab(tab);

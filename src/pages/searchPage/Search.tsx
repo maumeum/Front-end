@@ -7,7 +7,6 @@ import { CommunityListType, VolunteerListType } from '@src/types/cardType';
 import DataType from '@src/types/dataType';
 import {
 	SearchSection,
-	SearchContainer,
 	VolunteerContainer,
 	VolunteerTitle,
 	CommunityContainer,
@@ -118,9 +117,7 @@ const Search = () => {
 
 	return (
 		<SearchSection>
-			<SearchContainer>
-				<SearchBar onSearch={handleSearch} />
-			</SearchContainer>
+			<SearchBar onSearch={handleSearch} />
 			{validSearch ? (
 				<>
 					<VolunteerTitle>봉사활동 검색결과</VolunteerTitle>

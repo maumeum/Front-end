@@ -6,10 +6,6 @@ export const SearchSection = styled.div`
 	padding: 0;
 `;
 
-export const SearchContainer = styled.div`
-	margin-left: 50rem;
-`;
-
 export const VolunteerTitle = styled.h2`
 	margin: 12rem 40rem 0;
 	width: 50rem;

@@ -36,6 +36,7 @@ import VolunteerOngoing from '@pages/volunteerPage/VolunteerOngoingPage';
 import VolunteerClose from '@pages/volunteerPage/VolunteerClosePage';
 import VolunteerWrite from '@src/pages/volunteerPage/VolunteerWrite';
 import VolunteerOngoingDetail from '@pages/volunteerPage/VolunteerOngoingDetail';
+import VolunCloseDetail from '@pages/volunteerPage/VolunteerCloseDetail';
 
 function App() {
 	return (
@@ -49,6 +50,10 @@ function App() {
 				<Route
 					path='/volunteers/ongoing/detail/:postId'
 					element={<VolunteerOngoingDetail />}
+				/>
+				<Route
+					path='/volunteers/close/detail/:postId'
+					element={<VolunCloseDetail />}
 				/>
 
 				<Route path='/community/findfriend' element={<FindFriend />} />

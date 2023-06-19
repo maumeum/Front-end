@@ -20,7 +20,10 @@ export const VolunteerPageContainer = styled.div`
 	width: 100%;
 	margin: 0 auto;
 	padding: 0;
+	display: flex;
+	flex-direction: column;
 `;
+
 export const MiddleContainer = styled.div`
 	width: 112rem;
 	margin: 0 auto;
@@ -71,7 +74,7 @@ export const MainContainer = styled.div`
 	background-color: ${({ theme }) => theme.colors.green100};
 `;
 export const SearchContainer = styled.div`
-	margin-left: 56rem;
+	align-self: center;
 `;
 
 export const CardListContainer = styled.div`

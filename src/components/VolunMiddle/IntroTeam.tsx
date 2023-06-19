@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import dayjs from 'dayjs';
 
 import {
 	Container,
@@ -18,6 +17,7 @@ import {
 	DivideContent,
 	BottomContainer,
 } from './IntroTeamStyle';
+import { dateFormatter } from '@utils/dateUtils';
 import DataType from '@src/types/dataType.ts';
 import { post } from '@api/api';
 import { TeamType } from '@src/types/userType';
@@ -41,9 +41,10 @@ const IntroTeam: React.FC<IntroTeamProps> = ({ uuid }) => {
 		location: '',
 		image: '',
 	});
-	const establishDate = dayjs(teamData.establishmentDate)
-		.locale('ko')
-		.format('YYYY년 MM월 DD일');
+	const establishDate = dateFormatter(
+		teamData.establishmentDate,
+		'YYYY년 MM월 DD일',
+	);
 	const image = `${apiURL}/${teamData.image}`;
 
 	useEffect(() => {

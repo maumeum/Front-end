@@ -136,6 +136,7 @@ export const SelectContainer = styled.div`
 // Community Card
 export const CommunityContainer = styled.div`
 	display: flex;
+	align-items: center;
 	margin: 1rem 2rem 0;
 	max-height: 30%;
 	border-bottom: 1px solid ${({ theme }) => theme.colors.gray200};
@@ -181,20 +182,6 @@ export const WriterNickname = styled.p`
 	margin: 0.5rem 0 0 3rem;
 	font-size: 1rem;
 	color: ${({ theme }) => theme.colors.gray300};
-`;
-
-export const SearchCommunityContainer = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin: 1rem 2rem 0;
-	border-bottom: 1px solid ${({ theme }) => theme.colors.gray200};
-	transition: transform 0.1s ease;
-	cursor: pointer;
-
-	&:hover {
-		transform: scale(1.03);
-	}
 `;
 
 export const SearchQna = styled.div`

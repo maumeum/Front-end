@@ -44,62 +44,37 @@ const PostList = ({
 
 	const isAdmin = isReported && userData !== null && userData.role === 'admin';
 
-	const AcceptClick = () => {
-		Swal.fire(alertData.AcceptReported).then((result) => {
-			if (result.isConfirmed) {
-				if (postType) {
-					del(`/api/community/admins/reports/applications/${postId}`, {});
-					if (setIsModified) {
-						setIsModified(() => true);
-					}
-				} else if (volunteerId) {
-					del(`/api/review/admins/reports/applications/${postId}`, {});
-					if (setIsModified) {
-						setIsModified(() => true);
-					}
-				} else if (comment === 'community') {
-					del(`/api/postComments/admins/reports/applications/${postId}`, {});
-					if (setIsModified) {
-						setIsModified(() => true);
-					}
-				} else if (volunteer === 'volunteer') {
-					del(`/api/volunteers/admins/reports/applications/${postId}`, {});
-					if (setIsModified) {
-						setIsModified(() => true);
-					}
-				}
-				Swal.fire('승인되었습니다.');
+	const method = async (
+		alertData: any,
+		axios: any,
+		type: string,
+		message: string,
+	) => {
+		const { isConfirmed } = await Swal.fire(alertData);
+
+		if (isConfirmed) {
+			if (postType) {
+				axios(`/api/community/admins/reports/${type}/${postId}`, {});
+			} else if (volunteerId) {
+				axios(`/api/review/admins/reports/${type}/${postId}`, {});
+			} else if (comment === 'community') {
+				axios(`/api/postComments/admins/reports/${type}/${postId}`, {});
+			} else if (volunteer === 'volunteer') {
+				axios(`/api/volunteers/admins/reports/${type}/${postId}`, {});
 			}
-		});
+			if (setIsModified) {
+				setIsModified(() => true);
+			}
+			Swal.fire(message);
+		}
+	};
+
+	const AcceptClick = () => {
+		method(alertData.acceptReported, del, 'applications', '승인되었습니다');
 	};
 
 	const CancelClick = () => {
-		Swal.fire(alertData.cancelReported).then((result) => {
-			if (result.isConfirmed) {
-				if (postType) {
-					patch(`/api/community/admins/reports/cancellations/${postId}`, {});
-					if (setIsModified) {
-						setIsModified(() => true);
-					}
-				} else if (volunteerId) {
-					patch(`/api/review/admins/reports/cancellations/${postId}`, {});
-					if (setIsModified) {
-						setIsModified(() => true);
-					}
-				} else if (comment) {
-					patch(`/api/postComments/admins/reports/cancellations/${postId}`, {});
-					if (setIsModified) {
-						setIsModified(() => true);
-					}
-				} else if (volunteer) {
-					patch(`/api/volunteers/admins/reports/cancellations/${postId}`, {});
-					if (setIsModified) {
-						setIsModified(() => true);
-					}
-				}
-				Swal.fire('취소되었습니다.');
-			}
-		});
+		method(alertData.cancelReported, patch, 'cancellations', '취소되었습니다');
 	};
 
 	return (

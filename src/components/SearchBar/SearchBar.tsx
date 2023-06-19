@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import {
 	SearchBarForm,
+	InputContainer,
 	SearchBarInput,
 	SearchBarBtn,
-	SearchBarContainer,
 	SearchLogo,
 } from './SearchBarstyle';
 import searchLogo from '@assets/icons/search.svg';
@@ -25,8 +25,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 	};
 
 	return (
-		<SearchBarContainer>
-			<SearchBarForm onSubmit={handleSubmit}>
+		<SearchBarForm onSubmit={handleSubmit}>
+			<InputContainer>
 				<SearchLogo src={searchLogo} alt='searchlogo' />
 				<SearchBarInput
 					type='text'
@@ -34,9 +34,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 					onChange={handleInputChange}
 					placeholder='검색하기'
 				/>
-				<SearchBarBtn type='submit'>검색</SearchBarBtn>
-			</SearchBarForm>
-		</SearchBarContainer>
+			</InputContainer>
+			<SearchBarBtn type='submit'>검색</SearchBarBtn>
+		</SearchBarForm>
 	);
 };
 

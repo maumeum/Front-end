@@ -83,8 +83,8 @@ export const Highlight = styled.span`
 `;
 export const NumberWriteContainer = styled.div`
 	display: flex;
-	align-items: center;
-	width: 112rem;
+	justify-content: end;
+	width: 101rem;
 	margin: 5.8rem auto;
 `;
 export const ReviewPageContainer = styled.div`
@@ -214,7 +214,8 @@ export const SearchContainer = styled.div`
 `;
 
 export const BottomArea = styled.div`
-	margin: 0 auto;
-	margin-top: -10rem;
-	margin-left: 18rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-left: 15rem;
 `;

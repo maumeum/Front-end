@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from 'react';
 import ReactModal from 'react-modal';
 import Swal from 'sweetalert2';
-import dayjs from 'dayjs';
 
+import { dateFormatter } from '@utils/dateUtils';
 import { post } from '@api/api';
 import {
 	TeamButtonContainer,
@@ -45,9 +45,7 @@ const TeamModal = ({
 	};
 
 	const image = `${apiURL}/${teamData.image}`;
-	const date = dayjs(teamData.establishmentDate)
-		.locale('ko')
-		.format('YYYY년 MM월 DD일');
+	const date = dateFormatter(teamData.establishmentDate, 'YYYY년 MM월 DD일');
 	const introduction = teamData.introduction.split('\r\n');
 	const briefHistory = teamData.briefHistory.split('\r\n');
 

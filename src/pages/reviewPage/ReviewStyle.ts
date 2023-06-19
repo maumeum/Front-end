@@ -102,5 +102,7 @@ export const TextBox2 = styled.div`
 `;
 
 export const ReviewPostContainer = styled.div`
-	margin-left: 48rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 `;

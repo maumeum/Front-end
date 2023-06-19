@@ -47,13 +47,13 @@ const VolunteerTogetherCard = ({ volunteerData }: VolunteerCardProps) => {
 	const shortTitle = title.length > 13 ? `${title.slice(0, 13)}...` : title;
 	const onClick = () => {
 		if (statusName === '모집중') {
+			// uuid 저장
+			localStorage.setItem('uuid', volunteerData.register_user_id.uuid);
 			navigate(`/volunteers/ongoing/detail/${_id}`);
-			// uuid 저장
-			localStorage.setItem('uuid', volunteerData.register_user_id.uuid);
 		} else {
-			navigate(`/volunteers/close/detail/${_id}`);
 			// uuid 저장
 			localStorage.setItem('uuid', volunteerData.register_user_id.uuid);
+			navigate(`/volunteers/close/detail/${_id}`);
 		}
 	};
 

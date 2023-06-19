@@ -1,6 +1,4 @@
-import dayjs from 'dayjs';
-import 'dayjs/locale/ko';
-
+import { dateFormatter } from '@utils/dateUtils';
 import { TeamType } from '@src/types/cardType';
 import {
 	TeamCardSection,
@@ -23,9 +21,8 @@ const apiURL = import.meta.env.VITE_API_URL;
 const TeamCard = ({ teamData, onClick }: TeamCardProps) => {
 	const image = `${apiURL}/${teamData.image}`;
 
-	const date = dayjs(teamData.establishmentDate)
-		.locale('ko')
-		.format('YYYY년 MM월 DD일');
+	const date = dateFormatter(teamData.establishmentDate, 'YYYY년 MM월 DD일');
+
 	return (
 		<TeamCardSection onClick={onClick}>
 			<TeamImageContainer>
