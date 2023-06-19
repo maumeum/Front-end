@@ -124,6 +124,7 @@ export const Date = styled.p`
 `;
 export const BtnContainer = styled.div`
 	display: flex;
+	margin-left: 2rem;
 `;
 export const TabBtn1 = styled.button`
 	background-color: ${({ theme }) => theme.colors.pink100};
