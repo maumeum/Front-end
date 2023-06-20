@@ -1,6 +1,10 @@
-# 엘리스 SW 엔지니어 트랙 4기 2차 프로젝트 "마음이음"
+# 엘리스 SW 엔지니어 트랙 4기 2차 프로젝트 "마음이음"(작성중)
 
-[![logo](/uploads/d761595c3b4ce8aa3f0c5be33e73aaed/logo.png)](http://kdt-sw-4-team01.elicecoding.com/)
+[![logo](https://github.com/maumeum/Front-end/assets/119808319/69a624d8-6bb0-43bd-a3e0-b3e85d13e132)](http://kdt-sw-4-team01.elicecoding.com/)
+<br>
+[프론트엔드 리포지토리](https://github.com/maumeum/Front-end)
+<br>
+[백엔드 리포지토리](https://github.com/maumeum/Back-end)
 
 <br>
 
@@ -8,7 +12,7 @@
 
 ### 고객 페르소나
 <p align="center">
-![image](/uploads/c5d77670dcb0972e2bebc1c7a02702c1/image.png)
+  <img src="https://github.com/maumeum/Front-end/assets/119808319/8e516425-a2bb-4b5d-a027-6123730a3be7/image.png">
 </p>
 
 ### 서비스 개요
@@ -69,7 +73,7 @@
 ## 3. 아키텍쳐 설계
 
 <p align="center">
-  ![architecture](https://github.com/maumeum/Front-end/assets/123538138/453a3802-0198-45db-b4e2-e7cbf0e24d65)
+  <img src="https://github.com/maumeum/Front-end/assets/119808319/ddfd81c8-4b7c-4ca0-a1c7-d14c0ca14aee/image-arch.png">
 </p>
 
 <br>
@@ -85,13 +89,10 @@
 
 ### Frontend
 [김마리나](https://github.com/marinarinarina)
-- 각자
 
 [류이서](https://github.com/ryuiseo)
-- 분담한
 
 [정혜린](https://github.com/02rynn)
-- 기능을
 
 [최윤재](https://github.com/uniqueeest)
 - 메인페이지 구현
