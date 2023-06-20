@@ -69,7 +69,7 @@
 ## 3. 아키텍쳐 설계
 
 <p align="center">
-![image](/uploads/cfa83ea353988139ba891bca59faf29a/image.png)
+  ![architecture](https://github.com/maumeum/Front-end/assets/123538138/453a3802-0198-45db-b4e2-e7cbf0e24d65)
 </p>
 
 <br>
@@ -94,7 +94,15 @@
 - 기능을
 
 [최윤재](https://github.com/uniqueeest)
-- 적어주세요
+- 메인페이지 구현
+- 회원가입, 로그인 페이지 구현
+- 검색 페이지 구현
+- 팀 단체 인증
+- 관리자 페이지
+   - 신고된 게시글, 댓글 확인 후 승인/거부
+   - 팀 단체 승인/거부
+   - 신고된 유저 관리
+ 
 
 <br>
 
