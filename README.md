@@ -81,7 +81,13 @@
 ## 4. 역할 분담
 
 ### Backend
-[류한나](https://github.com/hanna-ryu)
+[류한나](https://github.com/hanna-ryu) : 팀장 / 백엔드 
+- User JWT인증 방식 로그인, 회원가입, 유저 관련 CRUD 기능 구현
+- Review 조건별 / 기능별 CRUD 기능 구현 , scheduler 모듈 활용 일정시점 db 자동변경 구현  
+- 팀 단체 인증 CRUD 기능 구현, , nodemailer 인증 시스템 구현, 
+- winston 활용 logger 시스템 적용
+- asyncHandler , errorHandler, 응답 형식 구분
+- multer 활용 이미지 업로드 기능 구현
 
 [이해인](https://github.com/LHI0915)
 
