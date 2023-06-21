@@ -97,6 +97,12 @@
 [김마리나](https://github.com/marinarinarina)
 
 [류이서](https://github.com/ryuiseo)
+- 커뮤니티 페이지 구현
+  - 게시글 작성, 수정, 삭제
+  - 댓글 작성, 수정, 삭제
+- 리뷰 페이지 구현
+  - 리뷰 수정, 삭제
+- 홈페이지 UI 디자인
 
 [정혜린](https://github.com/02rynn)
 
