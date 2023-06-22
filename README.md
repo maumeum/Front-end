@@ -95,6 +95,10 @@
 
 ### Frontend
 [김마리나](https://github.com/marinarinarina)
+- 컴포넌트 스토리북 작성
+- 같이봉사해요 페이지 구현
+  - 등록한 봉사활동 전체보기
+  - 봉사활동 글쓰기
 
 [류이서](https://github.com/ryuiseo)
 - 커뮤니티 페이지 구현
