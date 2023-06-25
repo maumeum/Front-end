@@ -34,6 +34,36 @@ interface VolunProps {
 	};
 }
 
+interface MyVolunCardProps {
+	volunCardData: {
+		title: string;
+		images: string[];
+		startDate: string;
+		endDate: string;
+		statusName: string;
+		isReviewed: boolean;
+		_id: string;
+		userImage: string;
+	};
+	currTab?: string;
+}
+
+//volunHistory에서 받는 데이터를 아예 카드형식으로 바꿔야함.
+// function transformVolunData(volunPropsArray: VolunProps[]): MyVolunCardProps[] {
+// 	const volunCardData = {
+// 			title: volunPropsArray.volunteer_id.title,
+// 			images: volunPropsArray.volunteer_id.images,
+// 			startDate: volunPropsArray.volunteer_id.startDate,
+// 			endDate: volunPropsArray.volunteer_id.endDate,
+// 			statusName: volunPropsArray.volunteer_id.statusName,
+// 			isReviewed: volunPropsArray.isReviewed,
+// 			_id: volunPropsArray._id,
+// 			userImage:volunPropsArray.volunteer_id.images[0]
+// 	};
+// 	console.log(volunPropsArray);
+// 	// return { volunCardData };
+// }
+
 function MyVolunHistory() {
 	const [currTab, setCurrTab] = useState<TabTypes>(TabTypes.VOLUNTEER_APPLIED);
 	const tabs = [TabTypes.VOLUNTEER_APPLIED, TabTypes.VOLUNTEER_COMPLETED];
@@ -89,6 +119,9 @@ function MyVolunHistory() {
 			: setVolunData(completedData);
 	}, [currTab, appliedData, completedData]);
 
+	console.log(volunData);
+	// const myVolunCardProps = transformVolunData(volunData);
+
 	return (
 		<>
 			<Container>
@@ -101,7 +134,7 @@ function MyVolunHistory() {
 						<Tab currTab={currTab} onClick={handleClickTab} tabs={tabs} />
 					</TabMenu>
 					{volunData.length === 0 && <NoData category='봉사' />}
-					<CardBox>
+					{/* <CardBox>
 						{volunData
 							.slice((currentPage - 1) * pageSize, currentPage * pageSize)
 							.map((data, index) => (
@@ -111,7 +144,7 @@ function MyVolunHistory() {
 									data={data}
 								/>
 							))}
-					</CardBox>
+					</CardBox> */}
 				</Main>
 			</Container>
 

@@ -11,7 +11,7 @@ import {
 	VolunInfo,
 	ButtonContainer,
 	SelectContainer,
-} from './card.ts';
+} from '@components/Card/Card.ts';
 import {
 	truncateDate,
 	truncateCentName,
