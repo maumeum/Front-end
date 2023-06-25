@@ -4,10 +4,8 @@ import {
 	Main,
 	MenuBar,
 	TabMenu,
-	CardBox,
 } from '@components/MyPage/myPage.ts';
 import Tab from '@components/Tab/Tab.tsx';
-import Card from '@components/Card/Card.tsx';
 import Menu from '@components/Menu/Menu.tsx';
 import Pagination from '@components/Pagination/Pagination.tsx';
 import { TabTypes } from '@src/types/myPageConstants';
@@ -34,19 +32,19 @@ interface VolunProps {
 	};
 }
 
-interface MyVolunCardProps {
-	volunCardData: {
-		title: string;
-		images: string[];
-		startDate: string;
-		endDate: string;
-		statusName: string;
-		isReviewed: boolean;
-		_id: string;
-		userImage: string;
-	};
-	currTab?: string;
-}
+// interface MyVolunCardProps {
+// 	volunCardData: {
+// 		title: string;
+// 		images: string[];
+// 		startDate: string;
+// 		endDate: string;
+// 		statusName: string;
+// 		isReviewed: boolean;
+// 		_id: string;
+// 		userImage: string;
+// 	};
+// 	currTab?: string;
+// }
 
 //volunHistory에서 받는 데이터를 아예 카드형식으로 바꿔야함.
 // function transformVolunData(volunPropsArray: VolunProps[]): MyVolunCardProps[] {
