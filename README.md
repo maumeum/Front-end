@@ -90,6 +90,12 @@
 - multer 활용 이미지 업로드 기능 구현
 
 [이해인](https://github.com/LHI0915)
+- Volunteer 조건별/기능별 CRUD 구현
+- Volunteer Comment, Post Comment 조건별/기능별 CRUD 구현
+- 봉사활동 신청 및 재고처리 기능 구현, 신청 및 완료한 봉사 조회 기능 구현
+- Query Builder를 활용한 페이징 처리
+- 봉사활동·커뮤니티 게시글, 댓글 신고 기능 구현 / 5회 이상 신고 승인 시 유저 블락 처리
+- 신고된 게시글 및 댓글 확인 후 승인/거부 기능 구현
 
 [탁경진](https://github.com/Takkyou)
 
